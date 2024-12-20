@@ -1,0 +1,165 @@
+{
+    "flights": [
+      {
+        "id": 1,
+        "from": "New York",
+        "to": "London",
+        "departureDate": "2024-09-09",
+        "price": 500,
+        "airline": "British Airways"
+      },
+      {
+        "id": 2,
+        "from": "Los Angeles",
+        "to": "Tokyo",
+        "departureDate": "2024-10-12",
+        "price": 600,
+        "airline": "Japan Airlines"
+      },
+      {
+        "id": 3,
+        "from": "Chicago",
+        "to": "Paris",
+        "departureDate": "2024-08-11",
+        "price": 450,
+        "airline": "Air France"
+      },
+      {
+        "id": 4,
+        "from": "Houston",
+        "to": "Dubai",
+        "departureDate": "2024-11-15",
+        "price": 700,
+        "airline": "Emirates"
+      },
+      {
+        "id": 5,
+        "from": "San Francisco",
+        "to": "Sydney",
+        "departureDate": "2024-12-20",
+        "price": 1200,
+        "airline": "Qantas"
+      },
+      {
+        "id": 6,
+        "from": "Miami",
+        "to": "Toronto",
+        "departureDate": "2024-10-10",
+        "price": 300,
+        "airline": "Air Canada"
+      },
+      {
+        "id": 7,
+        "from": "Boston",
+        "to": "Amsterdam",
+        "departureDate": "2024-09-30",
+        "price": 400,
+        "airline": "KLM"
+      },
+      {
+        "id": 8,
+        "from": "Seattle",
+        "to": "Beijing",
+        "departureDate": "2024-11-05",
+        "price": 800,
+        "airline": "Air China"
+      },
+      {
+        "id": 9,
+        "from": "Las Vegas",
+        "to": "Rome",
+        "departureDate": "2024-10-25",
+        "price": 650,
+        "airline": "Alitalia"
+      },
+      {
+        "id": 10,
+        "from": "Denver",
+        "to": "Berlin",
+        "departureDate": "2024-12-18",
+        "price": 550,
+        "airline": "Lufthansa"
+      },
+      {
+        "id": 11,
+        "from": "Phoenix",
+        "to": "Seoul",
+        "departureDate": "2024-11-28",
+        "price": 900,
+        "airline": "Korean Air"
+      },
+      {
+        "id": 12,
+        "from": "Dallas",
+        "to": "Singapore",
+        "departureDate": "2024-12-03",
+        "price": 950,
+        "airline": "Singapore Airlines"
+      },
+      {
+        "id": 13,
+        "from": "Atlanta",
+        "to": "Bangkok",
+        "departureDate": "2024-11-10",
+        "price": 1100,
+        "airline": "Thai Airways"
+      },
+      {
+        "id": 14,
+        "from": "Orlando",
+        "to": "Hong Kong",
+        "departureDate": "2024-10-22",
+        "price": 1000,
+        "airline": "Cathay Pacific"
+      },
+      {
+        "id": 15,
+        "from": "Charlotte",
+        "to": "Frankfurt",
+        "departureDate": "2024-09-18",
+        "price": 600,
+        "airline": "Lufthansa"
+      },
+      {
+        "id": 16,
+        "from": "Philadelphia",
+        "to": "Tokyo",
+        "departureDate": "2024-10-19",
+        "price": 850,
+        "airline": "ANA"
+      },
+      {
+        "id": 17,
+        "from": "Detroit",
+        "to": "Zurich",
+        "departureDate": "2024-12-08",
+        "price": 550,
+        "airline": "Swiss Air"
+      },
+      {
+        "id": 18,
+        "from": "San Diego",
+        "to": "Mexico City",
+        "departureDate": "2024-11-14",
+        "price": 400,
+        "airline": "Aeromexico"
+      },
+      {
+        "id": 19,
+        "from": "Austin",
+        "to": "Madrid",
+        "departureDate": "2024-09-29",
+        "price": 650,
+        "airline": "Iberia"
+      },
+      {
+        "id": 20,
+        "from": "Portland",
+        "to": "Copenhagen",
+        "departureDate": "2024-10-06",
+        "price": 750,
+        "airline": "SAS"
+      }
+    ]
+  }
+  

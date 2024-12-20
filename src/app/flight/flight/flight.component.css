@@ -1,0 +1,182 @@
+body{
+    background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/84262275-3d50-4e29-bd58-9cd3cc9f92df/dgesu5v-cc210d56-d0be-4b55-aae5-ae49e70182ca.jpg/v1/fill/w_1280,h_854,q_75,strp/mountain_with_river_and_sunset_by_rony_design_dgesu5v-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODU0IiwicGF0aCI6IlwvZlwvODQyNjIyNzUtM2Q1MC00ZTI5LWJkNTgtOWNkM2NjOWY5MmRmXC9kZ2VzdTV2LWNjMjEwZDU2LWQwYmUtNGI1NS1hYWU1LWFlNDllNzAxODJjYS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.lQ79HNQgxuL8WIktoxZqn3DX8mOfmwPk4oAaam0HyxA");
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  @keyframes flicker {
+    0% {
+      opacity: 1;
+      color: #ec4e4e; /* Red */
+    }
+    20% {
+      opacity: 0.3;
+      color: #ed8c50; /* Orange */
+    }
+    40% {
+      opacity: 1;
+      color: #49d749; /* Green */
+    }
+    60% {
+      opacity: 0.3;
+      color: #5390ce; /* Blue */
+    }
+    80% {
+      opacity: 1;
+      color: #ff00ff; /* Magenta */
+    }
+    100% {
+      opacity: 0.3;
+      color: #ffff00; /* Yellow */
+    }
+  }
+  
+  .flickering-text {
+    animation: flicker 1s infinite;
+    font-size: 40px; 
+    font-weight: bolder; 
+    font-style: italic;
+    padding-left: 100px;
+    padding-top: 30px;
+  }
+
+  .flight-booking-form {
+    background-color: rgba(245, 245, 245, 0.652);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 50px auto;
+  }
+  
+  h2.form-title {
+    text-align: center;
+    font-size: 1.8rem;
+    color: #005bb5;
+    margin-bottom: 20px;
+  }
+  
+
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    flex: 1;
+    margin-right: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: #0066cc;
+    outline: none;
+  }
+  
+  /* Trip Type (Horizontal Layout) */
+  .trip-type {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .trip-label {
+    font-weight: bold;
+    margin-right: 20px;
+  }
+  
+  .trip-radio {
+    margin-right: 20px;
+  }
+  
+  .trip-radio input {
+    margin-right: 5px;
+  }
+  
+  /* Passenger Controls */
+  .passenger-control {
+    display: flex;
+    align-items: center;
+  }
+  
+  .passenger-btn {
+    background-color: #0066cc;
+    color: white;
+    font-size: 18px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+    width: 35px;
+    text-align: center;
+  }
+  
+  .passenger-btn:hover {
+    background-color: #4584c2;
+  }
+  
+  .passenger-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .passenger-btn:focus {
+    outline: none;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #0066cc;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #005bb5;
+  }
+  
+  .submit-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    .form-row {
+      flex-direction: column;
+    }
+  
+    .form-group {
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+  
+  }
+  
+  
+  

@@ -1,0 +1,40 @@
+<div class="container">
+    <h1>Flight Search</h1>
+    <div class="search-form">
+      <div class="form-group">
+        <label for="from">From:</label>
+        <input type="text" id="from" [(ngModel)]="from" />
+      </div>
+      <div class="form-group">
+        <label for="to">To:</label>
+        <input type="text" id="to" [(ngModel)]="to" />
+      </div>
+      <div class="form-group">
+        <label for="departDate">Depart Date:</label>
+        <input type="date" id="departDate" [(ngModel)]="departDate" />
+      </div>
+      <button (click)="searchFlights()">Search</button>
+    </div>
+    <div class="flight-results">
+      <table>
+        <thead>
+          <tr>
+            <th>Airline</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Departure Date</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let flight of flights">
+            <td>{{ flight.airline }}</td>
+            <td>{{ flight.from }}</td>
+            <td>{{ flight.to }}</td>
+            <td>{{ flight.departureDate }}</td>
+            <td>${{ flight.price }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
