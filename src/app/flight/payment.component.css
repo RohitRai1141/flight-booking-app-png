@@ -1,0 +1,25 @@
+.payment-container {
+    padding: 20px;
+    background-color: #e9ecef;
+  }
+  
+  .payment-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .cancel-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+  }
+  

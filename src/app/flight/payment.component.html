@@ -1,0 +1,19 @@
+<div class="payment-container">
+    <h2>Make Payment</h2>
+    <p>Total Price: {{ totalPrice | currency }}</p>
+  
+    <div class="form-group">
+      <label>Select Payment Method</label>
+      <select [(ngModel)]="paymentMethod">
+        <option value="creditCard">Credit Card</option>
+        <option value="debitCard">Debit Card</option>
+        <option value="paypal">PayPal</option>
+      </select>
+    </div>
+  
+    <button (click)="makePayment()" class="payment-btn">Pay Now</button>
+    <button (click)="cancelPayment()" class="cancel-btn">Cancel</button>
+  
+    <p>{{ paymentStatus }}</p>
+  </div>
+  

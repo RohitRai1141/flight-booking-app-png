@@ -1,55 +1,92 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Router, RouterLink } from '@angular/router';
+import FlightsJson from '../flights.json';
+import { BookingComponent } from '../booking/booking.component';
+import { Flight } from '../models/flight.interface';
+
+interface Passenger {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  dateOfBirth: string;
+  gender: string;
+  nationality: string;
+  postalCode: string;
+}
 
 @Component({
   selector: 'app-flight',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule, BookingComponent,RouterLink],
   templateUrl: './flight.component.html',
-  styleUrl: './flight.component.css'
+  styleUrls: ['./flight.component.css']
 })
 export class FlightComponent {
-  tripType: string = 'oneWay'; // Default trip type
-  departureCity: string = '';
-  destinationCity: string = '';
-  departureDate: string = '';
-  returnDate: string = '';
-  adults: number = 1;
-  children: number = 0;
-  infants: number = 0;
 
-  constructor() {}
+  
 
-  ngOnInit(): void {}
+  // Initialize from JSON file
+  flights: Flight[] = FlightsJson.flights;
+  filteredFlights: Flight[] = [...this.flights];
+  noFlightsFound: boolean = false;
+  selectedFlight: Flight | null = null;
 
-  increment(type: string) {
-    if (type === 'adults'&& this.adults<9) {
-      this.adults++;
-      this.adults>9;
-    } else if (type === 'children' && this.children<5) {
-      this.children++;
-    } else if (type === 'infants'&& this.infants<3) {
-      this.infants++;
-    }
-  }
-  decrement(type: string) {
-    if (type === 'adults' && this.adults > 1) {
-      this.adults--;
-    } else if (type === 'children' && this.children > 0) {
-      this.children--;
-    } else if (type === 'infants' && this.infants > 0) {
-      this.infants--;
-    }
+  http = inject(HttpClient);
+  private apiUrl = "http://localhost:3000";
+
+  searchCriteria = {
+    from: '',
+    to: '',
+    date: '',
+    airline: ''
+  };
+  
+
+  constructor(private router: Router) {
+    // If you want to fetch from API instead of JSON file, uncomment this:
+    /*
+    this.getFlights().subscribe((data: any) => {
+      console.log('Fetched Flights:', data);
+      this.flights = data.flights || [];
+      this.filteredFlights = [...this.flights];
+    });
+    */
   }
 
-  onSubmit(form: any) {
-    if (form.valid) {
-      console.log('Form Submitted:', form.value);
-    } else {
-      console.log('Form is invalid');
-    }
+  getFlights(): any {
+    return this.http.get<{flights: Flight[]}>(`${this.apiUrl}/flights`);
+  }
+
+  getFilteredFlights(): void {
+    this.filteredFlights = this.flights.filter(flight => {
+      const matchesFrom = flight.from.toLowerCase().includes(this.searchCriteria.from.toLowerCase());
+      const matchesTo = flight.to.toLowerCase().includes(this.searchCriteria.to.toLowerCase());
+      const matchesAirline = flight.airline.toLowerCase().includes(this.searchCriteria.airline.toLowerCase());
+
+      const [day, month, year] = flight.departureDate.split('-');
+      const normalizedDate = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+
+      const matchesDate = this.searchCriteria.date ? normalizedDate === this.searchCriteria.date : true;
+
+      return matchesFrom && matchesTo && matchesAirline && matchesDate;
+    });
+
+    this.noFlightsFound = this.filteredFlights.length === 0;
+  }
+
+  onSubmit(): void {
+    this.getFilteredFlights();
+    console.log('Filtered Flights:', this.filteredFlights);
+  }
+
+  selectFlight(flight: Flight): void {
+    this.selectedFlight = flight;
+  }
+
+  cancelBooking(): void {
+    this.selectedFlight = null;
   }
 }
-

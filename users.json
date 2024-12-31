@@ -1,0 +1,214 @@
+{
+  "users": [
+    {
+      "id": "d181",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "09-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "availableSeats": "string[]",
+        "unavailableSeats": "string[]",
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-06",
+          "gender": "male",
+          "nationality": "Indian",
+          "postalCode": 600081
+        }
+      ],
+      "totalPrice": 500
+    },
+    {
+      "id": "2777",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "09-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "availableSeats": "string[]",
+        "unavailableSeats": "string[]",
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "Mani",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-06",
+          "gender": "male",
+          "nationality": "Indian",
+          "postalCode": 600081
+        }
+      ],
+      "totalPrice": 500
+    },
+    {
+      "id": "599b",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "09-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "availableSeats": "string[]",
+        "unavailableSeats": "string[]",
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-29",
+          "gender": "male",
+          "nationality": "Indian",
+          "postalCode": 600081
+        }
+      ],
+      "totalPrice": 500
+    },
+    {
+      "id": "0e0f",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "09-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "availableSeats": "string[]",
+        "unavailableSeats": "string[]",
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-29",
+          "gender": "male",
+          "nationality": "Indian",
+          "postalCode": 600081
+        }
+      ],
+      "totalPrice": 500
+    },
+    {
+      "id": "a27c",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "09-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "availableSeats": "string[]",
+        "unavailableSeats": "string[]",
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-29",
+          "gender": "male",
+          "nationality": "Indian",
+          "postalCode": 600081
+        },
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-31",
+          "gender": "male",
+          "nationality": "Indian",
+          "postalCode": 600081
+        }
+      ],
+      "totalPrice": 1000
+    },
+    {
+      "id": "cd4d",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "09-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "availableSeats": "string[]",
+        "unavailableSeats": "string[]",
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-13",
+          "gender": "male",
+          "nationality": "Indian",
+          "postalCode": 600081
+        },
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-31",
+          "gender": "female",
+          "nationality": "Indian",
+          "postalCode": 600081
+        },
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2024-12-31",
+          "gender": "",
+          "nationality": "indian",
+          "postalCode": 600081
+        },
+        {
+          "firstName": "rohit",
+          "middleName": "rai",
+          "lastName": "A",
+          "dateOfBirth": "2025-01-09",
+          "gender": "",
+          "nationality": "Pkaistani",
+          "postalCode": 600081
+        }
+      ],
+      "totalPrice": 2000
+    }
+  ]
+}
