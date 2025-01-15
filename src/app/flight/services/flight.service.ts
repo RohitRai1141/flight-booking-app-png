@@ -17,22 +17,46 @@ export interface Flight {
   unavailableSeats: string[];
 }
 
+interface Seat {
+  id: string;
+  status: 'available' | 'selected' | 'booked';
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class FlightService {
   private apiUrl = 'http://localhost:3000/flights';
-  private userApiUrl = 'http://localhost:3000/users'; // Endpoint for saving user data
+  private seatsApiUrl = 'http://localhost:3002/seats'; // Changed to match JSON server endpoint
+  private userApiUrl = 'http://localhost:3001/users';
 
   constructor(private http: HttpClient) {}
 
-  // Fetch flight data
   getFlights(): Observable<Flight[]> {
     return this.http.get<Flight[]>(this.apiUrl);
   }
 
-  // Save user data to users.json
+  getFlightById(id: string): Observable<Flight> {
+    return this.http.get<Flight>(`${this.apiUrl}/${id}`);
+  }
+
   saveUserData(userData: any): Observable<any> {
     return this.http.post(this.userApiUrl, userData);
+  }
+
+  saveSeats(updatedSeats: any[]): Observable<any> {
+    return this.http.post(this.seatsApiUrl, updatedSeats );
+  }
+
+  getSeats(): Observable<any> {
+    return this.http.get(`${this.seatsApiUrl}`);
+  }
+
+  saveUserSeats(userSeats: any): Observable<any> {
+    return this.http.post(this.userApiUrl, userSeats);
+  }
+
+  getUserData(): Observable<any[]> {
+    return this.http.get<any[]>(this.userApiUrl);
   }
 }

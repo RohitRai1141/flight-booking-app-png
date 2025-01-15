@@ -1,175 +1,94 @@
-
-body {
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvq3SFQJ8aHNx4op0-DqXZyXf7s6lColCI4A&s");
+.background{
+  
   background-size: cover;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+  
 }
-@keyframes flicker {
-  0% {
-    opacity: 1;
-    color: #ec4e4e; /* Red */
-  }
-  20% {
-    opacity: 0.3;
-    color: #ed8c50; /* Orange */
-  }
-  40% {
-    opacity: 1;
-    color: #49d749; /* Green */
-  }
-  60% {
-    opacity: 0.3;
-    color: #5390ce; /* Blue */
-  }
-  80% {
-    opacity: 1;
-    color: #ff00ff; /* Magenta */
-  }
-  100% {
-    opacity: 0.3;
-    color: #ffff00; /* Yellow */
-  }
+
+.background-1 {
+  padding: 20px;
+  background-color: lightblue; /* Adds a semi-transparent overlay for better readability */
+  border-radius: 10px;
+  max-width: 1200px;
+  margin: 20px auto;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
 }
 
 .flickering-text {
-  animation: flicker 1s infinite;
-  font-size: 40px;
-  font-weight: bolder;
-  font-style: italic;
-  padding-left: 100px;
-  padding-top: 30px;
+  text-align: center;
+  font-size: 2.5rem;
+  color: black;
+  text-shadow: 0 0 5px #fff, 0 0 10px #ffeb3b, 0 0 20px #ffeb3b;
+  animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 .flight-booking-form {
-  background-color: rgba(245, 245, 245, 0.652);
-  padding: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
-  margin: 50px auto;
-}
-#book-now{
-  color: whitesmoke;
-  background-color: #4c51bf;
-  border-radius: 20px;
-  width:100px ;
-  height: 30px;
-}
-#book-now:hover {
-  background-color: rgb(27, 92, 27);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  color: #333;
 }
 
-
-
-.h2 {
+.form-title {
   text-align: center;
   font-size: 1.8rem;
-  color: #005bb5;
   margin-bottom: 20px;
+  color: #000;
 }
 
 .form-row {
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: space-between;
-  margin-bottom: 15px;
 }
 
 .form-group {
-  flex: 1;
-  margin-right: 15px;
+  flex: 1 1 calc(50% - 10px);
+  min-width: 200px;
 }
 
-.form-group label {
-  display: block;
+label {
   font-weight: bold;
+  display: block;
   margin-bottom: 5px;
-  font-size: 14px;
 }
 
-.form-group input,
-.form-group select {
+input, select {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
-.form-group input:focus,
-.form-group select:focus {
-  border-color: #0a63bc;
-  outline: none;
-}
-
-/* Trip Type (Horizontal Layout) */
-.trip-type {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.trip-label {
-  font-weight: bold;
-  margin-right: 20px;
-}
-
-.trip-radio {
-  margin-right: 20px;
-}
-
-.trip-radio input {
-  margin-right: 5px;
-}
-
-/* Passenger Controls */
-.passenger-control {
-  display: flex;
-  align-items: center;
-}
-
-.passenger-btn {
-  background-color: #0066cc;
-  color: white;
-  font-size: 18px;
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 5px;
-  width: 35px;
-  text-align: center;
-}
-
-.passenger-btn:hover {
-  background-color: #3879b6;
-}
-
-.passenger-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.passenger-btn:focus {
-  outline: none;
+.error-message {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: 5px;
 }
 
 .submit-btn {
+  display: block;
   width: 100%;
-  padding: 12px;
-  background-color: rgb(27, 27, 193);
-  color: white;
-  font-size: 16px;
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 4px;
   cursor: pointer;
   margin-top: 20px;
-}
-
-.submit-btn:hover {
-  background-color: #09549f;
+  transition: background-color 0.3s ease;
 }
 
 .submit-btn:disabled {
@@ -177,917 +96,110 @@ body {
   cursor: not-allowed;
 }
 
-@media (max-width: 768px) {
-  .form-row {
-    flex-direction: column;
-  }
-
-  .form-group {
-    margin-right: 0;
-    margin-bottom: 15px;
-  }
+.submit-btn:hover:not(:disabled) {
+  background-color: #218838;
 }
-/* Overall container styling */
+
 .flight-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-image: url("https://t3.ftcdn.net/jpg/09/39/25/14/360_F_939251403_bj1gQDbbtjun0wSL8sYXikPhzcAgv2Za.jpg"); /* light blue background */
-  background-repeat: no-repeat;
-  background-size: cover;
+  margin-top: 30px;
 }
 
-/* Flight box styling */
-.flight-box {
-  background-color:rgba(245, 245, 245, 0.812);
-  padding: 24px;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 1280px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 2px solid #e5e7eb; /* light gray border */
-}
-
-/* Heading styling */
 .heading {
-  font-size: 2rem;
-  font-weight: bolder;
   text-align: center;
-  color: rgb(99, 10, 10); /* dark gray */
-  margin-bottom: 24px;
+  font-size: 1.5rem;
+  color: black;
 }
 
-/* Table styling */
 .flight-table {
   width: 100%;
   border-collapse: collapse;
-  text-align: left;
-  color: #062559; /* dark gray */
+  margin-top: 20px;
+  color: #000;
 }
 
-/* Table header styling */
-.flight-table thead {
-  background: linear-gradient(
-    to right,
-    #3a3eb3,
-    #9f7aea,
-    #c36a90
-  ); /* gradient for header */
-  color: white;
-}
-
-.flight-table th {
-  padding: 12px 16px;
-  font-weight: bold;
-}
-
-/* Table row styling */
-.flight-table tbody tr {
-  transition: background-color 0.3s ease;
-  border-bottom: 1px solid #e5e7eb; /* light gray border */
-}
-
-.flight-table tbody tr:hover {
-  background-color: #e2e8f0; /* light indigo on hover */
-}
-
+.flight-table th,
 .flight-table td {
-  padding: 12px 16px;
-  font-size: 1.125rem; /* large text */
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
 }
 
-/* Route column styling */
-.flight-table td span {
-  margin: 0 8px;
-}
-
-.flight-table .arrow {
+.price {
   font-weight: bold;
-  color: rgb(179, 124, 23); /* indigo */
+  color: #28a745;
 }
 
-/* Price styling */
-.flight-table .price {
-  font-weight: 600;
-  color: #38a169; /* green */
+.btn-danger {
+  background-color: #d9534f;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
+
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
 .no-flights-message {
   text-align: center;
-  color: red; /* Optional: Change the color for emphasis */
+  color: #fff;
+  margin-top: 20px;
 }
 
 .invalid-input {
-  font-weight: bold;
-  font-size: 2em; /* Adjust size for the first line */
-  margin-bottom: 10px; /* Optional: Space between the two lines */
-}
-
-.no-flight-match {
-  font-size: 1.5em; /* Adjust size for the second line */
-  font-weight: normal;
-}
-
-.booking-section {
- 
-  width: 60%;
-  margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.booking-section h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #4c51bf; /* Indigo for the heading */
-}
-
-.booking-section p {
   font-size: 1.2rem;
-  margin-bottom: 15px;
-  color: #2d3748; /* Dark gray for text */
-}
-
-.booking-section .form-group {
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.booking-section .form-group input,
-.booking-section .form-group select {
-  width: calc(100% - 20px); /* Reduce width slightly for padding */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-.booking-section .submit-btn,
-.booking-section .cancel-btn {
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.booking-section .submit-btn {
-  background-color: #4caf50; /* Green */
-  color: white;
-}
-
-.booking-section .cancel-btn {
-  background-color: #f44336; /* Red */
-  color: white;
-}
-
-.booking-section .submit-btn:hover {
-  background-color: #45a049;
-}
-
-.booking-section .cancel-btn:hover {
-  background-color: #d32f2f;
-}
-.Flightdetail{
-  position: sticky;
-  top:30;
-  text-align: center;
-  background: whitesmoke;
-  border-radius: 10px;
-  display:inline-flex;
-  width: 1200px;
-  height: 100px;
-  font-size: large;
-  margin-left: 200px;
-  margin-top: 0px;
-  padding: 30px;
- }
- .traveler_detail{
-   padding: 0px;
-   margin-top: 100px;
-   display: inline-block;
-   width: 1200px;
-   font-size: 20px;
-   background: rgba(245, 245, 245, 0.312);
-   text-align: left;
-   margin-left: 10px;
-   border-radius: 40px;
-   padding-right: 170px;
-   
- }
- strong{
-  color: red;
- }
- @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-#flightcol {
-  font-size: 2rem;
   font-weight: bold;
-  animation: bounce 1s ease-in-out infinite;
-  color: #005bb5;
+  color: #d9534f;
 }
-
-
-/* app.component.css */
-.glitch-container {
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px; /* Keeps the width consistent */
+  height: 80px; /* Reduced height */
+  padding: 15px; /* Adjusted padding */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Slightly lighter shadow */
+  z-index: 1000;
+  font-size: 14px; /* Slightly smaller font size */
+  font-weight: bold;
+  text-align: left; /* Align text to the left */
   display: flex;
-  flex-direction: column;
-  align-items: left;
-  font-family: 'Courier New', Courier, monospace; /* Optional: gives it a typewriter feel */
-  font-size: 30px;
-  font-weight:bolder;
-  position: relative;
-  color: #9f7aea;
+  align-items: center; /* Center text vertically */
+  justify-content: flex-start;
+  animation: fadeInOut 4s ease-in-out;
 }
 
-.glitch-text {
-  position: relative;
-  display: inline-block;
-  color: rgb(7, 60, 7); /* Initial text color */
-  animation: glitch 1s infinite; /* Apply the glitch animation */
-  letter-spacing: 1px;
-  font-weight: bolder;
-  padding-left: 30px;
-  padding-top: 40px;
+.notification.success {
+  background-color: #d4edda; /* Light green */
+  color: #155724; /* Dark green text */
+  border: 1px solid #c3e6cb; /* Subtle border */
 }
 
-.glitch-text::before,
-.glitch-text::after {
-  content: attr(data-text); /* Duplicate the text for glitch effect */
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: #ff0000; /* Different color for glitch effect */
-  overflow: hidden;
-  clip-path: inset(0 0 0 0);
-  animation: glitch-before 1s infinite, glitch-after 1s infinite;
+.notification.error {
+  background-color: #f8d7da; /* Light red */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb; /* Subtle border */
 }
 
-.glitch-text::before {
-  z-index: 1;
-  animation-delay: 0.1s; /* Slight delay for before glitch */
-}
-
-.glitch-text::after {
-  z-index: 2;
-  animation-delay: 0.3s; /* Slight delay for after glitch */
-}
-
-/* Keyframes for the glitch effect */
-@keyframes glitch {
-  0% {
-    transform: translateX(0);
-    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
-  }
-  20% {
-    transform: translateX(-3px) skew(10deg);
-    text-shadow: -2px -2px 0px rgba(255, 255, 255, 0.5);
-  }
-  40% {
-    transform: translateX(3px) skew(-10deg);
-    text-shadow: -2px 2px 0px rgba(255, 255, 255, 0.5);
-  }
-  60% {
-    transform: translateX(-2px) skew(5deg);
-    text-shadow: 2px -2px 0px rgba(255, 255, 255, 0.5);
-  }
-  80% {
-    transform: translateX(2px) skew(-5deg);
-    text-shadow: -2px 2px 0px rgba(255, 255, 255, 0.5);
-  }
-  100% {
-    transform: translateX(0);
-    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
-  }
-}
-
-/* Keyframes for glitch before effect */
-@keyframes glitch-before {
-  0% {
-    transform: translateX(0);
-    clip-path: inset(0 0 0 0);
-  }
-  50% {
-    transform: translateX(-10px) skew(-10deg);
-    clip-path: inset(0 0 100% 0);
-  }
-  100% {
-    transform: translateX(0);
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-/* Keyframes for glitch after effect */
-@keyframes glitch-after {
-  0% {
-    transform: translateX(0);
-    clip-path: inset(0 0 0 0);
-  }
-  50% {
-    transform: translateX(10px) skew(10deg);
-    clip-path: inset(0 0 100% 0);
-  }
-  100% {
-    transform: translateX(0);
-    clip-path: inset(0 0 0 0);
-  }
-}
-
-
-
-.form{
-  width:400px;
-  height: 50px;
-  position: relative;
-}
-.form input{
-  width: 500px;
-  height: 50px;
-  background: white;
-  border: 2px solid beige;
-  border-radius: 10px;
-  outline: none;
-  padding: 0 10px;
-  font-size: 20px;
-}
-.form label{
-  position: absolute;
-  top:15px;
-  left:15px;
-  color: black;
-  text-transform: capitalize;
-  font-size: 18px;
-  transition: top -3s;
-  padding: 0 5px;
-  font-weight: bold;
-}
-.form input:focus ~ label{
-  top:-9px;
-}
-
-
-
-/* Styling for the input container */
-.input-container {
-  position: relative;
-  margin-bottom: 30px;
-  width: 100%;
-  overflow: hidden; /* To handle the effects inside */
-}
-
-/* Styling for the select dropdown */
-select {
-  width: 100%;
-  padding: 14px 14px; /* Padding for better space */
-  font-size: 20px; /* Larger font size for readability */
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  background-color: transparent;
-  color: #333;
-  transition: all 0.3s ease; /* Smooth transition for all styles */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-  appearance: none; /* Remove default styling in some browsers */
-  -webkit-appearance: none; /* Safari and Chrome */
-  -moz-appearance: none; /* Firefox */
-  background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="%23333" d="M4.293 5.293a1 1 0 0 1 1.414 0L8 7.586l2.293-2.293a1 1 0 1 1 1.414 1.414L8 10.414 4.293 6.707a1 1 0 0 1 0-1.414z"/%3E%3C/svg%3E') no-repeat right 14px center;
-  background-size: 12px 12px;
-}
-
-/* Floating label effect */
-label {
-  position: absolute;
-  top: 18px;
-  left: 14px;
-  font-size: 20px; /* Larger font size */
-  color: #aaa;
-  transition: all 0.3s ease;
-  pointer-events: none; /* Prevent interaction with the label */
-  font-weight: normal;
-}
-
-/* Floating label on focus or when input has value */
-select:focus + label,
-select:not(:placeholder-shown) + label {
-  top: -8px;
-  font-size: 16px; /* Smaller font when label floats */
-  color: black;
-  font-size: 20px;
-}
-
-/* Placeholder styling */
-select::placeholder {
-  color: transparent;
-}
-
-/* Styling for the select dropdown when focused */
-select:focus {
-  border-color: #007bff; /* Border color on focus */
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Glowing border */
-  background-color: rgba(0, 123, 255, 0.1); /* Light background change */
-}
-
-/* Hover effect for the select dropdown */
-select:hover {
-  border-color: #007bff;
-  background-color: rgba(0, 123, 255, 0.1); /* Subtle hover background */
-  cursor: pointer;
-}
-.passenger-form{
-  padding-left: 150px;
-}
-
-
-/* Styling for the input container */
-.input-container {
-  position: relative;
-  margin-bottom: 30px;
-  width: 100%;
-}
-
-/* Styling for the input field */
-input[type="date"] {
-  width: 100%;
-  padding: 18px 14px; /* Padding for better space */
-  font-size: 20px; /* Larger font size for readability */
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  background-color: transparent;
-  color: #333;
-  transition: all 0.3s ease; /* Smooth transition for all styles */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-}
-
-/* Floating label effect */
-label {
-  position: absolute;
-  top: 18px;
-  left: 14px;
-  font-size: 20px; /* Larger font size */
-  color: #aaa;
-  transition: all 0.3s ease;
-  pointer-events: none; /* Prevent interaction with the label */
-  font-weight: normal;
-  z-index: 1; /* Ensure the label stays above the select box */
-}
-
-/* Floating label on focus or when input has value */
-input[type="date"]:focus + label,
-input[type="date"]:not(:placeholder-shown) + label {
-  top: -8px;
-  font-size: 16px; /* Smaller font when label floats */
-  color: blueviolet;
-  font-size: 20px;
-}
-
-/* Styling for the input field when focused */
-input[type="date"]:focus {
-  border-color: #007bff; /* Border color on focus */
-  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Glowing border */
-  background-color: rgba(0, 123, 255, 0.1); /* Light background change */
-}
-
-
-
-
-
-
-/* Container for each passenger form */
-.passenger-form {
-  margin-bottom: 20px;
-}
-
-/* Flex container for the two sections */
-.form-container {
-  display: flex;
-  justify-content: space-between;
-  gap: 150px; /* Gap between the two sections */
-}
-
-/* Style for each section */
-.form-section {
-  width: 200%; /* Each section takes up 48% of the width */
-}
-
-/* Styling for individual form fields (input and select) */
-.form {
-  position:relative;
-  margin-bottom: 20px;
-}
-
-/* Styling for the input and select fields */
-input[type="text"], input[type="date"], select {
-  width: 100%;
-  padding: 14px;
-  font-size: 16px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  outline: none;
-  background-color: white;
-  color: #333;
-  transition: all 0.3s ease;
-}
-
-label {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  font-size: 16px;
-  font-weight: bolder;
-  color: #aaa;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-
-/* Floating label behavior */
-input:focus + label, select:focus + label,
-input:not(:placeholder-shown) + label, select:not(:placeholder-shown) + label {
-  top: -8px;
-  font-size: 20px;
-  color: blueviolet;
-  font-weight: bold;
-}
-
-/* Styling for the remove button */
-.remove-btn {
-  padding: 10px 20px;
-  background-color: #ff4c4c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.remove-btn:hover {
-  background-color: #ff1a1a;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/* Style for the input container */
-.input-container {
-  width: 100%;
-  max-width: 400px; /* Max width for input container */
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  margin-left: 500px;
-}
-
-/* Styling for the label */
-.input-container label {
-  font-size: 18px;
-  font-weight: bolder;
-  margin-bottom: 10px;
-  display: block;
-  color: #490a0a;
-}
-
-/* Styling for the input field */
-.input-container input[type="number"] {
-  width: 100%;
-  padding: 12px;
-  font-size: 18px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  outline: none;
-  color: #555;
-  background-color: #fff;
-  transition: all 0.3s ease;
-}
-
-/* Focus and hover effect for the input field */
-.input-container input[type="number"]:focus {
-  border-color: transparent;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.249);
-}
-
-/* Placeholder styling */
-.input-container input[type="number"]::placeholder {
-  color: #bbb;
-  font-size: 16px;
-}
-
-/* Adjusting input when disabled (if necessary) */
-.input-container input[type="number"]:disabled {
-  background-color: #f1f1f1;
-  border-color: #ddd;
-  color: #aaa;
-  cursor: not-allowed;
-}
-
-/* Styling for mobile responsiveness */
-@media (max-width: 768px) {
-  .input-container {
-    width: 80%;
-    padding: 15px;
-  }
-
-  .input-container label {
-    font-size: 16px;
-  }
-
-  .input-container input[type="number"] {
-    font-size: 16px;
-  }
-}
-#cancel-btn {
-  justify-self:center;
-  display: inline-flex;
-  width: 20%;
-  padding: 12px;
-  background-color: red;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-left: 260px;
-  text-align: center;
-  padding-left: 120px;
-}
-
-#cancel-btn:hover {
-  background-color: rgb(150, 63, 63);
-}
-
-#submit-btn{
-  text-align: center;
-  display: inline-flex;
-  width: 20%;
-  padding: 12px;
-  background-color: blue;
-  color: white;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 20px;
-  margin-left: 350px;
-  padding-left: 120px;
-}
-
-#submit-btn:hover {
-  background-color: rgb(90, 90, 248);
-}
-
-
-
-/* Styling for the container */
-.typing-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-}
-
-/* Typing animation for each text */
-#passenger {
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
-  display: inline-block;
-  border-right: 3px solid #333; /* Simulates the cursor effect */
-  width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3s steps(20) 0.5s forwards, blink 0.75s step-end infinite;
-  margin: 10px 0;
-}
-
-/* Animation for typing effect */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-/* Animation for cursor blinking */
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-
-/* Add a delay for each element for sequential typing */
-.typing-effect:nth-child(1) {
-  animation-delay: 0.5s; /* Delay for the first text */
-}
-
-.typing-effect:nth-child(2) {
-  animation-delay: 4.5s; /* Delay for the second text */
-}
-
-.typing-effect:nth-child(3) {
-  animation-delay: 8.5s; /* Delay for the third text */
-}
-.Extra{
-  margin-top: 60px;
-  display: inline-block;
-  width: 600px;
-  font-size: 20px;
-  background: rgba(245, 245, 245, 0.729);
-  text-align: left;
-  margin-left: 10px;
-  border-radius: 40px;
- 
-}
-#remove-btn{
-  color: whitesmoke;
-  background: red;
-  width: 150px;
-  margin-top: 380px;
-  display: inline;
-  border-radius: 20px;
-  height: 30px;
-}
-
-.remove{
-  position: relative;
-  right: 650px;
-}
-.background-1{
-  background-image: url("https://media.istockphoto.com/id/1061786490/photo/sky-in-the-pink-and-blue-colors-effect-of-light-pastel-colored-of-sunset-clouds-cloud-on-the.jpg?s=612x612&w=0&k=20&c=63w_vI9ygxvO8FBEjGOkPAekGoaKmOl6TCdnQMcX8ug=");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-
-
-
-
-
-
-
-
-
-/* General button styles */
-#submit-btn, #cancel-btn {
-  padding: 15px 35px;
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 50px;
-  position: relative;
-  background-color: rgb(132, 132, 254);
-  color: white;
-  transition: all 0.5s ease-in-out;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  outline: none;
-  display: inline-block;
-}
-
-#submit-btn {
-  background-color: rgb(116, 116, 249);
-}
-
-#cancel-btn {
-  background-color: #e7564c;
-}
-
-/* Hover effect: Glow & Scale */
-#submit-btn:hover, #cancel-btn:hover {
-  background-color: #45a049;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transform: scale(1.1);
-  animation: glowing 1.5s infinite alternate;
-}
-
-/* Active state: Slight Shrink */
-#submit-btn:active, #cancel-btn:active {
-  transform: scale(1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Glow Animation */
-@keyframes glowing {
-  0% {
-    box-shadow: 0 0 15px #fff, 0 0 30px #4CAF50, 0 0 60px #4CAF50;
-  }
-  100% {
-    box-shadow: 0 0 30px #fff, 0 0 60px #4CAF50, 0 0 120px #4CAF50;
-  }
-}
-
-/* Loading spinner effect */
-#submit-btn.loading, #cancel-btn.loading {
-  background-color: #333;
-  color: #ccc;
-  border-color: #999;
-  cursor: not-allowed;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: scale(0.95);
-  animation: bounce 1.5s infinite alternate;
-}
-
-/* Bounce Effect */
-@keyframes bounce {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* Circle loader inside button */
-#submit-btn.loading::before, #cancel-btn.loading::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 60px;
-  height: 60px;
-  margin-top: -30px;
-  margin-left: -30px;
-  border: 5px solid #fff;
-  border-top: 5px solid transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  z-index: 2;
-}
-
-/* Spinner animation */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Glowing effect inside spinner */
-#submit-btn.loading::after, #cancel-btn.loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  animation: glow 1.5s ease-out infinite;
-  z-index: 1;
-}
-
-/* Pulse effect for glowing */
-@keyframes glow {
+@keyframes fadeInOut {
   0% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translateX(100%);
   }
-  50% {
+  10% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: translateX(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(0);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
+    transform: translateX(100%);
   }
-}
-
-/* Disabled button appearance */
-#submit-btn:disabled, #cancel-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 

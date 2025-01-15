@@ -4,149 +4,164 @@
     <div class="Flightdetail">
       <h2 id="flightcol">Flight Details</h2>
       <hr />
-      <p><strong>Flight Number:</strong> {{ selectedFlight.id }}</p>
-      <hr />
-      <p><strong>From:</strong><br />{{ selectedFlight.from }}</p>
-      <hr />
-      <p><strong>To:</strong><br />{{ selectedFlight.to }}</p>
-      <hr />
-      <p><strong>Departure Date:</strong><br />{{ selectedFlight.departureDate }}</p>
-      <hr />
-      <p><strong>Price (Per Passenger):</strong><br />{{ selectedFlight.price | currency: 'INR' }}</p>
-      <hr />
-      <p><strong>Total Price:</strong><br />{{ totalPrice | currency: 'INR' }}</p>
-      <hr />
-      <p><strong>Airline:</strong><br />{{ selectedFlight.airline }}</p>
-    </div>
-
-    <div class="traveler_detail">
-      <div class="glitch-container">
-        <span class="glitch-text">Enter Passenger Details:</span>
-      </div>
-      <br />
-      <hr />
-      <br />
-
-      <div class="input-container">
-        <label for="passengerCount">No of Passengers</label>
-        <input
-          type="number"
-          id="passengerCount"
-          name="passengerCount"
-          [(ngModel)]="numberOfPassengers"
-          min="1"
-          max="10"
-          (change)="updatePassengerCount()"
-        />
+      <div class="flight-details-row">
+        <p><strong>Flight Number:</strong> {{ selectedFlight.id }}</p>
+        <p><strong>From:</strong> {{ selectedFlight.from }}</p>
+        <p><strong>To:</strong> {{ selectedFlight.to }}</p>
+        <p>
+          <strong>Departure Date:</strong> {{ selectedFlight.departureDate }}
+        </p>
+        <p>
+          <strong>Price (Per Passenger):</strong>
+          {{ selectedFlight.price | currency : "INR" }}
+        </p>
+        <p><strong>Total Price:</strong> {{ totalPrice | currency : "INR" }}</p>
+        <p><strong>Airline:</strong> {{ selectedFlight.airline }}</p>
       </div>
 
-      <!-- Passengers Form -->
-      <div *ngFor="let passenger of passengers; let i = index" class="passenger-form">
-        <div class="typing-container">
-          <h3 id="passenger">Passenger {{ i + 1 }}</h3>
+      <div
+        *ngIf="validationMessage"
+        [ngClass]="notificationClass"
+        class="notification"
+      >
+        <p>{{ validationMessage }}</p>
+      </div>
+
+      <div class="traveler_detail">
+        <div class="glitch-container">
+          <span class="glitch-text">Enter Passenger Details:</span>
         </div>
         <br />
+        <hr />
+        <br />
 
-        <div class="form-container">
-          <!-- Name and DOB Section -->
-          <div class="form-section">
-            <div class="form">
-              <input
-                type="text"
-                [(ngModel)]="passenger.firstName"
-                name="firstName{{ i }}"
-                placeholder="First Name"
-                required
-              />
-              <label for="firstName">First Name</label>
-            </div>
-            <br />
-
-            <div class="form">
-              <input
-                type="text"
-                [(ngModel)]="passenger.middleName"
-                name="middleName{{ i }}"
-                placeholder="Middle Name"
-              />
-              <label for="middleName">Middle Name</label>
-            </div>
-            <br />
-
-            <div class="form">
-              <input
-                type="text"
-                [(ngModel)]="passenger.lastName"
-                name="lastName{{ i }}"
-                placeholder="Last Name"
-                required
-              />
-              <label for="lastName">Last Name</label>
-            </div>
-            <br />
-
-            <div class="form">
-              <input
-                type="date"
-                [(ngModel)]="passenger.dateOfBirth"
-                name="dateOfBirth{{ i }}"
-                required
-              />
-              <label for="DOB">DOB</label>
-            </div>
-          </div>
-
-          <!-- Gender, Nationality, and Postal Code -->
-          <div class="form-section">
-            <div class="form">
-              <select [(ngModel)]="passenger.gender" name="gender{{ i }}" required>
-                <option value="" disabled>Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-              </select>
-              <label for="gender">Gender</label>
-            </div>
-            <br />
-
-            <div class="form">
-              <input
-                type="text"
-                [(ngModel)]="passenger.nationality"
-                name="nationality{{ i }}"
-                placeholder="Nationality"
-                required
-              />
-              <label for="nationality">Nationality</label>
-            </div>
-            <br />
-
-            <div class="form">
-              <input
-                type="number"
-                [(ngModel)]="passenger.postalCode"
-                name="postalCode{{ i }}"
-                placeholder="Postal Code"
-                required
-              />
-              <label for="postalCode">Postal Code</label>
-            </div>
-          </div>
+        <div class="input-container">
+          <label for="passengerCount">No of Passengers</label>
+          <input
+            type="number"
+            id="passengerCount"
+            name="passengerCount"
+            [(ngModel)]="numberOfPassengers"
+            min="1"
+            max="10"
+            (change)="updatePassengerCount()"
+          />
         </div>
 
-        <!-- Remove Passenger Button -->
-        <div class="remove">
-          <button *ngIf="passengers.length > 1" (click)="removePassenger(i)" id="remove-btn">
-            Remove Passenger
-          </button>
+        <!-- Passengers Form -->
+        <div
+          *ngFor="let passenger of passengers; let i = index"
+          class="passenger-form"
+        >
+          <div class="typing-container">
+            <h3 id="passenger">Passenger {{ i + 1 }}</h3>
+          </div>
+          <br />
+
+          <div class="form-container">
+            <!-- Name and DOB Section -->
+            <div class="form-section">
+              <div class="form">
+                <input
+                  type="text"
+                  [(ngModel)]="passenger.firstName"
+                  name="firstName{{ i }}"
+                  required
+                />
+                <label for="firstName">First Name</label>
+              </div>
+              <div class="form">
+                <input
+                  type="text"
+                  [(ngModel)]="passenger.middleName"
+                  name="middleName{{ i }}"
+                />
+                <label for="middleName">Middle Name</label>
+              </div>
+            </div>
+
+            <br />
+
+            <div class="form-section">
+              <div class="form">
+                <input
+                  type="text"
+                  [(ngModel)]="passenger.lastName"
+                  name="lastName{{ i }}"
+                  required
+                />
+                <label for="lastName">Last Name</label>
+              </div>
+              <div class="form">
+                <input
+                  type="date"
+                  [(ngModel)]="passenger.dateOfBirth"
+                  name="dateOfBirth{{ i }}"
+                  required
+                />
+                <label for="DOB">DOB</label>
+              </div>
+            </div>
+
+            <!-- Gender, Nationality, and Postal Code Section -->
+            <div class="form-section">
+              <div class="form">
+                <select
+                  [(ngModel)]="passenger.gender"
+                  name="gender{{ i }}"
+                  required
+                >
+                  <option value="" disabled>Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                <label for="gender">Gender</label>
+              </div>
+              <div class="form">
+                <input
+                  type="text"
+                  [(ngModel)]="passenger.nationality"
+                  name="nationality{{ i }}"
+                  required
+                />
+                <label for="nationality">Nationality</label>
+              </div>
+            </div>
+
+            <br />
+
+            <div class="form-section">
+              <div class="form">
+                <input
+                  type="number"
+                  [(ngModel)]="passenger.postalCode"
+                  name="postalCode{{ i }}"
+                  required
+                />
+                <label for="postalCode">Passport Number</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Remove Passenger Button -->
+          <div class="remove">
+            <button
+              *ngIf="passengers.length > 1"
+              (click)="removePassenger(i)"
+              id="remove-btn"
+            >
+              Remove Passenger
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Confirm and Cancel Booking -->
-    <div class="action-buttons">
-      <button (click)="confirmBooking()" id="submit-btn">Confirm</button>
-      <button (click)="cancelBooking()" id="cancel-btn">Cancel</button>
+      <!-- Confirm and Cancel Booking -->
+      <div class="action-buttons">
+        <button (click)="confirmBooking()" id="submit-btn" [routerLink]="['/seat']">Confirm</button>
+        <button (click)="cancelBooking()" id="cancel-btn">Cancel</button>
+      </div>
     </div>
   </div>
 </div>

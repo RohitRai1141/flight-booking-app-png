@@ -1,110 +1,115 @@
-<div>
-  <h1 class="flickering-text">PlanNGo</h1>
-
-  <!-- Flight Search Form -->
-  <div *ngIf="!selectedFlight">
-    <form
-      #flightForm="ngForm"
-      (ngSubmit)="onSubmit()"
-      class="flight-booking-form"
-    >
-      <h2 class="form-title">Search Your Flight</h2>
-
-      <!-- Departure and Destination Cities -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="departureCity">From</label>
-          <input
-            type="text"
-            id="departureCity"
-            name="departureCity"
-            [(ngModel)]="searchCriteria.from"
-            placeholder="✈️ Departure city"
-            required
-          />
+<div class="background">
+  <div class="background-1">
+    <!-- Flight Search Section -->
+    <div *ngIf="!selectedFlight">
+      <h1 class="flickering-text">PlanNGo</h1>
+      <form #flightForm="ngForm" (ngSubmit)="onSubmit()" class="flight-booking-form">
+        <h2 class="form-title">Search Your Flight</h2>
+  
+  
+        <div *ngIf="isSearchExecuted && showSuccessMessage" class="notification success">
+          Success!!!</div>
+         
+          <!-- Error Message -->
+          <div *ngIf="isSearchExecuted && showError" class="notification error">
+          Failure!!</div>
+  
+  
+  
+  
+  
+  
+  
+  
+        <div class="form-row">
+          <div class="form-group">
+            <label for="departureCity">From</label>
+            <input
+              type="text"
+              id="departureCity"
+              name="departureCity"
+              [(ngModel)]="searchCriteria.from"
+              placeholder="✈️ Departure city"
+              required
+              #departureCity="ngModel"
+            />
+            <div *ngIf="departureCity.invalid && departureCity.touched" class="error-message">
+              Please enter a departure city.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="destinationCity">To</label>
+            <input
+              type="text"
+              id="destinationCity"
+              name="destinationCity"
+              [(ngModel)]="searchCriteria.to"
+              placeholder="🛬 Destination city"
+              required
+              #destinationCity="ngModel"
+            />
+            <div *ngIf="destinationCity.invalid && destinationCity.touched" class="error-message">
+              Please enter a destination city.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="departureDate">Departure Date</label>
+            <input
+              type="date"
+              id="departureDate"
+              name="departureDate"
+              [(ngModel)]="searchCriteria.date"
+              min="{{CurrentDate|date:'yyyy-MM-dd'}}"
+              required
+              #departureDate="ngModel"
+            />
+            <div *ngIf="departureDate.invalid && departureDate.touched" class="error-message">
+              Please select a departure date.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="airline">Select Airline</label>
+            <select
+              id="airline"
+              name="airline"
+              [(ngModel)]="searchCriteria.airline"
+              required
+              #airline="ngModel"
+            >
+              <option value="" disabled selected>Select an airline</option>
+              <option value="Indigo">Indigo</option>
+              <option value="Air India">Air India</option>
+              <option value="Jet Airways">Jet Airways</option>
+              <option value="Emirates">Emirates</option>
+              <option value="Qatar Airways">Qatar Airways</option>
+              <option value="Singapore Airlines">Singapore Airlines</option>
+            </select>
+            <div *ngIf="airline.invalid && airline.touched" class="error-message">
+              Please select an airline.
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="destinationCity">To</label>
-          <input
-            type="text"
-            id="destinationCity"
-            name="destinationCity"
-            [(ngModel)]="searchCriteria.to"
-            placeholder="🛬 Destination city"
-            required
-          />
-        </div>
-      </div>
-
-      <!-- Departure Date -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="departureDate">Departure Date</label>
-          <input
-            type="date"
-            id="departureDate"
-            name="departureDate"
-            [(ngModel)]="searchCriteria.date"
-            required
-          />
-        </div>
-      </div>
-
-      <!-- Airline Dropdown -->
-      <div class="form-group">
-        <label for="airline">Select Airline</label>
-        <select
-          id="airline"
-          name="airline"
-          [(ngModel)]="searchCriteria.airline"
-          required
-        >
-          <option value="" disabled selected>Select an airline</option>
-          <option value="Indigo">Indigo</option>
-          <option value="Air India">Air India</option>
-          <option value="Jet Airways">Jet Airways</option>
-          <option value="Emirates">Emirates</option>
-          <option value="Qatar Airways">Qatar Airways</option>
-          <option value="Singapore Airlines">Singapore Airlines</option>
-        </select>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" [disabled]="!flightForm.valid" class="submit-btn">
-        Search Flights
-      </button>
-    </form>
-
-    <!-- Display Filtered Flights -->
-    <div class="flight-container">
-      <div class="flight-box">
+        <button type="submit" [disabled]="!flightForm.valid" class="submit-btn">Search Flights</button>
+      </form>
+      <div class="flight-container">
         <h2 class="heading">Available Flights:</h2>
-
-        <!-- No flights message -->
         <div *ngIf="filteredFlights.length === 0" class="no-flights-message">
           <p class="invalid-input">INVALID INPUT</p>
-          <p class="no-flight-match">
-            No flights found for the selected criteria.
-          </p>
+          <p>No flights found for the selected criteria.</p>
         </div>
-
-        <!-- Flights Table -->
         <table class="flight-table" *ngIf="filteredFlights.length > 0">
           <thead>
             <tr>
               <th>Flight Number</th>
               <th>Route</th>
-              <th>Date of Departure(DD/MM/YYYY)</th>
+              <th>Date of Departure (DD/MM/YYYY)</th>
               <th>Price</th>
               <th>Airline</th>
               <th>Booking</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              *ngFor="let flight of filteredFlights"
-              (click)="selectFlight(flight)"
-            >
+            <tr *ngFor="let flight of filteredFlights" (click)="selectFlight(flight)">
               <td>{{ flight.id }}</td>
               <td>
                 <span>{{ flight.from }}</span>
@@ -115,26 +120,21 @@
               <td class="price">{{ flight.price | currency : "INR" }}</td>
               <td>{{ flight.airline }}</td>
               <td>
-                <button
-                  class="btn btn-danger"
-                  id="book-now"
-                  [routerLink]="['/booking', flight.id]"
-                  routerLinkActive="router-link-active"
-                >
-                  BOOK Seat
-                </button>
-              </td>
+                <button class="btn btn-danger" id="book-now" [routerLink]="['/booking', flight.id]">BOOK Seat</button>              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <!-- Pass selected flight to booking component when a flight is selected -->
+   <app-booking
+      *ngIf="selectedFlight"
+      (bookingCancelled)="cancelBooking()"
+    ></app-booking>
   </div>
-
-  <!-- Pass selected flight to booking component when a flight is selected -->
-  <app-booking
-    *ngIf="selectedFlight"
-    [selectedFlight]="selectedFlight"
-    (bookingCancelled)="cancelBooking()"
-  ></app-booking>
-</div>
+  </div>
+  
+  
+   
+  
+  

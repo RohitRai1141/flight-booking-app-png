@@ -1,0 +1,142 @@
+/* General container styles */
+.seating-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.flight-details {
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.flight-details h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+/* Seat grid styling */
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.seat-grid div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* Seat states */
+.available {
+  background-color: #90ee90; /* Light green */
+  border: 1px solid #28a745;
+}
+
+.selected {
+  background-color: #ffa500; /* Orange */
+  border: 1px solid #cc7a00;
+}
+
+.booked {
+  background-color: #ff6961; /* Red */
+  border: 1px solid #d62d20;
+  cursor: not-allowed;
+}
+
+/* Hover effect for available seats */
+.available:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Legend styling */
+.legend {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.seat-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  margin-right: 5px;
+}
+
+.seat-indicator.available {
+  background-color: #90ee90;
+}
+
+.seat-indicator.selected {
+  background-color: #ffa500;
+}
+
+.seat-indicator.booked {
+  background-color: #ff6961;
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.actions button {
+  background-color: #007bff;
+  color: white;
+}
+
+.actions button:hover {
+  background-color: #0056b3;
+}
+
+/* Validation messages */
+.notification {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: white;
+}
+
+.notification.success {
+  background-color: #28a745; /* Green */
+}
+
+.notification.error {
+  background-color: #dc3545; /* Red */
+}

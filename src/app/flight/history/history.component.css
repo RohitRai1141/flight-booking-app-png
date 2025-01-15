@@ -1,0 +1,100 @@
+/* General Styles */
+:host {
+    font-family: Arial, sans-serif;
+    background-color: #cce7ff; /* Light blue background for the entire page */
+    display: block;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    color: #000;
+}
+
+/* Heading Style */
+.heading {
+    font-size: 2rem;
+    text-align: center;
+    margin: 20px 0;
+    color: #000;
+}
+
+/* Container Style */
+.bookings-container {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: 1fr; /* Only one column per row */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Booking Card Style */
+.booking-card {
+    background: #cce7ff; /* Light blue background for each card */
+    border: 2px solid #000; /* Black border for each card */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative; /* Make the card relative to position the actions inside it */
+}
+
+/* Hover Effect for Cards */
+.booking-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Booking Title Style */
+.booking-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #000;
+}
+
+/* Booking Detail Style */
+.booking-detail {
+    font-size: 1rem;
+    margin: 5px 0;
+    color: #000;
+}
+
+/* Label Style */
+.detail-label {
+    font-weight: bold;
+    color: #000;
+}
+
+/* Actions Section - Top right corner */
+.actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+/* Action Button Style */
+.action-btn {
+    padding: 5px;
+    border: none;
+    background: transparent; /* Remove background */
+    cursor: pointer;
+    font-size: 1.5rem; /* Increase icon size */
+    display: flex;
+    align-items: center;
+}
+
+/* Edit Button Style */
+.edit-btn i, .delete-btn i {
+    color: #000; /* Set the icon color to black */
+}
+
+/* Hover Effects for Action Buttons */
+.action-btn:hover i {
+    opacity: 0.8;
+}
+
+/* Icon Styles */
+.fa {
+    font-size: 1.5rem; /* Set a larger icon size */
+    color: #000; /* Ensure the icon color is black */
+}
