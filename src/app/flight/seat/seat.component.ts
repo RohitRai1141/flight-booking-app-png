@@ -9,9 +9,13 @@ interface Seat {
   status: 'available' | 'selected' | 'booked';
 }
 
-// Define the payload interface to match the expected type
+// Update the payload interface to match the new structure
 interface SeatsPayload {
-  seats: SeatForBackend[];
+  flightId: string;
+  seats: {
+    id: string;
+    status: 'available' | 'selected' | 'booked';
+  }[];
 }
 
 @Component({
@@ -66,20 +70,26 @@ export class SeatComponent implements OnInit {
   loadSeats(flightId: string): void {
     this.flightService.getSeats().subscribe({
       next: (data) => {
-        const flightData = data.find((flight: any) => flight.flightId === flightId);
+        // Reverse the data array to process it from bottom to top
+        const reversedData = [...data].reverse();
+  
+        const flightData = reversedData.find((flight: any) => flight.flightId === flightId);
   
         if (flightData) {
+          // If a matching flight is found, load its seats
           this.allSeats = flightData.seats;
         } else {
-          this.allSeats = data.seats;
+          console.warn(`No seats found for flight ID: ${flightId}`);
+          this.allSeats = []; // Handle case where no matching flight is found
         }
       },
       error: (error) => {
         console.error('Error fetching seats:', error);
-        this.allSeats = [];
+        this.allSeats = []; // Handle error by clearing seats or showing an appropriate message
       },
     });
   }
+  
 
   getSeatClass(seat: Seat): string {
     if (seat.status === 'booked') return 'booked';
@@ -103,29 +113,22 @@ export class SeatComponent implements OnInit {
       this.showValidationMessage('Flight details are missing.', 'error');
       return;
     }
-
-    // Create updated seats array with proper typing
-    const updatedSeats: SeatForBackend[] = this.allSeats.map(seat => ({
-      id: seat.id,
-      status: this.selectedSeats.includes(seat.id) ? 'booked' as const : 
-              seat.status === 'booked' ? 'booked' as const : 'available' as const
-    }));
-
-    // Create properly typed payload
-    const payload: SeatsPayload = {
-      seats: updatedSeats
+  
+    // Prepare payload with flightId
+    const payload = {
+      flightId: this.selectedFlight.id, // Add flight ID
+      seats: this.allSeats.map((seat) => ({
+        id: seat.id,
+        status: this.selectedSeats.includes(seat.id) ? 'booked' : seat.status,
+      })),
     };
-
+  
     this.flightService.saveSeats(payload).subscribe({
       next: () => {
-        // Update local state while preserving booked seats
-        this.allSeats = this.allSeats.map(seat => ({
+        this.allSeats = this.allSeats.map((seat) => ({
           ...seat,
-          status: this.selectedSeats.includes(seat.id) ? 'booked' : 
-                 seat.status === 'booked' ? 'booked' : 'available'
+          status: this.selectedSeats.includes(seat.id) ? 'booked' : seat.status,
         }));
-        
-        this.selectedSeats = []; // Clear selected seats after booking
         this.showValidationMessage('Seats booked successfully!', 'success');
       },
       error: (error) => {
@@ -134,6 +137,7 @@ export class SeatComponent implements OnInit {
       },
     });
   }
+  
 
   private saveUserBooking(userBooking: any): void {
     this.flightService.saveUserData(userBooking).subscribe({
