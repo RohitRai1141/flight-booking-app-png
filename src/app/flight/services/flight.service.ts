@@ -17,7 +17,7 @@ export interface Flight {
   unavailableSeats: string[];
 }
 
-interface Seat {
+export interface SeatForBackend {
   id: string;
   status: 'available' | 'selected' | 'booked';
 }
@@ -44,12 +44,12 @@ export class FlightService {
     return this.http.post(this.userApiUrl, userData);
   }
 
-  saveSeats(updatedSeats: any[]): Observable<any> {
-    return this.http.post(this.seatsApiUrl, updatedSeats );
+  saveSeats(payload: { seats: SeatForBackend[] }): Observable<any> {
+    return this.http.post(this.seatsApiUrl, payload); // Ensure this endpoint handles seat updates
   }
 
   getSeats(): Observable<any> {
-    return this.http.get(`${this.seatsApiUrl}`);
+    return this.http.get(`${this.seatsApiUrl}`); // Fetch seats data
   }
 
   saveUserSeats(userSeats: any): Observable<any> {

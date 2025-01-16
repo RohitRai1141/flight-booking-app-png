@@ -1,127 +1,172 @@
-.background{
-  
-  background-size: cover;
-  
+.background {
+  background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+  background-color: #cce7ff;
+  min-height: 100vh;
+  padding: 2rem 0;
 }
 
 .background-1 {
-  padding: 20px;
-  background-color: lightblue; /* Adds a semi-transparent overlay for better readability */
-  border-radius: 10px;
+  border: 2px solid #000;
+  padding: 2rem;
+  background-color: #cce7ff;
+  border-radius: 15px;
+  border-color: black;
   max-width: 1200px;
-  margin: 20px auto;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.8);
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  
 }
 
 .flickering-text {
   text-align: center;
-  font-size: 2.5rem;
-  color: black;
-  text-shadow: 0 0 5px #fff, 0 0 10px #ffeb3b, 0 0 20px #ffeb3b;
-  animation: flicker 2s infinite;
+  font-size: 3.5rem;
+  color: #2575fc;
+  text-shadow: 0 0 5px #fff, 0 0 10px hsl(186, 100%, 50%), 0 0 20px #ff00ff, 
+  0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
+  0 0 75px #ff00ff;
+  animation: flicker .5s infinite;
+  margin-bottom: 2rem;
 }
 
 @keyframes flicker {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
 }
 
 .flight-booking-form {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-  color: #333;
+  border: 2px solid #000;
+  background: #cce7ff;
+  border-color: black;
+  padding: 2rem;
+  border-radius: 15px;
+  /*box-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 
+                   0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
+                   0 0 75px #ff00ff;
+      animation: glow .5s infinite;*/
+
 }
 
 .form-title {
   text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #000;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #2575fc;
 }
 
 .form-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
-  flex: 1 1 calc(50% - 10px);
-  min-width: 200px;
+  flex: 1 1 calc(50% - 0.75rem);
+  min-width: 250px;
 }
 
 label {
-  font-weight: bold;
+  font-weight: 600;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
+  color: #333;
 }
 
 input, select {
+  border: 2px solid #000;
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 0.75rem;
+ background-color: #cce7ff;
+  border-radius: 8px;
   font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #2575fc;
 }
 
 .error-message {
   color: #d9534f;
   font-size: 0.9rem;
-  margin-top: 5px;
+  margin-top: 0.5rem;
 }
 
 .submit-btn {
   display: block;
   width: 100%;
-  background-color: #28a745;
-  color: #fff;
-  padding: 10px 15px;
+  background-color: #2575fc;
+  color: white;
+  padding: 1rem;
   font-size: 1.2rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .submit-btn:disabled {
-  background-color: #ccc;
+  background-color: #b3b3b3;
   cursor: not-allowed;
 }
 
+
 .submit-btn:hover:not(:disabled) {
-  background-color: #218838;
+  background-color: #1c5cc9;
+  transform: translateY(-2px);
 }
 
 .flight-container {
-  margin-top: 30px;
+  margin-top: 3rem;
+ /* box-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 
+  0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
+  0 0 75px #ff00ff;
+animation: glow .5s infinite;*/
+  
 }
 
 .heading {
   text-align: center;
-  font-size: 1.5rem;
-  color: black;
+  font-size: 2rem;
+  color: #2575fc;
+  margin-bottom: 1.5rem;
 }
 
 .flight-table {
+  background-color: #cce7ff;
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  color: #000;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+  margin-top: 1.5rem;
+  border: 2px solid #000
 }
 
 .flight-table th,
 .flight-table td {
-  padding: 10px;
+  padding: 1rem;
   text-align: center;
-  border: 1px solid #ddd;
+  background-color: #cce7ff;
+  border: 2px solid #000
+  
+}
+
+.flight-table th {
+  background-color: #2575fc;
+  color: white;
+  font-weight: 600;
+  border: 2px solid #000
+}
+
+.flight-table tr {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  
+}
+
+.flight-table tr:hover {
+  transform: translateY(-3px);
 }
 
 .price {
@@ -131,11 +176,12 @@ input, select {
 
 .btn-danger {
   background-color: #d9534f;
-  color: #fff;
-  padding: 5px 10px;
+  color: white;
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn-danger:hover {
@@ -144,62 +190,64 @@ input, select {
 
 .no-flights-message {
   text-align: center;
-  color: #fff;
-  margin-top: 20px;
+  color: #d9534f;
+  margin-top: 2rem;
+  font-size: 1.2rem;
 }
 
 .invalid-input {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   font-weight: bold;
   color: #d9534f;
+  margin-bottom: 1rem;
 }
+
 .notification {
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 300px; /* Keeps the width consistent */
-  height: 80px; /* Reduced height */
-  padding: 15px; /* Adjusted padding */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Slightly lighter shadow */
+  width: 300px;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  font-size: 14px; /* Slightly smaller font size */
-  font-weight: bold;
-  text-align: left; /* Align text to the left */
-  display: flex;
-  align-items: center; /* Center text vertically */
-  justify-content: flex-start;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
   animation: fadeInOut 4s ease-in-out;
 }
 
 .notification.success {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green text */
-  border: 1px solid #c3e6cb; /* Subtle border */
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
 }
 
 .notification.error {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red text */
-  border: 1px solid #f5c6cb; /* Subtle border */
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
 @keyframes fadeInOut {
-  0% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  10% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  90% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(100%);
-  }
+  0%, 100% { opacity: 0; transform: translateX(100%); }
+  10%, 90% { opacity: 1; transform: translateX(0); }
 }
 
+@media (max-width: 768px) {
+  .background-1 {
+    padding: 1rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .flight-table {
+    font-size: 0.9rem;
+  }
+}
