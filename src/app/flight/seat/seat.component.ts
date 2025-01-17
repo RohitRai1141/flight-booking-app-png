@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../services/flight.service';
-import { SeatForBackend } from '../services/flight.service';
 
 interface Seat {
   id: string;
@@ -57,7 +56,7 @@ export class SeatComponent implements OnInit {
         if (!this.selectedFlight) {
           console.error('Flight not found');
           this.showValidationMessage('Flight not found.', 'error');
-          this.router.navigate(['/']);
+          this.router.navigate(['/history']);
         }
       },
       error: (error) => {
@@ -130,6 +129,7 @@ export class SeatComponent implements OnInit {
           status: this.selectedSeats.includes(seat.id) ? 'booked' : seat.status,
         }));
         this.showValidationMessage('Seats booked successfully!', 'success');
+        this.router.navigate(['/history']);
       },
       error: (error) => {
         console.error('Error updating seats:', error);

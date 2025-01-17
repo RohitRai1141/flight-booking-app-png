@@ -1,100 +1,174 @@
 /* General Styles */
 :host {
-    font-family: Arial, sans-serif;
-    background-color: #cce7ff; /* Light blue background for the entire page */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: url('https://media.istockphoto.com/id/1367756031/vector/light-blue-watercolor-background-illustration.jpg?s=612x612&w=0&k=20&c=qiJl7j-2terwHd-1YJxiFIo1VJx6l6IsmoqlgeypQ7c=') no-repeat center center fixed;
+    background-size: cover; /* Ensure background image covers the entire page */
     display: block;
     min-height: 100vh;
-    padding: 20px;
+    padding: 60px 20px;
     box-sizing: border-box;
-    color: #000;
+    color: #333;
 }
 
 /* Heading Style */
 .heading {
-    font-size: 2rem;
+    font-size: 3.2rem;
     text-align: center;
-    margin: 20px 0;
-    color: #000;
+    margin-bottom: 50px;
+    color: #0277bd;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); /* Dramatic shadow for depth */
+    animation: fadeIn 1.5s ease-out; /* Fading animation on load */
 }
 
 /* Container Style */
 .bookings-container {
     display: grid;
     gap: 50px;
-    grid-template-columns: 1fr; /* Only one column per row */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Responsive grid */
     max-width: 1200px;
     margin: 0 auto;
 }
 
 /* Booking Card Style */
 .booking-card {
-    background: #cce7ff; /* Light blue background for each card */
-    border: 2px solid #000; /* Black border for each card */
-    border-radius: 10px;
+    background: #ffffff;
+    border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative; /* Make the card relative to position the actions inside it */
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1); /* Big shadow for impact */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-left: 5px solid #0277bd; /* Add color accent */
+    background: linear-gradient(135deg, #ffffff, #f0f4f7); /* Gradient background for the card */
 }
 
-/* Hover Effect for Cards */
+/* Hover Effect for Booking Cards */
 .booking-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-15px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.05); /* Slight brightening effect on hover */
 }
 
 /* Booking Title Style */
 .booking-title {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    color: #0277bd;
+    font-weight: 700;
     margin-bottom: 10px;
-    color: #000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 3px solid #0277bd;
+    padding-bottom: 8px;
 }
 
 /* Booking Detail Style */
 .booking-detail {
-    font-size: 1rem;
-    margin: 5px 0;
-    color: #000;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+    line-height: 1.6;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 20px;
+    transition: color 0.3s ease;
 }
 
 /* Label Style */
 .detail-label {
     font-weight: bold;
-    color: #000;
+    color: #0277bd;
+    transition: color 0.3s ease;
 }
 
-/* Actions Section - Top right corner */
-.actions {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    gap: 10px;
+/* Passengers Section */
+.passengers-details {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive passenger grid */
+    margin-top: 30px;
 }
 
-/* Action Button Style */
+/* Passenger Card */
+.passenger-card {
+    background: #f5f5f5;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    border-left: 4px solid #0277bd;
+    background: linear-gradient(145deg, #ffffff, #e1f5fe); /* Gradient effect for passenger cards */
+}
+
+/* Hover Effect for Passenger Card */
+.passenger-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    filter: brightness(1.05);
+}
+
+/* Passenger Detail */
+.passenger-card p {
+    margin: 8px 0;
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* Action Button Style (Optional, if needed) */
 .action-btn {
-    padding: 5px;
+    padding: 12px 18px;
     border: none;
-    background: transparent; /* Remove background */
+    background: #0277bd;
+    color: white;
     cursor: pointer;
-    font-size: 1.5rem; /* Increase icon size */
+    border-radius: 5px;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Edit Button Style */
-.edit-btn i, .delete-btn i {
-    color: #000; /* Set the icon color to black */
+/* Hover Effect for Action Buttons */
+.action-btn:hover {
+    background-color: #01579b;
+    transform: scale(1.05);
 }
 
-/* Hover Effects for Action Buttons */
-.action-btn:hover i {
-    opacity: 0.8;
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .bookings-container {
+        grid-template-columns: 1fr; /* Single column for small screens */
+    }
+
+    .booking-card {
+        padding: 20px;
+    }
+
+    .passenger-card {
+        padding: 20px;
+    }
+
+    .heading {
+        font-size: 2.5rem;
+    }
 }
 
-/* Icon Styles */
-.fa {
-    font-size: 1.5rem; /* Set a larger icon size */
-    color: #000; /* Ensure the icon color is black */
+/* Keyframe Animation for Heading */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

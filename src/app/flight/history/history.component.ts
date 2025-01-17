@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import history from '../users.json'
+import history from '../../../../users.json'
+
 
 
 @Component({
   selector: 'app-history',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
 export class HistoryComponent {
-  // historys:any[]=history.historys;
+   users:any[]=history.users;
 }

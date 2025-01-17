@@ -1,18 +1,3 @@
-:root {
-  --primary-color: #3498db;
-  --primary-dark: #2980b9;
-  --secondary-color: #2c3e50;
-  --background-color: #ecf0f1;
-  --text-color: #34495e;
-  --error-color: #e74c3c;
-  --success-color: #2ecc71;
-  --border-radius: 8px;
-  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
-  --background-color: #cce7ff;
-  
-}
-
 body {
   font-family: 'Roboto', 'Arial', sans-serif;
   background-color: var(--background-color);
@@ -27,6 +12,7 @@ body {
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
+  border-radius: 15px;
  /* text-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 
                    0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
                    0 0 75px #ff00ff;
@@ -77,7 +63,7 @@ hr {
   background-color: #cce7ff;
   border: 2px solid #000;
   padding: 1.5rem;
-  border-radius: var(--border-radius);
+  border-radius: 15px;
  /* box-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 
                    0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
                    0 0 75px #ff00ff;
@@ -118,8 +104,7 @@ hr {
   margin-top: 3rem;
   padding: 2rem;
   background-color: #cce7ff;
-  border: 2px solid #000;
-  border-radius: var(--border-radius);
+  border-radius: 15px;
  /* box-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 
                    0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
                    0 0 75px #ff00ff;
@@ -131,6 +116,7 @@ hr {
 .glitch-container {
   overflow: hidden;
   margin-bottom: 1.5rem;
+  color: #00aaff;
 }
 
 .glitch-text {
@@ -152,7 +138,7 @@ hr {
 }
 
 .input-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .input-container label {
@@ -162,6 +148,7 @@ hr {
   font-weight:bolder;
   font-size: 1.5rem;
   color: var(--secondary-color);
+  margin-top: 3rem;
 }
 
 .input-container input {
@@ -169,7 +156,7 @@ hr {
   padding: 0.75rem;
   background-color: #cce7ff;
   border: 2px solid #000;
-  border-radius: var(--border-radius);
+  border-radius: 15px;
   font-size: 1.5rem;
   transition: var(--transition);
 }
@@ -183,7 +170,7 @@ hr {
 .passenger-form {
   background-color: #f9f9f9;
   padding: 1.5rem;
-  border-radius: var(--border-radius);
+  border-radius: 15px;
   margin-bottom: 2rem;
   background-color: #cce7ff;
   border: 2px solid #000;
@@ -232,6 +219,7 @@ hr {
   margin-bottom: 1.5rem;
   background-color: #cce7ff;
   border: 2px solid #000;
+ 
 }
 
 .form input,
@@ -276,8 +264,8 @@ hr {
 }
 
 #remove-btn {
-  background-color: var(--error-color);
-  color: white;
+  background-color: #7f8c8d;
+  color:white;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: var(--border-radius);
@@ -440,4 +428,351 @@ hr {
   #remove-btn {
     border: 2px solid currentColor;
   }
+}
+
+/* General Styles */
+:host {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('https://media.istockphoto.com/id/1367756031/vector/light-blue-watercolor-background-illustration.jpg?s=612x612&w=0&k=20&c=qiJl7j-2terwHd-1YJxiFIo1VJx6l6IsmoqlgeypQ7c=') no-repeat center center fixed;
+  background-size: cover; /* Ensure background image covers the entire page */
+  display: block;
+  min-height: 100vh;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  color: #333;
+}
+
+/* Heading Style */
+.heading {
+  font-size: 3.2rem;
+  text-align: center;
+  margin-bottom: 50px;
+  color: #0277bd;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2); /* Dramatic shadow for depth */
+  animation: fadeIn 1.5s ease-out; /* Fading animation on load */
+}
+
+/* Container Style */
+.bookings-container {
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Responsive grid */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Booking Card Style */
+.booking-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1); /* Big shadow for impact */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  border-left: 5px solid #0277bd; /* Add color accent */
+  background: linear-gradient(135deg, #ffffff, #f0f4f7); /* Gradient background for the card */
+}
+
+/* Hover Effect for Booking Cards */
+.booking-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.05); /* Slight brightening effect on hover */
+}
+
+/* Booking Title Style */
+.booking-title {
+  font-size: 2rem;
+  color: #0277bd;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 3px solid #0277bd;
+  padding-bottom: 8px;
+}
+
+/* Booking Detail Style */
+.booking-detail {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 20px;
+  transition: color 0.3s ease;
+}
+
+/* Label Style */
+.detail-label {
+  font-weight: bold;
+  color: #0277bd;
+  transition: color 0.3s ease;
+}
+
+/* Passengers Section */
+.passengers-details {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive passenger grid */
+  margin-top: 30px;
+}
+
+/* Passenger Card */
+.passenger-card {
+  background: #f5f5f5;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+  border-left: 4px solid #0277bd;
+  background: linear-gradient(145deg, #ffffff, #e1f5fe); /* Gradient effect for passenger cards */
+}
+
+/* Hover Effect for Passenger Card */
+.passenger-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  filter: brightness(1.05);
+}
+
+/* Passenger Detail */
+.passenger-card p {
+  margin: 8px 0;
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Action Button Style (Optional, if needed) */
+.action-btn {
+  padding: 12px 18px;
+  border: none;
+  background: #0277bd;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover Effect for Action Buttons */
+.action-btn:hover {
+  background-color: #01579b;
+  transform: scale(1.05);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .bookings-container {
+      grid-template-columns: 1fr; /* Single column for small screens */
+  }
+
+  .booking-card {
+      padding: 20px;
+  }
+
+  .passenger-card {
+      padding: 20px;
+  }
+
+  .heading {
+      font-size: 2.5rem;
+  }
+}
+
+/* Keyframe Animation for Heading */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: translateY(20px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Animation keyframes for fade in/out effect */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Main notification styles */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  height: 80px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  animation: fadeInOut 4s ease-in-out;
+}
+
+.notification.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.notification.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Individual field error styles */
+.error {
+  position: absolute;
+  bottom: -35px;
+  left: 0;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Style for form fields with errors */
+.form-container .form.has-error input,
+.form-container .form.has-error select {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Form container adjustments to accommodate error messages */
+.form-container .form {
+  position: relative;
+  margin-bottom: 35px; /* Space for error message */
+}
+
+/* Required field indicator */
+.form label::after {
+  content: ' *';
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Error icon */
+.form.has-error::before {
+  content: '⚠';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #dc3545;
+  font-size: 16px;
+}
+
+/* Animation for error messages appearing */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure form sections have proper spacing for error messages */
+.form-section {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Style for the entire form when there are errors */
+.passenger-form.has-errors {
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: #fff5f5;
+}
+
+/* Toast notification for form-wide errors */
+.form-error-toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 300px;
+  height: auto;
+  min-height: 80px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  animation: fadeInOut 4s ease-in-out;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Error list within toast */
+.form-error-toast ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-error-toast li {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.form-error-toast li::before {
+  content: '•';
+  color: #721c24;
+  font-weight: bold;
+  margin-right: 8px;
 }

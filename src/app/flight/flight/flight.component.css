@@ -1,110 +1,151 @@
-.background {
-  background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-  background-color: #cce7ff;
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-image: url('https://media.istockphoto.com/id/1367756031/vector/light-blue-watercolor-background-illustration.jpg?s=612x612&w=0&k=20&c=qiJl7j-2terwHd-1YJxiFIo1VJx6l6IsmoqlgeypQ7c=');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   min-height: 100vh;
-  padding: 2rem 0;
+  color: #333;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  animation: fadeInBackground 2s ease-out;
 }
 
+@keyframes fadeInBackground {
+  0% { opacity: 0; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Transparent Overlay */
+.background {
+  background: rgba(0, 0, 0, 0.3);
+  background-image: url('https://media.istockphoto.com/id/1367756031/vector/light-blue-watercolor-background-illustration.jpg?s=612x612&w=0&k=20&c=qiJl7j-2terwHd-1YJxiFIo1VJx6l6IsmoqlgeypQ7c=');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+
+/* Main Form Container */
 .background-1 {
-  border: 2px solid #000;
-  padding: 2rem;
-  background-color: #cce7ff;
-  border-radius: 15px;
-  border-color: black;
-  max-width: 1200px;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  background-image: url('https://media.istockphoto.com/id/1367756031/vector/light-blue-watercolor-background-illustration.jpg?s=612x612&w=0&k=20&c=qiJl7j-2terwHd-1YJxiFIo1VJx6l6IsmoqlgeypQ7c=');
+  background-size: cover;
+  background-position: center;
+  max-width: 1250px;
   margin: 0 auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  
-}
-
-.flickering-text {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
   text-align: center;
-  font-size: 3.5rem;
-  color: #2575fc;
-  text-shadow: 0 0 5px #fff, 0 0 10px hsl(186, 100%, 50%), 0 0 20px #ff00ff, 
-  0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
-  0 0 75px #ff00ff;
-  animation: flicker .5s infinite;
-  margin-bottom: 2rem;
+  position: relative;
+  z-index: 10;
+  animation: slideUp 1s ease-out;
 }
 
-@keyframes flicker {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.8; }
+@keyframes slideUp {
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-.flight-booking-form {
-  border: 2px solid #000;
-  background: #cce7ff;
-  border-color: black;
-  padding: 2rem;
-  border-radius: 15px;
-  /*box-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 
-                   0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
-                   0 0 75px #ff00ff;
-      animation: glow .5s infinite;*/
-
-}
-
+/* Form Title */
 .form-title {
-  text-align: center;
-  font-size: 2.2rem;
+  font-size: 3rem;
   margin-bottom: 2rem;
-  color: #2575fc;
+  color: #00aaff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 1s ease-out;
 }
 
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Form Rows (Horizontally Aligned) */
 .form-row {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  flex-wrap: nowrap;
 }
 
+/* Adjust specific form groups (departure and destination) */
 .form-group {
   flex: 1 1 calc(50% - 0.75rem);
-  min-width: 250px;
+  min-width: 280px;
 }
 
+/* Label Styling */
 label {
   font-weight: 600;
-  display: block;
+  color: #555;
   margin-bottom: 0.5rem;
-  color: #333;
+  display: block;
+  animation: fadeIn 1s ease-out;
 }
 
+/* Input & Select Styles */
 input, select {
-  border: 2px solid #000;
   width: 100%;
-  padding: 0.75rem;
- background-color: #cce7ff;
+  padding: 1rem;
+  border: 2px solid #00aaff;
+  background-color: #f0faff;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+  margin-bottom: 1rem;
+  animation: fadeIn 1s ease-out;
+}
+
+input:hover, select:hover {
+  transform: translateY(-2px);
 }
 
 input:focus, select:focus {
   outline: none;
-  border-color: #2575fc;
+  border-color: #0077cc;
 }
 
+/* Error Message Styles */
 .error-message {
   color: #d9534f;
   font-size: 0.9rem;
   margin-top: 0.5rem;
+  animation: fadeIn 1s ease-out;
 }
 
+/* Submit Button */
 .submit-btn {
   display: block;
   width: 100%;
-  background-color: #2575fc;
+  background-color: #00aaff;
   color: white;
-  padding: 1rem;
+  padding: 1.2rem;
   font-size: 1.2rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 1.5rem;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 2rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-weight: 600;
+  text-transform: uppercase;
+  animation: fadeIn 1.5s ease-out;
 }
 
 .submit-btn:disabled {
@@ -112,96 +153,91 @@ input:focus, select:focus {
   cursor: not-allowed;
 }
 
-
 .submit-btn:hover:not(:disabled) {
-  background-color: #1c5cc9;
-  transform: translateY(-2px);
+  background-color: #0077cc;
+  transform: scale(1.05);
 }
 
+/* Flight Container */
 .flight-container {
-  margin-top: 3rem;
- /* box-shadow: 0 0 5px #fff, 0 0 10px #ff00ff, 0 0 20px #ff00ff, 
-  0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 
-  0 0 75px #ff00ff;
-animation: glow .5s infinite;*/
-  
+  margin-top: 4rem;
+  padding: 2rem;
+  z-index: 10;
+  animation: fadeIn 1s ease-out;
 }
 
+/* Heading for Flight Section */
 .heading {
   text-align: center;
-  font-size: 2rem;
-  color: #2575fc;
-  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  color: #00aaff;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: fadeIn 1s ease-out;
 }
 
+/* Table Styling (Improved Layout and Interaction) */
 .flight-table {
-  background-color: #cce7ff;
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 15px;
-  margin-top: 1.5rem;
-  border: 2px solid #000
+  margin-top: 2rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  opacity: 0;
+  animation: slideIn 1.5s ease-out forwards;
 }
 
-.flight-table th,
-.flight-table td {
-  padding: 1rem;
+@keyframes slideIn {
+  0% { opacity: 0; transform: translateX(-30px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.flight-table th, .flight-table td {
+  padding: 1.2rem; /* Slightly increased padding for more breathing space */
   text-align: center;
-  background-color: #cce7ff;
-  border: 2px solid #000
-  
+  font-size: 13pxpx; /* Slightly larger font size */
+  color: #333;
+  background-color: #f7fbfd;
+  border: 1px solid #e0e0e0;
+  transition: all 0.3s ease; /* Smooth transition effect */
 }
 
 .flight-table th {
-  background-color: #2575fc;
+  background-color: #00aaff;
   color: white;
   font-weight: 600;
-  border: 2px solid #000
-}
-
-.flight-table tr {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-  
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .flight-table tr:hover {
+  background-color: #e6f7ff;
   transform: translateY(-3px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* Shadow on hover */
 }
 
-.price {
-  font-weight: bold;
-  color: #28a745;
-}
-
-.btn-danger {
+.flight-table .btn-danger {
   background-color: #d9534f;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem; /* Reduced padding for a smaller button */
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem; /* Reduced font size */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.btn-danger:hover {
+.flight-table .btn-danger:hover {
   background-color: #c9302c;
+  transform: scale(1.05);
 }
 
-.no-flights-message {
-  text-align: center;
-  color: #d9534f;
-  margin-top: 2rem;
-  font-size: 1.2rem;
-}
 
-.invalid-input {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #d9534f;
-  margin-bottom: 1rem;
-}
-
+/* Notification */
 .notification {
   position: fixed;
   top: 20px;
@@ -214,29 +250,28 @@ animation: glow .5s infinite;*/
   font-size: 1rem;
   font-weight: 600;
   text-align: center;
-  animation: fadeInOut 4s ease-in-out;
+  animation: slideInNotification 1s ease-out;
+}
+
+@keyframes slideInNotification {
+  0% { opacity: 0; transform: translateX(100%); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 .notification.success {
   background-color: #d4edda;
   color: #155724;
-  border: 1px solid #c3e6cb;
 }
 
 .notification.error {
   background-color: #f8d7da;
   color: #721c24;
-  border: 1px solid #f5c6cb;
 }
 
-@keyframes fadeInOut {
-  0%, 100% { opacity: 0; transform: translateX(100%); }
-  10%, 90% { opacity: 1; transform: translateX(0); }
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
   .background-1 {
-    padding: 1rem;
+    padding: 2rem;
   }
 
   .form-row {
@@ -247,7 +282,17 @@ animation: glow .5s infinite;*/
     width: 100%;
   }
 
-  .flight-table {
-    font-size: 0.9rem;
+  .flight-table th, .flight-table td {
+    font-size: 1rem; /* Slightly smaller font size for mobile */
+    padding: 1rem;
+  }
+
+  .flight-table .btn-danger {
+    font-size: 1rem;
+    padding: 0.6rem 1.1rem;
+  }
+
+  .heading {
+    font-size: 1.8rem;
   }
 }

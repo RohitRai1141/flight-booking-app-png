@@ -14,6 +14,16 @@ interface Passenger {
   postalCode: string;
 }
 
+interface ValidationError {
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+  gender?: string;
+  nationality?: string;
+  postalCode?: string;
+}
+
 @Component({
   selector: 'app-booking',
   standalone: true,
@@ -24,10 +34,11 @@ interface Passenger {
 export class BookingComponent {
   passengers: Passenger[] = [];
   totalPrice: number = 0;
-  numberOfPassengers: number = 1; // Initialize to 1 by default
-  validationMessage: string = ''; // Property to store the validation message
-  notificationClass: string = ''; // Class for notification styling
+  numberOfPassengers: number = 1;
+  validationMessage: string = '';
+  notificationClass: string = '';
   selectedFlight: any = null;
+  validationErrors: { [key: number]: ValidationError } = {};
 
   @Output() bookingCancelled = new EventEmitter<void>();
 
@@ -48,65 +59,128 @@ export class BookingComponent {
             this.updatePassengerCount();
             this.updateTotalPrice();
           } else {
-            console.error('Flight not found');
             this.showValidationMessage('Flight not found.', 'error');
             this.router.navigate(['/']);
           }
         },
         error: (error) => {
-          console.error('Error fetching flights:', error);
           this.showValidationMessage('Error loading flight details.', 'error');
         },
       });
     } else {
-      console.error('No flight ID provided');
       this.showValidationMessage('Invalid flight ID.', 'error');
       this.router.navigate(['/']);
     }
   }
 
+  validatePassenger(passenger: Passenger, index: number): boolean {
+    const errors: ValidationError = {};
+    let isValid = true;
+
+    // First Name validation
+    if (!passenger.firstName?.trim()) {
+      errors.firstName = 'First name is required';
+      isValid = false;
+    } else if (passenger.firstName.length < 2) {
+      errors.firstName = 'First name must be at least 2 characters';
+      isValid = false;
+    }
+
+    // Middle Name validation
+    if (!passenger.middleName?.trim()) {
+      errors.middleName = 'Middle name is required';
+      isValid = false;
+    }
+
+    // Last Name validation
+    if (!passenger.lastName?.trim()) {
+      errors.lastName = 'Last name is required';
+      isValid = false;
+    } else if (passenger.lastName.length < 2) {
+      errors.lastName = 'Last name must be at least 2 characters';
+      isValid = false;
+    }
+
+    // Date of Birth validation
+    if (!passenger.dateOfBirth) {
+      errors.dateOfBirth = 'Date of birth is required';
+      isValid = false;
+    } else {
+      const birthDate = new Date(passenger.dateOfBirth);
+      const today = new Date();
+      if (birthDate > today) {
+        errors.dateOfBirth = 'Date of birth cannot be in the future';
+        isValid = false;
+      }
+    }
+
+    // Gender validation
+    if (!passenger.gender) {
+      errors.gender = 'Gender is required';
+      isValid = false;
+    }
+
+    // Nationality validation
+    if (!passenger.nationality?.trim()) {
+      errors.nationality = 'Nationality is required';
+      isValid = false;
+    }
+
+    // Passport Number validation
+    if (!passenger.postalCode?.trim()) {
+      errors.postalCode = 'Passport number is required';
+      isValid = false;
+    } else if (!/^[A-Z0-9]{8,9}$/i.test(passenger.postalCode.trim())) {
+      errors.postalCode = 'Invalid passport number format';
+      isValid = false;
+    }
+
+    this.validationErrors[index] = errors;
+    return isValid;
+  }
+
   confirmBooking(): void {
-    this.validationMessage = '';
+    this.validationErrors = {};
+    let isValid = true;
 
     if (!this.selectedFlight) {
-      this.showValidationMessage(
-        'Flight details are missing. Cannot confirm booking.',
-        'error'
-      );
+      this.showValidationMessage('Flight details are missing. Cannot confirm booking.', 'error');
       return;
     }
 
-    if (this.passengers.length > 0) {
-      const bookingData = {
-        flight: this.selectedFlight,
-        passengers: this.passengers,
-        totalPrice: this.totalPrice,
-      };
+    // Validate all passengers
+    this.passengers.forEach((passenger, index) => {
+      if (!this.validatePassenger(passenger, index)) {
+        isValid = false;
+      }
+    });
 
-      this.flightService.saveUserData(bookingData).subscribe(
-        (response) => {
-          this.showValidationMessage('Booking confirmed and saved!', 'success');
-          if (this.selectedFlight) {
-            this.router.navigate(['/seat', this.selectedFlight.id]); // Pass flight ID dynamically
-          } else {
-            console.error('No flight selected');
-          }
-        },
-        (error) => {
-          console.error('Failed to save booking data:', error);
-          this.showValidationMessage(
-            'Failed to save booking. Please try again.',
-            'error'
-          );
-        }
-      );
-    } else {
-      this.showValidationMessage('Please add passenger details.', 'error');
+    if (!isValid) {
+      this.showValidationMessage('Please correct the errors in passenger details.', 'error');
+      return;
     }
+
+    const bookingData = {
+      flight: this.selectedFlight,
+      passengers: this.passengers,
+      totalPrice: this.totalPrice,
+    };
+
+    this.flightService.saveUserData(bookingData).subscribe({
+      next: (response) => {
+        this.showValidationMessage('Booking confirmed successfully!', 'success');
+        this.router.navigate(['/seat', this.selectedFlight.id]);
+      },
+      error: (error) => {
+        this.showValidationMessage('Failed to save booking. Please try again.', 'error');
+      }
+    });
   }
 
+  // Rest of your existing methods remain the same
   cancelBooking(): void {
     this.bookingCancelled.emit();
+    this.router.navigate(['/']);
   }
 
   addPassenger(): void {
@@ -147,9 +221,6 @@ export class BookingComponent {
     if (this.selectedFlight && this.selectedFlight.price !== undefined) {
       this.totalPrice = this.selectedFlight.price * this.passengers.length;
     } else {
-      console.error(
-        'Unable to calculate total price. Flight details are missing.'
-      );
       this.totalPrice = 0;
     }
   }
