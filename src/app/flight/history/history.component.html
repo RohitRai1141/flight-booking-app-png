@@ -1,46 +1,64 @@
-<h1 class="heading">My Bookings</h1>
 <div class="bookings-container">
-    @for(user of users; track user.id) {
-        <div class="booking-card">
-            <div class="booking">
-           <h2 class="booking-title"><span class="detail-label">Booking id:</span> {{user.id}}</h2>
-            <p class="booking-detail">
-                <span class="detail-label">Date:</span> {{user.flight.departureDate}}
-            </p>
-            <p class="booking-detail">
-                <span class="detail-label">Departure:</span> {{user.flight.from}}
-            </p>
-            <p class="booking-detail">
-                <span class="detail-label">Destination:</span> {{user.flight.to}}
-            </p>
-            <p class="booking-detail">
-                <span class="detail-label">Airline:</span> {{user.flight.airline}}
-            </p>
-            <p class="booking-detail">
-                <span class="detail-label">Price:</span> {{user.flight.price}}
-            </p> 
-           </div>
-           
-            <div *ngFor="let passenger of user.passengers">
+    <div *ngFor="let user of users; trackBy: trackUserId" class="booking-card">
+      <div class="booking">
+        <h2 class="booking-title">
+          <span class="detail-label">Booking ID:</span> {{ user.id }}
+        </h2>
+        <p class="booking-detail">
+          <span class="detail-label">Date:</span> {{ user.flight.departureDate }}
+        </p>
+        <p class="booking-detail">
+          <span class="detail-label">Departure:</span> {{ user.flight.from }}
+        </p>
+        <p class="booking-detail">
+          <span class="detail-label">Destination:</span> {{ user.flight.to }}
+        </p>
+        <p class="booking-detail">
+          <span class="detail-label">Airline:</span> {{ user.flight.airline }}
+        </p>
+        <p class="booking-detail">
+          <span class="detail-label">Price:</span> {{ user.flight.price }}
+        </p>
+
+
+         <!-- Passengers Section -->
+         <div class="passengers-details">
+            <div *ngFor="let passenger of user.passengers" class="passenger-card">
                 <p class="booking-detail">
-                    <span class="detail-label">FirstName:</span> {{passenger.firstName}}
+                    <span class="detail-label">FirstName:</span> {{ passenger.firstName }}
                 </p>
                 <p class="booking-detail">
-                    <span class="detail-label">MiddleName:</span> {{passenger.middleName}}
+                    <span class="detail-label">MiddleName:</span> {{ passenger.middleName }}
                 </p>
                 <p class="booking-detail">
-                    <span class="detail-label">LastName:</span> {{passenger.lastName}}
+                    <span class="detail-label">LastName:</span> {{ passenger.lastName }}
                 </p>
                 <p class="booking-detail">
-                    <span class="detail-label">DOB:</span> {{passenger.dateOfBirth}}
+                    <span class="detail-label">DOB:</span> {{ passenger.dateOfBirth }}
                 </p>
                 <p class="booking-detail">
-                    <span class="detail-label">Gender:</span> {{passenger.gender}}
+                    <span class="detail-label">Gender:</span> {{ passenger.gender }}
                 </p>
                 <p class="booking-detail">
-                    <span class="detail-label">Nationality:</span> {{passenger.nationality}}
+                    <span class="detail-label">Nationality:</span> {{ passenger.nationality }}
                 </p>
-              </div>
-       </div>
-    }
-</div>
+            </div>
+        </div>
+    </div>
+
+  
+        <!-- Icon Button for Delete History -->
+        <button class="action-btn" (click)="openDeleteConfirmation(user.id)">
+          <i>delete</i>
+        </button>
+      </div>
+    </div>
+  
+    <!-- Confirmation Modal -->
+    <div *ngIf="isDeleteModalOpen" class="delete-modal">
+      <div class="modal-content">
+        <p>Are you sure you want to delete this history?</p>
+        <button class="action-btn" (click)="deleteUserHistory()">Yes</button>
+        <button class="action-btn" (click)="closeDeleteModal()">No</button>
+      </div>
+    </div>

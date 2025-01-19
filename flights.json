@@ -4,7 +4,7 @@
       "id": "FL001",
       "from": "New York",
       "to": "London",
-      "departureDate": "09-01-2025",
+      "departureDate": "19-01-2025",
       "price": 500,
       "airline": "Indigo",
       "totalSeats": 200,

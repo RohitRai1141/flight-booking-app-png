@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FlightService } from '../services/flight.service';
@@ -77,7 +77,6 @@ export class BookingComponent {
     const errors: ValidationError = {};
     let isValid = true;
 
-    // First Name validation
     if (!passenger.firstName?.trim()) {
       errors.firstName = 'First name is required';
       isValid = false;
@@ -86,13 +85,11 @@ export class BookingComponent {
       isValid = false;
     }
 
-    // Middle Name validation
     if (!passenger.middleName?.trim()) {
       errors.middleName = 'Middle name is required';
       isValid = false;
     }
 
-    // Last Name validation
     if (!passenger.lastName?.trim()) {
       errors.lastName = 'Last name is required';
       isValid = false;
@@ -101,7 +98,6 @@ export class BookingComponent {
       isValid = false;
     }
 
-    // Date of Birth validation
     if (!passenger.dateOfBirth) {
       errors.dateOfBirth = 'Date of birth is required';
       isValid = false;
@@ -114,24 +110,21 @@ export class BookingComponent {
       }
     }
 
-    // Gender validation
     if (!passenger.gender) {
       errors.gender = 'Gender is required';
       isValid = false;
     }
 
-    // Nationality validation
     if (!passenger.nationality?.trim()) {
       errors.nationality = 'Nationality is required';
       isValid = false;
     }
 
-    // Passport Number validation
     if (!passenger.postalCode?.trim()) {
-      errors.postalCode = 'Passport number is required';
+      errors.postalCode = 'Postal code is required';
       isValid = false;
     } else if (!/^[A-Z0-9]{8,9}$/i.test(passenger.postalCode.trim())) {
-      errors.postalCode = 'Invalid passport number format';
+      errors.postalCode = 'Invalid postal code format';
       isValid = false;
     }
 
@@ -167,17 +160,19 @@ export class BookingComponent {
     };
 
     this.flightService.saveUserData(bookingData).subscribe({
-      next: (response) => {
+      next: () => {
         this.showValidationMessage('Booking confirmed successfully!', 'success');
-        this.router.navigate(['/seat', this.selectedFlight.id]);
+        // Navigate to /seat page, passing selectedFlight.id and numberOfPassengers as query params
+        this.router.navigate(['/seat', this.selectedFlight.id], {
+          queryParams: { passengers: this.numberOfPassengers }, // Pass number of passengers as query param
+        });
       },
-      error: (error) => {
+      error: () => {
         this.showValidationMessage('Failed to save booking. Please try again.', 'error');
       }
     });
   }
 
-  // Rest of your existing methods remain the same
   cancelBooking(): void {
     this.bookingCancelled.emit();
     this.router.navigate(['/']);

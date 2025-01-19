@@ -30,6 +30,7 @@ export class SeatComponent implements OnInit {
   selectedFlight: any = null;
   validationMessage: string = '';
   notificationClass: string = '';
+  bookingData: any = null; 
 
   constructor(
     private flightService: FlightService,
@@ -42,11 +43,29 @@ export class SeatComponent implements OnInit {
     if (flightId) {
       this.loadSeats(flightId);
       this.loadFlightDetails(flightId);
+      this.loadBookingData(flightId);
     } else {
       console.error('No flight ID provided');
       this.showValidationMessage('Invalid flight ID.', 'error');
       this.router.navigate(['/']);
     }
+  }
+
+  loadBookingData(flightId: string): void {
+    this.flightService.getUserData().subscribe({
+      next: (users) => {
+        // Find the most recent booking for this flight
+        const booking = users.find(user => 
+          user.flight && user.flight.id === flightId
+        );
+        if (booking) {
+          this.bookingData = booking;
+        }
+      },
+      error: (error) => {
+        console.error('Error loading booking data:', error);
+      }
+    });
   }
 
   loadFlightDetails(flightId: string): void {
@@ -113,21 +132,34 @@ export class SeatComponent implements OnInit {
       return;
     }
   
-    // Prepare payload with flightId
+    // Prepare payload with flightId and seats
     const payload = {
-      flightId: this.selectedFlight.id, // Add flight ID
+      flightId: this.selectedFlight.id,
       seats: this.allSeats.map((seat) => ({
         id: seat.id,
         status: this.selectedSeats.includes(seat.id) ? 'booked' : seat.status,
       })),
     };
   
+    // First save seats status
     this.flightService.saveSeats(payload).subscribe({
       next: () => {
+        // Update the user booking data to include selected seats
+        const userBooking = {
+          flight: this.selectedFlight,
+          totalPrice: this.selectedFlight.price,
+          seats: this.selectedSeats, // Add selected seats to user booking
+        };
+  
+        // Save the updated user booking data
+        this.saveUserBooking(userBooking);
+  
+        // Update local seats data
         this.allSeats = this.allSeats.map((seat) => ({
           ...seat,
           status: this.selectedSeats.includes(seat.id) ? 'booked' : seat.status,
         }));
+  
         this.showValidationMessage('Seats booked successfully!', 'success');
         this.router.navigate(['/history']);
       },
