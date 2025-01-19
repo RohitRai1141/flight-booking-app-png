@@ -8,7 +8,11 @@
     padding: 60px 20px;
     box-sizing: border-box;
     color: #333;
+<<<<<<< HEAD
     animation: backgroundAnimation 5s infinite alternate;
+=======
+    animation: backgroundAnimation 2s infinite alternate;
+>>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
   }
   
   /* Animation for background to add subtle movement */
@@ -240,4 +244,9 @@
       opacity: 1;
       transform: translateY(0);
     }
+<<<<<<< HEAD
   }
+=======
+  }
+  
+>>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226

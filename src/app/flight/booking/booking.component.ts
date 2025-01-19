@@ -85,10 +85,13 @@ export class BookingComponent {
       isValid = false;
     }
 
+<<<<<<< HEAD
     if (!passenger.middleName?.trim()) {
       errors.middleName = 'Middle name is required';
       isValid = false;
     }
+=======
+>>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
 
     if (!passenger.lastName?.trim()) {
       errors.lastName = 'Last name is required';
@@ -194,24 +197,27 @@ export class BookingComponent {
 
   removePassenger(index: number): void {
     if (this.passengers.length > 1) {
-      this.passengers.splice(index, 1);
-      this.updateTotalPrice();
+      this.passengers.splice(index, 1);  // Remove passenger from the array
+      this.numberOfPassengers = this.passengers.length;  // Update the number of passengers
+      this.updateTotalPrice();  // Recalculate total price
     }
   }
 
   updatePassengerCount(): void {
     const currentCount = this.passengers.length;
-    if (this.numberOfPassengers > currentCount) {
-      const newCount = this.numberOfPassengers - currentCount;
-      for (let i = 0; i < newCount; i++) {
-        this.addPassenger();
-      }
-    } else if (this.numberOfPassengers < currentCount) {
-      this.passengers.splice(this.numberOfPassengers);
-    }
-    this.updateTotalPrice();
-  }
+    const newCount = this.numberOfPassengers;
 
+    if (newCount > currentCount) {
+      const passengersToAdd = newCount - currentCount;
+      for (let i = 0; i < passengersToAdd; i++) {
+        this.addPassenger();  // Add new passengers
+      }
+    } else if (newCount < currentCount) {
+      this.passengers.splice(newCount);  // Remove excess passengers
+    }
+
+    this.updateTotalPrice();  // Recalculate total price
+  }
   updateTotalPrice(): void {
     if (this.selectedFlight && this.selectedFlight.price !== undefined) {
       this.totalPrice = this.selectedFlight.price * this.passengers.length;
@@ -224,4 +230,11 @@ export class BookingComponent {
     this.validationMessage = message;
     this.notificationClass = type;
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+
+
+>>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
