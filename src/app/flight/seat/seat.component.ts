@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlightService } from '../services/flight.service';
 import { SeatForBackend } from '../services/flight.service';
+import { RouterLink } from '@angular/router';
 
 interface Seat {
   id: string;
@@ -21,7 +22,7 @@ interface SeatsPayload {
 @Component({
   selector: 'app-seat',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './seat.component.html',
   styleUrls: ['./seat.component.css'],
 })
@@ -31,6 +32,9 @@ export class SeatComponent implements OnInit {
   selectedFlight: any = null;
   validationMessage: string = '';
   notificationClass: string = '';
+  numberOfPassengers: number = 1; // Default to 1, will be updated from query parameters
+
+
 
   constructor(
     private flightService: FlightService,
@@ -40,6 +44,12 @@ export class SeatComponent implements OnInit {
 
   ngOnInit(): void {
     const flightId = this.route.snapshot.paramMap.get('id');
+    
+    // Get the number of passengers from query parameters
+     this.route.queryParams.subscribe((params) => {
+      this.numberOfPassengers = +params['passengers'] || 1; // Default to 1 if not provided
+    });
+    
     if (flightId) {
       this.loadSeats(flightId);
       this.loadFlightDetails(flightId);
@@ -98,13 +108,22 @@ export class SeatComponent implements OnInit {
   }
 
   selectSeat(seat: Seat): void {
+    // Prevent selecting a booked seat
     if (seat.status === 'booked') return;
 
+    // Allow seat selection only if the number of selected seats is less than the number of passengers
     const index = this.selectedSeats.indexOf(seat.id);
-    if (index === -1) {
+    if (index === -1 && this.selectedSeats.length < this.numberOfPassengers) {
+      // If seat is not selected and there's room for more passengers
       this.selectedSeats.push(seat.id);
-    } else {
+    } else if (index !== -1) {
+      // If seat is already selected, deselect it
       this.selectedSeats.splice(index, 1);
+    }
+
+    // If more seats are selected than allowed, show a validation message
+    if (this.selectedSeats.length > this.numberOfPassengers) {
+      this.showValidationMessage('You can only select up to ' + this.numberOfPassengers + ' seats.', 'error');
     }
   }
 
@@ -113,6 +132,12 @@ export class SeatComponent implements OnInit {
       this.showValidationMessage('Flight details are missing.', 'error');
       return;
     }
+    // Ensure exactly the required number of seats are selected before saving
+    if (this.selectedSeats.length !== this.numberOfPassengers) {
+      this.showValidationMessage('Please select exactly ' + this.numberOfPassengers + ' seats.', 'error');
+      return;
+    }
+
   
     // Prepare payload with flightId
     const payload = {

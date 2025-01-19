@@ -1,3 +1,4 @@
+<body>
 <div class="seating-container">
   <h2>Select Your Seat</h2>
 
@@ -35,8 +36,10 @@
     </div>
   </div>
 
+  
+
   <div class="actions">
-    <button [disabled]="selectedSeats.length === 0" (click)="saveSeats()">
+    <button [disabled]="selectedSeats.length !== numberOfPassengers" (click)="saveSeats()" routerLink="/history">
       Confirm Selection
     </button>
   </div>
@@ -45,3 +48,4 @@
     {{ validationMessage }}
   </div>
 </div>
+</body>
