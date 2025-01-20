@@ -5,12 +5,11 @@ import { FlightComponent } from '../app/flight/flight/flight.component';
 import { BookingComponent } from './flight/booking/booking.component';
 import { SeatComponent } from "./flight/seat/seat.component";
 import { HistoryComponent } from "./flight/history/history.component";
-
-
+import { NavbarComponent } from './flight/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FlightComponent, BookingComponent, SeatComponent, HistoryComponent],
+  imports: [RouterOutlet, FlightComponent, BookingComponent, SeatComponent, HistoryComponent, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

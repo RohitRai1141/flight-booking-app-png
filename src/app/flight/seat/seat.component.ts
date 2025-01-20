@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FlightService } from '../services/flight.service';
-<<<<<<< HEAD
-=======
-import { SeatForBackend } from '../services/flight.service';
-import { RouterLink } from '@angular/router';
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
 
 interface Seat {
   id: string;
   status: 'available' | 'selected' | 'booked';
 }
 
-// Update the payload interface to match the new structure
+interface Passenger {
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  dateOfBirth: string;
+  gender: string;
+  nationality: string;
+  postalCode: string;
+}
+
 interface SeatsPayload {
   flightId: string;
   seats: {
@@ -22,10 +26,17 @@ interface SeatsPayload {
   }[];
 }
 
+interface BookingData {
+  flight: any;
+  passengers: Passenger[];
+  totalPrice: number;
+  seats?: string[];
+}
+
 @Component({
   selector: 'app-seat',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './seat.component.html',
   styleUrls: ['./seat.component.css'],
 })
@@ -35,13 +46,9 @@ export class SeatComponent implements OnInit {
   selectedFlight: any = null;
   validationMessage: string = '';
   notificationClass: string = '';
-<<<<<<< HEAD
-  bookingData: any = null; 
-=======
-  numberOfPassengers: number = 1; // Default to 1, will be updated from query parameters
-
-
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
+  numberOfPassengers: number = 1;
+  bookingData: BookingData | null = null;
+  passengers: Passenger[] = [];
 
   constructor(
     private flightService: FlightService,
@@ -53,8 +60,8 @@ export class SeatComponent implements OnInit {
     const flightId = this.route.snapshot.paramMap.get('id');
     
     // Get the number of passengers from query parameters
-     this.route.queryParams.subscribe((params) => {
-      this.numberOfPassengers = +params['passengers'] || 1; // Default to 1 if not provided
+    this.route.queryParams.subscribe((params) => {
+      this.numberOfPassengers = +params['passengers'] || 1;
     });
     
     if (flightId) {
@@ -71,12 +78,16 @@ export class SeatComponent implements OnInit {
   loadBookingData(flightId: string): void {
     this.flightService.getUserData().subscribe({
       next: (users) => {
-        // Find the most recent booking for this flight
+        // Find the most recent booking for this flight that doesn't have seats assigned
         const booking = users.find(user => 
-          user.flight && user.flight.id === flightId
+          user.flight && 
+          user.flight.id === flightId && 
+          (!user.seats || user.seats.length === 0)
         );
+        
         if (booking) {
           this.bookingData = booking;
+          this.passengers = booking.passengers || [];
         }
       },
       error: (error) => {
@@ -92,7 +103,7 @@ export class SeatComponent implements OnInit {
         if (!this.selectedFlight) {
           console.error('Flight not found');
           this.showValidationMessage('Flight not found.', 'error');
-          this.router.navigate(['/history']);
+          this.router.navigate(['/']);
         }
       },
       error: (error) => {
@@ -105,26 +116,22 @@ export class SeatComponent implements OnInit {
   loadSeats(flightId: string): void {
     this.flightService.getSeats().subscribe({
       next: (data) => {
-        // Reverse the data array to process it from bottom to top
         const reversedData = [...data].reverse();
-  
         const flightData = reversedData.find((flight: any) => flight.flightId === flightId);
-  
+        
         if (flightData) {
-          // If a matching flight is found, load its seats
           this.allSeats = flightData.seats;
         } else {
           console.warn(`No seats found for flight ID: ${flightId}`);
-          this.allSeats = []; // Handle case where no matching flight is found
+          this.allSeats = [];
         }
       },
       error: (error) => {
         console.error('Error fetching seats:', error);
-        this.allSeats = []; // Handle error by clearing seats or showing an appropriate message
+        this.allSeats = [];
       },
     });
   }
-  
 
   getSeatClass(seat: Seat): string {
     if (seat.status === 'booked') return 'booked';
@@ -136,64 +143,67 @@ export class SeatComponent implements OnInit {
     // Prevent selecting a booked seat
     if (seat.status === 'booked') return;
 
-    // Allow seat selection only if the number of selected seats is less than the number of passengers
     const index = this.selectedSeats.indexOf(seat.id);
+    
     if (index === -1 && this.selectedSeats.length < this.numberOfPassengers) {
       // If seat is not selected and there's room for more passengers
       this.selectedSeats.push(seat.id);
     } else if (index !== -1) {
       // If seat is already selected, deselect it
       this.selectedSeats.splice(index, 1);
-    }
-
-    // If more seats are selected than allowed, show a validation message
-    if (this.selectedSeats.length > this.numberOfPassengers) {
-      this.showValidationMessage('You can only select up to ' + this.numberOfPassengers + ' seats.', 'error');
+    } else if (this.selectedSeats.length >= this.numberOfPassengers) {
+      // If trying to select more seats than allowed
+      this.showValidationMessage(
+        `You can only select up to ${this.numberOfPassengers} seats.`,
+        'error'
+      );
     }
   }
 
   saveSeats(): void {
-    if (!this.selectedFlight) {
-      this.showValidationMessage('Flight details are missing.', 'error');
-      return;
-    }
-    // Ensure exactly the required number of seats are selected before saving
-    if (this.selectedSeats.length !== this.numberOfPassengers) {
-      this.showValidationMessage('Please select exactly ' + this.numberOfPassengers + ' seats.', 'error');
+    if (!this.selectedFlight || !this.bookingData) {
+      this.showValidationMessage('Booking details are missing.', 'error');
       return;
     }
 
-  
-    // Prepare payload with flightId and seats
-    const payload = {
+    // Validate exact number of seats selected
+    if (this.selectedSeats.length !== this.numberOfPassengers) {
+      this.showValidationMessage(
+        `Please select exactly ${this.numberOfPassengers} seats.`,
+        'error'
+      );
+      return;
+    }
+
+    // Prepare seats payload
+    const seatsPayload: SeatsPayload = {
       flightId: this.selectedFlight.id,
       seats: this.allSeats.map((seat) => ({
         id: seat.id,
         status: this.selectedSeats.includes(seat.id) ? 'booked' : seat.status,
       })),
     };
-  
+
     // First save seats status
-    this.flightService.saveSeats(payload).subscribe({
+    this.flightService.saveSeats(seatsPayload).subscribe({
       next: () => {
-        // Update the user booking data to include selected seats
-        const userBooking = {
+        // Update the booking data with selected seats
+        const updatedBooking: BookingData = {
+          ...this.bookingData!,
+          seats: this.selectedSeats,
           flight: this.selectedFlight,
-          totalPrice: this.selectedFlight.price,
-          seats: this.selectedSeats, // Add selected seats to user booking
+          passengers: this.passengers,
+          totalPrice: this.selectedFlight.price * this.selectedSeats.length
         };
-  
-        // Save the updated user booking data
-        this.saveUserBooking(userBooking);
-  
+
+        // Save the complete booking data
+        this.saveCompleteBooking(updatedBooking);
+
         // Update local seats data
         this.allSeats = this.allSeats.map((seat) => ({
           ...seat,
           status: this.selectedSeats.includes(seat.id) ? 'booked' : seat.status,
         }));
-  
-        this.showValidationMessage('Seats booked successfully!', 'success');
-        this.router.navigate(['/history']);
       },
       error: (error) => {
         console.error('Error updating seats:', error);
@@ -201,15 +211,16 @@ export class SeatComponent implements OnInit {
       },
     });
   }
-  
 
-  private saveUserBooking(userBooking: any): void {
-    this.flightService.saveUserData(userBooking).subscribe({
+  private saveCompleteBooking(bookingData: BookingData): void {
+    this.flightService.saveUserData(bookingData).subscribe({
       next: () => {
-        console.log('User booking data saved successfully.');
+        console.log('Complete booking data saved successfully.');
+        this.showValidationMessage('Booking completed successfully!', 'success');
+        this.router.navigate(['/history']);
       },
       error: (error) => {
-        console.error('Error saving booking data:', error);
+        console.error('Error saving complete booking:', error);
         this.showValidationMessage('Error saving booking. Try again.', 'error');
       },
     });

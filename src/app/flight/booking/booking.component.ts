@@ -85,13 +85,6 @@ export class BookingComponent {
       isValid = false;
     }
 
-<<<<<<< HEAD
-    if (!passenger.middleName?.trim()) {
-      errors.middleName = 'Middle name is required';
-      isValid = false;
-    }
-=======
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
 
     if (!passenger.lastName?.trim()) {
       errors.lastName = 'Last name is required';
@@ -230,11 +223,7 @@ export class BookingComponent {
     this.validationMessage = message;
     this.notificationClass = type;
   }
-<<<<<<< HEAD
-}
-=======
 }
 
 
 
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226

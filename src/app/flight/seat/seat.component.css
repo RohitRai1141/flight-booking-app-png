@@ -281,19 +281,6 @@ button:active {
 
 .notification.error {
   background-color: #dc3545;
-<<<<<<< HEAD
-=======
-}
-
-/* Fade In for Notifications */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
 }
 
 /* Fade In for Notifications */

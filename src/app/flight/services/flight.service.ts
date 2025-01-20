@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 export interface Flight {
   id: string;
@@ -30,7 +31,11 @@ export class FlightService {
   private seatsApiUrl = 'http://localhost:3002/seats'; // Changed to match JSON server endpoint
   private userApiUrl = 'http://localhost:3001/users';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  navigateToRoute(route: string): void {
+    this.router.navigate([`/${route}`]);
+  }
 
   getFlights(): Observable<Flight[]> {
     return this.http.get<Flight[]>(this.apiUrl);

@@ -49,7 +49,7 @@
   
         <!-- Icon Button for Delete History -->
         <button class="action-btn" (click)="openDeleteConfirmation(user.id)">
-          <i>delete</i>
+          <i>Cancel Booking</i>
         </button>
       </div>
     </div>
@@ -57,14 +57,10 @@
     <!-- Confirmation Modal -->
     <div *ngIf="isDeleteModalOpen" class="delete-modal">
       <div class="modal-content">
-        <p>Are you sure you want to delete this history?</p>
+        <p>Are you sure you want to Cancel this Flight?</p>
         <button class="action-btn" (click)="deleteUserHistory()">Yes</button>
         <button class="action-btn" (click)="closeDeleteModal()">No</button>
       </div>
-<<<<<<< HEAD
-    </div>
-=======
     </div>
  
   
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226

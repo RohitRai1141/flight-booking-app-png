@@ -2,11 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import history from '../../../../users.json'
-<<<<<<< HEAD
-
-=======
 import { HttpClient } from '@angular/common/http';
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
 
 
 @Component({
@@ -15,17 +11,11 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
-<<<<<<< HEAD
-export class HistoryComponent {
-=======
 export class HistoryComponent implements OnInit{
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
   users: any[] = history.users;  // Users imported from JSON
   isDeleteModalOpen: boolean = false;  // Control whether the modal is visible
   selectedUserId: number | null = null;  // Store the ID of the user to be deleted
 
-<<<<<<< HEAD
-=======
 
   constructor(private http: HttpClient) {}  // Inject HttpClient to perform HTTP operations
 
@@ -44,7 +34,6 @@ export class HistoryComponent implements OnInit{
     );
   }
 
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
   trackUserId(index: number, user: any): number {
     return user.id;
   }
@@ -61,14 +50,6 @@ export class HistoryComponent implements OnInit{
     this.selectedUserId = null;  // Reset selected user ID
   }
 
-<<<<<<< HEAD
-  // Delete user history
-  deleteUserHistory() {
-    // Filter out the user by ID and update the list
-    this.users = this.users.filter(user => user.id !== this.selectedUserId);
-    this.closeDeleteModal();  // Close the modal after deletion
-  }
-=======
  // Delete user from both frontend and backend (JSON Server)
  deleteUserHistory() {
   if (this.selectedUserId !== null) {
@@ -87,5 +68,4 @@ export class HistoryComponent implements OnInit{
     );
   }
 }
->>>>>>> 94d2dc290ac3b62830ba37e0bcd2d296fc8ea226
 }
