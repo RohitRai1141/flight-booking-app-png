@@ -1,35 +1,47 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import history from '../../../../users.json'
 import { HttpClient } from '@angular/common/http';
-
+import { FlightService } from '../services/flight.service';
 
 @Component({
   selector: 'app-history',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
-export class HistoryComponent implements OnInit{
-  users: any[] = history.users;  // Users imported from JSON
-  isDeleteModalOpen: boolean = false;  // Control whether the modal is visible
-  selectedUserId: number | null = null;  // Store the ID of the user to be deleted
+export class HistoryComponent implements OnInit {
+  users: any[] = [];
+  isDeleteModalOpen: boolean = false;
+  selectedUserId: number | null = null;
 
-
-  constructor(private http: HttpClient) {}  // Inject HttpClient to perform HTTP operations
+  constructor(
+    private http: HttpClient,
+    private flightService: FlightService
+  ) {}
 
   ngOnInit() {
-    this.loadUsers();  // Load users when the component is initialized
+    this.loadUsers();
   }
-   // Fetch users from the backend (JSON Server)
-   loadUsers() {
-    this.http.get<any[]>('http://localhost:3001/users').subscribe(
+
+  loadUsers() {
+    this.flightService.getUserData().subscribe(
       (data) => {
-        this.users = data;  // Set the fetched data to users array
+        // Filter users with UID, remove duplicates, and reverse order
+        this.users = data
+          .filter(user => 
+            user.passengers && 
+            user.passengers[0] && 
+            user.passengers[0].uid
+          )
+          .filter((user, index, self) =>
+            index === self.findIndex((t) => t.id === user.id)
+          )
+          .reverse();
       },
       (error) => {
-        console.error('Error loading users:', error);  // Handle error
+        console.error('Error loading users:', error);
       }
     );
   }
@@ -38,34 +50,72 @@ export class HistoryComponent implements OnInit{
     return user.id;
   }
 
-  // Open the confirmation modal
   openDeleteConfirmation(userId: number) {
-    this.selectedUserId = userId;  // Save the user ID to delete
-    this.isDeleteModalOpen = true;  // Show the modal
+    this.selectedUserId = userId;
+    this.isDeleteModalOpen = true;
   }
 
-  // Close the confirmation modal
   closeDeleteModal() {
-    this.isDeleteModalOpen = false;  // Hide the modal
-    this.selectedUserId = null;  // Reset selected user ID
+    this.isDeleteModalOpen = false;
+    this.selectedUserId = null;
   }
 
- // Delete user from both frontend and backend (JSON Server)
- deleteUserHistory() {
-  if (this.selectedUserId !== null) {
-    // Send DELETE request to the backend (JSON Server)
-    this.http.delete(`http://localhost:3001/users/${this.selectedUserId}`).subscribe(
-      () => {
-        // Remove the user from the frontend array (update UI)
-        this.users = this.users.filter(user => user.id !== this.selectedUserId);
+  deleteUserHistory() {
+    if (this.selectedUserId !== null) {
+      const userToDisplay = this.users.find((user) => user.id === this.selectedUserId);
 
-        // Close the modal after deletion
-        this.closeDeleteModal();
-      },
-      (error) => {
-        console.error('Error deleting user:', error);  // Handle error
+      if (userToDisplay) {
+        this.flightService.getSeats().subscribe(
+          (seatsData) => {
+            const reversedSeatsData = [...seatsData].reverse();
+            const flightSeats = reversedSeatsData.find(
+              (seat: any) => seat.flightId === userToDisplay.flight.id
+            );
+
+            if (flightSeats) {
+              userToDisplay.seats.forEach((seatId: string) => {
+                const seatInfo = flightSeats.seats.find(
+                  (seat: any) => seat.id === seatId
+                );
+
+                if (seatInfo) {
+                  seatInfo.status = 'available';
+                }
+              });
+
+              this.http
+                .patch(`http://localhost:3002/seats/${flightSeats.id}`, {
+                  seats: flightSeats.seats,
+                })
+                .subscribe(
+                  () => {
+                    userToDisplay.status = 'Cancelled';
+                    this.http
+                      .put(
+                        `http://localhost:3001/users/${this.selectedUserId}`,
+                        userToDisplay
+                      )
+                      .subscribe(
+                        () => {
+                          this.loadUsers();
+                          this.closeDeleteModal();
+                        },
+                        (error) => {
+                          console.error('Error updating user status:', error);
+                        }
+                      );
+                  },
+                  (error) => {
+                    console.error('Error updating seats:', error);
+                  }
+                );
+            }
+          },
+          (error) => {
+            console.error('Error fetching seats data:', error);
+          }
+        );
       }
-    );
+    }
   }
-}
 }

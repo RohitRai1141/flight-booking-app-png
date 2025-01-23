@@ -9,6 +9,7 @@ interface Seat {
 }
 
 interface Passenger {
+  uid: string | undefined;  
   firstName: string;
   middleName: string;
   lastName: string;
@@ -31,6 +32,7 @@ interface BookingData {
   passengers: Passenger[];
   totalPrice: number;
   seats?: string[];
+  status?: string; // Added status field
 }
 
 @Component({
@@ -56,14 +58,18 @@ export class SeatComponent implements OnInit {
     private router: Router
   ) {}
 
+  private generateUid(): string {
+    return Math.random().toString(36).substring(2, 9);
+  }
+
   ngOnInit(): void {
     const flightId = this.route.snapshot.paramMap.get('id');
-    
+
     // Get the number of passengers from query parameters
     this.route.queryParams.subscribe((params) => {
       this.numberOfPassengers = +params['passengers'] || 1;
     });
-    
+
     if (flightId) {
       this.loadSeats(flightId);
       this.loadFlightDetails(flightId);
@@ -75,10 +81,10 @@ export class SeatComponent implements OnInit {
     }
   }
 
+  
   loadBookingData(flightId: string): void {
     this.flightService.getUserData().subscribe({
-      next: (users) => {
-        // Find the most recent booking for this flight that doesn't have seats assigned
+      next: (users: any[]) => {
         const booking = users.find(user => 
           user.flight && 
           user.flight.id === flightId && 
@@ -87,7 +93,10 @@ export class SeatComponent implements OnInit {
         
         if (booking) {
           this.bookingData = booking;
-          this.passengers = booking.passengers || [];
+          this.passengers = (booking.passengers || []).map((passenger: Passenger) => ({
+            ...passenger,
+            uid: passenger.uid || this.generateUid()
+          }));
         }
       },
       error: (error) => {
@@ -95,6 +104,8 @@ export class SeatComponent implements OnInit {
       }
     });
   }
+
+
 
   loadFlightDetails(flightId: string): void {
     this.flightService.getFlightById(flightId).subscribe({
@@ -117,8 +128,10 @@ export class SeatComponent implements OnInit {
     this.flightService.getSeats().subscribe({
       next: (data) => {
         const reversedData = [...data].reverse();
-        const flightData = reversedData.find((flight: any) => flight.flightId === flightId);
-        
+        const flightData = reversedData.find(
+          (flight: any) => flight.flightId === flightId
+        );
+
         if (flightData) {
           this.allSeats = flightData.seats;
         } else {
@@ -144,7 +157,7 @@ export class SeatComponent implements OnInit {
     if (seat.status === 'booked') return;
 
     const index = this.selectedSeats.indexOf(seat.id);
-    
+
     if (index === -1 && this.selectedSeats.length < this.numberOfPassengers) {
       // If seat is not selected and there's room for more passengers
       this.selectedSeats.push(seat.id);
@@ -187,13 +200,14 @@ export class SeatComponent implements OnInit {
     // First save seats status
     this.flightService.saveSeats(seatsPayload).subscribe({
       next: () => {
-        // Update the booking data with selected seats
+        // Update the booking data with selected seats and status
         const updatedBooking: BookingData = {
           ...this.bookingData!,
           seats: this.selectedSeats,
           flight: this.selectedFlight,
           passengers: this.passengers,
-          totalPrice: this.selectedFlight.price * this.selectedSeats.length
+          totalPrice: this.selectedFlight.price * this.selectedSeats.length,
+          status: 'booked', // Add the status field here
         };
 
         // Save the complete booking data
@@ -212,8 +226,16 @@ export class SeatComponent implements OnInit {
     });
   }
 
-  private saveCompleteBooking(bookingData: BookingData): void {
-    this.flightService.saveUserData(bookingData).subscribe({
+  saveCompleteBooking(bookingData: BookingData): void {
+    const updatedBookingData = {
+      ...bookingData,
+      passengers: bookingData.passengers.map((passenger: Passenger) => ({
+        ...passenger,
+        uid: passenger.uid || this.generateUid()
+      }))
+    };
+
+    this.flightService.saveUserData(updatedBookingData).subscribe({
       next: () => {
         console.log('Complete booking data saved successfully.');
         this.showValidationMessage('Booking completed successfully!', 'success');

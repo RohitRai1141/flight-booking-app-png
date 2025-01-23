@@ -1,0 +1,43 @@
+<div class="booking-list">
+    <h1>Booking Management</h1>
+  
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <label for="searchQuery">Search Bookings:</label>
+      <input
+        id="searchQuery"
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="filterBookings()"
+        placeholder="Search by Flight ID or Passenger Name"
+      />
+    </div>
+  
+    <!-- Bookings Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Flight ID</th>
+          <th>Passenger Count</th>
+          <th>Total Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of bookings">
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.flightId }}</td>
+          <td>{{ booking.passengers.length }}</td>
+          <td>{{ booking.totalPrice | currency }}</td>
+          <td>
+            <button (click)="cancelBooking(booking.id)">Cancel</button>
+          </td>
+        </tr>
+        <tr *ngIf="bookings.length === 0">
+          <td colspan="5">No bookings found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

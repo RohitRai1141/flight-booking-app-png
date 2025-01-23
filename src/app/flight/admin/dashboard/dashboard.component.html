@@ -1,0 +1,30 @@
+<div class="dashboard">
+    <h1>Admin Dashboard</h1>
+  
+    <!-- Summary Stats -->
+    <div class="stats">
+      <div class="stat-card">
+        <h2>Total Flights</h2>
+        <p>{{ totalFlights }}</p>
+      </div>
+      <div class="stat-card">
+        <h2>Total Bookings</h2>
+        <p>{{ totalBookings }}</p>
+      </div>
+      <div class="stat-card">
+        <h2>Total Revenue</h2>
+        <p>{{ totalRevenue | currency }}</p>
+      </div>
+    </div>
+  
+    <!-- Notifications -->
+    <div class="notifications">
+      <h2>Notifications</h2>
+      <ul>
+        <li *ngFor="let notification of notifications">
+          {{ notification }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  

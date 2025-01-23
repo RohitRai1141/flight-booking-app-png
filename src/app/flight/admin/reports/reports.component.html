@@ -1,0 +1,36 @@
+<div class="reports">
+    <h1>Reports and Analytics</h1>
+  
+    <!-- Total Revenue -->
+    <div class="summary">
+      <h2>Total Revenue: {{ totalRevenue | currency }}</h2>
+    </div>
+  
+    <!-- Reports Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Flight ID</th>
+          <th>Total Revenue</th>
+          <th>Passenger Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of flightReports">
+          <td>{{ report.flightId }}</td>
+          <td>{{ report.revenue | currency }}</td>
+          <td>{{ report.passengers }}</td>
+        </tr>
+        <tr *ngIf="flightReports.length === 0">
+          <td colspan="3">No data available.</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Trend Chart -->
+    <div class="chart-container">
+      <h2>Booking Trends</h2>
+      <canvas id="bookingTrends"></canvas>
+    </div>
+  </div>
+  

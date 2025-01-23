@@ -1,0 +1,23 @@
+<div class="seat-map">
+    <h1>Seat Management</h1>
+    <h2>Flight ID: {{ flightId }}</h2>
+  
+    <div class="seat-grid">
+      <div
+        *ngFor="let seat of seats"
+        [ngClass]="{
+          'seat-available': seat.status === 'available',
+          'seat-selected': seat.status === 'selected',
+          'seat-booked': seat.status === 'booked'
+        }"
+        (click)="toggleSeatSelection(seat)"
+      >
+        {{ seat.id }}
+      </div>
+    </div>
+  
+    <div class="actions">
+      <button (click)="saveSeats()">Save Changes</button>
+    </div>
+  </div>
+  

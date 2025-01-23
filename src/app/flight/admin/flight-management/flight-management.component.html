@@ -1,0 +1,47 @@
+<div class="flight-management">
+    <h1>Flight Management</h1>
+  
+    <!-- Add/Edit Form -->
+    <form *ngIf="selectedFlight || isEditMode" (ngSubmit)="saveFlight(selectedFlight!)">
+      <h2>{{ isEditMode ? 'Edit' : 'Add' }} Flight</h2>
+  
+      <label>From: <input [(ngModel)]="selectedFlight.from" name="from" required /></label>
+      <label>To: <input [(ngModel)]="selectedFlight.to" name="to" required /></label>
+      <label>Departure Date: <input type="date" [(ngModel)]="selectedFlight.departureDate" name="departureDate" required /></label>
+      <label>Price: <input type="number" [(ngModel)]="selectedFlight.price" name="price" required /></label>
+      <label>Airline: <input [(ngModel)]="selectedFlight.airline" name="airline" required /></label>
+  
+      <button type="submit">Save</button>
+      <button type="button" (click)="cancelEdit()">Cancel</button>
+    </form>
+  
+    <!-- Flight List -->
+    <table>
+      <thead>
+        <tr>
+          <th>Flight ID</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Departure Date</th>
+          <th>Price</th>
+          <th>Airline</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of flights">
+          <td>{{ flight.id }}</td>
+          <td>{{ flight.from }}</td>
+          <td>{{ flight.to }}</td>
+          <td>{{ flight.departureDate }}</td>
+          <td>{{ flight.price | currency }}</td>
+          <td>{{ flight.airline }}</td>
+          <td>
+            <button (click)="editFlight(flight)">Edit</button>
+            <button (click)="deleteFlight(flight.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

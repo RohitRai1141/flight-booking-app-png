@@ -18,6 +18,9 @@
         <p><strong>Price (Per Passenger):</strong> {{ selectedFlight.price | currency: 'INR' }}</p>
         <p><strong>Total Price:</strong> {{ totalPrice | currency: 'INR' }}</p>
         <p><strong>Airline:</strong> {{ selectedFlight.airline }}</p>
+        <p><strong>Departure Time:</strong> {{ selectedFlight.fromTime }}</p>
+        <p><strong>Arrival Time:</strong> {{ selectedFlight.toTime }}</p>
+        <p><strong>Duration:</strong> {{ selectedFlight.duration }}</p>
       </div>
 
       <div *ngIf="validationMessage" [ngClass]="notificationClass" class="notification">

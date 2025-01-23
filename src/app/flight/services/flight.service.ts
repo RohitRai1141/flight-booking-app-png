@@ -64,4 +64,20 @@ export class FlightService {
   getUserData(): Observable<any[]> {
     return this.http.get<any[]>(this.userApiUrl);
   }
+
+  // Add this to your FlightService class
+  updateAllUsers(users: any[]): Observable<any> {
+    return this.http.put(this.userApiUrl, users);
+  }
+
+  updateSeats(flightSeatsId: string, seats: any[]): Observable<any> {
+    return this.http.patch(`${this.seatsApiUrl}/${flightSeatsId}`, { seats });
+  }
+  
+  updateUserStatus(userId: number | null, userData: any): Observable<any> {
+    if (userId === null) {
+      throw new Error('User ID cannot be null');
+    }
+    return this.http.put(`${this.userApiUrl}/${userId}`, userData);
+  }
 }

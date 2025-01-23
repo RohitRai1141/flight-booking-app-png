@@ -1,0 +1,52 @@
+<div class="passenger-list">
+    <h1>Passenger Management</h1>
+  
+    <!-- Filter Section -->
+    <div class="filters">
+      <label for="flightId">Filter by Flight ID:</label>
+      <input
+        id="flightId"
+        type="text"
+        [(ngModel)]="flightId"
+        (input)="filterPassengers()"
+        placeholder="Enter Flight ID"
+      />
+  
+      <label for="searchQuery">Search Passengers:</label>
+      <input
+        id="searchQuery"
+        type="text"
+        [(ngModel)]="searchQuery"
+        (input)="filterPassengers()"
+        placeholder="Search by name"
+      />
+    </div>
+  
+    <!-- Passengers Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Flight ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Gender</th>
+          <th>Date of Birth</th>
+          <th>Nationality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let passenger of filteredPassengers">
+          <td>{{ passenger.flightId }}</td>
+          <td>{{ passenger.firstName }}</td>
+          <td>{{ passenger.lastName }}</td>
+          <td>{{ passenger.gender }}</td>
+          <td>{{ passenger.dateOfBirth }}</td>
+          <td>{{ passenger.nationality }}</td>
+        </tr>
+        <tr *ngIf="filteredPassengers.length === 0">
+          <td colspan="6">No passengers found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,53 @@
+.booking-list {
+    padding: 20px;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+  .search-bar label {
+    margin-right: 10px;
+  }
+  
+  .search-bar input {
+    margin-right: 20px;
+    padding: 5px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  table th,
+  table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  table th {
+    background-color: #f4f4f4;
+  }
+  
+  table tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  table td {
+    text-align: center;
+  }
+  
+  button {
+    padding: 5px 10px;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #d32f2f;
+  }
+  

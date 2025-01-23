@@ -81,6 +81,17 @@ export class FlightComponent {
     if (!this.searchCriteria.date.trim()) {
       this.validationErrors.date = 'Departure date is required.';
       isValid = false;
+    } else {
+      const selectedDate = new Date(this.searchCriteria.date);
+      const currentDate = new Date();
+      // Reset the time to ensure only the date part is compared
+      selectedDate.setHours(0, 0, 0, 0);
+      currentDate.setHours(0, 0, 0, 0);
+  
+      if (selectedDate < currentDate) {
+        this.validationErrors.date = 'Invalid Departure date.';
+        isValid = false;
+      }
     }
 
 
@@ -152,4 +163,3 @@ export class FlightComponent {
     this.selectedFlight = null;
   }
 }
-

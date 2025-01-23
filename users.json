@@ -25,399 +25,108 @@
           "postalCode": "A12345633"
         }
       ],
-      "totalPrice": 500
-    },
-    {
-      "id": "5bc5",
-      "flight": {
-        "id": "FL001",
-        "from": "New York",
-        "to": "London",
-        "departureDate": "09-01-2025",
-        "price": 500,
-        "airline": "Indigo",
-        "totalSeats": 200,
-        "availableSeats": [
-          "A1",
-          "A2",
-          "A3",
-          "A4",
-          "A5",
-          "A8",
-          "A9",
-          "A10",
-          "A11",
-          "A12",
-          "A13",
-          "A14",
-          "A15",
-          "B1",
-          "B2",
-          "B3",
-          "B4",
-          "B5",
-          "B6",
-          "B7",
-          "B8",
-          "B9",
-          "B10",
-          "B11",
-          "B12",
-          "B13",
-          "B14",
-          "B15",
-          "C1",
-          "C2",
-          "C3",
-          "C4",
-          "C5",
-          "C9",
-          "C10",
-          "C11",
-          "C12",
-          "C13",
-          "C14",
-          "C15",
-          "D1",
-          "D2",
-          "D3",
-          "D4",
-          "D5",
-          "D6",
-          "D7",
-          "D8",
-          "D9",
-          "D10",
-          "D11",
-          "D12",
-          "D13",
-          "D14",
-          "D15",
-          "E1",
-          "E2",
-          "E3",
-          "E4",
-          "E5",
-          "E6",
-          "E7",
-          "E8",
-          "E9",
-          "E10",
-          "E11",
-          "E12",
-          "E13",
-          "E14",
-          "E15",
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5",
-          "F6",
-          "F7",
-          "F8",
-          "F9",
-          "F10",
-          "F11",
-          "F12",
-          "F13",
-          "F14",
-          "F15"
-        ],
-        "unavailableSeats": [
-          "A6",
-          "A7",
-          "C6",
-          "C7",
-          "C8"
-        ],
-        "fromTime": "08:00 AM",
-        "toTime": "08:00 PM",
-        "duration": "12h"
-      },
       "totalPrice": 500,
       "seats": [
-        "A6"
-      ]
-    },
-    {
-      "id": "10bd",
-      "flight": {
-        "id": "FL001",
-        "from": "New York",
-        "to": "London",
-        "departureDate": "09-01-2025",
-        "price": 500,
-        "airline": "Indigo",
-        "totalSeats": 200,
-        "availableSeats": [
-          "A1",
-          "A2",
-          "A3",
-          "A4",
-          "A5",
-          "A8",
-          "A9",
-          "A10",
-          "A11",
-          "A12",
-          "A13",
-          "A14",
-          "A15",
-          "B1",
-          "B2",
-          "B3",
-          "B4",
-          "B5",
-          "B6",
-          "B7",
-          "B8",
-          "B9",
-          "B10",
-          "B11",
-          "B12",
-          "B13",
-          "B14",
-          "B15",
-          "C1",
-          "C2",
-          "C3",
-          "C4",
-          "C5",
-          "C9",
-          "C10",
-          "C11",
-          "C12",
-          "C13",
-          "C14",
-          "C15",
-          "D1",
-          "D2",
-          "D3",
-          "D4",
-          "D5",
-          "D6",
-          "D7",
-          "D8",
-          "D9",
-          "D10",
-          "D11",
-          "D12",
-          "D13",
-          "D14",
-          "D15",
-          "E1",
-          "E2",
-          "E3",
-          "E4",
-          "E5",
-          "E6",
-          "E7",
-          "E8",
-          "E9",
-          "E10",
-          "E11",
-          "E12",
-          "E13",
-          "E14",
-          "E15",
-          "F1",
-          "F2",
-          "F3",
-          "F4",
-          "F5",
-          "F6",
-          "F7",
-          "F8",
-          "F9",
-          "F10",
-          "F11",
-          "F12",
-          "F13",
-          "F14",
-          "F15"
-        ],
-        "unavailableSeats": [
-          "A6",
-          "A7",
-          "C6",
-          "C7",
-          "C8"
-        ],
-        "fromTime": "08:00 AM",
-        "toTime": "08:00 PM",
-        "duration": "12h"
-      },
-      "passengers": [
-        {
-          "firstName": "rohit",
-          "middleName": "rai",
-          "lastName": "A",
-          "dateOfBirth": "2025-01-31",
-          "gender": "female",
-          "nationality": "",
-          "postalCode": 600081
-        }
+        "F7"
       ],
-      "totalPrice": 500,
-      "seats": [
-        "C6"
-      ]
+      "status": "Cancelled"
     },
     {
-      "id": "10bd",
+      "id": "6009",
       "flight": {
-        "id": "FL001",
-        "from": "New York",
-        "to": "London",
-        "departureDate": "09-01-2025",
+        "id": "FL020",
+        "from": "Salt Lake City",
+        "to": "Zurich",
+        "departureDate": "07-03-2025",
         "price": 500,
-        "airline": "Indigo",
+        "airline": "Swiss Air",
         "totalSeats": 200,
-        "fromTime": "08:00 AM",
-        "toTime": "08:00 PM",
+        "fromTime": "06:00 AM",
+        "toTime": "06:00 PM",
         "duration": "12h"
       },
       "passengers": [
         {
-          "firstName": "rohit",
-          "middleName": "rai",
-          "lastName": "A",
-          "dateOfBirth": "2025-01-31",
-          "gender": "female",
-          "nationality": "",
-          "postalCode": 600081
-        }
-      ],
-      "totalPrice": 500,
-      "seats": [
-        "B5"
-      ]
-    },
-    {
-      "id": "10bd",
-      "flight": {
-        "id": "FL001",
-        "from": "New York",
-        "to": "London",
-        "departureDate": "09-01-2025",
-        "price": 500,
-        "airline": "Indigo",
-        "totalSeats": 200,
-        "fromTime": "08:00 AM",
-        "toTime": "08:00 PM",
-        "duration": "12h"
-      },
-      "passengers": [
-        {
-          "firstName": "rohit",
-          "middleName": "rai",
-          "lastName": "A",
-          "dateOfBirth": "2025-01-31",
-          "gender": "female",
-          "nationality": "",
-          "postalCode": 600081
-        }
-      ],
-      "totalPrice": 500,
-      "seats": [
-        "D6"
-      ]
-    },
-    {
-      "id": "092f",
-      "flight": {
-        "id": "FL001",
-        "from": "New York",
-        "to": "London",
-        "departureDate": "20-01-2025",
-        "price": 500,
-        "airline": "Indigo",
-        "totalSeats": 200,
-        "fromTime": "08:00 AM",
-        "toTime": "08:00 PM",
-        "duration": "12h"
-      },
-      "passengers": [
-        {
-          "firstName": "skdcm ",
-          "middleName": "aefv",
-          "lastName": "afv",
-          "dateOfBirth": "2025-01-10",
+          "firstName": "Rohit",
+          "middleName": "",
+          "lastName": "rai",
+          "dateOfBirth": "2025-01-16",
           "gender": "male",
-          "nationality": "asva",
-          "postalCode": "A1231423Q"
-        }
-      ],
-      "totalPrice": 500
-    },
-    {
-      "id": "d837",
-      "flight": {
-        "id": "FL001",
-        "from": "New York",
-        "to": "London",
-        "departureDate": "20-01-2025",
-        "price": 500,
-        "airline": "Indigo",
-        "totalSeats": 200,
-        "fromTime": "08:00 AM",
-        "toTime": "08:00 PM",
-        "duration": "12h"
-      },
-      "passengers": [
-        {
-          "firstName": "rohit",
-          "middleName": "rai",
-          "lastName": "A",
-          "dateOfBirth": "2025-01-31",
-          "gender": "male",
-          "nationality": "",
-          "postalCode": 600081
+          "nationality": "ccc",
+          "postalCode": "A134141Q"
         }
       ],
       "totalPrice": 500,
       "seats": [
         "F6"
-      ]
+      ],
+      "status": "Cancelled"
     },
     {
-      "id": "d837",
+      "id": "1dc3",
       "flight": {
-        "id": "FL001",
-        "from": "New York",
-        "to": "London",
-        "departureDate": "20-01-2025",
+        "id": "FL020",
+        "from": "Salt Lake City",
+        "to": "Zurich",
+        "departureDate": "07-03-2025",
         "price": 500,
-        "airline": "Indigo",
+        "airline": "Swiss Air",
         "totalSeats": 200,
-        "fromTime": "08:00 AM",
-        "toTime": "08:00 PM",
+        "fromTime": "06:00 AM",
+        "toTime": "06:00 PM",
         "duration": "12h"
       },
       "passengers": [
         {
-          "firstName": "rohit",
-          "middleName": "rai",
-          "lastName": "A",
-          "dateOfBirth": "2025-01-31",
+          "firstName": "Naveen",
+          "middleName": "",
+          "lastName": "Raj",
+          "dateOfBirth": "2025-01-03",
           "gender": "male",
-          "nationality": "",
-          "postalCode": 600081
+          "nationality": "skjdbvsdkhvb",
+          "postalCode": "A123131Q"
+        }
+      ],
+      "totalPrice": 500
+    },
+    {
+      "id": "1dc3",
+      "flight": {
+        "id": "FL020",
+        "from": "Salt Lake City",
+        "to": "Zurich",
+        "departureDate": "07-03-2025",
+        "price": 500,
+        "airline": "Swiss Air",
+        "totalSeats": 200,
+        "fromTime": "06:00 AM",
+        "toTime": "06:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "Naveen",
+          "middleName": "",
+          "lastName": "Raj",
+          "dateOfBirth": "2025-01-03",
+          "gender": "male",
+          "nationality": "skjdbvsdkhvb",
+          "postalCode": "A123131Q"
         }
       ],
       "totalPrice": 500,
       "seats": [
-        "F7"
-      ]
+        "F5"
+      ],
+      "status": "booked"
     },
     {
-      "id": "d347",
+      "id": "f6d3",
       "flight": {
         "id": "FL001",
         "from": "New York",
         "to": "London",
-        "departureDate": "20-01-2025",
+        "departureDate": "21-01-2025",
         "price": 500,
         "airline": "Indigo",
         "totalSeats": 200,
@@ -427,19 +136,789 @@
       },
       "passengers": [
         {
-          "firstName": "sfbvjk ",
-          "middleName": "SDn ",
-          "lastName": "SMDvn ",
+          "firstName": "Rohit",
+          "middleName": "",
+          "lastName": "rai",
+          "dateOfBirth": "2025-01-08",
+          "gender": "female",
+          "nationality": "eztsfdhgjfvkuj",
+          "postalCode": "A1323443Q"
+        }
+      ],
+      "totalPrice": 500,
+      "seats": [
+        "D9"
+      ],
+      "status": "Cancelled"
+    },
+    {
+      "id": "f6d3",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "21-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "Rohit",
+          "middleName": "",
+          "lastName": "rai",
+          "dateOfBirth": "2025-01-08",
+          "gender": "female",
+          "nationality": "eztsfdhgjfvkuj",
+          "postalCode": "A1323443Q"
+        }
+      ],
+      "totalPrice": 500,
+      "seats": [
+        "E9"
+      ],
+      "status": "booked"
+    },
+    {
+      "id": "9785",
+      "flight": {
+        "id": "FL019",
+        "from": "Austin",
+        "to": "Dubai",
+        "departureDate": "04-03-2025",
+        "price": 700,
+        "airline": "Emirates",
+        "totalSeats": 200,
+        "fromTime": "10:00 PM",
+        "toTime": "08:00 AM",
+        "duration": "10h"
+      },
+      "passengers": [
+        {
+          "firstName": "Mithra ",
+          "middleName": "er",
+          "lastName": "AK",
+          "dateOfBirth": "2025-01-03",
+          "gender": "male",
+          "nationality": "svad",
+          "postalCode": "A123123Q"
+        }
+      ],
+      "totalPrice": 700
+    },
+    {
+      "id": "09be",
+      "flight": {
+        "id": "FL002",
+        "from": "Los Angeles",
+        "to": "Tokyo",
+        "departureDate": "22-01-2025",
+        "price": 600,
+        "airline": "Air India",
+        "totalSeats": 200,
+        "fromTime": "10:00 AM",
+        "toTime": "02:00 PM",
+        "duration": "14h"
+      },
+      "passengers": [
+        {
+          "firstName": "Rohit",
+          "middleName": "",
+          "lastName": "Rai",
+          "dateOfBirth": "2003-02-02",
+          "gender": "male",
+          "nationality": "indian",
+          "postalCode": "A124114Q"
+        },
+        {
+          "firstName": "Rohit",
+          "middleName": "",
+          "lastName": "Rai",
+          "dateOfBirth": "2003-02-02",
+          "gender": "male",
+          "nationality": "indian",
+          "postalCode": "A124114Q"
+        }
+      ],
+      "totalPrice": 1200
+    },
+    {
+      "id": "e961",
+      "flight": {
+        "id": "FL002",
+        "from": "Los Angeles",
+        "to": "Tokyo",
+        "departureDate": "22-01-2025",
+        "price": 600,
+        "airline": "Air India",
+        "totalSeats": 200,
+        "fromTime": "10:00 AM",
+        "toTime": "02:00 PM",
+        "duration": "14h"
+      },
+      "passengers": [
+        {
+          "firstName": "Mithra ",
+          "middleName": "er",
+          "lastName": "AK",
+          "dateOfBirth": "2025-01-03",
+          "gender": "female",
+          "nationality": "svad",
+          "postalCode": "A123123Q"
+        }
+      ],
+      "totalPrice": 600
+    },
+    {
+      "id": "d1d1",
+      "flight": {
+        "id": "FL002",
+        "from": "Los Angeles",
+        "to": "Tokyo",
+        "departureDate": "22-01-2025",
+        "price": 600,
+        "airline": "Air India",
+        "totalSeats": 200,
+        "fromTime": "10:00 AM",
+        "toTime": "02:00 PM",
+        "duration": "14h"
+      },
+      "passengers": [
+        {
+          "firstName": "Mithra",
+          "middleName": "er",
+          "lastName": "AK",
+          "dateOfBirth": "2025-01-03",
+          "gender": "male",
+          "nationality": "svad",
+          "postalCode": "A123123Q"
+        }
+      ],
+      "totalPrice": 600
+    },
+    {
+      "id": "853f",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "21-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "Sharmila",
+          "middleName": "",
+          "lastName": "Ravi",
+          "dateOfBirth": "2025-01-02",
+          "gender": "female",
+          "nationality": "Indian",
+          "postalCode": "A1233456Q"
+        }
+      ],
+      "totalPrice": 500,
+      "seats": [
+        "F1"
+      ],
+      "status": "Cancelled"
+    },
+    {
+      "id": "9d8e",
+      "flight": {
+        "id": "FL004",
+        "from": "Houston",
+        "to": "Dubai",
+        "departureDate": "23-01-2025",
+        "price": 700,
+        "airline": "Emirates",
+        "totalSeats": 200,
+        "fromTime": "07:00 AM",
+        "toTime": "11:00 PM",
+        "duration": "14h"
+      },
+      "passengers": [
+        {
+          "firstName": "papa",
+          "middleName": "",
+          "lastName": "paya",
+          "dateOfBirth": "2025-01-09",
+          "gender": "male",
+          "nationality": "indian",
+          "postalCode": "A123432Q"
+        }
+      ],
+      "totalPrice": 700
+    },
+    {
+      "id": "9d8e",
+      "flight": {
+        "id": "FL004",
+        "from": "Houston",
+        "to": "Dubai",
+        "departureDate": "23-01-2025",
+        "price": 700,
+        "airline": "Emirates",
+        "totalSeats": 200,
+        "fromTime": "07:00 AM",
+        "toTime": "11:00 PM",
+        "duration": "14h"
+      },
+      "passengers": [
+        {
+          "firstName": "papa",
+          "middleName": "",
+          "lastName": "paya",
+          "dateOfBirth": "2025-01-09",
+          "gender": "male",
+          "nationality": "indian",
+          "postalCode": "A123432Q",
+          "uid": "eq5q589"
+        }
+      ],
+      "totalPrice": 700,
+      "seats": [
+        "F6"
+      ],
+      "status": "booked"
+    },
+    {
+      "id": "23bf",
+      "flight": {
+        "id": "FL019",
+        "from": "Austin",
+        "to": "Dubai",
+        "departureDate": "04-03-2025",
+        "price": 700,
+        "airline": "Emirates",
+        "totalSeats": 200,
+        "fromTime": "10:00 PM",
+        "toTime": "08:00 AM",
+        "duration": "10h"
+      },
+      "passengers": [
+        {
+          "firstName": "Sutithi",
+          "middleName": "",
+          "lastName": "Sss",
+          "dateOfBirth": "2025-01-08",
+          "gender": "female",
+          "nationality": "indian",
+          "postalCode": "A1234134R"
+        }
+      ],
+      "totalPrice": 700
+    },
+    {
+      "id": "2c3f",
+      "flight": {
+        "id": "FL019",
+        "from": "Austin",
+        "to": "Dubai",
+        "departureDate": "04-03-2025",
+        "price": 700,
+        "airline": "Emirates",
+        "totalSeats": 200,
+        "fromTime": "10:00 PM",
+        "toTime": "08:00 AM",
+        "duration": "10h"
+      },
+      "passengers": [
+        {
+          "uid": "wxoafwx",
+          "firstName": "Rakshna",
+          "middleName": "",
+          "lastName": "VJ",
+          "dateOfBirth": "2025-01-09",
+          "gender": "female",
+          "nationality": "hgvygvk",
+          "postalCode": "A414326Q"
+        }
+      ],
+      "totalPrice": 700,
+      "seats": [
+        "F1"
+      ],
+      "status": "Cancelled"
+    },
+    {
+      "id": "acd5",
+      "flight": {
+        "id": "FL010",
+        "from": "Denver",
+        "to": "Berlin",
+        "departureDate": "05-02-2025",
+        "price": 550,
+        "airline": "Emirates",
+        "totalSeats": 200,
+        "fromTime": "07:00 PM",
+        "toTime": "11:00 AM",
+        "duration": "10h"
+      },
+      "passengers": [
+        {
+          "firstName": "Preetha ",
+          "middleName": "",
+          "lastName": "NS",
           "dateOfBirth": "2025-01-13",
           "gender": "female",
-          "nationality": "adjkv",
-          "postalCode": "A236545Q"
+          "nationality": "KjkD csdc ,n",
+          "postalCode": "A123124Q"
+        }
+      ],
+      "totalPrice": 550
+    },
+    {
+      "id": "acd5",
+      "flight": {
+        "id": "FL010",
+        "from": "Denver",
+        "to": "Berlin",
+        "departureDate": "05-02-2025",
+        "price": 550,
+        "airline": "Emirates",
+        "totalSeats": 200,
+        "fromTime": "07:00 PM",
+        "toTime": "11:00 AM",
+        "duration": "10h"
+      },
+      "passengers": [
+        {
+          "uid": "4opybzz",
+          "firstName": "Preetha ",
+          "middleName": "",
+          "lastName": "NS",
+          "dateOfBirth": "2025-01-13",
+          "gender": "female",
+          "nationality": "KjkD csdc ,n",
+          "postalCode": "A123124Q"
+        }
+      ],
+      "totalPrice": 550,
+      "seats": [
+        "F10"
+      ],
+      "status": "booked"
+    },
+    {
+      "id": "3c88",
+      "flight": {
+        "id": "FL010",
+        "from": "Denver",
+        "to": "Berlin",
+        "departureDate": "05-02-2025",
+        "price": 550,
+        "airline": "Emirates",
+        "totalSeats": 200,
+        "fromTime": "07:00 PM",
+        "toTime": "11:00 AM",
+        "duration": "10h"
+      },
+      "passengers": [
+        {
+          "firstName": "Rohit",
+          "middleName": "",
+          "lastName": "Rai",
+          "dateOfBirth": "2025-01-15",
+          "gender": "male",
+          "nationality": "indian",
+          "postalCode": "A123132Q"
+        }
+      ],
+      "totalPrice": 550
+    },
+    {
+      "id": "3969",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "21-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "sasa",
+          "middleName": "",
+          "lastName": "Soni",
+          "dateOfBirth": "2025-01-02",
+          "gender": "female",
+          "nationality": "adcas",
+          "postalCode": "A123132Q"
+        }
+      ],
+      "totalPrice": 500
+    },
+    {
+      "id": "3969",
+      "flight": {
+        "id": "FL001",
+        "from": "New York",
+        "to": "London",
+        "departureDate": "21-01-2025",
+        "price": 500,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "fromTime": "08:00 AM",
+        "toTime": "08:00 PM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "uid": "uziz9rv",
+          "firstName": "sasa",
+          "middleName": "",
+          "lastName": "Soni",
+          "dateOfBirth": "2025-01-02",
+          "gender": "female",
+          "nationality": "adcas",
+          "postalCode": "A123132Q"
         }
       ],
       "totalPrice": 500,
       "seats": [
-        "F8"
-      ]
+        "F1"
+      ],
+      "status": "booked"
+    },
+    {
+      "id": "6f6e",
+      "flight": {
+        "id": "FL015",
+        "from": "Detroit",
+        "to": "Delhi",
+        "departureDate": "20-02-2025",
+        "price": 800,
+        "airline": "Air India",
+        "totalSeats": 200,
+        "fromTime": "05:00 PM",
+        "toTime": "05:00 AM",
+        "duration": "14h"
+      },
+      "passengers": [
+        {
+          "firstName": "ccc",
+          "middleName": "cc",
+          "lastName": "cccc",
+          "dateOfBirth": "2024-12-30",
+          "gender": "male",
+          "nationality": "qcwd",
+          "postalCode": "A122312Q"
+        }
+      ],
+      "totalPrice": 800
+    },
+    {
+      "id": "3fdc",
+      "flight": {
+        "id": "FL005",
+        "from": "San Francisco",
+        "to": "Sydney",
+        "departureDate": "21-01-2025",
+        "price": 1200,
+        "airline": "Qatar Airways",
+        "totalSeats": 200,
+        "fromTime": "11:00 PM",
+        "toTime": "09:00 AM",
+        "duration": "16h"
+      },
+      "passengers": [
+        {
+          "uid": "oct1i8l",
+          "firstName": "erbsg",
+          "middleName": "",
+          "lastName": "zcv zc",
+          "dateOfBirth": "2025-01-08",
+          "gender": "male",
+          "nationality": "zdv zd",
+          "postalCode": "A1341134Q"
+        }
+      ],
+      "totalPrice": 1200,
+      "seats": [
+        "E3"
+      ],
+      "status": "booked"
+    },
+    {
+      "id": "5b21",
+      "flight": {
+        "id": "FL003",
+        "from": "Chicago",
+        "to": "Paris",
+        "departureDate": "22-01-2025",
+        "price": 450,
+        "airline": "Jet Airways",
+        "totalSeats": 200,
+        "fromTime": "09:00 AM",
+        "toTime": "11:00 PM",
+        "duration": "8h"
+      },
+      "passengers": [
+        {
+          "firstName": "ugv",
+          "middleName": "",
+          "lastName": "ubh ",
+          "dateOfBirth": "2025-01-02",
+          "gender": "male",
+          "nationality": "kgh ",
+          "postalCode": "A313433Q",
+          "uid": "760uhmc"
+        }
+      ],
+      "totalPrice": 450,
+      "seats": [
+        "F10"
+      ],
+      "status": "Cancelled"
+    },
+    {
+      "id": "9b02",
+      "flight": {
+        "id": "FL002",
+        "from": "Los Angeles",
+        "to": "Tokyo",
+        "departureDate": "22-01-2025",
+        "price": 600,
+        "airline": "Air India",
+        "totalSeats": 200,
+        "fromTime": "10:00 AM",
+        "toTime": "02:00 PM",
+        "duration": "14h"
+      },
+      "passengers": [
+        {
+          "firstName": "nf",
+          "middleName": "",
+          "lastName": "zdbg",
+          "dateOfBirth": "2025-01-15",
+          "gender": "male",
+          "nationality": "zdb",
+          "postalCode": "A234113Q"
+        }
+      ],
+      "totalPrice": 600
+    },
+    {
+      "id": "0900",
+      "flight": {
+        "id": "FL007",
+        "from": "Boston",
+        "to": "Amsterdam",
+        "departureDate": "27-01-2025",
+        "price": 400,
+        "airline": "Indigo",
+        "totalSeats": 200,
+        "fromTime": "05:00 AM",
+        "toTime": "01:00 PM",
+        "duration": "8h"
+      },
+      "passengers": [
+        {
+          "firstName": "aerha",
+          "middleName": "",
+          "lastName": "zdb",
+          "dateOfBirth": "2024-12-31",
+          "gender": "male",
+          "nationality": "Sbf",
+          "postalCode": "A124124Q"
+        }
+      ],
+      "totalPrice": 400
+    },
+    {
+      "id": "943e",
+      "flight": {
+        "id": "FL006",
+        "from": "Miami",
+        "to": "Toronto",
+        "departureDate": "24-01-2025",
+        "price": 300,
+        "airline": "Singapore Airlines",
+        "totalSeats": 200,
+        "fromTime": "03:00 PM",
+        "toTime": "06:00 PM",
+        "duration": "3h"
+      },
+      "passengers": [
+        {
+          "firstName": "AScAC",
+          "middleName": "",
+          "lastName": "sDv",
+          "dateOfBirth": "2025-01-06",
+          "gender": "male",
+          "nationality": "SDV",
+          "postalCode": "A121244Q"
+        }
+      ],
+      "totalPrice": 300
+    },
+    {
+      "id": "943e",
+      "flight": {
+        "id": "FL006",
+        "from": "Miami",
+        "to": "Toronto",
+        "departureDate": "24-01-2025",
+        "price": 300,
+        "airline": "Singapore Airlines",
+        "totalSeats": 200,
+        "fromTime": "03:00 PM",
+        "toTime": "06:00 PM",
+        "duration": "3h"
+      },
+      "passengers": [
+        {
+          "firstName": "AScAC",
+          "middleName": "",
+          "lastName": "sDv",
+          "dateOfBirth": "2025-01-06",
+          "gender": "male",
+          "nationality": "SDV",
+          "postalCode": "A121244Q",
+          "uid": "5xmtif2"
+        }
+      ],
+      "totalPrice": 300,
+      "seats": [
+        "F7"
+      ],
+      "status": "booked"
+    },
+    {
+      "id": "b3da",
+      "flight": {
+        "id": "FL003",
+        "from": "Chicago",
+        "to": "Paris",
+        "departureDate": "22-01-2025",
+        "price": 450,
+        "airline": "Jet Airways",
+        "totalSeats": 200,
+        "fromTime": "09:00 AM",
+        "toTime": "11:00 PM",
+        "duration": "8h"
+      },
+      "passengers": [
+        {
+          "firstName": "Rohit",
+          "middleName": "",
+          "lastName": "Rai",
+          "dateOfBirth": "2025-01-01",
+          "gender": "male",
+          "nationality": "waiguwif",
+          "postalCode": "A124124Q"
+        }
+      ],
+      "totalPrice": 450
+    },
+    {
+      "id": "5b21",
+      "flight": {
+        "id": "FL003",
+        "from": "Chicago",
+        "to": "Paris",
+        "departureDate": "22-01-2025",
+        "price": 450,
+        "airline": "Jet Airways",
+        "totalSeats": 200,
+        "fromTime": "09:00 AM",
+        "toTime": "11:00 PM",
+        "duration": "8h"
+      },
+      "passengers": [
+        {
+          "firstName": "ugv",
+          "middleName": "",
+          "lastName": "ubh ",
+          "dateOfBirth": "2025-01-02",
+          "gender": "male",
+          "nationality": "kgh ",
+          "postalCode": "A313433Q",
+          "uid": "760uhmc"
+        }
+      ],
+      "totalPrice": 450,
+      "seats": [
+        "F10"
+      ],
+      "status": "booked"
+    },
+    {
+      "id": "975b",
+      "flight": {
+        "id": "FL008",
+        "from": "Seattle",
+        "to": "Beijing",
+        "departureDate": "30-01-2025",
+        "price": 800,
+        "airline": "Air India",
+        "totalSeats": 200,
+        "fromTime": "06:00 PM",
+        "toTime": "10:00 AM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "Sana",
+          "middleName": "",
+          "lastName": "Rot",
+          "dateOfBirth": "2025-01-16",
+          "gender": "male",
+          "nationality": "z,mdv ",
+          "postalCode": "A123123Q",
+          "uid": "4kt5lyp"
+        }
+      ],
+      "totalPrice": 800,
+      "seats": [
+        "F10"
+      ],
+      "status": "Cancelled"
+    },
+    {
+      "id": "975b",
+      "flight": {
+        "id": "FL008",
+        "from": "Seattle",
+        "to": "Beijing",
+        "departureDate": "30-01-2025",
+        "price": 800,
+        "airline": "Air India",
+        "totalSeats": 200,
+        "fromTime": "06:00 PM",
+        "toTime": "10:00 AM",
+        "duration": "12h"
+      },
+      "passengers": [
+        {
+          "firstName": "Sana",
+          "middleName": "",
+          "lastName": "Rot",
+          "dateOfBirth": "2025-01-16",
+          "gender": "male",
+          "nationality": "z,mdv ",
+          "postalCode": "A123123Q",
+          "uid": "4kt5lyp"
+        }
+      ],
+      "totalPrice": 800,
+      "seats": [
+        "F10"
+      ],
+      "status": "booked"
     }
   ]
 }

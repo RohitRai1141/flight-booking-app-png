@@ -224,6 +224,3 @@ export class BookingComponent {
     this.notificationClass = type;
   }
 }
-
-
-
