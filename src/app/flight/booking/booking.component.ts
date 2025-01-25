@@ -3,6 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FlightService } from '../services/flight.service';
+import { RouterOutlet } from '@angular/router';
 
 interface Passenger {
   firstName: string;
@@ -27,7 +28,7 @@ interface ValidationError {
 @Component({
   selector: 'app-booking',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink,RouterOutlet],
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css'],
 })
@@ -159,7 +160,7 @@ export class BookingComponent {
       next: () => {
         this.showValidationMessage('Booking confirmed successfully!', 'success');
         // Navigate to /seat page, passing selectedFlight.id and numberOfPassengers as query params
-        this.router.navigate(['/seat', this.selectedFlight.id], {
+        this.router.navigate(['/flight/seat', this.selectedFlight.id], {
           queryParams: { passengers: this.numberOfPassengers }, // Pass number of passengers as query param
         });
       },

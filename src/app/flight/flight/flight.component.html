@@ -164,7 +164,8 @@
                 <td class="price">{{ flight.price | currency : "INR" }}</td>
                 <td>{{ flight.airline }}</td>
                 <td>
-                  <button class="btn btn-danger" id="book-now" [routerLink]="['/booking', flight.id]">BOOK Seat</button>              </td>
+                  <button class="btn btn-danger" id="book-now" [routerLink]="['/flight/booking', flight.id]">BOOK Seat</button>   
+               </td>
               </tr>
             </tbody>
           </table>
@@ -178,3 +179,4 @@
     </div>
     </div>
     </body>
+    <router-outlet></router-outlet>

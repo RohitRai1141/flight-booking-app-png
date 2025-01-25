@@ -6,20 +6,38 @@ import { FlightComponent } from './flight/flight/flight.component';
 import { BookingComponent } from './flight/booking/booking.component';
 import { SeatComponent } from './flight/seat/seat.component';
 import { HistoryComponent } from './flight/history/history.component';
+import { DemopageForFlightComponent } from './flight/demopage-for-flight/demopage-for-flight.component';
 
 export const routes: Routes = [
-  // Default route for displaying flights
-  { path: '', component: FlightComponent },
+  
+  { path: '', component: DemopageForFlightComponent }, 
+   
+   
+  {
+    path: 'flight',
+    children:
+    [
+        { path: 'flight', 
+          component: FlightComponent
+        },
 
-  // Route for booking, with dynamic parameter `id` for the selected flight
-  { path: 'booking/:id', component: BookingComponent },
+    
+        { path: 'booking/:id',
+          component: BookingComponent
+        },
 
-  // Route for seat selection
-  { path: 'seat/:id', component: SeatComponent },
+    
+        { path: 'seat/:id', 
+          component: SeatComponent
+        },
 
-  // Wildcard route for handling unknown routes (optional)
-  { path: 'history', component: HistoryComponent },
-];
+    
+        { path: 'history', 
+          component: HistoryComponent
+        }, 
+     ]
+   }
+ ]   
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

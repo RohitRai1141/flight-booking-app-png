@@ -34,6 +34,7 @@ export class FlightService {
   navigateToRoute(route: string): void {
     this.router.navigate([`/${route}`]);
   }
+  
 
   getFlights(): Observable<Flight[]> {
     return this.http.get<Flight[]>(this.apiUrl);

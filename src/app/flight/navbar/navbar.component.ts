@@ -23,6 +23,6 @@ export class NavbarComponent {
   navigateTo(route: string): void {
     this.menuActive = false;
     // Use the service to navigate to the route
-    this.flightService.navigateToRoute(route === 'flight' ? '' : route); // Redirect 'flight' to the default route
+    this.flightService.navigateToRoute(route === '/flight' ? '' : route); // Redirect 'flight' to the default route
   }
 }

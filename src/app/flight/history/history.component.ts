@@ -7,7 +7,7 @@ import { FlightService } from '../services/flight.service';
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule,RouterOutlet],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })

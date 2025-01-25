@@ -39,7 +39,7 @@
   
 
   <div class="actions">
-    <button [disabled]="selectedSeats.length !== numberOfPassengers" (click)="saveSeats()" routerLink="/history">
+    <button [disabled]="selectedSeats.length !== numberOfPassengers" (click)="saveSeats()">
       Confirm Selection
     </button>
   </div>
@@ -49,3 +49,4 @@
   </div>
 </div>
 </body>
+<router-outlet></router-outlet>

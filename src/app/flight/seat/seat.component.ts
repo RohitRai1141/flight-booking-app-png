@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FlightService } from '../services/flight.service';
 
 interface Seat {
@@ -38,7 +38,7 @@ interface BookingData {
 @Component({
   selector: 'app-seat',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink,RouterOutlet],
   templateUrl: './seat.component.html',
   styleUrls: ['./seat.component.css'],
 })
@@ -239,7 +239,7 @@ export class SeatComponent implements OnInit {
       next: () => {
         console.log('Complete booking data saved successfully.');
         this.showValidationMessage('Booking completed successfully!', 'success');
-        this.router.navigate(['/history']);
+        this.router.navigate(['/flight/history']);
       },
       error: (error) => {
         console.error('Error saving complete booking:', error);

@@ -6,11 +6,12 @@ import { BookingComponent } from './flight/booking/booking.component';
 import { SeatComponent } from "./flight/seat/seat.component";
 import { HistoryComponent } from "./flight/history/history.component";
 import { NavbarComponent } from './flight/navbar/navbar.component';
+import { DemopageForFlightComponent } from './flight/demopage-for-flight/demopage-for-flight.component';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FlightComponent, BookingComponent, SeatComponent, HistoryComponent, NavbarComponent],
+  imports: [RouterOutlet, FlightComponent, BookingComponent, SeatComponent, HistoryComponent, NavbarComponent,DemopageForFlightComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

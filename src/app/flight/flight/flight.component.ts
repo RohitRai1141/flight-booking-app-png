@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import FlightsJson from '../flights.json';
 import { BookingComponent } from '../booking/booking.component';
 import { Flight } from '../models/flight.interface';
@@ -22,7 +22,7 @@ interface Passenger {
 @Component({
   selector: 'app-flight',
   standalone: true,
-  imports: [CommonModule, FormsModule, BookingComponent, RouterLink],
+  imports: [CommonModule, FormsModule, BookingComponent, RouterLink,RouterOutlet],
   templateUrl: './flight.component.html',
   styleUrls: ['./flight.component.css'],
 })
