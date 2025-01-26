@@ -26,8 +26,8 @@ export interface SeatForBackend {
 })
 export class FlightService {
   private apiUrl = 'http://localhost:3000/flights';
-  private seatsApiUrl = 'http://localhost:3002/seats';
-  private userApiUrl = 'http://localhost:3001/users';
+  private seatsApiUrl = 'http://localhost:3000/seats';
+  private userApiUrl = 'http://localhost:3000/users';
 
   constructor(private http: HttpClient, private router: Router) {}
 

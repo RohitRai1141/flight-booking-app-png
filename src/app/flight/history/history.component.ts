@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FlightService } from '../services/flight.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-history',
   standalone: true,
-  imports: [CommonModule,RouterOutlet],
+  imports: [CommonModule,RouterOutlet,NavbarComponent],
   templateUrl: './history.component.html',
   styleUrl: './history.component.css'
 })
@@ -84,7 +85,7 @@ export class HistoryComponent implements OnInit {
               });
 
               this.http
-                .patch(`http://localhost:3002/seats/${flightSeats.id}`, {
+                .patch(`http://localhost:3000/seats/${flightSeats.id}`, {
                   seats: flightSeats.seats,
                 })
                 .subscribe(
@@ -92,7 +93,7 @@ export class HistoryComponent implements OnInit {
                     userToDisplay.status = 'Cancelled';
                     this.http
                       .put(
-                        `http://localhost:3001/users/${this.selectedUserId}`,
+                        `http://localhost:3000/users/${this.selectedUserId}`,
                         userToDisplay
                       )
                       .subscribe(

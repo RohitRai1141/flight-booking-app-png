@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { FlightService } from '../services/flight.service';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-admin-navbar',
   standalone: true,
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  templateUrl: './admin-navbar.component.html',
+  styleUrl: './admin-navbar.component.css',
 })
-export class NavbarComponent {
+export class AdminNavbarComponent {
   menuActive: boolean = false;
 
   constructor(private flightService: FlightService) {}

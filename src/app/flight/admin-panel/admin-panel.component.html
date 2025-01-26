@@ -1,0 +1,110 @@
+<div class="background">
+<div class="admin-container">
+  <h1>Admin Panel - Flight Management</h1>
+
+  <!-- Action Buttons: Add, Edit, Delete -->
+  <button (click)="showAddFlightForm = true; showDeleteFlightForm = false; showEditFlightForm = false; resetNewFlightForm()">
+    Add Flight
+  </button>
+
+  <button (click)="showAddFlightForm = false; showDeleteFlightForm = true; showEditFlightForm = false; resetDeleteForm()">
+    Delete Flight
+  </button>
+
+  <button (click)="showAddFlightForm = false; showDeleteFlightForm = false; showEditFlightForm = true; resetEditForm()">
+    Edit Flight
+  </button>
+
+  <!-- Add Flight Form -->
+  <div *ngIf="showAddFlightForm" class="add-flight-form">
+    <h3>Add Flight</h3>
+    <form (ngSubmit)="saveFlight()" #flightForm="ngForm">
+      <input [(ngModel)]="newFlight.id" placeholder="Flight ID" name="id" required />
+      <input [(ngModel)]="newFlight.from" placeholder="From" name="from" required />
+      <input [(ngModel)]="newFlight.to" placeholder="To" name="to" required />
+      <input [(ngModel)]="newFlight.departureDate" placeholder="Departure Date" type="date" name="departureDate" required />
+      <input [(ngModel)]="newFlight.price" placeholder="Price" type="number" name="price" required />
+      <input [(ngModel)]="newFlight.airline" placeholder="Airline" name="airline" required />
+      <input [(ngModel)]="newFlight.totalSeats" placeholder="Total Seats" type="number" name="totalSeats" required />
+      <input [(ngModel)]="newFlight.fromTime" placeholder="From Time" type="time" name="fromTime" required />
+      <input [(ngModel)]="newFlight.toTime" placeholder="To Time" type="time" name="toTime" required />
+      <input [(ngModel)]="newFlight.duration" placeholder="Duration" type="text" name="duration" required />
+      <button type="submit" [disabled]="!flightForm.form.valid">Save Flight</button>
+    </form>
+  </div>
+
+  <!-- Delete Flight Form -->
+  <div *ngIf="showDeleteFlightForm" class="delete-flight-form">
+    <h3>Delete Flight</h3>
+    <form (ngSubmit)="deleteFlightById()" #deleteForm="ngForm">
+      <input [(ngModel)]="deleteFlightId" placeholder="Enter Flight ID to delete" name="id" required />
+      <button type="submit" [disabled]="!deleteForm.form.valid">Delete Flight</button>
+    </form>
+  </div>
+
+  <!-- Edit Flight Form -->
+  <div *ngIf="showEditFlightForm" class="edit-flight-form">
+    <h3>Edit Flight</h3>
+    <form (ngSubmit)="saveFlight()" #editFlightForm="ngForm">
+      <input [(ngModel)]="newFlight.id" placeholder="Flight ID" name="id" required (blur)="onFlightIdBlur()" />
+      <input [(ngModel)]="newFlight.from" placeholder="From" name="from" required />
+      <input [(ngModel)]="newFlight.to" placeholder="To" name="to" required />
+      <input [(ngModel)]="newFlight.departureDate" placeholder="Departure Date" type="date" name="departureDate" required />
+      <input [(ngModel)]="newFlight.price" placeholder="Price" type="number" name="price" required />
+      <input [(ngModel)]="newFlight.airline" placeholder="Airline" name="airline" required />
+      <input [(ngModel)]="newFlight.totalSeats" placeholder="Total Seats" type="number" name="totalSeats" required />
+      <input [(ngModel)]="newFlight.fromTime" placeholder="From Time" type="time" name="fromTime" required />
+      <input [(ngModel)]="newFlight.toTime" placeholder="To Time" type="time" name="toTime" required />
+      <input [(ngModel)]="newFlight.duration" placeholder="Duration" type="text" name="duration" required />
+      <button type="submit" [disabled]="!editFlightForm.form.valid">Update Flight</button>
+    </form>
+  </div>
+
+  <hr />
+
+  <!-- Flights Table -->
+  <div *ngIf="filteredFlights.length > 0; else noFlights">
+    <h3>Available Flights</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>From</th>
+          <th>To</th>
+          <th>Departure Date</th>
+          <th>Price</th>
+          <th>Airline</th>
+          <th>Total Seats</th>
+          <th>From Time</th>
+          <th>To Time</th>
+          <th>Duration</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let flight of filteredFlights">
+          <td>{{ flight.id }}</td>
+          <td>{{ flight.from }}</td>
+          <td>{{ flight.to }}</td>
+          <td>{{ flight.departureDate }}</td>
+          <td>{{ flight.price }}</td>
+          <td>{{ flight.airline }}</td>
+          <td>{{ flight.totalSeats }}</td>
+          <td>{{ flight.fromTime }}</td>
+          <td>{{ flight.toTime }}</td>
+          <td>{{ flight.duration }}</td>
+          <td>
+            <button (click)="editFlight(flight)">Edit</button>
+            <button (click)="deleteFlightById()">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noFlights>
+    
+  </ng-template>
+</div>
+</div>
+<app-admin-navbar></app-admin-navbar>

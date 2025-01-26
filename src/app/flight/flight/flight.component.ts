@@ -3,10 +3,10 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import FlightsJson from '../flights.json';
+import FlightsJson from '../../../../db.json';
 import { BookingComponent } from '../booking/booking.component';
 import { Flight } from '../models/flight.interface';
-
+import { NavbarComponent } from '../navbar/navbar.component';
 
 interface Passenger {
   firstName: string;
@@ -22,7 +22,7 @@ interface Passenger {
 @Component({
   selector: 'app-flight',
   standalone: true,
-  imports: [CommonModule, FormsModule, BookingComponent, RouterLink,RouterOutlet],
+  imports: [CommonModule, FormsModule, BookingComponent, RouterLink,RouterOutlet,NavbarComponent],
   templateUrl: './flight.component.html',
   styleUrls: ['./flight.component.css'],
 })

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   imports:[FormsModule],
+  standalone: true,
   selector: 'app-demopage-for-flight',
   templateUrl: './demopage-for-flight.component.html',
   styleUrls: ['./demopage-for-flight.component.css']
@@ -16,13 +17,10 @@ export class DemopageForFlightComponent {
   onLogin(): void {
     switch (this.selectedRole) {
       case 'end-user':
-        this.router.navigate(['/flight/flight']);
+        this.router.navigate(['/flight']);
         break;
       case 'admin':
-        this.router.navigate(['/flight/history']);
-        break;
-      case 'super-admin':
-        this.router.navigate(['flight/flight']);
+        this.router.navigate(['/admin/panel']);
         break;
       default:
         console.error('Invalid role selected');

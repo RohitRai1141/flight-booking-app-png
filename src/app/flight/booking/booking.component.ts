@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FlightService } from '../services/flight.service';
 import { RouterOutlet } from '@angular/router';
-
+import { NavbarComponent } from '../navbar/navbar.component';
 interface Passenger {
   firstName: string;
   middleName: string;
@@ -28,7 +28,7 @@ interface ValidationError {
 @Component({
   selector: 'app-booking',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink,RouterOutlet],
+  imports: [CommonModule, FormsModule, RouterLink,RouterOutlet,NavbarComponent],
   templateUrl: './booking.component.html',
   styleUrls: ['./booking.component.css'],
 })
