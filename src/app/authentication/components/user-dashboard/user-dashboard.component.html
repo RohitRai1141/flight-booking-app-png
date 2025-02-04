@@ -1,0 +1,60 @@
+<div class="bookings-container">
+  <h2>My Bookings 📅</h2>
+
+  <!-- Table to display bookings -->
+  <table>
+    <thead>
+      <tr>
+        <th>Booking ID</th>
+        <th>Service</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booking of bookings">
+        <td>{{ booking.id }}</td>
+        <td>{{ booking.service }}</td>
+        <td>{{ booking.date }}</td>
+        <td>{{ booking.status }}</td>
+        <td>
+          <button class="view-btn" (click)="viewBooking(booking.id)">
+            <fa-icon [icon]="faEye"></fa-icon> View
+          </button>
+          <button class="update-btn" (click)="updateBooking(booking.id)">
+            <fa-icon [icon]="faEdit"></fa-icon> Update
+          </button>
+          <button class="cancel-btn" (click)="cancelBooking(booking.id)">
+            <fa-icon [icon]="faTrash"></fa-icon> Cancel
+          </button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Payment History Section -->
+<div *ngIf="currentSection === 'payments'" class="payments-container">
+  <h2>Payment History 💳</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Payment ID</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Service</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let payment of payments">
+        <td>{{ payment.id }}</td>
+        <td>₹{{ payment.amount }}</td>
+        <td>{{ payment.date }}</td>
+        <td>{{ payment.status }}</td>
+        <td>{{ payment.service }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

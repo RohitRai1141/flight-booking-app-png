@@ -1,0 +1,252 @@
+/* General Container Styling */
+.background {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background-image: url("https://media.istockphoto.com/id/1367756031/vector/light-blue-watercolor-background-illustration.jpg?s=612x612&w=0&k=20&c=qiJl7j-2terwHd-1YJxiFIo1VJx6l6IsmoqlgeypQ7c=");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  color: #333;
+  box-sizing: border-box;
+  transition: all 0.5s ease;
+  animation: fadeInBackground 2s ease-out;
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: block; /* Use block instead of flex */
+}
+
+.admin-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #e3f2fd; /* Light blue background */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #1976d2; /* Deep blue */
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+/* Action Buttons */
+button {
+  padding: 10px 20px;
+  margin: 10px 10px;
+  font-size: 1rem;
+  background-color: #2196f3; /* Blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #1976d2; /* Darker blue */
+}
+.add-flight-btn {
+    width: 500px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #1976d2; /* Darker blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-flight-btn:hover {
+    color: #1976d2; /* Deep blue */
+  }
+  
+  .add-flight-btn:active {
+    color: #1976d2; /* Deep blue */
+    transform: scale(0.98); /* Slight button press effect */
+  }
+  
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .delete-modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .action-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .confirm-btn {
+    color: #1976d2; /* Deep blue */
+    color: white;
+  }
+  
+  .cancel-btn {
+    color: #1976d2; /* Deep blue */
+    color: white;
+  }
+  
+  
+/* Form Section */
+.add-flight-form {
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 30px; /* Reduced border radius for a wider appearance */
+    margin-bottom: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Adjusted width for a wider box */
+    max-width: 1000px; /* Restrict maximum width for large screens */
+    margin: 20px auto; /* Center the form horizontally */
+  }
+  
+
+h3 {
+  color: #1976d2; /* Deep blue */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Form Fields */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #2196f3; /* Blue focus */
+  outline: none;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  width: 100%;
+  background-color: #2196f3; /* Blue */
+  color: white;
+  font-size: 1.2rem;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #1976d2; /* Darker blue */
+}
+
+/* Flights Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  font-size: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #2196f3; /* Blue */
+  color: white;
+}
+
+tr:hover {
+  background-color: #e3f2fd; /* Light blue hover */
+}
+
+td button {
+  padding: 5px 10px;
+  font-size: 1rem;
+  background-color: #42a5f5; /* Darker red */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+td button:hover {
+  background-color: #42a5f5; /* Darker red */
+}
+
+td button:first-of-type {
+  background-color: #42a5f5; /* Lighter blue for edit */
+}
+
+td button:first-of-type:hover {
+  background-color: #1e88e5; /* Darker blue for edit */
+}
+
+/* No Flights Section */
+.ng-template p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 10px;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+
+  input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+}

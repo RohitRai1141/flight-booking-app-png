@@ -1,0 +1,440 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0; 
+  background-color: #e3f2fd; 
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  gap: 10px;
+}
+
+/* Driver Section */
+.driver-section {
+  flex: 1;
+  background-color: #bbdefb;  
+  padding: 20px;
+  border-right: 2px solid #90caf9; 
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 90%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #90caf9;
+  font-size: 16px;
+}
+
+.driver-list {
+  overflow-y: auto;
+  height: calc(100% - 60px);
+}
+ 
+.driver-card span.available {
+  color: #4caf50;  
+  font-weight: bold;
+}
+
+.driver-card span.unavailable {
+  color: #f44336;  
+  font-weight: bold;
+}
+ 
+.driver-card {
+  background: #e3f2fd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid #bbdefb;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.driver-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.driver-card.selected {
+  border: 2px solid #1976d2;
+  background: #bbdefb;
+}
+
+.driver-card {
+  background-color: #e3f2fd; 
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.driver-card:hover {
+  background-color: #bbdefb;
+  transform: scale(1.02);
+}
+
+.driver-card.selected {
+  background-color: #64b5f6;
+  color: white;
+}
+
+/* Chat Section */
+.chat-section {
+  flex: 2;
+  background-color: #e3f2fd;  
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.chat-section h2 {
+  margin-bottom: 20px;
+  color: #1976d2;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  background: #f5f5f5;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.message.admin p {
+  text-align: right;
+  background-color: #64b5f6;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  max-width: 70%;
+}
+
+.message.driver p {
+  text-align: left;
+  background-color: #e3f2fd;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+  max-width: 70%;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: gray;
+  display: block;
+  margin-top: 5px;
+}
+
+.quick-messages {
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quick-messages button {
+  background-color: #64b5f6;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.quick-messages button:hover {
+  background-color: #42a5f5;
+}
+
+/* Message Input Section */
+.message-input {
+  display: flex;
+  gap: 10px;
+}
+
+.message-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #90caf9;
+  font-size: 16px;
+}
+
+.message-input button {
+  padding: 10px 20px;
+  background-color: #64b5f6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.message-input button:hover {
+  background-color: #42a5f5;
+}
+
+.emoji-picker {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.emoji-picker span {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.no-driver {
+  text-align: center;
+  margin-top: 50px;
+  color: #103553;
+  font-size: 18px;
+}
+
+/* Filters Section */
+.filters { 
+  margin-bottom: 20px;
+}
+
+.filters input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  width: calc(100% - 20px);
+}
+
+.availability-filters {
+  display: flex;
+  gap: 10px;
+}
+
+.availability-filters button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.availability-filters button.active {
+  background-color: #0288d1; 
+  color: white;
+}
+.availability-filters button:hover {
+  background-color: #42a5f5;
+}
+
+ 
+
+/* FAB Menu */
+
+.fixed {
+  position: fixed;
+}
+
+.bottom-5 {
+  bottom: 1.25rem;  
+}
+
+.right-5 {
+  right: 1.25rem;  
+}
+
+.z-50 {
+  z-index: 50; 
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.space-y-reverse {
+  --tw-space-y-reverse: 1;
+}
+
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: calc(1rem * var(--tw-space-y-reverse));
+  margin-bottom: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+}
+
+.mb-4 {
+  margin-bottom: 1rem;  
+}
+
+.transition-all {
+  transition-property: all;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.translate-y-10 {
+  transform: translateY(2.5rem);  
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.opacity-100 {
+  opacity: 1;
+}
+
+.translate-y-0 {
+  transform: translateY(0);
+}
+
+.w-12 {
+  width: 3rem;  
+}
+
+.h-12 {
+  height: 3rem;  
+}
+
+.bg-white {
+  background-color: #c0d1e4;
+}
+
+.text-teal-600 {
+  color: #319795;  
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.shadow-md {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-teal-600 {
+  border-color: #003366;  
+}
+
+.hover\:bg-teal-600:hover {
+  background-color:  #003366;;
+}
+
+.hover\:text-white:hover {
+  color: white;
+}
+
+.transition-colors {
+  transition-property: color, background-color;
+}
+
+.w-16 {
+  width: 4rem;  
+}
+
+.h-16 {
+  height: 4rem; 
+}
+
+.bg-teal-600 {
+  background-color:  #113b64;;
+}
+
+.text-white {
+  color: white;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.text-3xl {
+  font-size: 1.875rem;  
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1);  
+}
+
+.transition-transform {
+  transition-property: transform;
+}
+.text-emoji {
+  font-size: 1.5rem;  
+  line-height: 1;
+}
+
+ 
+.admin-heading {
+  font-size: 28px;  
+  font-weight: bold;  
+  text-align: center;  
+  color: #004d40;  
+  margin-bottom: 20px; 
+  padding: 10px;  
+  border-bottom: 2px solid #009688;  
+  background-color: #e0f2f1;  
+  border-radius: 8px;  
+}
+
+.driver-status {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.driver-status span {
+  font-weight: bold;
+}
+
+.driver-status .available {
+  color: green;  
+}
+
+.driver-status .unavailable {
+  color: red;  
+}

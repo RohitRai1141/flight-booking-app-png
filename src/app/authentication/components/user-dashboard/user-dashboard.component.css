@@ -1,0 +1,114 @@
+/* General Styling */
+.bookings-container,
+.payments-container {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Section Headings */
+.bookings-container h2,
+.payments-container h2 {
+    text-align: center;
+    color: #1565c0;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: linear-gradient(135deg, #1565c0, #1e88e5);
+    color: white;
+    border-radius: 8px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+thead {
+    background: linear-gradient(135deg, #1e88e5, #64b5f6);
+    color: white;
+    font-size: 18px;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+tbody tr:hover {
+    background: #e3f2fd;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Buttons */
+button {
+    border: none;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 4px 2px;
+}
+
+/* View Button */
+button.view-btn {
+    background: #2e7d32;
+    color: white;
+    box-shadow: 0 2px 8px rgba(46, 125, 50, 0.4);
+}
+
+button.view-btn:hover {
+    background: #1b5e20;
+}
+
+/* Update Button */
+button.update-btn {
+    background: #ffb300;
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 179, 0, 0.5);
+}
+
+button.update-btn:hover {
+    background: #ff8f00;
+}
+
+/* Cancel Button */
+button.cancel-btn {
+    background: #d32f2f;
+    color: white;
+    box-shadow: 0 2px 8px rgba(211, 47, 47, 0.4);
+}
+
+button.cancel-btn:hover {
+    background: #b71c1c;
+}
+
+/* Payment History Section */
+.payments-container {
+    background: linear-gradient(135deg, #fbe9e7, #ffccbc);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.payments-container h2 {
+    background: linear-gradient(135deg, #d84315, #ff7043);
+}

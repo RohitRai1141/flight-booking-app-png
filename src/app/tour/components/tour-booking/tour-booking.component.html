@@ -1,0 +1,398 @@
+<div
+  class="book-package-container bg-gray-100 min-h-screen flex items-center justify-center bg-gradient-to-r from-teal-300 to-indigo-300"
+>
+  <!-- Header -->
+  <!-- <div class="header text-white text-center py-6 ">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold">PlanNGo-Hub</h1>
+    <p class="text-base sm:text-lg md:text-xl mt-2">Explore the world</p>
+  </div> -->
+
+  <!-- Form Container -->
+  <div
+    class="bg-white shadow-md rounded-lg p-6 sm:p-8 w-full sm:max-w-xl md:max-w-3xl flex flex-col"
+  >
+    <h1
+      class="text-xl sm:text-xl md:text-3xl font-semibold text-center text-blue-600"
+    >
+      Reserve Your Package
+    </h1>
+    <h2 class="text-2xl sm:text-3xl font-bold text-center text-red-600">
+      {{ packages.Name }}
+    </h2>
+    <h3 class="text-sm sm:text-base md:text-lg text-center text-gray-500 mt-2">
+      Experience Something New Every Moment
+    </h3>
+
+    <form
+      [formGroup]="bookingForm"
+      (ngSubmit)="onSubmit()"
+      class="mt-6 space-y-4"
+    >
+      <!-- Guests and Rooms -->
+      <div class="form-group">
+        <label for="guestsAndRooms" class="block text-teal-600 font-medium">
+          Guests & Rooms
+        </label>
+        <button
+          type="button"
+          id="guestsAndRoomsBtn"
+          (click)="toggleDropdown()"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 text-left focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+        >
+          {{ guestsAndRoomsSummary }}
+        </button>
+
+        <div
+          *ngIf="dropdownVisible"
+          id="dropdownMenu"
+          class="dropdown-menu mt-2 bg-white shadow-lg rounded-md p-4 space-y-4"
+        >
+          <div class="flex flex-col sm:flex-row md:space-x-6">
+            <!-- Adults Field -->
+            <div class="flex-1">
+              <label for="adults" class="block text-teal-600 font-medium"
+                >Adults</label
+              >
+              <input
+                type="number"
+                formControlName="adults"
+                id="adults"
+                min="1"
+                max="10"
+                class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                (change)="calculatePrice()"
+              />
+            </div>
+
+            <!-- Children Field -->
+            <div class="flex-1">
+              <label for="children" class="block text-teal-600 font-medium"
+                >Children</label
+              >
+              <input
+                type="number"
+                formControlName="children"
+                id="children"
+                min="0"
+                max="5"
+                class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                (change)="calculatePrice()"
+              />
+            </div>
+
+            <!-- Rooms Field -->
+            <div class="flex-1">
+              <label for="rooms" class="block text-teal-600 font-medium"
+                >Rooms</label
+              >
+              <input
+                type="number"
+                formControlName="rooms"
+                id="rooms"
+                min="1"
+                max="5"
+                class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+                (change)="calculatePrice()"
+              />
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              (click)="done()"
+              class="w-full bg-teal-600 text-white rounded-md py-2 mt-4 hover:bg-teal-700"
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Arrival and Departure Dates -->
+      <div class="form-group">
+        <label for="departureDate" class="block text-teal-600 font-medium">
+          Departure Date & Time *
+        </label>
+        <input
+          formControlName="departureDate"
+          id="departureDate"
+          type="datetime-local"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+          (change)="setArrivalDateLimit()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="arrivalDateTime" class="block text-teal-600 font-medium">
+          Arrival Date *
+        </label>
+        <input
+          formControlName="arrivalDate"
+          id="arrivalDateTime"
+          type="datetime-local"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+          (change)="calculatePrice()"
+        />
+      </div>
+
+      <!-- Free Pickup -->
+      <div class="form-group">
+        <label class="block text-teal-600 font-medium">Free Pickup? *</label>
+        <div class="flex items-center space-x-4 mt-2">
+          <div class="flex items-center space-x-2">
+            <input
+              type="radio"
+              formControlName="freePickup"
+              value="yes"
+              id="pickupYes"
+              class="hidden peer"
+            />
+            <label
+              for="pickupYes"
+              class="cursor-pointer bg-teal-100 py-2 px-4 rounded-md border peer-checked:bg-teal-500 peer-checked:text-white"
+            >
+              Yes, Please!
+            </label>
+          </div>
+          <div class="flex items-center space-x-2">
+            <input
+              type="radio"
+              formControlName="freePickup"
+              value="no"
+              id="pickupNo"
+              class="hidden peer"
+            />
+            <label
+              for="pickupNo"
+              class="cursor-pointer bg-teal-600 py-2 px-4 rounded-md border peer-checked:bg-teal-500 peer-checked:text-white"
+            >
+              No Thanks
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Amount -->
+      <div class="form-group">
+        <label for="amount" class="block text-teal-600 font-medium">
+          Amount Payable
+        </label>
+        <input
+          formControlName="amount"
+          id="amount"
+          type="text"
+          readonly
+          placeholder="INR 0000.00"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 bg-gray-100"
+        />
+      </div>
+
+      <!-- Special Request -->
+      <div class="form-group">
+        <label for="specialRequest" class="block text-teal-600 font-medium">
+          Special Request
+        </label>
+        <textarea
+          formControlName="specialRequest"
+          id="specialRequest"
+          placeholder="Type your message here"
+          class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent"
+        ></textarea>
+      </div>
+
+      <!-- Submit Buttons -->
+      <div class="flex justify-between items-center mt-6 space-x-4">
+        <button
+          type="button"
+          (click)="onPrevious()"
+          class="w-full bg-gray-300 text-teal-600 rounded-md px-6 py-2 hover:bg-gray-400"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          [disabled]="bookingForm.invalid"
+          class="w-full bg-teal-600 text-white rounded-md px-6 py-2 hover:bg-teal-700 disabled:bg-gray-300"
+        >
+          Pay Now
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Payment -->
+  <div
+    *ngIf="showPaymentModal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
+      <!-- Close Button -->
+      <button
+        class="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+        (click)="closePaymentModal()"
+      >
+        X
+      </button>
+
+      <!-- Payment Component -->
+      <form [formGroup]="paymentForm" (ngSubmit)="onSubmitPayment()" class="p-8">
+        <div class="mb-4">
+          <h2 class="text-xl sm:text-xl md:text-3xl font-semibold text-center text-blue-600">Complete Payment</h2>
+        </div>
+        
+        <!-- Name on Card -->
+        <div class="mb-4">
+          <input
+            type="text"
+            formControlName="nameOnCard"
+            placeholder="Account Holder Name"
+            class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          />
+          <div *ngIf="paymentForm.get('nameOnCard')?.touched && paymentForm.get('nameOnCard')?.invalid">
+            <small class="text-red-500">Please enter a valid name.</small>
+          </div>
+        </div>
+      
+        <!-- Card Number -->
+        <div class="mb-4">
+          <input
+            type="text"
+            formControlName="cardNumber"
+            placeholder="Card Number"
+            class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          />
+          <div *ngIf="paymentForm.get('cardNumber')?.touched && paymentForm.get('cardNumber')?.invalid">
+            <small class="text-red-500">Please enter a valid card number.</small>
+          </div>
+        </div>
+      
+        <!-- Exp Date and CVV -->
+        <div class="flex flex-col sm:flex-row sm:space-x-4 mb-4">
+          <div class="flex-1">
+            <input
+              type="text"
+              formControlName="expDate"
+              placeholder="MM/YY"
+              class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+            />
+            <div *ngIf="paymentForm.get('expDate')?.touched && paymentForm.get('expDate')?.invalid">
+              <small class="text-red-500">Please enter a valid expiration date.</small>
+            </div>
+          </div>
+          <div class="flex-1">
+            <input
+              type="text"
+              formControlName="cvv"
+              placeholder="CVV"
+              class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+            />
+            <div *ngIf="paymentForm.get('cvv')?.touched && paymentForm.get('cvv')?.invalid">
+              <small class="text-red-500">Please enter a valid CVV.</small>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button
+            type="submit"
+            class="w-full bg-teal-600 text-white font-semibold rounded-md px-6 py-2 hover:bg-teal-700 transition-colors"
+            [disabled]="paymentForm.invalid"
+          >
+            PAY
+          </button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="inline-block rounded-full text-white" role="status">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="w-8 h-8 text-white animate-spin"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          stroke-width="4"
+          class="opacity-25"
+        ></circle>
+        <path
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          class="opacity-75"
+        ></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Booking Form -->
+  <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+    <!-- form content -->
+  </form>
+
+  <!-- Success Popup -->
+  <div
+    *ngIf="showSuccessPopup"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-sm p-6 text-center">
+      <h3 class="text-xl font-semibold text-teal-600">{{ successHeader }}</h3>
+      <p class="mt-2 text-gray-600">{{ successMessage }}</p>
+      <button
+        (click)="closeSuccessPopup()"
+        class="mt-4 bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <div class="fixed bottom-5 right-5 z-50 flex flex-col items-center">
+    <!-- FAB Menu -->
+    <ul
+      class="flex-col-reverse items-center space-y-reverse space-y-4 mb-4 transition-all duration-300"
+      [ngClass]="{
+        'opacity-0 translate-y-10 pointer-events-none': !isFabMenuOpen,
+        'opacity-100 translate-y-0': isFabMenuOpen
+      }"
+    >
+      <li class="mb-3">
+        <a
+          href="/tours/home"
+          class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+          title="Home"
+        >
+          🏠
+        </a>
+      </li>
+      <li class="mb-3">
+        <a
+          href="/tours/my-bookings"
+          class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+          title="My Bookings"
+        >
+          ℹ️
+        </a>
+      </li>
+    </ul>
+
+    <!-- Floating Action Button -->
+    <button
+      class="w-16 h-16 bg-teal-600 text-white rounded-full shadow-lg flex justify-center items-center text-3xl hover:scale-110 transition-transform"
+      (click)="toggleFabMenu()"
+    >
+      +
+    </button>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+/* Modal Animations (optional) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.modal-enter {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  
+  .modal-enter-active {
+    transform: scale(1);
+    opacity: 1;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  
+  .modal-exit {
+    transform: scale(1);
+    opacity: 1;
+  }
+  
+  .modal-exit-active {
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  

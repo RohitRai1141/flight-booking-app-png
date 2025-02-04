@@ -1,0 +1,275 @@
+<div class="booking-page">
+    <div class="booking-content">
+
+        <!-- booking form -->
+        <div class="form-container">
+            <!-- Booking Form -->
+            <h1>Book Your Stay</h1>
+        
+            <form #bookingForm="ngForm" (ngSubmit)="onSubmit(bookingForm)" novalidate>
+                <!-- Guest Details -->
+                <h3>Guest Details</h3>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    [(ngModel)]="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                    #nameInput="ngModel"
+                  />
+                  <div *ngIf="nameInput.invalid && nameInput.touched" class="error">
+                    Name is required.
+                  </div>
+                </div>
+              
+                <div class="form-group form-row">
+                  <!-- Age Input -->
+                  <div class="form-item">
+                    <label for="age">Age</label>
+                    <input
+                      type="number"
+                      id="age"
+                      [(ngModel)]="age"
+                      name="age"
+                      placeholder="Enter your age"
+                      required
+                      min="1"
+                      max="150"
+                      #ageInput="ngModel"
+                    />
+                    <div *ngIf="ageInput.invalid && ageInput.touched" class="error">
+                      <div *ngIf="ageInput.errors?.['required']">Age is required.</div>
+                      <div *ngIf="ageInput.errors?.['min'] || ageInput.errors?.['max']">
+                        Age must be between 1 and 150.
+                      </div>
+                    </div>
+                  </div>
+                
+                  <!-- Gender Dropdown -->
+                  <div class="form-item">
+                    <label for="gender">Gender</label>
+                    <select
+                      id="gender"
+                      [(ngModel)]="gender"
+                      name="gender"
+                      required
+                      #genderInput="ngModel"
+                    >
+                      <option value="" disabled selected>Select Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <div *ngIf="genderInput.invalid && genderInput.touched" class="error">
+                      Gender is required.
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    [(ngModel)]="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                    email
+                    #emailInput="ngModel"
+                  />
+                  <div *ngIf="emailInput.invalid && emailInput.touched" class="error">
+                    <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+                    <div *ngIf="emailInput.errors?.['email']">Please enter a valid email address.</div>
+                  </div>
+                </div>
+              
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    [(ngModel)]="phone"
+                    name="phone"
+                    placeholder="Enter your phone number"
+                    required
+                    pattern="^[0-9]*$" 
+                    maxlength="10"
+                    minlength="10"
+                    #phoneInput="ngModel"
+                   />
+                  <div *ngIf="phoneInput.invalid && phoneInput.touched" class="error">
+                    <div *ngIf="phoneInput.errors?.['required']">Phone number is required.</div>
+                    <div *ngIf="phoneInput.errors?.['pattern']">Only numbers are allowed.</div>
+                    <div *ngIf="phoneInput.errors?.['maxlength']">Phone number must be 10 digits.</div>
+                    <div *ngIf="phoneInput.errors?.['minlength']">Phone number must be 10 digits.</div>
+                  </div>
+                </div>
+                
+              
+                <h3>Other Guests</h3>
+                <div *ngFor="let guest of otherGuests; let i = index" class="form-group">
+                  <!-- Guest Name Row -->
+                  <div class="form-row">
+                    <div class="form-item">
+                      <label>Guest {{ i + 1 }} Name</label>
+                      <input
+                        type="text"
+                        [(ngModel)]="guest.name"
+                        [name]="'guestName' + i"
+                        placeholder="Enter name"
+                        required
+                        #guestNameInput="ngModel"
+                      />
+                      <div *ngIf="guestNameInput.invalid && guestNameInput.touched" class="error">
+                        Guest name is required.
+                      </div>
+                    </div>
+                  </div>
+
+                      <!-- Guest Age and Gender Row -->
+                      <div class="form-row">
+                        <!-- Guest Age -->
+                        <div class="form-item">
+                          <label>Guest {{ i + 1 }} Age</label>
+                          <input
+                            type="number"
+                            [(ngModel)]="guest.age"
+                            [name]="'guestAge' + i"
+                            placeholder="Enter age"
+                            required
+                            min="1"
+                            max="150"
+                            #guestAgeInput="ngModel"
+                          />
+                          <div *ngIf="guestAgeInput.invalid && guestAgeInput.touched" class="error">
+                            <div *ngIf="guestAgeInput.errors?.['required']">Age is required.</div>
+                            <div *ngIf="guestAgeInput.errors?.['min'] || guestAgeInput.errors?.['max']">
+                              Age must be between 1 and 150.
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Guest Gender -->
+                        <div class="form-item">
+                          <label>Guest {{ i + 1 }} Gender</label>
+                          <select
+                            [(ngModel)]="guest.gender"
+                            [name]="'guestGender' + i"
+                            required
+                            #guestGenderInput="ngModel"
+                          >
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                          </select>
+                          <div *ngIf="guestGenderInput.invalid && guestGenderInput.touched" class="error">
+                            Gender is required.
+                          </div>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="form-actions">
+                  <button
+                    type="submit"
+                    class="btn btn-primary confirm-btn"
+                    [disabled]="bookingForm.invalid"
+                  >
+                    Confirm Booking <fa-icon [icon]="faCheckCircle"></fa-icon>
+                  </button>
+                </div>
+          </form>    
+        </div>
+
+        <!-- Right side content (Hotel details and Price Breakdown) -->
+        <div class="right-content">
+        
+            <!-- Hotel and Room Info -->
+            <div class="room-info">
+            <div class="room-details">
+                <img [src]="hotel.images[0]" alt="Hotel Image" class="hotel-image">
+                <div class="room-content">
+                    <h2 class="hotel-name">{{ hotel.name }}</h2>
+                    <p class="room-type">{{ room.type }}</p>
+                    <div class="amenities">
+                        <strong>Amenities</strong>
+                        <ul class="amenities-list">
+                            <li *ngFor="let amenity of hotel.amenities">{{ amenity }}</li>
+                        </ul>
+                    </div>
+                    <div class="date-info">
+                      <div class="price-row">
+                        <span class="label"><strong>Check-in</strong></span>
+                        <span class="value">{{ checkIn.toLocaleDateString() }}</span>
+                      </div>
+                      <div class="price-row">
+                        <span class="label"><strong>Check-out</strong></span>
+                        <span class="value">{{ checkOut.toLocaleDateString() }}</span>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="price-details">
+              <h3>Total Price Breakdown</h3>
+              <div class="price-row">
+                  <span class="label"><strong>Room Price</strong></span>
+                  <span class="value">₹{{ room.price }}</span>
+              </div>
+              <div class="price-row">
+                  <span class="label"><strong>Number of Nights</strong></span>
+                  <span class="value">{{ stayDuration }}</span>
+              </div>
+              <div class="price-row">
+                  <span class="label"><strong>No of Rooms</strong></span>
+                  <span class="value">{{ noOfRooms }}</span>
+              </div>
+              <div class="price-row">
+                  <span class="label"><strong>Total Price</strong></span>
+                  <span class="value">₹{{ totalPrice }}</span>
+              </div>
+              <div class="price-row">
+                  <span class="label"><strong>Offer Applied</strong></span>
+                  <span class="value">₹{{ offerApplied }}</span>
+              </div>
+              <div class="price-row">
+                  <span class="label"><strong>Net Price</strong></span>
+                  <span class="value">₹{{ netPrice }}</span>
+              </div>
+              <div class="price-row">
+                  <span class="label"><strong>Taxes (18%)</strong></span>
+                  <span class="value">₹{{ gstAmount }}</span>
+              </div>
+              <!-- Highlighted Total Payable -->
+              <div class="price-row highlighted">
+                  <span class="label"><strong>Total Payable</strong></span>
+                  <span class="value">₹{{ totalPayable }}</span>
+              </div>
+            </div>
+
+        </div>
+
+        <!-- Popup for confirmation -->
+        <div class="popup" *ngIf="showConfirmation">
+            <div class="popup-content">
+                <h2>🎉 Booking Successful 🎉</h2>
+                <p>Your booking has been successfully confirmed!</p>
+                <div class="popup-actions">
+                    <button class="btn btn-view-details" (click)="viewDetails()">View Details</button>
+                    <button class="btn btn-go-home" (click)="goToHome()">Go to Home</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<app-navigation-toggle></app-navigation-toggle>
+

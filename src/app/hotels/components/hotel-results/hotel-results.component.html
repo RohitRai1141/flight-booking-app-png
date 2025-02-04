@@ -1,0 +1,169 @@
+<div class="heading">
+  <h2 *ngIf="filteredHotels.length; else defaultHeading"> Showing {{ filteredHotels.length }} hotels in {{ searchParams.location }}</h2>
+  <ng-template #defaultHeading>
+    <h2> No Matching Hotels</h2>
+
+  </ng-template>
+</div>
+
+<div class="container">
+
+  <!-- Filters Section -->
+  <div class="filters-section">
+
+    <h2>Filters <i><fa-icon [icon]="faFilter"></fa-icon></i></h2>
+
+    <div class="filter-content">
+      <div class="filter-row">
+        <label><strong>Price per night</strong></label>
+        <div class="price-inputs">
+          <div>
+            <label for="minPriceRange">Min Price</label>
+            ₹<input type="number" id="minPriceRange" [(ngModel)]="filters.minPrice" placeholder="Min" />
+          </div>
+          <div>
+            <label for="priceRange">Max Price</label>
+            ₹<input type="number" id="priceRange" [(ngModel)]="filters.price" placeholder="Max" />
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <label><strong>Star Category</strong></label>
+        <div class="amenity-checkbox">
+          <input type="checkbox" value="3" (change)="onStarChange($event)" /><label>3 star</label>
+          <input type="checkbox" value="4" (change)="onStarChange($event)" /><label>4 star</label>
+          <input type="checkbox" value="5" (change)="onStarChange($event)" /><label>5 star</label>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <label><strong>User Ratings</strong></label>
+        <select (change)="onRatingChange($event)">
+          <option value="0">Any</option>
+          <option value="4.2">Excellent (4.2+)</option>
+          <option value="3.5">Very Good (3.5+)</option>
+          <option value="3.0">Good (3.0+)</option>
+        </select>
+      </div>
+
+      <div class="filter-row">
+        <label><strong>Amenities</strong></label>
+        <div class="amenity-scroll">
+          <div class="amenity-checkbox" *ngFor="let amenity of availableAmenities">
+            <input type="checkbox" [value]="amenity" (change)="onAmenityChange($event)" />
+            <label>{{ amenity }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btns">
+      <button class="filter-btn" (click)="applyFilters()">Apply Filters</button>
+      <button class="reset-btn" [disabled]="!filters.price && !filters.minPrice && !filters.amenities.length && !filters.starCategories.length && !filters.rating" (click)="resetFilters()">Reset Filters</button>
+    </div>
+  </div>
+
+  <!-- Filtered Results -->
+  <div *ngIf="filteredHotels.length; else defaultHotels">
+    <div class="card-container">
+      <div *ngFor="let hotel of filteredHotels" class="card">
+        <img [src]="hotel['images'][0]" alt="{{ hotel['name'] }}" class="card-img" />
+
+        <div class="card-content">
+
+          <div class="name-star">
+            <h3>{{ hotel['name']}}</h3>
+            <div><i style="color: gold" *ngFor="let star of getFilledStars(hotel['star'])"><fa-icon [icon]="faStar"></fa-icon></i></div>
+          </div>
+
+          <div class="rating-label">
+            <p><strong>{{ hotel['rating'] }}/5</strong></p>
+            <p><strong>{{ getRatingLabel(hotel['rating']) }}</strong></p>
+          </div>
+
+          <div class="location-price">
+            <p><i><fa-icon [icon]="faMapMarkerAlt"></fa-icon></i> {{ hotel['location'] }}</p>
+
+            <!-- Display offer price section if offerDescription exists -->
+            <div *ngIf="hotel.offerDescription; else normalPrice">
+              <div class="price-offer">
+                <div class="price">
+                  <p class="original-price"><s>₹{{ hotel['price'] }}</s></p>
+                  <p class="discounted-price">₹{{ hotel['discountedPrice'] }}</p>
+                </div>
+                <div class="description">
+                  <p class="offer-description">{{ hotel['offerDescription'] }}</p>
+                  <p>{{ hotel['specialOffers'][0].discount }}% off</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Normal price if no offer -->
+            <ng-template #normalPrice>
+              <p>₹{{ hotel['price'] }} / night</p>
+            </ng-template>
+          </div>
+
+          <p *ngIf="hotel.amenities?.length">
+            {{ getTruncatedAmenities(hotel['amenities'].join(', ')) }} <strong>more</strong>
+          </p>
+        </div>
+        <button class="know-more-btn" (click)="navigateToDetails(hotel)">Know More</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Results Template -->
+  <ng-template #defaultHotels>
+      <div class="card-container">
+        <div *ngFor="let hotel of defaultHotelsList" class="card">
+          <img [src]="hotel.images[0]" alt="{{ hotel.name }}" class="card-img" />
+
+          <div class="card-content">
+
+            <div class="name-star">
+              <h3>{{ hotel['name']}}</h3>
+              <div><i style="color: gold" *ngFor="let star of getFilledStars(hotel.star)"><fa-icon [icon]="faStar"></fa-icon></i></div>
+            </div>
+            
+            <div class="rating-label">
+              <p><strong>{{ hotel.rating }}/5</strong></p>
+              <p><strong>{{ getRatingLabel(hotel.rating) }}</strong></p>
+            </div>
+
+            <div class="location-price">
+              <p><i><fa-icon [icon]="faMapMarkerAlt"></fa-icon></i> {{ hotel.location }}</p>
+
+              <!-- Display offer price section if offerDescription exists -->
+              <div *ngIf="hotel.offerDescription; else normalPrice">
+                <div class="price-offer">
+                  <div class="price">
+                    <p class="original-price"><s>₹{{ hotel.price }}</s></p>
+                    <p class="discounted-price">₹{{ hotel.discountedPrice }}</p>
+                  </div>
+                  <div class="description">
+                    <p class="offer-description">{{ hotel.offerDescription }}</p>
+                    <p>{{ hotel.specialOffers[0].discount }}% off</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Normal price if no offer -->
+              <ng-template #normalPrice>
+                <p>₹{{ hotel.price }} / night</p>
+              </ng-template>
+            </div>
+
+            <p *ngIf="hotel.amenities?.length">
+              {{ getTruncatedAmenities(hotel.amenities.join(', ')) }} <strong>more</strong>
+            </p>
+          </div>
+          <button class="know-more-btn" (click)="navigateToDetails(hotel)">Know More</button>
+        </div>
+      </div>
+  </ng-template>
+
+</div>
+
+<app-navigation-toggle></app-navigation-toggle>

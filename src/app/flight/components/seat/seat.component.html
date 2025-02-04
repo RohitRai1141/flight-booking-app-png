@@ -1,0 +1,52 @@
+<body>
+<div class="seating-container">
+  <h2>Select Your Seat</h2>
+
+  <div *ngIf="selectedFlight" class="flight-details">
+    <h3>Flight Details</h3>
+    <p><strong>Flight ID:</strong> {{ selectedFlight.id }}</p>
+    <p><strong>From:</strong> {{ selectedFlight.from }}</p>
+    <p><strong>To:</strong> {{ selectedFlight.to }}</p>
+    <p><strong>Departure Date:</strong> {{ selectedFlight.departureDate }}</p>
+    <p><strong>Airline:</strong> {{ selectedFlight.airline }}</p>
+  </div>
+
+  <div class="seat-grid">
+    <div
+      *ngFor="let seat of allSeats"
+      [class]="getSeatClass(seat)"
+      (click)="selectSeat(seat)"
+    >
+      {{ seat.id }}
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <div class="seat-indicator available"></div>
+      <span>Available</span>
+    </div>
+    <div class="legend-item">
+      <div class="seat-indicator selected"></div>
+      <span>Selected</span>
+    </div>
+    <div class="legend-item">
+      <div class="seat-indicator booked"></div>
+      <span>Booked</span>
+    </div>
+  </div>
+
+  
+
+  <div class="actions">
+    <button [disabled]="selectedSeats.length !== numberOfPassengers" (click)="saveSeats()">
+      Confirm Selection
+    </button>
+  </div>
+
+  <div *ngIf="validationMessage" [ngClass]="notificationClass" class="notification">
+    {{ validationMessage }}
+  </div>
+</div>
+</body>
+<router-outlet></router-outlet>

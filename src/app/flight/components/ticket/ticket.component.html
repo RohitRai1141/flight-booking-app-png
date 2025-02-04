@@ -1,0 +1,83 @@
+<div class="ticket-container">
+  <h2>Flight Ticket</h2>
+  
+  <!-- Display the last updated user's details if found -->
+  <div *ngIf="lastUpdatedUser">
+    <div class="ticket-header">
+      <div class="airline-logo">
+        <h2>FlyHigh</h2>
+      </div>
+      <div class="flight-info">
+        <p>{{ lastUpdatedUser.flight.from }} to {{ lastUpdatedUser.flight.to }}</p>
+        <p>{{ lastUpdatedUser.flight.airline }}</p>
+      </div>
+    </div>
+
+    <div class="ticket-body">
+      <div class="passenger-info">
+        <h3>Passenger Details</h3>
+
+        <!-- Loop over passengers and display details -->
+        <div *ngIf="lastUpdatedUser.passengers.length > 1">
+          <div *ngFor="let passenger of lastUpdatedUser.passengers; let i = index">
+            <p><strong>Name:</strong> {{ passenger.firstName }} {{ passenger.lastName }}</p>
+            <p><strong>Date of Birth:</strong> {{ passenger.dateOfBirth | date: 'dd-MM-yyyy' }}</p>
+            <p><strong>Gender:</strong> {{ passenger.gender }}</p>
+            <p><strong>Nationality:</strong> {{ passenger.nationality }}</p>
+
+            <!-- Optionally show only up to the first 2 passengers -->
+            <div *ngIf="!showAllPassengers && i >= 2">
+              <p>Only showing 2 passengers. Click to show more.</p>
+              <button (click)="togglePassengerDisplay()">Show All</button>
+            </div>
+
+            <div *ngIf="showAllPassengers && i >= 2">
+              <p><strong>Name:</strong> {{ passenger.firstName }} {{ passenger.lastName }}</p>
+              <p><strong>Date of Birth:</strong> {{ passenger.dateOfBirth | date: 'dd-MM-yyyy' }}</p>
+              <p><strong>Gender:</strong> {{ passenger.gender }}</p>
+              <p><strong>Nationality:</strong> {{ passenger.nationality }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- If there is only one passenger, show their details -->
+        <div *ngIf="lastUpdatedUser.passengers.length === 1">
+          <p><strong>Name:</strong> {{ lastUpdatedUser.passengers[0].firstName }} {{ lastUpdatedUser.passengers[0].lastName }}</p>
+          <p><strong>Date of Birth:</strong> {{ lastUpdatedUser.passengers[0].dateOfBirth | date: 'dd-MM-yyyy' }}</p>
+          <p><strong>Gender:</strong> {{ lastUpdatedUser.passengers[0].gender }}</p>
+          <p><strong>Nationality:</strong> {{ lastUpdatedUser.passengers[0].nationality }}</p>
+        </div>
+      </div>
+
+      <div class="flight-details">
+        <h3>Flight Details</h3>
+        <p><strong>Flight-id:</strong> {{ lastUpdatedUser.flight.id }}</p>
+        <p><strong>Departure:</strong> {{ lastUpdatedUser.flight.from }} at {{ lastUpdatedUser.flight.fromTime }}</p>
+        <p><strong>Arrival:</strong> {{ lastUpdatedUser.flight.to }} at {{ lastUpdatedUser.flight.toTime }}</p>
+        <p><strong>Duration:</strong> {{ lastUpdatedUser.flight.duration }}</p>
+      </div>
+
+      <div class="seat-details">
+        <h3>Seat Information</h3>
+        <p><strong>Seat(s):</strong> {{ lastUpdatedUser.seats.join(', ') }}</p>
+      </div>
+    </div>
+
+    <div class="ticket-footer">
+      <div class="price">
+        <p><strong>Total Price:</strong> {{ lastUpdatedUser.totalPrice | currency:"INR" }}</p>
+      </div>
+      <div class="status">
+        <p><strong>Status:</strong> {{ lastUpdatedUser.status }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!lastUpdatedUser">
+    <p>Sorry, no ticket data available. Please complete your booking first.</p>
+  </div>
+  </div>
+
+  <!-- Add the button to generate PDF -->
+  <button (click)="generatePDF()">Generate into PDF</button>
+

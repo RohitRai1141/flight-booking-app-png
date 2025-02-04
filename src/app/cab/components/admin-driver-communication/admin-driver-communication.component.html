@@ -1,0 +1,149 @@
+<div class="container">
+
+  <!-- Driver Section -->
+  <div class="driver-section">
+    <div class="filters">
+      <input
+        type="text"
+        [placeholder]="expandedCity ? 'Search drivers in ' + expandedCity + '...' : 'Search drivers by location...'"
+        (input)="searchByLocation($event)"
+        aria-label="Search drivers by location"
+      />
+      <div class="availability-filters">
+        <button 
+          (click)="filterByAvailability('all')" 
+          [ngClass]="{ 'active': availabilityFilter === 'all' }"
+          aria-label="Show all drivers"
+        >
+          All
+        </button>
+        <button 
+          (click)="filterByAvailability('available')" 
+          [ngClass]="{ 'active': availabilityFilter === 'available' }"
+          aria-label="Show available drivers"
+        >
+          Available
+        </button>
+        <button 
+          (click)="filterByAvailability('unavailable')" 
+          [ngClass]="{ 'active': availabilityFilter === 'unavailable' }"
+          aria-label="Show unavailable drivers"
+        >
+          Unavailable
+        </button>
+      </div>
+    </div>
+
+    <!-- Driver List -->
+    <div class="driver-list">
+      <div
+        *ngFor="let driver of filteredDrivers"
+        class="driver-card"
+        (click)="selectDriver(driver)"
+        [class.selected]="selectedDriver?.id === driver.id"
+      >
+        <p><strong>{{ driver.driverName }}</strong></p>
+        <p>Cab Number: {{ driver.cabNumber }}</p>
+        <p>Location: {{ driver.location }}</p>
+        <p>Status: 
+          <span
+            [class.available]="driver.available"
+            [class.unavailable]="!driver.available"
+          >
+            {{ driver.available ? 'Available' : 'Unavailable' }}
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+      
+  <!-- Chat Section -->
+  <div class="chat-section">
+      <!-- Heading -->
+      <h1 class="admin-heading">Admin-Driver Communication Window</h1>
+
+    <div *ngIf="selectedDriver; else noDriver">
+      <h2>Chat with {{ selectedDriver.driverName }}</h2>
+      <p class="driver-status">Status:
+        <span 
+          [class.available]="selectedDriver.available" 
+          [class.unavailable]="!selectedDriver.available"
+        >
+          {{ selectedDriver.available ? 'Available' : 'Unavailable' }}
+        </span>
+      </p>
+      <div class="chat-messages" style="max-height: 300px; overflow-y: auto;">
+        <div
+          *ngIf="messages.length === 0"
+          class="no-messages"
+        >
+          <p>No messages yet. Start the conversation!</p>
+        </div>
+        <div
+          *ngFor="let message of messages"
+          class="message"
+          [class.admin]="message.sender === 'admin'"
+          [class.driver]="message.sender === 'driver'"
+        >
+          <p>{{ message.text }}</p>
+          <span class="timestamp">{{ message.timestamp | date: 'shortTime' }}</span>
+        </div>
+      </div>
+       <!-- Predefined Quick Message Buttons -->
+    <div class="quick-messages">
+      <button (click)="sendQuickMessage('Are you available?')">Are you available?</button>
+      <button (click)="sendQuickMessage('Please confirm pickup.')">Please confirm pickup.</button>
+      <button (click)="sendQuickMessage('Request Location')">Request Location</button>
+      <button (click)="sendQuickMessage('Confirm Availability')">Confirm Availability</button>
+    </div>
+
+    <!-- Message Input -->
+      <div class="message-input">
+        <input
+          [(ngModel)]="newMessage"
+          type="text"
+          placeholder="Type a message..."
+          aria-label="Type a message"
+        />
+        <button (click)="sendMessage()" aria-label="Send message">Send</button>
+        <button (click)="toggleEmojiPicker()" aria-label="Toggle emoji picker">😊</button>
+      </div>
+      <div *ngIf="emojiPickerVisible" class="emoji-picker">
+        <span *ngFor="let emoji of emojis" (click)="addEmoji(emoji)">{{ emoji }}</span>
+      </div>
+    </div>
+    <ng-template #noDriver>
+      <div class="no-driver">
+        <p>Select a driver to start communication</p>
+      </div>
+    </ng-template>
+  </div>
+
+<!-- Floating Action Button -->
+<div class="fixed bottom-5 right-5 z-50 flex flex-col items-center">
+  <ul class="flex-col-reverse items-center space-y-reverse space-y-4 mb-4 transition-all duration-300"
+      [ngClass]="{ 'opacity-0 translate-y-10 pointer-events-none': !isFabMenuOpen, 'opacity-100 translate-y-0': isFabMenuOpen }">
+    <li class="mb-3">
+      <a href="/admin/" class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors" title="Admin Dashboard">
+        <span class="text-emoji">📶</span>
+      </a>
+    </li>
+    <li class="mb-3">
+      <a href="/admin/communication" class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors" title="Communication Window">
+        <span class="text-emoji">💬</span>
+      </a>
+    </li>
+    <li class="mb-3">
+      <a href="/admin/admin-manage" class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors" title="Manage Booking">
+        <span class="text-emoji">🖥</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- FAB Toggle Button -->
+  <button class="w-16 h-16 bg-teal-600 text-white rounded-full shadow-lg flex justify-center items-center text-3xl hover:scale-110 transition-transform" (click)="toggleFabMenu()">
+    ☰
+  </button>
+</div>
+</div>

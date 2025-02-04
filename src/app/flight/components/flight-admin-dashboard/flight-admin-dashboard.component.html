@@ -1,0 +1,41 @@
+<div class="dashboard-container">
+  <h1 class="title">Admin Dashboard</h1>
+  <div class="chart-wrapper">
+    <!-- Flight Data Chart -->
+    <div class="chart-container" *ngIf="flightChartData.length">
+      <h2 class="chart-title">Flights Data</h2>
+      <ngx-charts-bar-vertical
+        [results]="flightChartData"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [xAxisLabel]="'Airline'"
+        [showYAxisLabel]="showYAxisLabel"
+        [yAxisLabel]="'Flight Count'"
+        [xAxisTickFormatting]="xAxisTickFormatting"
+      >
+      </ngx-charts-bar-vertical>
+    </div>
+
+    <!-- User Data Chart -->
+    <div class="chart-container" *ngIf="userChartData.length">
+      <h2 class="chart-title">Users Data</h2>
+      <ngx-charts-bar-vertical
+        [results]="userChartData"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [xAxisLabel]="'Category'"
+        [showYAxisLabel]="showYAxisLabel"
+        [yAxisLabel]="'User Count'"
+        [xAxisTickFormatting]="xAxisTickFormatting"
+      >
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+</div>
+<app-admin-navbar></app-admin-navbar>

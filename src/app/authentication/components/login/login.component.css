@@ -1,0 +1,140 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-image: url(https://thumbs.dreamstime.com/b/famous-landmarks-around-world-travel-background-ai-generative-famous-landmarks-around-world-travel-background-design-324007031.jpg) no-repeat center center fixed; 
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  position: absolute;
+  font-family: 'Dancing Script', cursive; /* A more elegant, cursive font */
+  font-size: 3rem; /* Larger size */
+
+  font-weight: bold;
+  color: #ff8c00; /* A vibrant color for the text */
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Softer, more dramatic text shadow */
+  letter-spacing: 2px; /* Adds a bit of spacing between the letters */
+  text-transform: uppercase; /* Uppercase styling for a stronger presence */
+  transition: transform 0.3s ease; /* Smooth transition effect */
+}
+
+.header:hover {
+  transform: translateY(-5px); /* Adds a subtle hover effect */
+  color: #fff; /* Changes color on hover */
+}
+
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.min-h-screen {
+  min-height: 100vh;
+}
+
+p-card {
+  background: rgba(255, 255, 255, 0.1); 
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); 
+  backdrop-filter: blur(10px); 
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  border-radius: 15px; 
+  padding: 2rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+p-card:hover {
+  transform: scale(1.05);
+}
+
+.field {
+  margin-bottom: 1.5rem;
+}
+
+.field label {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #130404; 
+  margin-bottom: 0.5rem;
+
+}
+
+.field input,
+.field p-password {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #0a0808;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+.field input:focus,
+.field p-password:focus,
+.field p-dropdown:focus {
+  border-color: #a29bfe;
+  box-shadow: 0 0 8px rgba(162, 155, 254, 0.8);
+  outline: none;
+
+}
+
+.block.p-error {
+  font-size: 0.85rem;
+  color: #ff6b6b; 
+}
+
+p-button {
+  /* background: linear-gradient(90deg, #6a11cb, #2575fc);  */
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  border: none;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+/* p-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+} */
+
+a {
+  color: #31065f;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #032c73;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  p-card {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  p-button {
+    font-size: 1rem;
+  }
+
+  .field label {
+    font-size: 0.9rem;
+  }
+}
+mt-2.text-center{
+  margin-right: 20px;
+}

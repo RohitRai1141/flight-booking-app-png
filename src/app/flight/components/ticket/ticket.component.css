@@ -1,0 +1,261 @@
+/* Main ticket container */
+.ticket-container {
+    width: 80%;
+    max-width: 1100px;
+    background: #eddfdf;
+    color: #333;
+    margin: 30px auto;
+    padding: 30px; /* Increased padding */
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-top: 10px solid #1E88E5;
+    position: relative;
+    background: linear-gradient(135deg, #E3F2FD, #90CAF9);
+    overflow: hidden;
+  }
+  
+  /* Title of the ticket */
+  .ticket-container h2 {
+    font-size: 42px; /* Increased font size */
+    color: #1E88E5;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header section with airline logo and flight info */
+  .ticket-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  
+  .airline-logo h2 {
+    font-size: 48px; /* Larger font size for the logo */
+    font-weight: bold;
+    color: #1E88E5;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .flight-info p {
+    font-size: 18px; /* Increased font size */
+    text-align: right;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  .flight-info p strong {
+    color: #1E88E5;
+  }
+  
+  /* Ticket body section layout */
+  .ticket-body {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Ticket body heading */
+  .ticket-body h3 {
+    font-size: 22px; /* Larger heading size */
+    color: #1E88E5;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* Ticket body paragraph styling */
+  .ticket-body p {
+    font-size: 16px; /* Increased font size */
+    margin: 5px 0;
+    color: #362727;
+  }
+  
+  /* Sections within the ticket body */
+  .ticket-body .section {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px; /* Increased padding */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 48%;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Add icon to sections */
+  .ticket-body .section i {
+    color: #1E88E5;
+    font-size: 24px; /* Larger icons */
+    margin-right: 12px; /* More space between icon and text */
+  }
+  
+  /* Footer with price and status */
+  .ticket-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 2px solid #f0f0f0;
+  }
+  
+  /* Price styling */
+  .price p {
+    font-size: 28px; /* Larger price font */
+    font-weight: bold;
+    color: #ff6b6b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Pulse effect for the price */
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Shake effect for price on hover */
+  .price p:hover {
+    animation: shake 0.5s ease-in-out forwards;
+  }
+  
+  /* Shake animation for price */
+  @keyframes shake {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    50% {
+      transform: translateX(5px);
+    }
+    75% {
+      transform: translateX(-5px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  /* Status styling */
+  .status p {
+    font-size: 20px; /* Larger font for status */
+    font-weight: bold;
+    color: #135751;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover effect on the whole ticket */
+  .ticket-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease-in-out;
+    animation: flipInY 1s ease-out;
+  }
+  
+  /* No data available message */
+  .no-data {
+    text-align: center;
+    font-size: 18px; /* Larger font for the no data message */
+    color: #ff0000;
+    padding: 20px;
+    background: #f2f2f2;
+    border-radius: 10px;
+  }
+  
+  /* Responsive design for small screens */
+  @media (max-width: 768px) {
+    .ticket-container {
+      width: 90%;
+      padding: 25px; /* Increased padding for smaller screens */
+    }
+  
+    .ticket-header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .flight-info {
+      text-align: center;
+      margin-top: 15px; /* Increased margin for better spacing */
+    }
+  
+    .ticket-body {
+      flex-direction: column;
+    }
+  
+    .ticket-body .section {
+      width: 100%;
+    }
+  
+    .ticket-footer {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .price p {
+      font-size: 24px; /* Larger price for mobile screens */
+    }
+  
+    .status p {
+      font-size: 18px; /* Larger status font for mobile screens */
+    }
+  }
+  /* Style the button */
+button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text color */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Top and bottom padding, left and right padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius: 5px; /* Rounded corners */
+    margin-top: 10px; /* Space above the button */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for background color and scaling */
+    margin-left: 45%;
+  }
+  
+  /* Button */
+  button:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly increase size on hover */
+  }
+  
+  /* Button active (clicked) state */
+  button:active {
+    background-color: #3e8e41; /* Even darker green when clicked */
+    transform: scale(1); /* Reset size to normal */
+  }
+  
+  /* Add some space around the button */
+  button + button {
+    margin-left: 10px;
+  }
+  
+  

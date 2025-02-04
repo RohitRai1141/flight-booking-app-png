@@ -1,0 +1,78 @@
+<div class="bookings-container">
+  <div *ngFor="let user of users; trackBy: trackUserId" class="booking-card">
+    <div class="booking">
+      <h2 class="booking-title">
+        <span class="detail-label">Booking ID:</span> {{ user.id }}
+      </h2>
+      <p class="booking-detail">
+        <span class="detail-label">Date:</span> {{ user.flight.departureDate }}
+      </p>
+      <p class="booking-detail">
+        <span class="detail-label">Departure:</span> {{ user.flight.from }}
+      </p>
+      <p class="booking-detail">
+        <span class="detail-label">Destination:</span> {{ user.flight.to }}
+      </p>
+      <p class="booking-detail">
+        <span class="detail-label">Airline:</span> {{ user.flight.airline }}
+      </p>
+      <p class="booking-detail">
+        <span class="detail-label">Price:</span> {{ user.flight.price }}
+      </p>
+      <p class="booking-detail">
+        <span class="detail-label">Status:</span> {{ user.status }}
+      </p>
+
+      <!-- Passengers Section -->
+      <div class="passengers-details">
+        <div *ngFor="let passenger of user.passengers" class="passenger-card">
+          <p class="booking-detail">
+            <span class="detail-label">FirstName:</span>
+            {{ passenger.firstName }}
+          </p>
+          <p class="booking-detail">
+            <span class="detail-label">MiddleName:</span>
+            {{ passenger.middleName }}
+          </p>
+          <p class="booking-detail">
+            <span class="detail-label">LastName:</span> {{ passenger.lastName }}
+          </p>
+          <p class="booking-detail">
+            <span class="detail-label">DOB:</span> {{ passenger.dateOfBirth }}
+          </p>
+          <p class="booking-detail">
+            <span class="detail-label">Gender:</span> {{ passenger.gender }}
+          </p>
+          <p class="booking-detail">
+            <span class="detail-label">Nationality:</span>
+            {{ passenger.nationality }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Only show cancel button if status is not already cancelled -->
+    <button 
+      *ngIf="user.status !== 'Cancelled'" 
+      class="action-btn" 
+      (click)="openDeleteConfirmation(user.id)"
+    >
+      Cancel Booking
+    </button>
+  </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div *ngIf="isDeleteModalOpen" class="modal-overlay">
+  <div class="delete-modal">
+    <div class="modal-content">
+      <p>Are you sure you want to Cancel this Flight?</p>
+      <div class="modal-buttons">
+        <button class="action-btn confirm-btn" (click)="deleteUserHistory()">Yes</button>
+        <button class="action-btn cancel-btn" (click)="closeDeleteModal()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+<app-navbar></app-navbar>

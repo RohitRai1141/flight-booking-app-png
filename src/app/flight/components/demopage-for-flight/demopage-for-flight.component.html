@@ -1,0 +1,17 @@
+<div class="login-container">
+  <div class="login-box">
+    <h1 class="title">Demo Login</h1>
+
+    <form (ngSubmit)="onLogin()">
+      <div class="form-group">
+        <label for="role" class="label">Role</label>
+        <select id="role" [(ngModel)]="selectedRole" name="role" class="select-box">
+          <option value="end-user">Consumer</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <button type="submit" class="submit-btn">Log In</button>
+    </form>
+  </div>
+</div>

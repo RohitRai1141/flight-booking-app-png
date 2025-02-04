@@ -1,0 +1,183 @@
+<body>
+  <div class="background">
+    <div class="background-1">
+      <!-- Flight Search Section -->
+      <div *ngIf="!selectedFlight">
+        <h1 class="flickering-text">PlanNGo</h1>
+        <form #flightForm="ngForm" (ngSubmit)="onSubmit()" class="flight-booking-form">
+          <h2 class="form-title">Search Your Flight</h2>
+    
+    
+          <div *ngIf="isSearchExecuted && showSuccessMessage" class="notification success">
+            Success!!!</div>
+           
+            <!-- Error Message -->
+            <div *ngIf="isSearchExecuted && showError" class="notification error">
+            Failure!!</div>
+            <div *ngIf="isSearchExecuted && validationErrors.date" class="error-message-date">
+              {{ validationErrors.date }}
+            </div>
+    
+    
+    
+    
+          <div class="form-row">
+            <div class="form-group">
+              <label for="departureCity">From</label>
+              <select
+                
+                id="departureCity"
+                name="departureCity"
+                [(ngModel)]="searchCriteria.from"
+                placeholder="✈ Departure city"
+                required
+                #departureCity="ngModel"
+              >
+              <option value="" disabled selected>Select an Departure city</option>
+              <option value="New York">New York</option>
+              <option value="Los Angeles">Los Angeles</option>
+              <option value="Chicago">Chicago</option>
+              <option value="Houston">Houston</option>
+              <option value="San Francisco">San Francisco</option>
+              <option value="Miami">Miami</option>
+              <option value="Boston">Boston</option>
+              <option value="Seattle">Seattle</option>
+              <option value="Las Vegas">Las Vegas</option>
+              <option value="Denver">Denver</option>
+              <option value="Orlando">Orlando</option>
+              <option value="Phoenix">Phoenix</option>
+              <option value="Dallas">Dallas</option>
+              <option value="Atlanta">Atlanta</option>
+              <option value="Detroit">Detroit</option>
+              <option value="Charlotte">Charlotte</option>
+              <option value="San Diego">San Diego</option>
+              <option value="Philadelphia">Philadelphia</option>
+              <option value="Austin">Austin</option>
+              <option value="Salt Lake City">Salt Lake City</option>
+            </select>
+              <div *ngIf="departureCity.invalid && departureCity.touched" class="error-message">
+                Please enter a departure city.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="destinationCity">To</label>
+              <select
+                id="destinationCity"
+                name="destinationCity"
+                [(ngModel)]="searchCriteria.to"
+                placeholder="🛬 Destination city"
+                required
+                #destinationCity="ngModel"
+              >
+              <option value="" disabled selected>Select a Destination city</option>
+              <option value="London">London</option>
+              <option value="Tokyo">Tokyo</option>
+              <option value="Paris">Paris</option>
+              <option value="Dubai">Dubai</option>
+              <option value="Sydney">Sydney</option>
+              <option value="Toronto">Toronto</option>
+              <option value="Amsterdam">Amsterdam</option>
+              <option value="Beijing">Beijing</option>
+              <option value="Rome">Rome</option>
+              <option value="Berlin">Berlin</option>
+              <option value="Frankfurt">Frankfurt</option>
+              <option value="Madrid">Madrid</option>
+              <option value="Seoul">Seoul</option>
+              <option value="Istanbul">Istanbul</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Bangkok">Bangkok</option>
+              <option value="Vienna">Vienna</option>
+              <option value="Dubai">Dubai</option>
+              <option value="Zurich">Zurich</option>
+              </select>            
+  
+              <div *ngIf="destinationCity.invalid && destinationCity.touched" class="error-message">
+                Please enter a destination city.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="departureDate">Departure Date</label>
+              <input
+                type="date"
+                id="departureDate"
+                name="departureDate"
+                [(ngModel)]="searchCriteria.date"
+                min="{{CurrentDate|date:'yyyy-MM-dd'}}"
+                required
+                #departureDate="ngModel"
+              />
+              <div *ngIf="departureDate.invalid && departureDate.touched" class="error-message">
+                Please select a departure date.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="airline">Select Airline</label>
+              <select
+                id="airline"
+                name="airline"
+                [(ngModel)]="searchCriteria.airline"
+                required
+                #airline="ngModel"
+              >
+                <option value="" disabled selected>Select an airline</option>
+                <option value="Indigo">Indigo</option>
+                <option value="Air India">Air India</option>
+                <option value="Jet Airways">Jet Airways</option>
+                <option value="Emirates">Emirates</option>
+                <option value="Qatar Airways">Qatar Airways</option>
+                <option value="Singapore Airlines">Singapore Airlines</option>
+              </select>
+              <div *ngIf="airline.invalid && airline.touched" class="error-message">
+                Please select an airline.
+              </div>
+            </div>
+          </div>
+          <button type="submit" [disabled]="!flightForm.valid" class="submit-btn">Search Flights</button>
+        </form>
+        <div class="flight-container">
+          <h2 class="heading">Available Flights:</h2>
+          <div *ngIf="filteredFlights.length === 0" class="no-flights-message">
+            <p class="invalid-input">INVALID INPUT</p>
+            <p>No flights found for the selected criteria.</p>
+          </div>
+          <table class="flight-table" *ngIf="filteredFlights.length > 0">
+            <thead>
+              <tr>
+                <th>Flight Number</th>
+                <th>Route</th>
+                <th>Date of Departure (DD/MM/YYYY)</th>
+                <th>Price</th>
+                <th>Airline</th>
+                <th>Booking</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let flight of filteredFlights" (click)="selectFlight(flight)">
+                <td>{{ flight.id }}</td>
+                <td>
+                  <span>{{ flight.from }}</span>
+                  <span class="arrow">===✈</span>
+                  <span>{{ flight.to }}</span>
+                </td>
+                <td>{{ flight.departureDate }}</td>
+                <td class="price">{{ flight.price | currency : "INR" }}</td>
+                <td>{{ flight.airline }}</td>
+                <td>
+                  <button class="btn btn-danger" id="book-now" [routerLink]="['/flight/booking', flight.id]">BOOK Seat</button>   
+               </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Pass selected flight to booking component when a flight is selected -->
+     <app-booking
+        *ngIf="selectedFlight"
+        (bookingCancelled)="cancelBooking()"
+      ></app-booking>
+    </div>
+    </div>
+    </body>
+    <router-outlet></router-outlet>
+    <app-navbar></app-navbar>

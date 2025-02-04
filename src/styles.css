@@ -1,4 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+/* body
+{
+    background-color: #f9f9f9;
+} */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: url(https://i.pinimg.com/736x/e8/92/f4/e892f4096519fe6a693423720cfd22c1.jpg) no-repeat center center fixed; 
+  background-size: cover;
+  opacity: 1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}  */

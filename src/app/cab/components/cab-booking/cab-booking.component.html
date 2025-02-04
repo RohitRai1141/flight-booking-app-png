@@ -1,0 +1,49 @@
+<div class="booking-container">
+  <div class="cab-info">
+    <div *ngIf="booking; else noBooking">
+      <h2 class="booking-title">Booking Details</h2>
+      <div class="cab-details-box">
+        <div class="details-left">
+          <p><strong>First Name:</strong> {{ booking.users?.[0]?.firstname }}</p>
+          <p><strong>Last Name:</strong> {{ booking.users?.[0]?.lastname }}</p>
+          <p><strong>Gender:</strong> {{ booking.users?.[0]?.gender }}</p>
+          <p><strong>Booking Date:</strong> {{ booking.users?.[0]?.date }}</p>
+          <p><strong>Driver Name:</strong> {{ booking.cab?.[0]?.driverName }}</p>
+          <p><strong>Pickup Location:</strong> {{ booking.cab?.[0]?.location }}</p>
+          <p><strong>Drop Location:</strong> {{ booking.cab?.[0]?.dropLocation }}</p>
+          <p><strong>Fare Estimate:</strong> ${{ booking.cab?.[0]?.fareEstimate }}</p>
+          <p><strong>Ride Type:</strong> {{ booking.cab?.[0]?.type }}</p>
+          <p><strong>Pin Generated:</strong> {{ booking.cab?.[0]?.pinGenerated }}</p>
+          <p><strong>Contact Number:</strong> {{ booking.cab?.[0]?.contactNumber }}</p>
+          <p>
+            <strong>Status:</strong> 
+            <span [ngClass]="getStatusClass(booking.users?.[0]?.date, booking.status)">
+              {{ getStatusClass(booking.users?.[0]?.date, booking.status) }}
+            </span>
+          </p>
+          <div class="cab-buttons">
+            <button (click)="back()">Back to booking history</button>
+            <button *ngIf="getStatusClass(booking.users?.[0]?.date, booking.status) === 'Upcoming'" 
+                    (click)="confirmCancel()">Cancel Booking</button>
+          </div>
+          </div>
+         <!-- Cab Image Box -->
+         <div class="cab-image-box">
+          <img [src]="booking.cab?.[0]?.image" alt="Cab Image" class="cab-image"/>
+        </div>
+      </div>
+    </div>
+    <ng-template #noBooking>
+      <p class="error-message">{{ error || 'No booking details found' }}</p>
+    </ng-template>
+  </div>
+
+  <!-- Custom Confirmation Popup Box -->
+  <div class="confirmation-popup" *ngIf="showPopup">
+    <div class="popup-box">
+      <p>Are you sure you want to cancel the booking?</p>
+      <button class="yes-button" (click)="cancelBooking()">Yes</button>
+      <button class="no-button" (click)="closePopup()">No</button>
+    </div>
+  </div>
+</div>

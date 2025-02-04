@@ -1,0 +1,277 @@
+<div class="header">
+  <div class="logo">
+    <div class="logo-text">PlanNGoHub</div>
+  </div>
+  <button class="back-button" (click)="goBack()">◀️ Back</button>
+</div>
+
+<div class="booking-history">
+  <h2>Booking History</h2>
+
+
+  <div class="filters-container">
+    <!-- Dropdown for Status -->
+    <label for="statusFilter" class="status-label">Status:</label>
+    <select
+      id="statusFilter"
+      [(ngModel)]="statusFilter"
+      (change)="filterBookings()"
+      class="status-dropdown"
+    >
+      <option value="">All</option>
+      <option value="Completed">Completed</option>
+      <option value="Upcoming">Upcoming</option>
+      <option value="Cancelled">Cancelled</option>
+    </select>
+  </div>
+  
+  <!-- Enhanced Search Bar -->
+  <div class="search-bar-container">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        placeholder="Search by location"
+        [(ngModel)]="searchQuery"
+        (input)="filterBookings()"
+        class="search-input"
+      />
+    </div>
+  </div>
+
+   
+
+<div *ngIf="bookings.length === 0">No bookings available.</div>
+<div *ngIf="filteredBookings.length === 0">No bookings found for the entered location.</div>
+
+<div *ngFor="let booking of filteredBookings" class="booking-card">
+    <div class="card-header">
+      <h3>{{ booking.cab?.[0]?.type }} - {{ booking.cab?.[0]?.location }}</h3>
+      <div class="button-container">
+         
+         <button
+         *ngIf="getStatusClass(booking.users?.[0]?.date, booking.status) === 'Completed'"
+         (click)="openReviewPopup(booking)"
+         class="review-button"
+       >
+       Add Review
+       </button>
+        <button
+          *ngIf="getStatusClass(booking.users?.[0]?.date, booking.status) === 'Upcoming'"
+          (click)="openEditPopup(booking)"
+          class="edit-button"
+        >
+          Edit
+        </button>
+        <button (click)="viewDetails(booking.id)" class="view-button">View Details</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <p><strong>First Name:</strong> {{ booking.users?.[0]?.firstname }}</p>
+      <p><strong>Last Name:</strong> {{ booking.users?.[0]?.lastname }}</p>
+      <p><strong>Gender:</strong> {{ booking.users?.[0]?.gender }}</p>
+      <p><strong>Booking Date:</strong> {{ booking.users?.[0]?.date }}</p>
+      <p><strong>Contact:</strong> {{ booking.users?.[0]?.contactNumber }}</p>
+      <p>
+        <strong>Status:</strong>
+        <span [ngClass]="getStatusClass(booking.users?.[0]?.date, booking.status)">
+          {{ getStatusClass(booking.users?.[0]?.date, booking.status) }}
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Booking Popup -->
+<div class="edit-popup-overlay" *ngIf="isEditPopupOpen" (click)="closeEditPopup()"></div>
+<div class="edit-popup" *ngIf="isEditPopupOpen">
+  <div class="edit-popup-header">
+    <h2>Edit Booking</h2>
+  </div>
+  <form class="edit-popup-form" #editBookingForm="ngForm" (ngSubmit)="updateBookingDetails()">
+    <label for="firstname">First Name</label>
+    <input
+      type="text"
+      id="firstname"
+      [(ngModel)]="currentBooking.users[0].firstname"
+      name="firstname"
+      placeholder="First Name"
+      required
+      #firstname="ngModel"
+      [ngClass]="{'is-invalid': firstname.invalid && firstname.touched}"
+    />
+    <div class="error-message" *ngIf="firstname.invalid && firstname.touched">
+      First Name is required.
+    </div>
+
+    <label for="lastname">Last Name</label>
+    <input
+      type="text"
+      id="lastname"
+      [(ngModel)]="currentBooking.users[0].lastname"
+      name="lastname"
+      placeholder="Last Name"
+      required
+      #lastname="ngModel"
+      [ngClass]="{'is-invalid': lastname.invalid && lastname.touched}"
+    />
+    <div class="error-message" *ngIf="lastname.invalid && lastname.touched">
+      Last Name is required.
+    </div>
+
+    <label for="dropLocation">Drop Location</label>
+    <input
+      type="text"
+      id="dropLocation"
+      [(ngModel)]="currentBooking.cab[0].dropLocation"
+      name="dropLocation"
+      placeholder="Drop Location"
+      required
+      #dropLocation="ngModel"
+      [ngClass]="{'is-invalid': dropLocation.invalid && dropLocation.touched || locationError}"
+      (blur)="validateLocations()"
+    />
+    <div class="error-message" *ngIf="locationError">
+      Drop Location cannot be the same as the current location.
+    </div>
+    <div class="error-message" *ngIf="dropLocation.invalid && dropLocation.touched">
+      Drop location is required.
+    </div>
+
+    <label for="gender">Gender</label>
+    <select
+      id="gender"
+      [(ngModel)]="currentBooking.users[0].gender"
+      name="gender"
+      required
+      #gender="ngModel"
+      [ngClass]="{'is-invalid': gender.invalid && gender.touched}"
+    >
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+      <option value="other">Other</option>
+    </select>
+    <div class="error-message" *ngIf="gender.invalid && gender.touched">
+      Gender is required.
+    </div>
+
+    <label for="date">Booking Date</label>
+    <input
+      type="date"
+      [(ngModel)]="currentBooking.users[0].date"
+      id="date"
+      name="date"
+      [min]="minDate"
+      [max]="maxDate"
+      required
+      #date="ngModel"
+      [ngClass]="{'is-invalid': date.invalid && date.touched}"
+    />
+    <div class="error-message" *ngIf="date.invalid && date.touched">
+      Booking Date is required.
+    </div>
+
+    <label for="contactNumber">Contact Number</label>
+    <input
+      id="contactNumber"
+      [(ngModel)]="currentBooking.users[0].contactNumber"
+      name="contactNumber"
+      minlength="10"
+      maxlength="10"
+      pattern="^\d{10}$"
+      required
+      #contactNumber="ngModel"
+      [ngClass]="{'is-invalid': contactNumber.invalid && contactNumber.touched}"
+    />
+    <div class="error-message" *ngIf="contactNumber.invalid && contactNumber.touched">
+      Contact Number must be 10 digits.
+    </div>
+
+    <div class="edit-popup-buttons">
+      <button type="submit" [disabled]="editBookingForm.invalid">Save</button>
+      <button type="button" class="cancel-button" (click)="closeEditPopup()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- Review Popup -->
+<div class="review-popup-overlay" *ngIf="isReviewPopupOpen" (click)="closeReviewPopup()"></div>
+<div class="review-popup" *ngIf="isReviewPopupOpen">
+  <div class="review-popup-header">
+    <h2>Submit Your Review</h2>
+  </div>
+  <form class="review-popup-form" (ngSubmit)="submitReview()">
+    <label for="comment">Comment</label>
+    <textarea
+      id="comment"
+      [(ngModel)]="review.comment"
+      name="comment"
+      placeholder="Write your review here..."
+      required
+      rows="4"
+    ></textarea>
+
+    <label for="rating">Rating</label>
+    <div class="rating-stars">
+      <span *ngFor="let star of [1, 2, 3, 4, 5]" (click)="setRating(star)" [ngClass]="{'selected': star <= review.rating}">
+        ★
+      </span>
+    </div>
+
+    <div class="edit-popup-buttons">
+      <button type="submit" [disabled]="!review.comment || !review.rating">Submit</button>
+      <button type="button" class="cancel-button" (click)="closeReviewPopup()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+
+<!-- Floating Action Button -->
+<div class="fixed bottom-5 right-5 z-50 flex flex-col items-center">
+  <!-- FAB Menu -->
+  <ul
+    class="flex-col-reverse items-center space-y-reverse space-y-4 mb-4 transition-all duration-300"
+    [ngClass]="{
+      'opacity-0 translate-y-10 pointer-events-none': !isFabMenuOpen,
+      'opacity-100 translate-y-0': isFabMenuOpen
+    }"
+  >
+
+    <li class="mb-3">
+      <a
+        href="cab/home"
+        class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+        title="Home Page"
+      >
+      <span class="text-emoji">🏠</span>   
+      </a>
+    </li>
+    <li class="mb-3">
+      <a
+        href="cab/cab-search"
+        class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+        title="Search Cabs"
+      >
+      <span class="text-emoji">🔍</span>    
+      </a>
+    </li>
+    <li class="mb-3">
+      <a
+        href="cab/booking-history"
+        class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+        title="Booking History"
+      >
+      <span class="text-emoji">⏳</span>     
+      </a>
+    </li>
+  </ul>
+
+  <!-- Floating Action Button -->
+  <button
+    class="w-16 h-16 bg-teal-600 text-white rounded-full shadow-lg flex justify-center items-center text-3xl hover:scale-110 transition-transform"
+    (click)="toggleFabMenu()"
+  >
+    ☰
+  </button>
+</div>

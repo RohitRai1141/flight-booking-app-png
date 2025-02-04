@@ -1,0 +1,127 @@
+<div class="header">
+  <div class="logo">
+    <!-- Logo -->
+    <div class="logo-text">PlanNGoHub</div>
+  </div>
+  <button class="back-button" (click)="goBack()">◀️ Back</button>
+</div>
+
+<div class="page-container">
+  <!-- Search Container -->
+  <div class="cab-search">
+    <h1>Search for Cabs</h1>
+    <form (ngSubmit)="onSearch()">
+      <!-- Pickup Location Dropdown -->
+      <select [(ngModel)]="location" name="location">
+        <option value="" disabled selected>Enter pickup location</option>
+        <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+      </select>
+
+      <!-- Drop Location Dropdown -->
+      <select [(ngModel)]="dropLocation" name="dropLocation">
+        <option value="" disabled selected>Enter drop location</option>
+        <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+      </select>
+
+
+      <!-- Ride Type Dropdown -->
+    <select [(ngModel)]="rideType" name="rideType">
+      <option value="" disabled selected>Enter ride type</option>
+      <option value="SUV">SUV</option>
+      <option value="Sedan">Sedan</option>
+      <option value="Hatchback">Hatchback</option>
+      <option value="Wagon">Wagon</option>
+      <option value="Sports">Sports</option>
+      <option value="Minivan">Minivan</option>
+    </select>
+
+      <button type="submit">Search</button>
+    </form>
+
+    <!-- Popup for validation -->
+    <div class="popup-backdrop" *ngIf="isPopupVisible">
+      <div class="popup-container">
+        <h2>Validation Message</h2>
+        <p>{{ popupMessage }}</p>
+        <button (click)="isPopupVisible = false">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cab List Container -->
+  <div class="cab-list">
+    <div *ngIf="!cabs || cabs.length === 0" class="no-cabs-message">
+      <p>Not available. Try after a few minutes.</p>
+    </div>
+
+    <div class="cab-grid">
+      <div
+        *ngFor="let cab of cabs"
+        class="cab-item"
+        (click)="onSelectCab(cab.id)"
+      >
+        <div class="cab-card">
+          <div class="cab-image">
+            <img [src]="cab.image" alt="{{ cab.type }}" />
+          </div>
+          <div class="cab-details">
+            <h3>{{ cab.type }}</h3>
+            <p>Location: {{ cab.location }}</p>
+            <p>Fare Estimate: ${{ cab.fareEstimate }}</p>
+            <p
+              [class.available]="cab.available"
+              [class.unavailable]="!cab.available"
+            >
+              {{ cab.available ? 'Available' : 'Not Available' }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <div class="fixed bottom-5 right-5 z-50 flex flex-col items-center">
+    <ul
+      class="flex-col-reverse items-center space-y-reverse space-y-4 mb-4 transition-all duration-300"
+      [ngClass]="{
+        'opacity-0 translate-y-10 pointer-events-none': !isFabMenuOpen,
+        'opacity-100 translate-y-0': isFabMenuOpen
+      }"
+    >
+      <li class="mb-3">
+        <a
+          href="cab/home"
+          class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+          title="Home Page"
+        >
+          <span class="text-emoji">🏠</span>
+        </a>
+      </li>
+      <li class="mb-3">
+        <a
+          href="cab/cab-search"
+          class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+          title="Search Cabs"
+        >
+          <span class="text-emoji">🔍</span>
+        </a>
+      </li>
+      <li class="mb-3">
+        <a
+          href="cab/booking-history"
+          class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+          title="Booking History"
+        >
+          <span class="text-emoji">⏳</span>
+        </a>
+      </li>
+    </ul>
+    <button
+      class="w-16 h-16 bg-teal-600 text-white rounded-full shadow-lg flex justify-center items-center text-3xl hover:scale-110 transition-transform"
+      (click)="toggleFabMenu()"
+    >
+      ☰
+    </button>
+  </div>
+</div>

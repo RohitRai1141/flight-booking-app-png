@@ -1,0 +1,51 @@
+<div class="cab-details-container">
+  <!-- Loading and Error Messages -->
+  <div *ngIf="isLoading" class="loading">Loading...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <!-- Cab Details Section -->
+  <div *ngIf="cab" class="cab-details">
+    <h2>{{ cab.type }} Details</h2>
+    <div class="cab-image">
+      <img [src]="cab.image" alt="{{ cab.type }}" />
+    </div>
+    <div class="cab-info">
+      <p><strong>Location:</strong> {{ cab.location }}</p>
+      <p><strong>Drop Location:</strong> {{ cab.dropLocation }}</p>
+      <p><strong>Fare Estimate:</strong> ${{ cab.fareEstimate }}</p>
+      <p><strong>Status:</strong> {{ cab.available ? 'Available' : 'Not Available' }}</p>
+      <p><strong>Seater:</strong> {{ cab.seater }}</p>
+      <p><strong>Cab No.:</strong> {{ cab.carNumber}}</p>
+    </div>
+  </div>
+
+  <!-- Contact Information Section -->
+  <div *ngIf="cab" class="contact-info">
+    <h3>Contact Information</h3>
+    <p><strong>Driver Name:</strong> {{ cab.driverName }}</p>
+    <p><strong>Phone:</strong> {{ cab.contactNumber }}</p>
+  </div>
+
+  <!-- Reviews and Ratings Section -->
+  <div *ngIf="cab.reviews" class="reviews-section">
+    <h3>Reviews</h3>
+    <div *ngFor="let review of cab.reviews" class="review">
+      <p><strong>{{ review.user }}</strong></p>
+      <p>{{ review.comment }}</p>
+      <p>
+        <strong>Rating:</strong>
+        <span *ngFor="let star of [1, 2, 3, 4, 5]">
+          {{ star <= review.rating ? '★' : '☆' }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Buttons Section -->
+  <div class="cab-buttons">
+    <button (click)="goBack()">Back to Search</button>  
+    <!-- Conditionally show the "Book Cab" button only if the cab is available -->
+    <button *ngIf="cab.available" (click)="book()">Book Cab</button>
+  </div>
+ 
+</div>

@@ -1,0 +1,136 @@
+<div class="header">
+  <div class="logo">
+    <!-- Logo -->
+    <div class="logo-text">PlanNGoHub</div>
+  </div>
+  <button class="back-button" (click)="goBack()">◀️ Back</button>
+</div>
+
+<div class="background-1">
+  <div *ngIf="selectedCab" class="cab-user-management">
+    <h2>User Details for Booking</h2>
+    <!-- Add or Edit User Form -->
+    <form (ngSubmit)="submitUser()" #userForm="ngForm">
+      <div>
+        <label for="firstName">First Name</label>
+        <input id="firstName" [(ngModel)]="user.firstname" name="firstname" #firstname="ngModel" required />
+        <div *ngIf="(userForm.submitted || firstname.touched) && firstname.invalid && !userAdded" class="error-message">
+          First name is required.
+        </div>
+      </div>
+      <div>
+        <label for="middleName">Middle Name</label>
+        <input id="middleName" [(ngModel)]="user.midname" name="midname" />
+      </div>
+      <div>
+        <label for="lastName">Last Name</label>
+        <input id="lastName" [(ngModel)]="user.lastname" name="lastname" #lastname="ngModel" required />
+        <div *ngIf="(userForm.submitted || lastname.touched) && lastname.invalid && !userAdded" class="error-message">
+          Last name is required.
+        </div>
+      </div>
+      <div>
+        <label for="gender">Gender</label>
+        <select id="gender" [(ngModel)]="user.gender" name="gender" #gender="ngModel" required>
+          <option value="" disabled>Select the gender</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="other">Other</option>
+        </select>
+        <div *ngIf="(userForm.submitted || gender.touched) && gender.invalid && !userAdded" class="error-message">
+          Gender is required.
+        </div>
+      </div>
+      <div>
+        <label for="bookingDate">Booking Date</label>
+        <input id="bookingDate" type="date" [(ngModel)]="user.date" name="date" #date="ngModel" required [min]="minDate" [max]="maxDate" />
+        <div *ngIf="(userForm.submitted || date.touched) && date.invalid && !userAdded" class="error-message">
+          <p *ngIf="date.errors?.['required']">Booking date is required.</p>
+          <p *ngIf="date.errors?.['min']">Past days cannot be booked.</p>
+          <p *ngIf="date.errors?.['max']">Can only book up to 20 days in advance.</p>
+        </div>
+      </div>
+      <div>
+        <label for="contactNumber">Contact Number</label>
+        <input id="contactNumber" [(ngModel)]="user.contactNumber" name="contactNumber" #contactNumber="ngModel" minlength="10" maxlength="10" pattern="^\d{10}$" required />
+        <div *ngIf="(userForm.submitted || contactNumber.touched) && contactNumber.invalid && !userAdded" class="error-message">
+          Contact number is required and must be 10 digits.
+        </div>
+      </div>
+      <button type="submit" [disabled]="userForm.invalid">{{ editing ? 'Update User' : 'Submit' }}</button>
+    </form>
+
+    <!-- List of Users -->
+    <div *ngIf="users.length" class="user-list">
+      <h3>Your User Details</h3>
+      <div *ngFor="let user of users; let i = index" class="user-item">
+        <p><strong>First Name:</strong> {{ user.firstname }}</p>
+        <p><strong>Middle Name:</strong> {{ user.midname }}</p>
+        <p><strong>Last Name:</strong> {{ user.lastname }}</p>
+        <p><strong>Gender:</strong> {{ user.gender }}</p>
+        <p><strong>Booking Date:</strong> {{ user.date }}</p>
+        <p><strong>Contact Number:</strong> {{ user.contactNumber }}</p>
+        <button (click)="editUser(i)">Edit</button>
+        <button (click)="cancelUser(i)">Cancel</button>
+      </div>
+      <button (click)="confirmUser()">Confirm Booking</button>
+    </div>
+  </div>
+
+  <div class="confirmation-modal" *ngIf="showConfirmationPopup">
+    <div class="modal-box">
+      <h3>Confirmation</h3>
+      <p>Booking has been successfully done ✅</p>
+      <button (click)="closeConfirmationPopup()">Close</button>
+    </div>
+  </div>
+</div>
+
+  <!-- Floating Action Button -->
+<div class="fixed bottom-5 right-5 z-50 flex flex-col items-center">
+  <!-- FAB Menu -->
+  <ul
+    class="flex-col-reverse items-center space-y-reverse space-y-4 mb-4 transition-all duration-300"
+    [ngClass]="{
+      'opacity-0 translate-y-10 pointer-events-none': !isFabMenuOpen,
+      'opacity-100 translate-y-0': isFabMenuOpen
+    }"
+  >
+
+    <li class="mb-3">
+      <a
+        href="cab/home"
+        class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+        title="Home Page"
+      >
+      <span class="text-emoji">🏠</span>   
+      </a>
+    </li>
+    <li class="mb-3">
+      <a
+        href="cab/cab-search"
+        class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+        title="Search Cabs"
+      >
+      <span class="text-emoji">🔍</span>    
+      </a>
+    </li>
+    <li class="mb-3">
+      <a
+        href="cab/booking-history"
+        class="w-12 h-12 bg-white text-teal-600 rounded-full shadow-md flex justify-center items-center border border-teal-600 hover:bg-teal-600 hover:text-white transition-colors"
+        title="Booking History"
+      >
+      <span class="text-emoji">⏳</span>     
+      </a>
+    </li>
+  </ul>
+
+  <!-- Floating Action Button -->
+  <button
+    class="w-16 h-16 bg-teal-600 text-white rounded-full shadow-lg flex justify-center items-center text-3xl hover:scale-110 transition-transform"
+    (click)="toggleFabMenu()"
+  >
+    ☰
+  </button>
+</div>

@@ -29,7 +29,7 @@ export interface SeatForBackend {
 export class FlightService {
   private apiUrl = 'http://localhost:3000/flights';
   private seatsApiUrl = 'http://localhost:3000/seats'; // Changed to match JSON server endpoint
-  private userApiUrl = 'http://localhost:3000/users';
+  private userApiUrl = 'http://localhost:3000/flightusers';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -79,5 +79,9 @@ export class FlightService {
       throw new Error('User ID cannot be null');
     }
     return this.http.put(`${this.userApiUrl}/${userId}`, userData);
+  }
+
+  getFlightsByAirline(airline: string): Observable<Flight[]> {
+    return this.http.get<Flight[]>(`${this.apiUrl}?airline=${airline}`);
   }
 }

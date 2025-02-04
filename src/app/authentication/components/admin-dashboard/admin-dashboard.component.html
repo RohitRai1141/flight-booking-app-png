@@ -1,0 +1,148 @@
+<div class="dashboard-container" [class.dark-theme]="isDarkTheme">
+    <div class="dashboard">
+        <nav class="horizontal-navbar">
+            <ul>
+                <li><a href="/admin/dashboard"><fa-icon [icon]="faCar"></fa-icon> Cab</a></li>
+                <li><a href="/hotels/admin/dashboard"><fa-icon [icon]="faHotel"></fa-icon> Hotel</a></li>
+                <li><a href="/flight-admin/panel"><fa-icon [icon]="faPlane"></fa-icon> Flight</a></li>
+                <li><a href="/tour"><fa-icon [icon]="faSuitcase"></fa-icon> Tour</a></li>
+            </ul>
+        </nav>
+        <button class="hamburger" (click)="toggleDashboard()">☰</button>
+        <div class="dashboard-menu" [class.open]="isDashboardOpen">
+            <div class="profile-section">
+                <img [src]="profileData?.profilePic || defaultProfilePic" alt="Profile Picture" class="profile-image" />
+                <input type="file" accept="image/*" #fileInput (change)="uploadProfilePicture($event)" hidden />
+
+                <h3 *ngIf="!isEditing">{{fullName }}</h3>
+                <input *ngIf="isEditing" [(ngModel)]="profileData!.fullName" type="text"
+                    placeholder="Enter your name" />
+                <p *ngIf="!isEditing">{{ email }}</p>
+                <input *ngIf="isEditing" [(ngModel)]="profileData!.email" type="email" placeholder="Enter your email" />
+                <p *ngIf="!isEditing">Age: {{ profileData?.age }}</p>
+                <input *ngIf="isEditing" [(ngModel)]="profileData!.age" type="number" placeholder="Enter your age" />
+
+                <p *ngIf="!isEditing">Location: {{ profileData?.location }}</p>
+                <input *ngIf="isEditing" [(ngModel)]="profileData!.location" type="text"
+                    placeholder="Enter your location" />
+
+                <p *ngIf="!isEditing">Gender: {{ profileData?.gender }}</p>
+                <select *ngIf="isEditing" [(ngModel)]="profileData!.gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <button (click)="toggleTheme()">
+                    Switch to {{ isDarkTheme ? 'Light' : 'Dark' }} Theme
+                </button>
+                <button *ngIf="!isEditing" (click)="editProfile()">Edit Profile</button>
+                <div *ngIf="isEditing">
+                    <button (click)="saveProfile()">Save</button>
+                    <button (click)="cancelEdit()">Cancel</button>
+                    <button (click)="triggerFileUpload()">Change Profile Picture</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <h1>
+        <fa-icon [icon]="faUser" style="margin-right: 10px;"></fa-icon>
+        Admin Dashboard
+    </h1>
+    <h4>
+        <fa-icon [icon]="faUsers" style="margin-right: 10px;"></fa-icon>
+        Total Users: {{ totalUsers }}
+    </h4>
+
+
+    <div class="chart-section">
+        <!-- Gender Pie Chart -->
+        <div class="chart">
+            <h2 [ngStyle]="{ color: isDarkTheme ? 'white' : 'black' }">
+                <fa-icon [icon]="faVenusMars" style="margin-right: 10px;"></fa-icon>
+                Gender Distribution
+            </h2>
+            <canvas baseChart [data]="genderDistribution" [type]="'pie'">
+            </canvas>
+        </div>
+
+
+        <!-- Age Bar Chart -->
+        <div class="chart">
+            <h2>
+                <fa-icon [icon]="faChartBar" style="margin-right: 10px;"></fa-icon>
+                Age Distribution
+            </h2>
+            <canvas baseChart [data]="ageDistribution" [type]="'bar'">
+            </canvas>
+        </div>
+
+        <!-- Location Line Chart -->
+        <div class="chart">
+            <h2>
+                <fa-icon [icon]="faLocationArrow" style="margin-right: 10px;"></fa-icon>
+                Location Distribution
+            </h2> <canvas baseChart [data]="locationDistribution" [type]="'line'">
+            </canvas>
+        </div>
+    </div>
+
+    <div class="table-section">
+        <h2>User Details</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of paginatedUsers">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.fullName }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.age }}</td>
+                    <td>{{ user.gender }}</td>
+                    <td>{{ user.location }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+        <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+            Previous
+        </button>
+        <button *ngFor="let page of totalPages" [class.active]="page === currentPage" (click)="goToPage(page)">
+            {{ page }}
+        </button>
+        <button (click)="goToNextPage()" [disabled]="currentPage === totalPages.length">
+            Next
+        </button>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3>About Us</h3>
+            <p>At PlanNGoHub, we are redefining the way people travel. By connecting users with a range of trusted
+                travel
+                providers, we aim to make travel planning as easy as a few clicks. Our mission is to provide exceptional
+                service, transparent pricing, and unforgettable experiences.
+
+            </p>
+            <h3>Contact Us</h3>
+            <p>Email: support&#64;planngohub.com | Phone: +1-800-555-1234</p>
+            <div class="footer-links">
+                <a href="#about"><fa-icon [icon]="faInfoCircle"></fa-icon>About</a>
+                <a href="#services"><fa-icon [icon]="faConciergeBell"></fa-icon> Services</a>
+                <a href="#contact"><fa-icon [icon]="faAddressBook"></fa-icon> Contact</a>
+            </div>
+            <p>© 2024 PlanNGoHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+</div>

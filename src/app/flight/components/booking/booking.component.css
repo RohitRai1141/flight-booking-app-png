@@ -1,0 +1,323 @@
+/* Global Styling */
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #2d3436;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Background Styling */
+.background-1 {
+  background-image: url('https://media.istockphoto.com/id/1367756031/vector/light-blue-watercolor-background-illustration.jpg?s=612x612&w=0&k=20&c=qiJl7j-2terwHd-1YJxiFIo1VJx6l6IsmoqlgeypQ7c=');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: backgroundAnimation 4s infinite alternate;
+}
+
+/* Animation for background */
+@keyframes backgroundAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+/* Flight Details Container */
+.Flightdetail {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  width: 100%;
+  opacity: 0;
+  animation: fadeInUp 1.5s forwards;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for Flight Details */
+.Flightdetail:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Flight Details Heading */
+h2#flightcol {
+  font-size: 3rem;
+  color: #00aaff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 1s ease-out;
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Flight Details Row */
+.flight-details-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin: 20px 0;
+  animation: fadeInUp 1s forwards;
+}
+
+/* Styling for individual flight detail items */
+.flight-details-row p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.flight-details-row p:hover {
+  color: #0984e3;
+}
+
+.flight-details-row strong {
+  color: #0984e3;
+}
+
+/* Text Fade In Up Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Notification Messages */
+.notification {
+  padding: 15px;
+  background-color: #fdcb6e;
+  color: #2d3436;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.notification.success {
+  background-color: #55efc4;
+  color: #1e272e;
+}
+
+.notification.error {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.notification:hover {
+  background-color: #ff9f43;
+}
+
+/* Traveler Details Section */
+.traveler_detail {
+  margin-top: 30px;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Glitch Text for Enter Passenger Details */
+.glitch-container {
+  position: relative;
+  text-align: center;
+}
+
+.glitch-text {
+  font-size: 1.6rem;
+  color: #00aaff;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: glitch 1s infinite alternate, textJump 0.5s ease-in-out infinite;
+}
+
+/* Glitch Animation */
+@keyframes glitch {
+  0% {
+    transform: translateX(1px) translateY(1px);
+    text-shadow: 1px 1px #00aaff;
+  }
+  100% {
+    transform: translateX(-1px) translateY(-1px);
+    text-shadow: -1px -1px #00aaff;
+  }
+}
+
+/* Jump Animation for Text */
+@keyframes textJump {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Passenger Form Styling */
+.passenger-form {
+  background-color: #f7fafc;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  animation: fadeInUp 1.5s forwards;
+}
+
+.passenger-form .form-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.passenger-form .form {
+  flex: 1 1 45%;
+  min-width: 200px;
+}
+
+/* Input Fields Styling */
+.passenger-form input,
+.passenger-form select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #dfe6e9;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect */
+.passenger-form input:focus,
+.passenger-form select:focus {
+  border-color: #00aaff;
+  box-shadow: 0 0 8px rgba(0, 170, 255, 0.8);
+}
+
+/* Error Styling for Validation */
+.error {
+  color: red;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Error Input Field Styling */
+.passenger-form input.ng-invalid,
+.passenger-form select.ng-invalid {
+  border-color:lightblue;
+  box-shadow: 0 0 8px lightblue;
+}
+
+/* Remove Passenger Button */
+button#remove-btn {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+button#remove-btn:hover {
+  background-color: #e74c3c;
+}
+
+/* Action Buttons Styling */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Confirm Button */
+button#submit-btn {
+  background-color: #0984e3;
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+button#submit-btn:hover {
+  background-color: #74b9ff;
+  transform: scale(1.05);
+}
+
+/* Cancel Button */
+button#cancel-btn {
+  background-color: #dfe6e9;
+  color: #2d3436;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+button#cancel-btn:hover {
+  background-color: #b2bec3;
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .flight-details-row {
+    grid-template-columns: 1fr; /* Stack the flight details on smaller screens */
+  }
+
+  .passenger-form .form-section {
+    flex-direction: column; /* Stack passenger form fields vertically */
+  }
+
+  .passenger-form .form {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button#submit-btn,
+  button#cancel-btn {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  /* Adjust for glitch text on small screens */
+  .glitch-text {
+    font-size: 1.3rem;
+  }
+}

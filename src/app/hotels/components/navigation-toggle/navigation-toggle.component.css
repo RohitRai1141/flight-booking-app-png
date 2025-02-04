@@ -1,0 +1,78 @@
+/* toggle styles */
+
+/* Floating Toggle Button Positioning (Right side of the page) */
+.toggle-btn {
+    position: fixed;
+    bottom: 20px; /* Adjust position from the bottom */
+    right: 20px; /* Move to the right side */
+    cursor: pointer;
+    z-index: 1000; /* Ensure it stays on top */
+    width: 50px;
+    height: 50px;
+    background-color: #007bff; /* Toggle button color */
+    color: #fff;
+    border-radius: 50%; /* Circular shape */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease; /* Smooth scaling */
+  }
+  
+  .toggle-btn .circle {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%; /* Inner circle for the main button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Circle Menu (Navigation buttons) */
+  .circle-menu {
+    position: fixed;
+    bottom: 100px; /* Position buttons above the toggle button */
+    right: 20px; /* Align with the toggle button */
+    z-index: 999; /* Place it above the toggle button */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* No white space between buttons */
+  }
+  
+  .circle-btn {
+    background-color: #007bff; /* Button color */
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .circle-btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: translateY(-5px); /* Lift effect */
+  }
+  
+  /* Toggle Button Open Animation */
+  .toggle-btn.open {
+    transform: scale(1.1); /* Slight scaling effect when open */
+  }
+  
+  /* Responsiveness for Mobile Devices */
+  @media (max-width: 768px) {
+    .toggle-btn {
+      bottom: 20px;
+      right: 20px;
+    }
+  
+    .circle-menu {
+      right: 20px;
+      bottom: 80px; /* Adjust the position for smaller screens */
+    }
+  }
+  

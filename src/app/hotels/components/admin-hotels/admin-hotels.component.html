@@ -1,0 +1,77 @@
+<div class="hotels-container">
+  <h1>Available Hotels</h1>
+
+  <!-- Hotel Cards -->
+  <div *ngIf="displayedHotels.length; else noHotels">
+    <div *ngFor="let hotel of displayedHotels" class="hotel-card">
+      <!-- Image Section -->
+      <div class="hotel-image">
+        <img [src]="hotel.images[0]" [alt]="hotel.name" />
+      </div>
+
+      <!-- Hotel Details Section -->
+      <div class="hotel-details">
+        <div class="detail-column hotel-info">
+          <h3>{{ hotel.name }}</h3>
+          <p><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ hotel.location }}</p>
+          <p>
+            <fa-icon [icon]="faCircle"></fa-icon> 
+            Amenities: 
+            <span *ngFor="let amenity of hotel.amenities; let last = last">
+              {{ amenity }}<span *ngIf="!last">, </span>
+            </span>
+          </p>
+        </div>
+
+        <div class="detail-column room-info">
+          <h4>Room Types</h4>
+          <div *ngFor="let room of hotel.rooms">
+            <p>
+              <strong>{{ room.type }}</strong> - ₹{{ room.price }} / night
+            </p>
+          </div>
+        </div>
+
+        <div class="detail-column offer-info">
+          <h4>Special Offers</h4>
+          <div *ngIf="hotel.specialOffers?.length; else noOffers">
+            <p *ngFor="let offer of hotel.specialOffers">
+              {{ offer.description }} - {{ offer.discount }}% off!
+            </p>
+          </div>
+          <ng-template #noOffers>
+            <p>No current offers</p>
+          </ng-template>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="hotel-buttons">
+        <button (click)="viewDetails(hotel)">View Details</button>
+        <button (click)="updateHotel(hotel)">Update Hotel</button>
+        <button (click)="deleteHotel(hotel.id)">Delete Hotel</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noHotels>
+    <p class="no-hotels">No hotels available at the moment.</p>
+  </ng-template>
+
+  <div class="pagination-controls">
+    <!-- Rows Per Page Section -->
+    <div class="rows-per-page">
+      <label for="rowsPerPage">Rows per page:</label>
+      <select id="rowsPerPage" [(ngModel)]="rowsPerPage" (change)="changeRowsPerPage($event)">
+        <option *ngFor="let option of rowsPerPageOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+  
+    <!-- Pagination Buttons Section -->
+    <div class="pagination-buttons">
+      <button (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>
+    </div>
+  </div>
+  

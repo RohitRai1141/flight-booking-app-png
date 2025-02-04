@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="login-div">
+      <h1>Log in</h1>
+      <select name="role-select" id="role-select" [(ngModel)]="selectedRole">
+        <option value="" disabled selected>Select Role</option>
+        <option value="admin">Admin</option>
+        <option value="user">User</option>
+      </select>
+      <button [disabled]="!selectedRole" (click)="onLogin()">Login</button>
+    </div>
+  </div>
+  

@@ -1,0 +1,144 @@
+<header
+  style="background-color: #007bff; padding: 20px; text-align: center; color: white; font-size: 24px; font-weight: bold;border-radius: 6px;margin: 5px;width: 590px;height: 50px;">
+  PlanNGoHub
+</header>
+<div class="register-container">
+  <p-card header="Register"
+    [style]="{ width: '600px',color:'black', background: 'rgba(255, 255, 255, 0.5)' ,marginRight: '280px',marginBottom:'50px' }">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <!-- Full Name Field -->
+      <div class="field">
+        <label for="fullName"> <fa-icon [icon]="faUser" style="margin-right: 5px; color: #007bff;"
+            class="icon"></fa-icon>Full Name</label>
+        <input pInputText class="w-full" id="fullName" formControlName="fullName"
+          style="background: rgba(255,255,255,0.1);" />
+        <small
+          *ngIf="registerForm.get('fullName')?.invalid && (registerForm.get('fullName')?.dirty || registerForm.get('fullName')?.touched)"
+          class="block p-error">
+          Full name is required
+        </small>
+      </div>
+
+      <!-- Email Field -->
+      <div class="field">
+        <label for="email"><fa-icon [icon]="faEnvelope"
+            style="margin-right: 5px; color: #007bff;"></fa-icon>Email</label>
+        <input pInputText class="w-full" id="email" formControlName="email"
+          style="background: rgba(255,255,255,0.1);" />
+
+        <small
+          *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
+          class="block p-error">
+          <ng-container *ngIf="registerForm.get('email')?.hasError('required')">
+            Email is required
+          </ng-container>
+          <ng-container *ngIf="registerForm.get('email')?.hasError('pattern')">
+            Email is invalid
+          </ng-container>
+        </small>
+      </div>
+
+      <!-- Password Fields -->
+      <div class="field">
+        <label for="password"> <fa-icon [icon]="faLock"
+            style="margin-right: 5px; color: #007bff;"></fa-icon>Password</label>
+        <p-password formControlName="password" [feedback]="false" [toggleMask]="true" inputId="password"
+          inputStyleClass="w-full" styleClass="w-full"
+          [inputStyle]="{ 'background': 'rgba(255,255,255,0.1)','color':'black' }">
+          ></p-password>
+        <small
+          *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)"
+          class="block p-error">
+          Password is required
+        </small>
+      </div>
+
+      <div class="field">
+        <label for="confirmPassword"> <fa-icon [icon]="faLock"
+            style="margin-right: 5px; color: #007bff;"></fa-icon>Confirm Password</label>
+        <p-password formControlName="confirmPassword" [feedback]="false" [toggleMask]="true" inputId="confirmPassword"
+          inputStyleClass="w-full" styleClass="w-full"
+          [inputStyle]="{ 'background': 'rgba(255,255,255,0.1)','color':'black' }">
+
+          ></p-password>
+        <small
+          *ngIf="registerForm.get('confirmPassword')?.invalid && (registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)"
+          class="block p-error">
+          Confirm Password is required
+        </small>
+        <small
+          *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('password')?.valid && registerForm.get('confirmPassword')?.valid"
+          class="block p-error">
+          Password mismatch
+        </small>
+      </div>
+
+
+      <!-- Role Field -->
+      <div class="field">
+        <label for="role">
+          <fa-icon [icon]="faVenusMars" style="margin-right: 5px; color: #007bff;" class="icon"></fa-icon> Role
+        </label>
+        <p-dropdown [options]="roleOptions" formControlName="role" placeholder="Select Role"
+          class="w-full"></p-dropdown>
+        <small
+          *ngIf="registerForm.get('role')?.invalid && (registerForm.get('role')?.dirty || registerForm.get('role')?.touched)"
+          class="block p-error">
+          Role is required
+        </small>
+      </div>
+
+
+      <!-- Age Field -->
+      <div class="field">
+        <label for="age"> <fa-icon [icon]="faBirthdayCake" style="margin-right: 5px; color: #007bff;"
+            class="icon"></fa-icon>Age</label>
+        <input type="number" pInputText class="w-full" id="age" formControlName="age"
+          style="background: rgba(255,255,255,0.1);" />
+        <small
+          *ngIf="registerForm.get('age')?.invalid && (registerForm.get('age')?.dirty || registerForm.get('age')?.touched)"
+          class="block p-error">
+          Age is required and must be a valid number
+        </small>
+      </div>
+
+      <!-- Gender Field -->
+      <div class="field">
+        <label for="gender"> <fa-icon [icon]="faVenusMars" style="margin-right: 5px; color: #007bff;"
+            class="icon"></fa-icon> Gender</label>
+        <p-dropdown [options]="genderOptions" formControlName="gender" placeholder="Select Gender"
+          class="w-full"></p-dropdown>
+        <small
+          *ngIf="registerForm.get('gender')?.invalid && (registerForm.get('gender')?.dirty || registerForm.get('gender')?.touched)"
+          class="block p-error">
+          Gender is required
+        </small>
+      </div>
+
+      <!-- Location Field -->
+      <div class="field">
+        <label for="location"> <fa-icon [icon]="faMapMarkerAlt" style="margin-right: 5px; color: #007bff;"
+            class="icon"></fa-icon>Location</label>
+        <input pInputText class="w-full" id="location" formControlName="location"
+          style="background: rgba(255,255,255,0.1);" />
+        <small
+          *ngIf="registerForm.get('location')?.invalid && (registerForm.get('location')?.dirty || registerForm.get('location')?.touched)"
+          class="block p-error">
+          Location is required
+        </small>
+      </div>
+
+      <!-- Submit Button -->
+      <p-button type="submit" label="Register" styleClass="w-full" [disabled]="registerForm.invalid"></p-button>
+
+      <!-- Login Redirect -->
+      <div class="mt-2 text-center">
+        <span style="font-family: 'Poppins', sans-serif; font-size: 18px; margin-right: 5px;line-height:2.0;">Already a
+          member?</span>
+        <p-button label="Login" class="p-button-text" (onClick)="navigateToLogin()"
+          [style]="{ background:'#007bff',color:'#fff',marginTop:'20px'}"></p-button>
+      </div>
+
+    </form>
+  </p-card>
+</div>
