@@ -1,60 +1,354 @@
-<div class="bookings-container">
-  <h2>My Bookings 📅</h2>
+<div class="dashboard-container">
 
-  <!-- Table to display bookings -->
-  <table>
-    <thead>
-      <tr>
-        <th>Booking ID</th>
-        <th>Service</th>
-        <th>Date</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let booking of bookings">
-        <td>{{ booking.id }}</td>
-        <td>{{ booking.service }}</td>
-        <td>{{ booking.date }}</td>
-        <td>{{ booking.status }}</td>
-        <td>
-          <button class="view-btn" (click)="viewBooking(booking.id)">
-            <fa-icon [icon]="faEye"></fa-icon> View
-          </button>
-          <button class="update-btn" (click)="updateBooking(booking.id)">
-            <fa-icon [icon]="faEdit"></fa-icon> Update
-          </button>
-          <button class="cancel-btn" (click)="cancelBooking(booking.id)">
-            <fa-icon [icon]="faTrash"></fa-icon> Cancel
-          </button>
-        </td>
+  <button class="theme-toggle-btn" (click)="toggleTheme()">
+    ☯️ Switch to {{ isDarkTheme ? 'Light' : 'Dark' }} Theme
+  </button>
+  <div class="section-buttons">
+    <button (click)="showSection('bookings')">📅 My Bookings</button>
+    <button (click)="showSection('payments')">💳 Payments</button>
+    <button (click)="showSection('savedTours')">❤️ Saved Tours</button>
+  </div>
+  <div *ngIf="currentSection === 'bookings'" class="bookings-container">
+    <h2>My Bookings 📅</h2>
 
-      </tr>
-    </tbody>
-  </table>
-</div>
-<!-- Payment History Section -->
-<div *ngIf="currentSection === 'payments'" class="payments-container">
-  <h2>Payment History 💳</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Payment ID</th>
-        <th>Amount</th>
-        <th>Date</th>
-        <th>Status</th>
-        <th>Service</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let payment of payments">
-        <td>{{ payment.id }}</td>
-        <td>₹{{ payment.amount }}</td>
-        <td>{{ payment.date }}</td>
-        <td>{{ payment.status }}</td>
-        <td>{{ payment.service }}</td>
-      </tr>
-    </tbody>
-  </table>
+    <!-- Cab Bookings -->
+    <h3>Cab Bookings</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Driver Name</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of cabBookings">
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.driverName }}</td>
+          <td>{{ booking.type }}</td>
+          <td>{{ booking.status }}</td>
+          <td>
+            <button class="view-btn" (click)="viewBooking('cabBookings', booking.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="updateBooking('cabBookings', booking.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Update
+            </button>
+            <button class="cancel-btn" (click)="cancelBooking('cabBookings', booking.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Cancel
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- Hotel Bookings -->
+    <h3>Hotel Bookings</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Hotel Name</th>
+          <th>Room Type</th>
+          <th>Status</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of hotelBookings">
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.hotelName }}</td>
+          <td>{{ booking.roomType }}</td>
+          <td>{{ booking.status }}</td>
+          <td>
+            <button class="view-btn" (click)="viewBooking('hotelBookings', booking.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="updateBooking('hotelBookings', booking.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Update
+            </button>
+            <button class="cancel-btn" (click)="cancelBooking('hotelBookings', booking.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Cancel
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- Flight Bookings -->
+    <h3>Flight Bookings</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Flight Name</th>
+          <th>Duration </th>
+          <th>Status</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of flightBookings">
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.airline }}</td>
+          <td>{{ booking.duration }}</td>
+          <td>{{ booking.status }}</td>
+          <td>
+            <button class="view-btn" (click)="viewBooking('flightBookings', booking.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="updateBooking('flightBookings', booking.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Update
+            </button>
+            <button class="cancel-btn" (click)="cancelBooking('flightBookings', booking.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Cancel
+            </button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- Tour Bookings -->
+    <h3>Tour Bookings</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Tour Name</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let booking of tourBookings">
+          <td>{{ booking.id }}</td>
+          <td>{{ booking.tourName }}</td>
+          <td>{{ booking.duration }}</td>
+          <td>{{ booking.status }}</td>
+          <td>
+            <button class="view-btn" (click)="viewBooking('tourBookings', booking.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="updateBooking('tourBookings', booking.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Update
+            </button>
+            <button class="cancel-btn" (click)="cancelBooking('tourBookings', booking.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Cancel
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="currentSection === 'savedTours'" class="saved-container">
+    <h2> Saved Tours ❤️</h2>
+    <table class="saved-table">
+      <thead>
+        <tr>
+          <th>Booking ID</th>
+          <th>Driver Name</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tour of getSavedTours()">
+          <td>{{ tour.id }}</td>
+          <td>{{ tour.tourName }}</td>
+          <td>{{ tour.location }}</td>
+          <td>{{ tour.status }}</td>
+          <td>
+            <button class="view-btn" (click)="viewSavedTour(tour.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="bookTour(tour.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Book Now
+            </button>
+            <button class="cancel-btn" (click)="removeSavedTour(tour.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Payment History Section -->
+  <div *ngIf="currentSection === 'payments'" class="payments-container">
+    <h2>Payment History 💳</h2>
+
+    <!-- Cab Payments -->
+    <h3>Cab Payments</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Payment ID</th>
+          <th>Booking ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Method</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of getCabBookingPayments()">
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.bookingId }}</td>
+          <td>₹{{ payment.amount }}</td>
+          <td>{{ payment.paymentDate }}</td>
+          <td>{{ payment.status }}</td>
+          <td>{{ payment.method }}</td>
+          <td>
+            <button class="view-btn" (click)="viewPayment(payment.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="updatePayment(payment.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Update
+            </button>
+            <button class="cancel-btn" (click)="cancelPayment(payment.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Cancel
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Hotel Payments -->
+    <h3>Hotel Payments</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Payment ID</th>
+          <th>Booking ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Method</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of getHotelBookingPayments()">
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.bookingId }}</td>
+          <td>₹{{ payment.amount }}</td>
+          <td>{{ payment.paymentDate }}</td>
+          <td>{{ payment.status }}</td>
+          <td>{{ payment.method }}</td>
+          <td>
+            <button class="view-btn" (click)="viewPayment(payment.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="updatePayment(payment.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Update
+            </button>
+            <button class="cancel-btn" (click)="cancelPayment(payment.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Cancel
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Tour Payments -->
+    <h3>Tour Payments</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Payment ID</th>
+          <th>Booking ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Method</th>
+          <th>Actions</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of getTourBookingPayments()">
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.bookingId }}</td>
+          <td>₹{{ payment.amount }}</td>
+          <td>{{ payment.paymentDate }}</td>
+          <td>{{ payment.status }}</td>
+          <td>{{ payment.method }}</td>
+          <td>
+            <button class="view-btn" (click)="viewPayment(payment.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="updatePayment(payment.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Update
+            </button>
+            <button class="cancel-btn" (click)="cancelPayment(payment.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Cancel
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Flight Payments -->
+    <h3>Flight Payments</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Payment ID</th>
+          <th>Booking ID</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Method</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of getFlightBookingPayments()">
+          <td>{{ payment.id }}</td>
+          <td>{{ payment.bookingId }}</td>
+          <td>₹{{ payment.amount }}</td>
+          <td>{{ payment.paymentDate }}</td>
+          <td>{{ payment.status }}</td>
+          <td>{{ payment.method }}</td>
+          <td>
+            <button class="view-btn" (click)="viewPayment(payment.id)">
+              <fa-icon [icon]="faEye"></fa-icon> View
+            </button>
+            <button class="update-btn" (click)="updatePayment(payment.id)">
+              <fa-icon [icon]="faEdit"></fa-icon> Update
+            </button>
+            <button class="cancel-btn" (click)="cancelPayment(payment.id)">
+              <fa-icon [icon]="faTrash"></fa-icon> Cancel
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="request-change-container">
+    <h3>Request Profile Change</h3>
+    <label>New Name:</label>
+    <input type="text" [(ngModel)]="newFullName">
+    <label>New Age:</label>
+    <input type="text" [(ngModel)]="newAge">
+    <label>New Location:</label>
+    <input type="text" [(ngModel)]="newLocation">
+    <button (click)="requestChange(newFullName,newAge,  newLocation)">Request Change</button>
+  </div>
 </div>

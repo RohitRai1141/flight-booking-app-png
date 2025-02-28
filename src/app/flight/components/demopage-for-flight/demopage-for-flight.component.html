@@ -1,17 +1,12 @@
-<div class="login-container">
-  <div class="login-box">
-    <h1 class="title">Demo Login</h1>
-
-    <form (ngSubmit)="onLogin()">
-      <div class="form-group">
-        <label for="role" class="label">Role</label>
-        <select id="role" [(ngModel)]="selectedRole" name="role" class="select-box">
-          <option value="end-user">Consumer</option>
-          <option value="admin">Admin</option>
-        </select>
-      </div>
-
-      <button type="submit" class="submit-btn">Log In</button>
-    </form>
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div
+    class="w-full max-w-md bg-white rounded-lg shadow-md p-8 flex flex-col justify-center"
+  >
+    <h1 class="text-2xl font-bold text-gray-700 text-center mb-6">
+      Redirecting
+    </h1>
+    <h3 class="text-2xl font-bold text-gray-700 text-center mb-6">
+      This may take a while
+    </h3>
   </div>
 </div>

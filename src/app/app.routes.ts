@@ -7,6 +7,7 @@ import { HomeComponent } from './authentication/components/home/home.component';
 import { authGuard } from './authentication/services/auth.guard';
 import { ForgotPasswordComponent } from './authentication/components/forgotpassword/forgotpassword.component';
 import { AdminDashboardComponent } from './authentication/components/admin-dashboard/admin-dashboard.component';
+import { UserDashboardComponent } from './authentication/components/user-dashboard/user-dashboard.component';
 // #endregion
 
 // #region Cabs
@@ -18,11 +19,11 @@ import { CabManageComponent } from './cab/components/cab-manage/cab-manage.compo
 import { BookingHistoryComponent } from './cab/components/cab-history/cab-history.component';
 import { AdminDriverCommunicationComponent } from './cab/components/admin-driver-communication/admin-driver-communication.component';
 import { AdminManageBookingsComponent } from './cab/components/admin-manage-bookings/admin-manage-bookings.component';
-// import { CabAdminDashboardComponent } from './cab/components/admin-dashboard/admin-dashboard.component';
+import { CabAdminDashboardComponent } from './cab/components/admin-dashboard/admin-dashboard.component';
+import{CabServiceProviderComponent}from './cab/components/cab-service-provider/cab-service-provider.component'
 // #endregion
 
 //#region Hotels
-import { LoginPageComponent } from './hotels/components/login-page/login-page.component';
 import { SearchHotelComponent } from './hotels/components/search-hotel/search-hotel.component';
 import { HotelResultsComponent } from './hotels/components/hotel-results/hotel-results.component';
 import { HotelDetailsComponent } from './hotels/components/hotel-details/hotel-details.component';
@@ -31,6 +32,9 @@ import { MyBookings_Component } from './hotels/components/my-bookings/my-booking
 import { AdminHotelsComponent } from './hotels/components/admin-hotels/admin-hotels.component';
 import { AdminDashboard_Component } from './hotels/components/admin-dashboard/admin-dashboard.component';
 import { AdminBookingsComponent } from './hotels/components/admin-bookings/admin-bookings.component';
+import { ServiceProviderHotelComponent } from './hotels/components/service-provider-hotel/service-provider-hotel.component';
+import { ServiceProviderDashboardComponent } from './hotels/components/service-provider-dashboard/service-provider-dashboard.component';
+import { Hotels_DemopageComponent } from './hotels/components/demopage/demopage.component';
 //#endregion
 
 // #region Flight
@@ -53,7 +57,10 @@ import { MyBookingsComponent } from './tour/components/my-bookings/my-bookings.c
 import { SuperAdminDashboardComponent } from './tour/components/super-admin-dashboard/super-admin-dashboard.component';
 import { SuperAdminAgencyManagementComponent } from './tour/components/super-admin-agency-management/super-admin-agency-management.component';
 import { AgencyAdminManagementComponent } from './tour/components/agency-admin-management/agency-admin-management.component';
+import { AgencyAdminDashboardComponent } from "./tour/components/agency-admin-dashboard/agency-admin-dashboard.component";
 import { DemopageComponent } from './tour/components/demopage/demopage.component';
+import { Cab_Demo_Component } from './cab/components/demo/demo.component';
+import { DemopageForFlightComponent } from './flight/components/demopage-for-flight/demopage-for-flight.component';
 import { FlightServiceProviderDashboardComponent } from './flight/components/flight-service-provider/flight-service-provider.component';
 //#endregion
 
@@ -64,12 +71,23 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
+  { path: 'user-dashboard', component: UserDashboardComponent },
+  { path: 'cab-service-provider', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'hotel-service-provider', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'flight-service-provider', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'tour-service-provider', component: HomeComponent, canActivate: [authGuard] },
+
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+//   { path: '**', redirectTo: '/login' },
 
   // cabs
   {
     path: 'cab',
     children: [
+      {
+        path: 'load',
+        component: Cab_Demo_Component,
+      },
       {
         path: 'home',
         component: CabHomeComponent,
@@ -104,10 +122,10 @@ export const routes: Routes = [
         redirectTo: 'dashboard',
         pathMatch: 'full',
       },
-      // {
-      //   path: 'dashboard',
-      //   component: CabAdminDashboardComponent,
-      // },
+      {
+        path: 'dashboard',
+        component: CabAdminDashboardComponent,
+      },
       {
         path: 'communication',
         component: AdminDriverCommunicationComponent,
@@ -118,9 +136,19 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'service',
+    children: [
+      {
+        path: 'cab-service',
+        component: CabServiceProviderComponent
+      }
+      ]
+    },
 
   // hotels
   // { path: '', component: LoginPageComponent },
+  { path: 'hotel', component: Hotels_DemopageComponent },
   {
     path: 'hotels',
     children: [
@@ -137,11 +165,17 @@ export const routes: Routes = [
           { path: 'bookings', component: AdminBookingsComponent },
         ],
       },
+      { path: 'service-provider',
+        children: [
+          { path: 'hotels', component: ServiceProviderHotelComponent },
+          { path: 'dashboard', component: ServiceProviderDashboardComponent },
+        ]
+      },
     ],
   },
 
   // Flight Routes
-  // { path: '', component: DemopageForFlightComponent },
+  { path: 'flights', component: DemopageForFlightComponent },
   {
     path: 'flight',
     children: [
@@ -150,7 +184,7 @@ export const routes: Routes = [
       { path: 'seat/:id', component: SeatComponent },
       { path: 'flight-ticket', component:TicketComponent },
       { path: 'history', component: HistoryComponent },
-      { path: 'service-provider', component: FlightServiceProviderDashboardComponent }, 
+      { path: 'service-provider', component: FlightServiceProviderDashboardComponent },
     ],
   },
   {
@@ -202,6 +236,10 @@ export const routes: Routes = [
       {
         path: 'agencyadmin',
         children: [
+          {
+            path: ':agencyId/dashboard',
+            component: AgencyAdminDashboardComponent,
+          },
           {
             path: ':agencyId/dashboard/packages',
             component: AgencyAdminManagementComponent,

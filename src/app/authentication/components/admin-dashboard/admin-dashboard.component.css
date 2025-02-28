@@ -95,12 +95,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 10px;
     background: linear-gradient(to left, rgb(40, 133, 253), #4c85ff, #3895f8, #5e4dfa);
-    color: white;
+    color: #4d4d4d;
     margin-bottom: 20px;
     text-align: center;
-    height: 110vh;
+    height: 95vh;
     border-radius: 0 0 10px 10px;
 }
 
@@ -377,22 +377,13 @@ tr:hover {
     background: #312e2e;
 }
 
-/* .hamburger {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: white;
-    position: sticky;
-    z-index: 1000;
-    padding-left: 12px;
-} */
+
 
 
 /* Footer */
 .footer {
-    background: #111010;
-    color: white;
+    background: #949191;
+    color: rgb(34, 33, 33);
     text-align: center;
     padding: 20px;
     margin-top: 30px;
@@ -404,13 +395,14 @@ tr:hover {
 }
 
 .footer-links a {
-    color: #ff6a00;
+    color: #fa9146;
     margin: 0 10px;
     text-decoration: none;
+    font-weight: bold;
 }
 
 p {
-    color: #e0d9d9;
+    color: #464242;
     font-weight: 500;
 }
 
@@ -420,9 +412,93 @@ h4 {
 }
 
 .dashboard-container.dark-theme h3 {
-    color: #111010;
+    color: #fcf1f1;
+}
+
+.dashboard-container.dark-theme p {
+    color: #fcf1f1;
 }
 
 .dashboard-container.dark-theme .footer-links a {
     color: #ff6a00;
+}
+
+.search-container {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    max-width: 500px;
+}
+
+input {
+    width: 80%;
+    padding: 8px;
+    border: 2px solid #1e88e5;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+button.search-btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 15px;
+    margin: 0;
+}
+
+.menu-list li {
+    padding: 18px 20px;
+    background-color: #fff;
+}
+
+
+
+.menu-list li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.menu-list li :hover {
+    box-shadow: #a69c9c;
+}
+
+button.search-btn:hover {
+    background: #0056b3;
+}
+
+.user-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+}
+
+button.delete-btn {
+    background: #d32f2f;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button.delete-btn:hover {
+    background: #b71c1c;
+}
+
+h3 a {
+    text-decoration: none;
+    color: black;
 }

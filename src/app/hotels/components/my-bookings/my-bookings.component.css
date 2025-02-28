@@ -342,3 +342,70 @@ button:hover:disabled {
   opacity: 0.6;
 } 
 
+/* pagination styles */
+
+.pagination-controls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap:450px;
+  white-space: nowrap;
+  margin: 16px 0;
+  font-size: 14px;
+  /* border: #000 solid; */
+}
+
+/* Style for Rows Per Page */
+.pagination-controls .rows-per-page {
+  display: flex;
+  align-items: center;
+  width: 15%;
+  gap: 8px; /* Add spacing between label and dropdown */
+  /* position: absolute; */
+  bottom: 20px;
+  left: 20px; /* Align to the bottom-left */
+  /* border: #000 solid; */
+}
+
+.pagination-controls select
+{
+    height: 40px; 
+    width: 55px;
+}
+
+/* Style for Centered Pagination Buttons */
+.pagination-controls .pagination-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Center buttons without extra space */
+  gap: 8px; /* Ensure consistent spacing */
+}
+
+.pagination-controls button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0;
+}
+
+
+
+
+.pagination-controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-controls button:not(:disabled) {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination-controls span.page-info {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}

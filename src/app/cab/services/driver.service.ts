@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { drivers, ChatMessage } from '../models/cab-entities';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +12,10 @@ export class DriverService {
 
   constructor(private http: HttpClient) {}
 
-   // Fetch all drivers
-   getDrivers(): Observable<any> {
+  /** ----------------------------- DRIVER MANAGEMENT ----------------------------- **/
+
+  // Fetch all drivers
+  getDrivers(): Observable<any> {
     return this.http.get(`${this.apiUrl}/drivers`);
   }
 
@@ -20,13 +24,34 @@ export class DriverService {
     return this.http.get(`${this.apiUrl}/cabs/${cabId}`);  
   }
 
-  
+  /** ----------------------------- CHAT MANAGEMENT ----------------------------- **/
 
-  getMessageHistory(driverId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/messages?receiverId=${driverId}`);
-  }
+   
+ // Fetch chat messages for a specific driver (from the driver's `chats` array)
+ getMessageHistory(driverId: string): Observable<ChatMessage[]> {
+  return this.http.get<drivers>(`${this.apiUrl}/drivers/${driverId}`) 
+    .pipe(map(driver => driver.chats));  
+}
 
-  sendMessage(message: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/messages`, message);
+// Send a new message in the chat (update the driver's `chats` array)
+sendMessage(driverId: string, message: ChatMessage): Observable<any> {
+  return this.http.get<drivers>(`${this.apiUrl}/drivers/${driverId}`)
+    .pipe(
+      switchMap(driver => {
+        const updatedChats = [...driver.chats, message];  
+        return this.http.put(`${this.apiUrl}/drivers/${driverId}`, { ...driver, chats: updatedChats });  
+      })
+    );
+}
+
+
+  // Update chat messages (used if updating an existing conversation)
+  updateMessageHistory(driverId: string, updatedMessages: ChatMessage[]): Observable<any> {
+    return this.http.get<drivers>(`${this.apiUrl}/drivers/${driverId}`)
+      .pipe(
+        switchMap(driver => {
+          return this.http.put(`${this.apiUrl}/drivers/${driverId}`, { ...driver, chats: updatedMessages });
+        })
+      );
   }
 }

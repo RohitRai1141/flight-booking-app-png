@@ -35,9 +35,6 @@ export class HomepageComponent implements OnInit {
   isFabMenuOpen = false;
 
   constructor(private tourService: TourPackagesService) {
-    if (typeof window !== 'undefined' && window.sessionStorage) {
-      sessionStorage.setItem("userId", "USR001");
-    }
   }
 
   private sleep(ms: number): Promise<void> {

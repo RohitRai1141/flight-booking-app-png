@@ -27,6 +27,7 @@ import { faSuitcase } from '@fortawesome/free-solid-svg-icons';
 import { faLandmark } from '@fortawesome/free-solid-svg-icons';
 import { faUmbrellaBeach } from '@fortawesome/free-solid-svg-icons';
 import { faPlaneDeparture } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -56,7 +57,8 @@ export class HomeComponent {
   triggerFileUpload(): void {
     this.fileInput.nativeElement.click();
   }
-
+  faSun = faSun;
+  faMoon = faMoon;
   faGlobe = faGlobe;
   faCar = faCar;
   faAdjust = faAdjust;
@@ -184,5 +186,19 @@ export class HomeComponent {
         },
       });
     }
+  }
+  navigateToBookings(): void {
+    this.router.navigate(['/user-dashboard'], { queryParams: { section: 'bookings' } });
+  }
+
+  navigateToPayments(): void {
+    this.router.navigate(['/user-dashboard'], { queryParams: { section: 'payments' } });
+  }
+  navigateToSavedTours(): void {
+    this.router.navigate(['/user-dashboard'], { queryParams: { section: 'savedTours' } });
+  }
+  navigateToLogin() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

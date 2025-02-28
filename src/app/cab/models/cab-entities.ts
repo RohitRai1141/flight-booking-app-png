@@ -1,5 +1,6 @@
 export interface cabs{
       id: string
+      agencyId:string
       driverName: string
       type: string,
       fareEstimate: number
@@ -63,8 +64,16 @@ export interface cabs{
       city:string;
       driverName:string;
       cabNumber:string;
+      chats: ChatMessage[];
     }
 
+    export interface ChatMessage {
+      sender: string;
+      receiver: string;
+      text: string;
+      timestamp: string;
+    }
+    
     export interface reviews{
       id:string;
       Bookingid: string;

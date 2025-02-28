@@ -1,20 +1,20 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormsModule,
   Validators,
-} from "@angular/forms";
-import { TourPackagesService } from "../../services/tour-packages.service";
-import { ReactiveFormsModule } from "@angular/forms";
-import { HttpErrorResponse } from "@angular/common/http";
-import { HttpClientModule } from "@angular/common/http";
-import { CommonModule } from "@angular/common";
-import { ActivatedRoute, Router, RouterModule } from "@angular/router";
-import { TourBooking } from "../../models/tour-booking-entities"; // Import the TourBooking model
-import { AbstractControl, ValidationErrors } from "@angular/forms";
+} from '@angular/forms';
+import { TourPackagesService } from '../../services/tour-packages.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { TourBooking } from '../../models/tour-booking-entities'; // Import the TourBooking model
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 @Component({
-  selector: "app-tour-booking",
+  selector: 'app-tour-booking',
   standalone: true,
   imports: [
     CommonModule,
@@ -24,42 +24,42 @@ import { AbstractControl, ValidationErrors } from "@angular/forms";
     FormsModule,
   ],
   providers: [TourPackagesService],
-  templateUrl: "./tour-booking.component.html",
-  styleUrls: ["./tour-booking.component.css"],
+  templateUrl: './tour-booking.component.html',
+  styleUrls: ['./tour-booking.component.css'],
 })
 export class BookingFormComponent implements OnInit {
   bookingForm: FormGroup;
   paymentForm: FormGroup;
   packages: any;
-  guestsAndRoomsSummary = "Select Guests and Rooms";
+  guestsAndRoomsSummary = 'Select Guests and Rooms';
   dropdownVisible = false;
   totalPrice: number = 0;
   isFabMenuOpen = false;
   showPaymentModal: boolean = false;
-  bookedId: string = "";
+  bookedId: string = '';
   isLoading = false;
   showSuccessPopup = false;
-  successHeader = "";
-  successMessage = "";
+  successHeader = '';
+  successMessage = '';
   loadingTimeout: any;
   isFormSuccess: boolean = false;
   isFormSubmitting: boolean = false;
 
   paymentData = {
-    nameOnCard: "",
-    cardNumber: "",
-    expDate: "",
-    cvv: "",
+    nameOnCard: '',
+    cardNumber: '',
+    expDate: '',
+    cvv: '',
   };
 
   bookingData: Partial<TourBooking> = {
     paymentStatus: false,
-    paymentId: "",
+    paymentId: '',
     createdAt: new Date(), // Added createdDate to booking data
   };
   dateRangeValidator(control: AbstractControl): ValidationErrors | null {
-    const arrivalDate = control.get("arrivalDate")?.value;
-    const departureDate = control.get("departureDate")?.value;
+    const arrivalDate = control.get('arrivalDate')?.value;
+    const departureDate = control.get('departureDate')?.value;
 
     if (
       arrivalDate &&
@@ -78,12 +78,12 @@ export class BookingFormComponent implements OnInit {
     this.isFabMenuOpen = !this.isFabMenuOpen;
   }
   onPrevious() {
-    const id = this.route.snapshot.paramMap.get("id");
+    const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.router.navigate([`tours/package/${id}`]);
     } else {
-      console.error("ID not found in the route.");
-      alert("Cannot navigate to the previous page because the ID is missing.");
+      console.error('ID not found in the route.');
+      alert('Cannot navigate to the previous page because the ID is missing.');
     }
   }
   done() {
@@ -102,7 +102,7 @@ export class BookingFormComponent implements OnInit {
   }
   // Show Loading
   async showLoading(duration: number = 2000): Promise<void> {
-    console.log("Showing loading...");
+    console.log('Showing loading...');
     this.isLoading = true;
   } // Set loading state to true to show spinner
   constructor(
@@ -113,20 +113,21 @@ export class BookingFormComponent implements OnInit {
   ) {
     this.bookingForm = this.fb.group(
       {
-        userId: ["", Validators.required],
-        tourId: ["", Validators.required],
-        tourName: ["", Validators.required],
+        userId: ['', Validators.required],
+        tourId: ['', Validators.required],
+        tourName: ['', Validators.required],
+        agencyId: ['', Validators.required],
         adults: [1, [Validators.required, Validators.min(1)]],
         children: [0, [Validators.min(0)]],
         rooms: [1, [Validators.required, Validators.min(1)]],
-        departureDate: ["", Validators.required],
-        arrivalDate: ["", Validators.required],
-        freePickup: ["no", Validators.required],
-        paymentStatus: false,
-        paymentId: [""],
-        amount: ["", Validators.required],
-        specialRequest: [""],
-        bookingDate: ["", Validators.required],
+        departureDate: ['', Validators.required],
+        arrivalDate: ['', Validators.required],
+        freePickup: ['no', Validators.required],
+        paymentStatus: true,
+        paymentId: [''],
+        amount: ['', Validators.required],
+        specialRequest: [''],
+        bookingDate: ['', Validators.required],
         status: true,
       },
       { validator: this.dateRangeValidator }
@@ -134,22 +135,22 @@ export class BookingFormComponent implements OnInit {
 
     this.paymentForm = this.fb.group({
       nameOnCard: [
-        "",
+        '',
         [Validators.required, Validators.pattern(/^[a-zA-Z\s]+$/)],
       ],
       cardNumber: [
-        "",
+        '',
         [Validators.required, Validators.pattern(/^\d{13,19}$/)],
       ],
       expDate: [
-        "",
+        '',
         [
           Validators.required,
           Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/),
           this.expirationDateValidator,
         ],
       ],
-      cvv: ["", [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
+      cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
     });
   }
 
@@ -163,7 +164,7 @@ export class BookingFormComponent implements OnInit {
     await this.sleep(1000);
     this.showSuccessPopup = false;
     this.router.navigate([
-      `/tours/package/${this.route.snapshot.paramMap.get("id")}`,
+      `/tours/package/${this.route.snapshot.paramMap.get('id')}`,
     ]);
   }
   showSuccess(header: string, message: string): void {
@@ -174,7 +175,7 @@ export class BookingFormComponent implements OnInit {
   expirationDateValidator(control: any) {
     const currentDate = new Date();
     const [month, year] = control.value
-      .split("/")
+      .split('/')
       .map((x: string) => parseInt(x, 10));
     const yearNumber = parseInt(`20${year}`, 10);
     const expDate = new Date(yearNumber, month - 1);
@@ -182,16 +183,16 @@ export class BookingFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    const userId = sessionStorage.getItem("userId");
+    const userId = sessionStorage.getItem('userId');
     if (userId) {
       this.bookingForm.patchValue({ userId });
     } else {
-      alert("Please log in to continue.");
-      this.router.navigate(["/login"]);
+      alert('Please log in to continue.');
+      this.router.navigate(['/login']);
       return;
     }
 
-    const tourId = this.route.snapshot.paramMap.get("id");
+    const tourId = this.route.snapshot.paramMap.get('id');
     if (tourId) {
       this.bookingForm.patchValue({ tourId });
       this.tourPackagesService.getTourPackages().subscribe(
@@ -199,24 +200,25 @@ export class BookingFormComponent implements OnInit {
           this.packages = data.find((pkg) => pkg.TourId === tourId);
           this.bookingForm.patchValue({
             tourName: this.packages.Name,
-            bookingDate: new Date()
-          })
-          if (!this.packages) alert("Tour package not found.");
+            agencyId: this.packages.AgencyId,
+            bookingDate: new Date(),
+          });
+          if (!this.packages) alert('Tour package not found.');
         },
         (error: HttpErrorResponse) => {
-          console.error("Error fetching tour packages:", error);
-          alert("Error fetching the tour package. Please try again.");
+          console.error('Error fetching tour packages:', error);
+          alert('Error fetching the tour package. Please try again.');
         }
       );
     } else {
-      alert("Invalid tour ID.");
-      this.router.navigate(["/"]);
+      alert('Invalid tour ID.');
+      this.router.navigate(['/']);
     }
   }
 
   calculatePrice() {
-    const arrivalDate = this.bookingForm.get("arrivalDate")?.value;
-    const departureDate = this.bookingForm.get("departureDate")?.value;
+    const arrivalDate = this.bookingForm.get('arrivalDate')?.value;
+    const departureDate = this.bookingForm.get('departureDate')?.value;
 
     if (!arrivalDate || !departureDate) return;
 
@@ -226,16 +228,16 @@ export class BookingFormComponent implements OnInit {
       (arrival.getTime() - departure.getTime()) / (1000 * 3600 * 24);
 
     if (this.packages && numOfDays > 0) {
-      const adults = this.bookingForm.get("adults")?.value || 0;
-      const children = this.bookingForm.get("children")?.value || 0;
+      const adults = this.bookingForm.get('adults')?.value || 0;
+      const children = this.bookingForm.get('children')?.value || 0;
       const basePrice = Number(this.packages.Price) || 0; // Ensure price is a number
 
       this.totalPrice = basePrice * numOfDays * (adults + children * 0.5);
       this.bookingForm
-        .get("amount")
+        .get('amount')
         ?.setValue(`INR ${this.totalPrice.toFixed(2)}`);
     } else {
-      this.bookingForm.get("amount")?.setValue("");
+      this.bookingForm.get('amount')?.setValue('');
     }
   }
 
@@ -246,7 +248,7 @@ export class BookingFormComponent implements OnInit {
       this.addNewPayment();
       this.closePaymentModal();
     } else {
-      console.error("Form is invalid");
+      console.error('Form is invalid');
       this.isLoading = false;
     }
   }
@@ -254,24 +256,24 @@ export class BookingFormComponent implements OnInit {
   addNewPayment(): void {
     this.tourPackagesService.addNewPayment(this.paymentForm.value).subscribe(
       (response) => {
-        console.log("Payment successful", response);
+        console.log('Payment successful', response);
         this.updateBooking(response.id);
         this.hideLoading();
-        this.showSuccess("Success", "Payment completed successfully!");
+        this.showSuccess('Success', 'Payment completed successfully!');
       },
       (error) => {
-        console.error("Payment failed", error);
+        console.error('Payment failed', error);
         this.hideLoading();
-        this.showSuccess("Failed", "Payment failed! " + error.statusText);
+        this.showSuccess('Failed', 'Payment failed! ' + error.statusText);
       }
     );
   }
   setArrivalDateLimit(): void {
     const departureDateInput = document.getElementById(
-      "departureDate"
+      'departureDate'
     ) as HTMLInputElement;
     const arrivalDateInput = document.getElementById(
-      "arrivalDateTime"
+      'arrivalDateTime'
     ) as HTMLInputElement;
 
     if (departureDateInput && arrivalDateInput) {
@@ -291,14 +293,14 @@ export class BookingFormComponent implements OnInit {
       .updateBooking(this.bookedId, this.bookingForm.value)
       .subscribe(
         (updateResponse) =>
-          console.log("Booking updated successfully", updateResponse),
-        (updateError) => console.error("Failed to update booking", updateError)
+          console.log('Booking updated successfully', updateResponse),
+        (updateError) => console.error('Failed to update booking', updateError)
       );
   }
 
   isValid(): boolean {
     return Object.values(this.paymentForm.value).every(
-      (val) => String(val).trim() !== ""
+      (val) => String(val).trim() !== ''
     );
   }
 
@@ -308,14 +310,17 @@ export class BookingFormComponent implements OnInit {
       await this.sleep(2000);
       this.tourPackagesService.createBooking(this.bookingForm.value).subscribe(
         (response: any) => {
-          console.log("Booking Successful:", response);
+          console.log('Booking Successful:', response);
           this.bookedId = response.id;
-          this.openPaymentModal();
+          // this.openPaymentModal();
           this.hideLoading();
+          this.showSuccess('Success', 'Booked successfully!');
+          this.router.navigate([`tours/home`]);
         },
         (error: HttpErrorResponse) => {
-          console.error("Booking Error:", error);
+          console.error('Booking Error:', error);
           this.hideLoading();
+          this.showSuccess('Failed', 'Booking failed! ' + error.statusText);
         }
       );
     }

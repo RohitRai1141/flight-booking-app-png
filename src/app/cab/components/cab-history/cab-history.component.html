@@ -1,9 +1,9 @@
-<div class="header">
+<!-- <div class="header">
   <div class="logo">
     <div class="logo-text">PlanNGoHub</div>
   </div>
   <button class="back-button" (click)="goBack()">◀️ Back</button>
-</div>
+</div> -->
 
 <div class="booking-history">
   <h2>Booking History</h2>
@@ -63,6 +63,13 @@
         >
           Edit
         </button>
+        <button 
+        *ngIf="getStatusClass(booking.users?.[0]?.date, booking.status) === 'Completed' || getStatusClass(booking.users?.[0]?.date, booking.status) === 'Cancelled'" 
+        (click)="openRebookPopup(booking)"
+        class="rebook-button">
+        Book Again
+      </button>
+      
         <button (click)="viewDetails(booking.id)" class="view-button">View Details</button>
       </div>
     </div>
@@ -194,6 +201,52 @@
   </form>
 </div>
 
+
+<!-- Rebook Popup Overlay -->
+<div class="rebook-popup-overlay" *ngIf="isRebookPopupOpen" (click)="closeRebookPopup()"></div>
+
+<!-- Rebook Popup -->
+<div class="rebook-popup" *ngIf="isRebookPopupOpen">
+  <div class="rebook-popup-header">
+    <h2>Rebook Your Ride</h2>
+  </div>
+  <form class="rebook-popup-form" #rebookForm="ngForm" (ngSubmit)="confirmRebooking()">
+    <label for="newDate">New Booking Date</label>
+    <input
+      type="date"
+      [(ngModel)]="rebookDetails.date"
+      id="newDate"
+      name="newDate"
+      [min]="minDate"
+      required
+      #newDate="ngModel"
+      [ngClass]="{'is-invalid': newDate.invalid && newDate.touched}"
+    />
+    <div class="error-message" *ngIf="newDate.invalid && newDate.touched">
+      Booking Date is required.
+    </div>
+
+    <label for="dropLocation">Drop Location</label>
+    <input
+      type="text"
+      id="dropLocation"
+      [(ngModel)]="rebookDetails.dropLocation"
+      name="dropLocation"
+      placeholder="Drop Location"
+      required
+      #dropLocation="ngModel"
+      [ngClass]="{'is-invalid': dropLocation.invalid && dropLocation.touched}"
+    />
+    <div class="error-message" *ngIf="dropLocation.invalid && dropLocation.touched">
+      Drop location is required.
+    </div>
+
+    <div class="rebook-popup-buttons">
+      <button type="submit" [disabled]="rebookForm.invalid">Confirm Rebooking</button>
+      <button type="button" class="cancel-button" (click)="closeRebookPopup()">Cancel</button>
+    </div>
+  </form>
+</div>
 
 <!-- Review Popup -->
 <div class="review-popup-overlay" *ngIf="isReviewPopupOpen" (click)="closeReviewPopup()"></div>

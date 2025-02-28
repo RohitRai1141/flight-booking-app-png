@@ -1,586 +1,625 @@
 <!-- past and current bookings -->
 <div class="bookings-container"> 
-<h1>My Bookings</h1>
-
-<!-- Current Bookings Section -->
-<h2>Current Bookings</h2>
-<div *ngIf="currentBookings.length; else noCurrentBookings">
-  <div *ngFor="let booking of currentBookings">
-    <div *ngIf="booking.userid === userid" class="booking-card">
-
-      <!-- Image column -->
-      <div class="booking-image">
-        <img src="{{ booking.hotelImage }}" alt="{{ booking.hotelName }}">
-      </div>
-
-      <!-- Details columns -->
-      <div class="booking-details">
-
-        <div class="detail-column">
-          <p><fa-icon [icon]="faHotel"></fa-icon> {{ booking.hotelName }}</p>
-          <p><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ booking.location }}</p>
+  <h1>My Bookings</h1>
+  
+  <!-- Current Bookings Section -->
+  <h2>Current Bookings</h2>
+  <div *ngIf="displayedCurrentBookings.length; else noCurrentBookings">
+    <div *ngFor="let booking of displayedCurrentBookings">
+      <div *ngIf="booking.userid === userid" class="booking-card">
+  
+        <!-- Image column -->
+        <div class="booking-image">
+          <img src="{{ booking.hotelImage }}" alt="{{ booking.hotelName }}">
         </div>
-
-        <div class="detail-column">
-          <p><fa-icon [icon]="faCalendarCheck"></fa-icon> {{ booking.checkIn }} -> <fa-icon [icon]="faCalendarMinus"></fa-icon> {{ booking.checkOut }}</p>
-          <p><fa-icon [icon]="faUsers"></fa-icon> {{ booking.noOfGuests }} Guests</p>
-        </div>
-
-        <div class="detail-column">
-          <p><fa-icon [icon]="faBed"></fa-icon>{{ booking.roomType }}</p>
-          <p><fa-icon [icon]="faCircle" [style.color]="getStatusColor(booking.status)"></fa-icon> {{ booking.status }}</p>
-        </div>
-        
-        <div class="detail-column">
-          <p><fa-icon [icon]="faCloudMoon"></fa-icon> {{ booking.stayDuration }} night(s)</p>
-          <p><fa-icon [icon]="faMoneyBill"></fa-icon> ₹{{ booking.totalPayable }}</p>
-        </div>
-
-        <!-- Buttons -->
-        <div class="booking-buttons">
-          <button (click)="openDetailsPopup(booking)">View Details</button>
-          <button (click)="openCancelPopup(booking)">Cancel</button>
-          <button (click)="openEditPopup(booking)">Edit Booking</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<ng-template #noCurrentBookings>
-  <p class="no-bookings">No current bookings available.</p>
-</ng-template>
-
-<!-- Past Bookings Section -->
-<h2>Past Bookings</h2>
-<div *ngIf="pastBookings.length; else noPastBookings">
-  <div *ngFor="let booking of pastBookings">
-    <div  class="booking-card">
-      <!-- Image column -->
-      <div class="booking-image">
-        <img src="{{ booking.hotelImage }}" alt="{{ booking.hotelName }}">
-      </div>
-
-      <!-- Details columns -->
-      <div class="booking-details">
-        <div class="detail-column">
-          <p><fa-icon [icon]="faHotel"></fa-icon> {{ booking.hotelName }}</p>
-          <p><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ booking.location }}</p>
-        </div>
-        <div class="detail-column">
-          <p><fa-icon [icon]="faCalendarCheck"></fa-icon> {{ booking.checkIn }} -> <fa-icon [icon]="faCalendarMinus"></fa-icon> {{ booking.checkOut }}</p>
-          <p><fa-icon [icon]="faUsers"></fa-icon> {{ booking.noOfGuests }} Guests</p>
-        </div>
-        <div class="detail-column">
-          <p><fa-icon [icon]="faBed"></fa-icon> {{ booking.roomType }}</p>
-          <p><fa-icon [icon]="faCircle" [style.color]="getStatusColor(booking.status)"></fa-icon>  {{ booking.status }}</p>
-        </div>
-        <div class="detail-column">
-          <p><fa-icon [icon]="faCloudMoon"></fa-icon> {{ booking.stayDuration }} night(s)</p>
-          <p><fa-icon [icon]="faMoneyBill"></fa-icon> ₹{{ booking.totalPayable }}</p>
+  
+        <!-- Details columns -->
+        <div class="booking-details">
+  
+          <div class="detail-column">
+            <p><fa-icon [icon]="faHotel"></fa-icon> {{ booking.hotelName }}</p>
+            <p><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ booking.location }}</p>
           </div>
-
-        <!-- Buttons -->
-        <div class="booking-buttons">
-          <!-- <button>View Details</button>
-          <button (click)="giveReview(booking)">Give Review</button>
-          <button>Book Again</button>-->
-          <button (click)="openDetailsPopup(booking)">View Details</button>
-          <button [disabled]="booking.status === 'cancelled'" [class.disabled]="booking.status === 'cancelled'" (click)="openReviewForm(booking)">Give Review</button>
-          <button (click)="openRebookPopup(booking)">Book Again</button>
+  
+          <div class="detail-column">
+            <p><fa-icon [icon]="faCalendarCheck"></fa-icon> {{ booking.checkIn }} -> <fa-icon [icon]="faCalendarMinus"></fa-icon> {{ booking.checkOut }}</p>
+            <p><fa-icon [icon]="faUsers"></fa-icon> {{ booking.noOfGuests }} Guests</p>
+          </div>
+  
+          <div class="detail-column">
+            <p><fa-icon [icon]="faBed"></fa-icon>{{ booking.roomType }}</p>
+            <p><fa-icon [icon]="faCircle" [style.color]="getStatusColor(booking.status)"></fa-icon> {{ booking.status }}</p>
+          </div>
+          
+          <div class="detail-column">
+            <p><fa-icon [icon]="faCloudMoon"></fa-icon> {{ booking.stayDuration }} night(s)</p>
+            <p><fa-icon [icon]="faMoneyBill"></fa-icon> ₹{{ booking.totalPayable }}</p>
+          </div>
+  
+          <!-- Buttons -->
+          <div class="booking-buttons">
+            <button (click)="openDetailsPopup(booking)">View Details</button>
+            <button (click)="openCancelPopup(booking)">Cancel</button>
+            <button (click)="openEditPopup(booking)">Edit Booking</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<ng-template #noPastBookings>
-  <p class="no-bookings">No past bookings available.</p>
-</ng-template>
-</div>
-
-<!-- Details Popup -->
-<div class="popup" *ngIf="showDetailsPopup">
-  <div class="popup-content">
-    
-    <h3>Booking Details</h3>
-
-    <div class="details-grid">
-      <p><strong>Booking ID</strong></p>
-      <p>{{ selectedBooking.id }}</p>
-      <p><strong>Hotel ID</strong></p>
-      <p>{{ selectedBooking.hotelid }}</p>
-      <p><strong>Hotel</strong></p>
-      <p>{{ selectedBooking.hotelName }}</p>
-      <p><strong>Location</strong></p>
-      <p>{{ selectedBooking.location }}</p>
-      <p><strong>Booking Dates</strong></p>
-      <p>{{ selectedBooking.checkIn }} to {{ selectedBooking.checkOut }}</p>
-      <p><strong>Room Type</strong></p>
-      <p>{{ selectedBooking.roomType }}</p>
-      <p><strong>No of Rooms</strong></p>
-      <p>{{ selectedBooking.noOfrooms }}</p>
-      <p><strong>No of Guests</strong></p>
-      <p>{{ selectedBooking.noOfGuests }}</p>
-      <p><strong>Stay Duration</strong></p>
-      <p>{{ selectedBooking.stayDuration }} night(s)</p>
-      <p><strong>Total Price</strong></p>
-      <p>₹{{ selectedBooking.totalPrice }}</p>
-      <p><strong>Offer Price</strong></p>
-      <p>₹{{ selectedBooking.offer }}</p>
-      <p><strong>Net Price</strong></p>
-      <p>₹{{ selectedBooking.netPrice }}</p>
-      <p><strong>Total Payable</strong></p>
-      <p>₹{{ selectedBooking.totalPayable }}</p>
-      <p><strong>Status</strong></p>
-      <p>{{ selectedBooking.status }}</p>
+  
+  <!-- Pagination for Current Bookings -->
+  <div class="pagination-controls">
+    <!-- Rows Per Page Section -->
+    <div class="rows-per-page">
+      <label for="rowsPerPage">Rows per page</label>
+      <select id="rowsPerPage" [(ngModel)]="currentRowsPerPage" (change)="changeCurrentRowsPerPage($event)">
+        <option *ngFor="let option of currentRowsPerPageOptions" [value]="option">{{ option }}</option>
+      </select>
     </div>
-    
-    <button (click)="closeDetailsPopup()" style="color: white;">Close</button>
-  </div>
-</div>
-
-<!-- Review Popup -->
-<div class="popup" *ngIf="showReviewForm">
-  <div class="popup-content">
-    <h3>Submit Review</h3>
-    <form #reviewFormRef="ngForm" (ngSubmit)="submitReview()" novalidate>
-      <label>
-        Name:
-        <input
-          type="text"
-          [(ngModel)]="reviewForm.username"
-          name="username"
-          required
-          #usernameRef="ngModel"
-        />
-        <div *ngIf="usernameRef.invalid && usernameRef.touched" class="error">
-          Name is required.
-        </div>
-      </label>
-
-      <label>
-        Rating:
-        <select
-          [(ngModel)]="reviewForm.rating"
-          name="rating"
-          required
-          #ratingRef="ngModel"
-        >
-          <option *ngFor="let r of [1, 2, 3, 4, 5]" [value]="r">{{ r }}</option>
-        </select>
-        <div *ngIf="ratingRef.invalid && ratingRef.touched" class="error">
-          Rating is required.
-        </div>
-      </label>
-
-      <label>
-        Comment:
-        <textarea
-          [(ngModel)]="reviewForm.comment"
-          name="comment"
-          required
-          #commentRef="ngModel"
-        ></textarea>
-        <div *ngIf="commentRef.invalid && commentRef.touched" class="error">
-          Comment is required.
-        </div>
-      </label>
-
-      <button type="submit" [disabled]="reviewFormRef.invalid">Submit</button>
-      <button type="button" (click)="closeReviewForm()">Cancel</button>
-    </form>
-  </div>
-</div>
-
-<!-- Edit Booking Popup -->
-<div class="popup" *ngIf="showEditPopup">
-  <div class="popup-content">
-    <h3>Edit Booking</h3>
-    <form #editFormRef="ngForm" (ngSubmit)="submitEditForm()">
-      <!-- Main Guest Information -->
-      <label>
-        Name:
-        <input
-          type="text"
-          [(ngModel)]="editForm.name"
-          name="name"
-          #name="ngModel"
-          required
-        />
-        <div *ngIf="name.invalid && name.touched" class="error">
-          Name is required.
-        </div>
-      </label>
-      <label>
-        Age:
-        <input
-          type="number"
-          [(ngModel)]="editForm.age"
-          name="age"
-          #age="ngModel"
-          required
-          min="1"
-          max="100"
-        />
-        <div *ngIf="age.invalid && age.touched" class="error">
-          Age must be between 1 and 100.
-        </div>
-      </label>
-      <label>
-        Gender:
-        <select
-          [(ngModel)]="editForm.gender"
-          name="gender"
-          #gender="ngModel"
-          required
-        >
-          <option value="" disabled>Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-        <div *ngIf="gender.invalid && gender.touched" class="error">
-          Gender is required.
-        </div>
-      </label>
-      <label>
-        Email:
-        <input
-          type="email"
-          [(ngModel)]="editForm.email"
-          name="email"
-          #email="ngModel"
-          required
-          pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
-        />
-        <div *ngIf="email.invalid && email.touched" class="error">
-          Enter a valid email.
-        </div>
-      </label>
-      <label>
-        Phone:
-        <input
-          type="tel"
-          [(ngModel)]="editForm.phone"
-          name="phone"
-          #phone="ngModel"
-          required
-          pattern="^[0-9]{10}$"
-        />
-        <div *ngIf="phone.invalid && phone.touched" class="error">
-          Phone number must be 10 digits.
-        </div>
-      </label>
-
-      <!-- Room Type Dropdown -->
-      <label>
-        Room Type:
-        <select
-          [(ngModel)]="editForm.roomType"
-          name="roomType"
-          #roomType="ngModel"
-          required
-        >
-          <option value="" disabled>Select Room Type</option>
-          <option *ngFor="let room of availableRooms" [value]="room.type">
-            {{ room.type }} (₹{{ room.price }})
-          </option>
-        </select>
-        <div *ngIf="roomType.invalid && roomType.touched" class="error">
-          Room type is required.
-        </div>
-      </label>
-
-      <!-- Guest Details -->
-      <div>
-        <h4>Guests</h4>
-        <div
-          *ngFor="let guest of editForm.guests; let i = index"
-          class="guest-entry"
-        >
-          <label>
-            Name:
-            <input
-              type="text"
-              [(ngModel)]="guest.name"
-              [name]="'guestName' + i"
-              required
-              #guestName="ngModel"
-            />
-            <div
-              *ngIf="guestName.invalid && guestName.touched"
-              class="error"
-            >
-              Guest name is required.
-            </div>
-          </label>
-          <label>
-            Age:
-            <input
-              type="number"
-              [(ngModel)]="guest.age"
-              [name]="'guestAge' + i"
-              required
-              min="1"
-              max="100"
-              #guestAge="ngModel"
-            />
-            <div
-              *ngIf="guestAge.invalid && guestAge.touched"
-              class="error"
-            >
-              Age must be between 1 and 100.
-            </div>
-          </label>
-          <label>
-            Gender:
-            <select
-              [(ngModel)]="guest.gender"
-              [name]="'guestGender' + i"
-              required
-              #guestGender="ngModel"
-            >
-              <option value="" disabled>Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-            <div
-              *ngIf="guestGender.invalid && guestGender.touched"
-              class="error"
-            >
-              Gender is required.
-            </div>
-          </label>
-          <button type="button" (click)="removeGuest(i)">Remove</button>
-        </div>
-        <button type="button" (click)="addGuest()">Add Guest</button>
-      </div>
-
-      <!-- Price and Dates -->
-      <label>
-        Check-In Date:
-        <input
-          type="date"
-          [(ngModel)]="editForm.checkIn"
-          name="checkIn"
-          required
-          [min]="minCheckInDate"
-          #checkIn="ngModel"
-        />
-        <div *ngIf="checkIn.invalid && checkIn.touched" class="error">Check-In is required.</div>
-      </label>
-
-      <label>
-        Check-Out Date:
-        <input
-          type="date"
-          [(ngModel)]="editForm.checkOut"
-          name="checkOut"
-          required
-          [min]="getNextDate(minCheckInDate||editForm.checkIn)"
-          #checkOut="ngModel"
-        />
-        <div *ngIf="checkOut.invalid && checkOut.touched" class="error">Check-Out is required.</div>
-      </label>
-
-      <label>
-        Total Payable: ₹{{ editForm.totalPayable }}
-      </label>
-
-      <button type="submit" [disabled]="editFormRef.invalid">Submit</button>
-      <button type="button" (click)="closeEditPopup()">Cancel</button>
-    </form>
-  </div>
-</div>
-
-<!-- Rebooking Popup -->
-<div class="popup" *ngIf="showRebookPopup">
-  <div class="popup-content">
-    <h3>Rebook Hotel</h3>
-    <form #rebookFormRef="ngForm" (ngSubmit)="submitRebookForm()">
-      <!-- Main Guest Information -->
-      <label>
-        Name:
-        <input type="text" [(ngModel)]="rebookForm.name" name="name" required #name="ngModel" />
-        <div *ngIf="name.invalid && name.touched" class="error">
-          Name is required.
-        </div>
-      </label>
-      <label>
-        Age:
-        <input type="number" [(ngModel)]="rebookForm.age" name="age" required min="1" max="100" #age="ngModel" />
-        <div *ngIf="age.invalid && age.touched" class="error">
-          Age must be between 1 and 100.
-        </div>
-      </label>
-      <label>
-        Gender:
-        <select [(ngModel)]="rebookForm.gender" name="gender" required #gender="ngModel">
-          <option value="" disabled>Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-        <div *ngIf="gender.invalid && gender.touched" class="error">
-          Gender is required.
-        </div>
-      </label>
-      <label>
-        Email:
-        <input type="email" [(ngModel)]="rebookForm.email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" #email="ngModel" />
-        <div *ngIf="email.invalid && email.touched" class="error">
-          Enter a valid email.
-        </div>
-      </label>
-      <label>
-        Phone:
-        <input type="tel" [(ngModel)]="rebookForm.phone" name="phone" required pattern="^[0-9]{10}$" #phone="ngModel" />
-        <div *ngIf="phone.invalid && phone.touched" class="error">
-          Phone number must be 10 digits.
-        </div>
-      </label>
-
-      <!-- Room Type Dropdown -->
-      <label>
-        Room Type:
-        <select [(ngModel)]="rebookForm.roomType" name="roomType" required #roomType="ngModel">
-          <option value="" disabled>Select Room Type</option>
-          <option *ngFor="let room of availableRooms" [value]="room.type">
-            {{ room.type }} (₹{{ room.price }})
-          </option>
-        </select>
-        <div *ngIf="roomType.invalid && roomType.touched" class="error">
-          Room type is required.
-        </div>
-      </label>
-
-      <!-- Guest Details -->
-      <div>
-        <h4>Guests</h4>
-        <div *ngFor="let guest of rebookForm.guests; let i = index" class="guest-entry">
-          <label>
-            Name:
-            <input type="text" [(ngModel)]="guest.name" [name]="'guestName' + i" required #guestName="ngModel" />
-            <div *ngIf="guestName.invalid && guestName.touched" class="error">
-              Guest name is required.
-            </div>
-          </label>
-          <label>
-            Age:
-            <input type="number" [(ngModel)]="guest.age" [name]="'guestAge' + i" required min="1" max="100" #guestAge="ngModel" />
-            <div *ngIf="guestAge.invalid && guestAge.touched" class="error">
-              Age must be between 1 and 100.
-            </div>
-          </label>
-          <label>
-            Gender:
-            <select [(ngModel)]="guest.gender" [name]="'guestGender' + i" required #guestGender="ngModel">
-              <option value="" disabled>Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-            <div *ngIf="guestGender.invalid && guestGender.touched" class="error">
-              Gender is required.
-            </div>
-          </label>
-          <button type="button" (click)="removeRebookGuest(i)">Remove</button>
-        </div>
-        <button type="button" (click)="addRebookGuest()">Add Guest</button>
-      </div>
-
-      <!-- Price and Dates -->
-    
-      <!-- Check-In Date -->
-      <label>
-        Check-In Date:
-        <input
-          type="date"
-          [(ngModel)]="rebookForm.checkIn"
-          name="checkIn"
-          required
-          [min]="minCheckInDate"
-          #checkIn="ngModel"
-        />
-        <!-- Validation Errors for Check-In -->
-        <div *ngIf="checkIn.invalid && checkIn.touched" class="error">
-          <div *ngIf="checkIn.errors?.['required']">Check-In date is required.</div>
-          <div *ngIf="checkIn.errors?.['min']">Check-In date cannot be in the past.</div>
-        </div>
-      </label>
-
-      <!-- Check-Out Date -->
-      <label>
-        Check-Out Date:
-        <input
-          type="date"
-          [(ngModel)]="rebookForm.checkOut"
-          name="checkOut"
-          required
-          [min]="getNextDate(rebookForm.checkIn || minCheckInDate)"
-          #checkOut="ngModel"
-        />
-        <!-- Validation Errors for Check-Out -->
-        <div *ngIf="checkOut.invalid && checkOut.touched" class="error">
-          <div *ngIf="checkOut.errors?.['required']">Check-Out date is required.</div>
-          <div *ngIf="checkOut.errors?.['min']">Check-Out date must be after Check-In date.</div>
-        </div>
-      </label>
-
-      <button type="submit" [disabled]="rebookFormRef.invalid">Confirm Rebooking</button>
-      <button type="button" (click)="closeRebookPopup()">Cancel</button>
-    </form>
-  </div>
-</div>
- 
-<!-- Rebooking Success Popup -->
-<div *ngIf="showRebookingSuccessPopup" class="popup">
-  <div class="popup-content popup-content-cancel">
-    <h3>Success</h3>
-    <p>Rebooking successful</p>
-    <button (click)="closeRebookingSuccessPopup()">OK</button>
-  </div>
-</div>
-
-<!-- Cancellation Popup -->
-<div *ngIf="showCancelPopup" class="popup">
-  <div class="popup-content popup-content-cancel">
-    <h3>Confirm Cancellation</h3>
-    <p>Are you sure you want to cancel this booking?</p>
-    <div class="popup-buttons">
-      <button type="button" (click)="closeCancelPopup()" class="btn">No</button>
-      <button type="submit" (click)="confirmCancellation()" class="btn">Yes</button>
+  
+    <!-- Pagination Buttons Section -->
+    <div class="pagination-buttons">
+      <button (click)="goToCurrentPreviousPage()" [disabled]="currentCurrentPage === 1"><i><fa-icon [icon]="faArrowLeft"></fa-icon></i></button>
+      <span class="page-info">Page {{ currentCurrentPage }} of {{ currentTotalPages }}</span>
+      <button (click)="goToCurrentNextPage()" [disabled]="currentCurrentPage === currentTotalPages"><i><fa-icon [icon]="faArrowRight"></fa-icon></i></button>
     </div>
   </div>
-</div>
-
-<!-- Review Submission Success Popup -->
-<div *ngIf="showReviewSuccessPopup" class="popup">
-  <div class="popup-content popup-content-cancel">
-    <h3>Success</h3>
-    <p>Review submitted successfully</p>
-    <button (click)="closeReviewSuccessPopup()" style="width: 40%;">OK</button>
+  
+  <ng-template #noCurrentBookings>
+    <p class="no-bookings">No current bookings available.</p>
+  </ng-template>
+  
+  <!-- Past Bookings Section -->
+  <h2>Past Bookings</h2>
+  <div *ngIf="displayedPastBookings.length; else noPastBookings">
+    <div *ngFor="let booking of displayedPastBookings">
+      <div  class="booking-card">
+        <!-- Image column -->
+        <div class="booking-image">
+          <img src="{{ booking.hotelImage }}" alt="{{ booking.hotelName }}">
+        </div>
+  
+        <!-- Details columns -->
+        <div class="booking-details">
+          <div class="detail-column">
+            <p><fa-icon [icon]="faHotel"></fa-icon> {{ booking.hotelName }}</p>
+            <p><fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ booking.location }}</p>
+          </div>
+          <div class="detail-column">
+            <p><fa-icon [icon]="faCalendarCheck"></fa-icon> {{ booking.checkIn }} -> <fa-icon [icon]="faCalendarMinus"></fa-icon> {{ booking.checkOut }}</p>
+            <p><fa-icon [icon]="faUsers"></fa-icon> {{ booking.noOfGuests }} Guests</p>
+          </div>
+          <div class="detail-column">
+            <p><fa-icon [icon]="faBed"></fa-icon> {{ booking.roomType }}</p>
+            <p><fa-icon [icon]="faCircle" [style.color]="getStatusColor(booking.status)"></fa-icon>  {{ booking.status }}</p>
+          </div>
+          <div class="detail-column">
+            <p><fa-icon [icon]="faCloudMoon"></fa-icon> {{ booking.stayDuration }} night(s)</p>
+            <p><fa-icon [icon]="faMoneyBill"></fa-icon> ₹{{ booking.totalPayable }}</p>
+            </div>
+  
+          <!-- Buttons -->
+          <div class="booking-buttons">
+            <!-- <button>View Details</button>
+            <button (click)="giveReview(booking)">Give Review</button>
+            <button>Book Again</button>-->
+            <button (click)="openDetailsPopup(booking)">View Details</button>
+            <button [disabled]="booking.status === 'cancelled'" [class.disabled]="booking.status === 'cancelled'" (click)="openReviewForm(booking)">Give Review</button>
+            <button (click)="openRebookPopup(booking)">Book Again</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-
-<!-- Cancellation Success Popup -->
-<div *ngIf="showCancelSuccessPopup" class="popup">
-  <div class="popup-content popup-content-cancel">
-    <h3>Success</h3>
-    <p>Booking cancelled successfully</p>
-    <button (click)="closeCancelSuccessPopup()">OK</button>
+  
+  <!-- Pagination for Past Bookings -->
+  <div class="pagination-controls">
+    <!-- Rows Per Page Section -->
+    <div class="rows-per-page">
+      <label for="rowsPerPage">Rows per page</label>
+      <select id="rowsPerPage" [(ngModel)]="pastRowsPerPage" (change)="changePastRowsPerPage($event)">
+        <option *ngFor="let option of pastRowsPerPageOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+  
+    <!-- Pagination Buttons Section -->
+    <div class="pagination-buttons">
+      <button (click)="goToPastPreviousPage()" [disabled]="pastCurrentPage === 1"><i><fa-icon [icon]="faArrowLeft"></fa-icon></i></button>
+      <span class="page-info">Page {{ pastCurrentPage }} of {{ pastTotalPages }}</span>
+      <button (click)="goToPastNextPage()" [disabled]="pastCurrentPage === pastTotalPages"><i><fa-icon [icon]="faArrowRight"></fa-icon></i></button>
+    </div>
   </div>
-</div>
-
-<!-- Update Success Popup -->
-<div *ngIf="showUpdateSuccessPopup" class="popup">
-  <div class="popup-content popup-content-cancel">
-    <h3>Success</h3>
-    <p>Booking data updated successfully</p>
-    <button (click)="closeUpdateSuccessPopup()">OK</button>
+  
+  <ng-template #noPastBookings>
+    <p class="no-bookings">No past bookings available.</p>
+  </ng-template>
   </div>
-</div>
-
-
-<app-navigation-toggle></app-navigation-toggle>
-
+  
+  <!-- Details Popup -->
+  <div class="popup" *ngIf="showDetailsPopup">
+    <div class="popup-content">
+      
+      <h3>Booking Details</h3>
+  
+      <div class="details-grid">
+        <p><strong>Booking ID</strong></p>
+        <p>{{ selectedBooking.id }}</p>
+        <p><strong>Hotel ID</strong></p>
+        <p>{{ selectedBooking.hotelid }}</p>
+        <p><strong>Hotel</strong></p>
+        <p>{{ selectedBooking.hotelName }}</p>
+        <p><strong>Location</strong></p>
+        <p>{{ selectedBooking.location }}</p>
+        <p><strong>Booking Dates</strong></p>
+        <p>{{ selectedBooking.checkIn }} to {{ selectedBooking.checkOut }}</p>
+        <p><strong>Room Type</strong></p>
+        <p>{{ selectedBooking.roomType }}</p>
+        <p><strong>No of Rooms</strong></p>
+        <p>{{ selectedBooking.noOfrooms }}</p>
+        <p><strong>No of Guests</strong></p>
+        <p>{{ selectedBooking.noOfGuests }}</p>
+        <p><strong>Stay Duration</strong></p>
+        <p>{{ selectedBooking.stayDuration }} night(s)</p>
+        <p><strong>Total Price</strong></p>
+        <p>₹{{ selectedBooking.totalPrice }}</p>
+        <p><strong>Offer Price</strong></p>
+        <p>₹{{ selectedBooking.offer }}</p>
+        <p><strong>Net Price</strong></p>
+        <p>₹{{ selectedBooking.netPrice }}</p>
+        <p><strong>Total Payable</strong></p>
+        <p>₹{{ selectedBooking.totalPayable }}</p>
+        <p><strong>Status</strong></p>
+        <p>{{ selectedBooking.status }}</p>
+      </div>
+      
+      <button (click)="closeDetailsPopup()" style="color: white;">Close</button>
+    </div>
+  </div>
+  
+  <!-- Review Popup -->
+  <div class="popup" *ngIf="showReviewForm">
+    <div class="popup-content">
+      <h3>Submit Review</h3>
+      <form #reviewFormRef="ngForm" (ngSubmit)="submitReview()" novalidate>
+        <label>
+          Name:
+          <input
+            type="text"
+            [(ngModel)]="reviewForm.username"
+            name="username"
+            required
+            #usernameRef="ngModel"
+          />
+          <div *ngIf="usernameRef.invalid && usernameRef.touched" class="error">
+            Name is required.
+          </div>
+        </label>
+  
+        <label>
+          Rating:
+          <select
+            [(ngModel)]="reviewForm.rating"
+            name="rating"
+            required
+            #ratingRef="ngModel"
+          >
+            <option *ngFor="let r of [1, 2, 3, 4, 5]" [value]="r">{{ r }}</option>
+          </select>
+          <div *ngIf="ratingRef.invalid && ratingRef.touched" class="error">
+            Rating is required.
+          </div>
+        </label>
+  
+        <label>
+          Comment:
+          <textarea
+            [(ngModel)]="reviewForm.comment"
+            name="comment"
+            required
+            #commentRef="ngModel"
+          ></textarea>
+          <div *ngIf="commentRef.invalid && commentRef.touched" class="error">
+            Comment is required.
+          </div>
+        </label>
+  
+        <button type="submit" [disabled]="reviewFormRef.invalid">Submit</button>
+        <button type="button" (click)="closeReviewForm()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Edit Booking Popup -->
+  <div class="popup" *ngIf="showEditPopup">
+    <div class="popup-content">
+      <h3>Edit Booking</h3>
+      <form #editFormRef="ngForm" (ngSubmit)="submitEditForm()">
+        <!-- Main Guest Information -->
+        <label>
+          Name:
+          <input
+            type="text"
+            [(ngModel)]="editForm.name"
+            name="name"
+            #name="ngModel"
+            required
+          />
+          <div *ngIf="name.invalid && name.touched" class="error">
+            Name is required.
+          </div>
+        </label>
+        <label>
+          Age:
+          <input
+            type="number"
+            [(ngModel)]="editForm.age"
+            name="age"
+            #age="ngModel"
+            required
+            min="1"
+            max="100"
+          />
+          <div *ngIf="age.invalid && age.touched" class="error">
+            Age must be between 1 and 100.
+          </div>
+        </label>
+        <label>
+          Gender:
+          <select
+            [(ngModel)]="editForm.gender"
+            name="gender"
+            #gender="ngModel"
+            required
+          >
+            <option value="" disabled>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <div *ngIf="gender.invalid && gender.touched" class="error">
+            Gender is required.
+          </div>
+        </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            [(ngModel)]="editForm.email"
+            name="email"
+            #email="ngModel"
+            required
+            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+          />
+          <div *ngIf="email.invalid && email.touched" class="error">
+            Enter a valid email.
+          </div>
+        </label>
+        <label>
+          Phone:
+          <input
+            type="tel"
+            [(ngModel)]="editForm.phone"
+            name="phone"
+            #phone="ngModel"
+            required
+            pattern="^[0-9]{10}$"
+          />
+          <div *ngIf="phone.invalid && phone.touched" class="error">
+            Phone number must be 10 digits.
+          </div>
+        </label>
+  
+        <!-- Room Type Dropdown -->
+        <label>
+          Room Type:
+          <select
+            [(ngModel)]="editForm.roomType"
+            name="roomType"
+            #roomType="ngModel"
+            required
+          >
+            <option value="" disabled>Select Room Type</option>
+            <option *ngFor="let room of availableRooms" [value]="room.type">
+              {{ room.type }} (₹{{ room.price }})
+            </option>
+          </select>
+          <div *ngIf="roomType.invalid && roomType.touched" class="error">
+            Room type is required.
+          </div>
+        </label>
+  
+        <!-- Guest Details -->
+        <div>
+          <h4>Guests</h4>
+          <div
+            *ngFor="let guest of editForm.guests; let i = index"
+            class="guest-entry"
+          >
+            <label>
+              Name:
+              <input
+                type="text"
+                [(ngModel)]="guest.name"
+                [name]="'guestName' + i"
+                required
+                #guestName="ngModel"
+              />
+              <div
+                *ngIf="guestName.invalid && guestName.touched"
+                class="error"
+              >
+                Guest name is required.
+              </div>
+            </label>
+            <label>
+              Age:
+              <input
+                type="number"
+                [(ngModel)]="guest.age"
+                [name]="'guestAge' + i"
+                required
+                min="1"
+                max="100"
+                #guestAge="ngModel"
+              />
+              <div
+                *ngIf="guestAge.invalid && guestAge.touched"
+                class="error"
+              >
+                Age must be between 1 and 100.
+              </div>
+            </label>
+            <label>
+              Gender:
+              <select
+                [(ngModel)]="guest.gender"
+                [name]="'guestGender' + i"
+                required
+                #guestGender="ngModel"
+              >
+                <option value="" disabled>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              <div
+                *ngIf="guestGender.invalid && guestGender.touched"
+                class="error"
+              >
+                Gender is required.
+              </div>
+            </label>
+            <button type="button" (click)="removeGuest(i)">Remove</button>
+          </div>
+          <button type="button" (click)="addGuest()">Add Guest</button>
+        </div>
+  
+        <!-- Price and Dates -->
+        <label>
+          Check-In Date:
+          <input
+            type="date"
+            [(ngModel)]="editForm.checkIn"
+            name="checkIn"
+            required
+            [min]="minCheckInDate"
+            #checkIn="ngModel"
+          />
+          <div *ngIf="checkIn.invalid && checkIn.touched" class="error">Check-In is required.</div>
+        </label>
+  
+        <label>
+          Check-Out Date:
+          <input
+            type="date"
+            [(ngModel)]="editForm.checkOut"
+            name="checkOut"
+            required
+            [min]="getNextDate(minCheckInDate||editForm.checkIn)"
+            #checkOut="ngModel"
+          />
+          <div *ngIf="checkOut.invalid && checkOut.touched" class="error">Check-Out is required.</div>
+        </label>
+  
+        <label>
+          Total Payable: ₹{{ editForm.totalPayable }}
+        </label>
+  
+        <button type="submit" [disabled]="editFormRef.invalid">Submit</button>
+        <button type="button" (click)="closeEditPopup()">Cancel</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Rebooking Popup -->
+  <div class="popup" *ngIf="showRebookPopup">
+    <div class="popup-content">
+      <h3>Rebook Hotel</h3>
+      <form #rebookFormRef="ngForm" (ngSubmit)="submitRebookForm()">
+        <!-- Main Guest Information -->
+        <label>
+          Name:
+          <input type="text" [(ngModel)]="rebookForm.name" name="name" required #name="ngModel" />
+          <div *ngIf="name.invalid && name.touched" class="error">
+            Name is required.
+          </div>
+        </label>
+        <label>
+          Age:
+          <input type="number" [(ngModel)]="rebookForm.age" name="age" required min="1" max="100" #age="ngModel" />
+          <div *ngIf="age.invalid && age.touched" class="error">
+            Age must be between 1 and 100.
+          </div>
+        </label>
+        <label>
+          Gender:
+          <select [(ngModel)]="rebookForm.gender" name="gender" required #gender="ngModel">
+            <option value="" disabled>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+          <div *ngIf="gender.invalid && gender.touched" class="error">
+            Gender is required.
+          </div>
+        </label>
+        <label>
+          Email:
+          <input type="email" [(ngModel)]="rebookForm.email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" #email="ngModel" />
+          <div *ngIf="email.invalid && email.touched" class="error">
+            Enter a valid email.
+          </div>
+        </label>
+        <label>
+          Phone:
+          <input type="tel" [(ngModel)]="rebookForm.phone" name="phone" required pattern="^[0-9]{10}$" #phone="ngModel" />
+          <div *ngIf="phone.invalid && phone.touched" class="error">
+            Phone number must be 10 digits.
+          </div>
+        </label>
+  
+        <!-- Room Type Dropdown -->
+        <label>
+          Room Type:
+          <select [(ngModel)]="rebookForm.roomType" name="roomType" required #roomType="ngModel">
+            <option value="" disabled>Select Room Type</option>
+            <option *ngFor="let room of availableRooms" [value]="room.type">
+              {{ room.type }} (₹{{ room.price }})
+            </option>
+          </select>
+          <div *ngIf="roomType.invalid && roomType.touched" class="error">
+            Room type is required.
+          </div>
+        </label>
+  
+        <!-- Guest Details -->
+        <div>
+          <h4>Guests</h4>
+          <div *ngFor="let guest of rebookForm.guests; let i = index" class="guest-entry">
+            <label>
+              Name:
+              <input type="text" [(ngModel)]="guest.name" [name]="'guestName' + i" required #guestName="ngModel" />
+              <div *ngIf="guestName.invalid && guestName.touched" class="error">
+                Guest name is required.
+              </div>
+            </label>
+            <label>
+              Age:
+              <input type="number" [(ngModel)]="guest.age" [name]="'guestAge' + i" required min="1" max="100" #guestAge="ngModel" />
+              <div *ngIf="guestAge.invalid && guestAge.touched" class="error">
+                Age must be between 1 and 100.
+              </div>
+            </label>
+            <label>
+              Gender:
+              <select [(ngModel)]="guest.gender" [name]="'guestGender' + i" required #guestGender="ngModel">
+                <option value="" disabled>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+              <div *ngIf="guestGender.invalid && guestGender.touched" class="error">
+                Gender is required.
+              </div>
+            </label>
+            <button type="button" (click)="removeRebookGuest(i)">Remove</button>
+          </div>
+          <button type="button" (click)="addRebookGuest()">Add Guest</button>
+        </div>
+  
+        <!-- Price and Dates -->
+      
+        <!-- Check-In Date -->
+        <label>
+          Check-In Date:
+          <input
+            type="date"
+            [(ngModel)]="rebookForm.checkIn"
+            name="checkIn"
+            required
+            [min]="minCheckInDate"
+            #checkIn="ngModel"
+          />
+          <!-- Validation Errors for Check-In -->
+          <div *ngIf="checkIn.invalid && checkIn.touched" class="error">
+            <div *ngIf="checkIn.errors?.['required']">Check-In date is required.</div>
+            <div *ngIf="checkIn.errors?.['min']">Check-In date cannot be in the past.</div>
+          </div>
+        </label>
+  
+        <!-- Check-Out Date -->
+        <label>
+          Check-Out Date:
+          <input
+            type="date"
+            [(ngModel)]="rebookForm.checkOut"
+            name="checkOut"
+            required
+            [min]="getNextDate(rebookForm.checkIn || minCheckInDate)"
+            #checkOut="ngModel"
+          />
+          <!-- Validation Errors for Check-Out -->
+          <div *ngIf="checkOut.invalid && checkOut.touched" class="error">
+            <div *ngIf="checkOut.errors?.['required']">Check-Out date is required.</div>
+            <div *ngIf="checkOut.errors?.['min']">Check-Out date must be after Check-In date.</div>
+          </div>
+        </label>
+  
+        <button type="submit" [disabled]="rebookFormRef.invalid">Confirm Rebooking</button>
+        <button type="button" (click)="closeRebookPopup()">Cancel</button>
+      </form>
+    </div>
+  </div>
+   
+  <!-- Rebooking Success Popup -->
+  <div *ngIf="showRebookingSuccessPopup" class="popup">
+    <div class="popup-content popup-content-cancel">
+      <h3>Success</h3>
+      <p>Rebooking successful</p>
+      <button (click)="closeRebookingSuccessPopup()">OK</button>
+    </div>
+  </div>
+  
+  <!-- Cancellation Popup -->
+  <div *ngIf="showCancelPopup" class="popup">
+    <div class="popup-content popup-content-cancel">
+      <h3>Confirm Cancellation</h3>
+      <p>Are you sure you want to cancel this booking?</p>
+      <div class="popup-buttons">
+        <button type="button" (click)="closeCancelPopup()" class="btn">No</button>
+        <button type="submit" (click)="confirmCancellation()" class="btn">Yes</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Review Submission Success Popup -->
+  <div *ngIf="showReviewSuccessPopup" class="popup">
+    <div class="popup-content popup-content-cancel">
+      <h3>Success</h3>
+      <p>Review submitted successfully</p>
+      <button (click)="closeReviewSuccessPopup()" style="width: 40%;">OK</button>
+    </div>
+  </div>
+  
+  <!-- Cancellation Success Popup -->
+  <div *ngIf="showCancelSuccessPopup" class="popup">
+    <div class="popup-content popup-content-cancel">
+      <h3>Success</h3>
+      <p>Booking cancelled successfully</p>
+      <button (click)="closeCancelSuccessPopup()">OK</button>
+    </div>
+  </div>
+  
+  <!-- Update Success Popup -->
+  <div *ngIf="showUpdateSuccessPopup" class="popup">
+    <div class="popup-content popup-content-cancel">
+      <h3>Success</h3>
+      <p>Booking data updated successfully</p>
+      <button (click)="closeUpdateSuccessPopup()">OK</button>
+    </div>
+  </div>
+  
+  
+  <app-navigation-toggle></app-navigation-toggle>
+  
+  

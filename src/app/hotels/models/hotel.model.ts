@@ -23,6 +23,7 @@ export interface Room {
 
 export interface Hotel {
     id: string;
+    hspid: string;
     name: string;
     location: string;
     Address: string;

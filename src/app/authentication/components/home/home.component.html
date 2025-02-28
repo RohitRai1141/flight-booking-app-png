@@ -4,19 +4,49 @@
     <button class="hamburger" (click)="toggleDashboard()">☰</button>
     <div class="dashboard-menu" [class.open]="isDashboardOpen">
       <div class="profile-section">
-        <img [src]="profileData?.profilePic || defaultProfilePic" alt="Profile Picture"
-          style="text-align: center;margin-top: 10px;" class="profile-image" />
-        <input type="file" accept="image/*" #fileInput (change)="uploadProfilePicture($event)" hidden />
+        <img
+          [src]="profileData?.profilePic || defaultProfilePic"
+          alt="Profile Picture"
+          style="text-align: center; margin-top: 10px"
+          class="profile-image"
+        />
+        <input
+          type="file"
+          accept="image/*"
+          #fileInput
+          (change)="uploadProfilePicture($event)"
+          hidden
+        />
 
-        <h3 *ngIf="!isEditing">{{fullName }}</h3>
-        <input *ngIf="isEditing" [(ngModel)]="profileData!.fullName" type="text" placeholder="Enter your name" />
+        <h3 *ngIf="!isEditing">{{ fullName }}</h3>
+        <input
+          *ngIf="isEditing"
+          [(ngModel)]="profileData!.fullName"
+          type="text"
+          placeholder="Enter your name"
+        />
         <p *ngIf="!isEditing">{{ email }}</p>
-        <input *ngIf="isEditing" [(ngModel)]="profileData!.email" type="email" placeholder="Enter your email" />
+        <input
+          *ngIf="isEditing"
+          [(ngModel)]="profileData!.email"
+          type="email"
+          placeholder="Enter your email"
+        />
         <p *ngIf="!isEditing">Age: {{ profileData?.age }}</p>
-        <input *ngIf="isEditing" [(ngModel)]="profileData!.age" type="number" placeholder="Enter your age" />
+        <input
+          *ngIf="isEditing"
+          [(ngModel)]="profileData!.age"
+          type="number"
+          placeholder="Enter your age"
+        />
 
         <p *ngIf="!isEditing">Location: {{ profileData?.location }}</p>
-        <input *ngIf="isEditing" [(ngModel)]="profileData!.location" type="text" placeholder="Enter your location" />
+        <input
+          *ngIf="isEditing"
+          [(ngModel)]="profileData!.location"
+          type="text"
+          placeholder="Enter your location"
+        />
 
         <p *ngIf="!isEditing">Gender: {{ profileData?.gender }}</p>
         <select *ngIf="isEditing" [(ngModel)]="profileData!.gender">
@@ -29,51 +59,89 @@
           <button (click)="saveProfile()">Save</button>
           <button (click)="cancelEdit()">Cancel</button>
           <button (click)="triggerFileUpload()">Change Profile Picture</button>
-
         </div>
       </div>
 
       <ul class="menu-list">
-        <li><a href="#"><fa-icon [icon]="faCalendarCheck"></fa-icon>My Bookings</a></li>
-        <li><a href="#"><fa-icon [icon]="faHeart"></fa-icon>Saved Tours</a></li>
-        <li><a href="#"><fa-icon [icon]="faMoneyBillAlt"></fa-icon>Payment History</a></li>
-        <li><a href="#"><fa-icon [icon]="faCog"></fa-icon>Settings</a>
-          <button (click)="toggleTheme()">
-            Switch to {{ isDarkTheme ? 'Light' : 'Dark' }} Theme
-          </button>
+        <p-button label="📅 My Bookings " (onClick)="navigateToBookings()" styleClass="p-button-text">
+        </p-button>
+        <p-button label="❤️ Saved Tours" (onClick)="navigateToSavedTours()" styleClass="p-button-text"></p-button>
+        <p-button label="💳 Payment History" (onClick)="navigateToPayments()" styleClass="p-button-text">
+        </p-button>
+        <button (click)="toggleTheme()"
+          style="background-color: #f8eaea; color: #007bff; border: 1px solid #f8eaea; font-weight: bold; padding: 10px 15px; cursor: pointer;">
+          ☯️ Switch to {{ isDarkTheme ? 'Light' : 'Dark' }} Theme
+        </button>
 
+
+        <p-button label="↩️ Logout" (onClick)="navigateToLogin()" styleClass="p-button-text">
+        </p-button>
+        <li>
+          <a href="#"
+            ><fa-icon [icon]="faCalendarCheck"></fa-icon>My Bookings</a
+          >
         </li>
-        <li><a href="#"><fa-icon [icon]="faSignOutAlt"></fa-icon>Logout</a></li>
+        <li>
+          <a href="#"><fa-icon [icon]="faHeart"></fa-icon>Saved Tours</a>
+        </li>
+        <li>
+          <a href="#"
+            ><fa-icon [icon]="faMoneyBillAlt"></fa-icon>Payment History</a
+          >
+        </li>
+        <li>
+          <a href="#"><fa-icon [icon]="faCog"></fa-icon>Settings</a>
+          <button (click)="toggleTheme()">
+            Switch to {{ isDarkTheme ? "Light" : "Dark" }} Theme
+          </button>
+        </li>
+        <li>
+          <a href="#"><fa-icon [icon]="faSignOutAlt"></fa-icon>Logout</a>
+        </li>
       </ul>
     </div>
   </div>
-  <nav class="horizontal-navbar">
+  <!-- <nav class="horizontal-navbar">
     <ul>
-      <li><a href="/cab/home"><fa-icon [icon]="faCar"></fa-icon> Cab</a></li>
-      <li><a href="/hotels/search"><fa-icon [icon]="faHotel"></fa-icon> Hotel</a></li>
-      <li><a href="/flight/search"><fa-icon [icon]="faPlane"></fa-icon> Flight</a></li>
-      <li><a href="/tour"><fa-icon [icon]="faSuitcase"></fa-icon> Tour</a></li>
+      <li>
+        <a href="/cab/load"><fa-icon [icon]="faCar"></fa-icon> Cab</a>
+      </li>
+      <li>
+        <a href="/hotel"><fa-icon [icon]="faHotel"></fa-icon> Hotel</a>
+      </li>
+      <li>
+        <a href="/flight/search"><fa-icon [icon]="faPlane"></fa-icon> Flight</a>
+      </li>
+      <li>
+        <a href="/tour"><fa-icon [icon]="faSuitcase"></fa-icon> Tour</a>
+      </li>
     </ul>
-  </nav>
-
+  </nav> -->
 
   <!-- Hero Section -->
   <section class="hero">
-
     <div class="hero-overlay">
       <h1>
-        <fa-icon [icon]="faMapMarkedAlt" style="margin-right:10px;"></fa-icon>
+        <fa-icon [icon]="faMapMarkedAlt" style="margin-right: 10px"></fa-icon>
         Welcome to PlanNGoHub
       </h1>
-      <p> Your one-stop destination for all travel and tour management needs. We bring together the convenience of
-        booking cabs, reserving hotels,scheduling flights, and exploring personalized tour packages—all in one place. At
-        PlanNGoHub, we believe that travel should be seamless, enjoyable, and tailored to your preferences. With an
-        intuitive platform, 24/7 support, and reliable services, we simplify the complexities of travel planning.
-        Whether you're a solo traveler, a family on vacation, or a corporate team planning a retreat, PlanNGoHub ensures
-        a stress-free experience.</p>
-      <p>Our platform is built to save you time and money, offering curated travel options at the best prices.
-        Experience real-time updates, personalized recommendations, and exclusive deals that make every trip memorable.
-        With PlanNGoHub, you are not just booking a journey—you are creating stories and experiences to cherish forever.
+      <p>
+        Your one-stop destination for all travel and tour management needs. We
+        bring together the convenience of booking cabs, reserving
+        hotels,scheduling flights, and exploring personalized tour packages—all
+        in one place. At PlanNGoHub, we believe that travel should be seamless,
+        enjoyable, and tailored to your preferences. With an intuitive platform,
+        24/7 support, and reliable services, we simplify the complexities of
+        travel planning. Whether you're a solo traveler, a family on vacation,
+        or a corporate team planning a retreat, PlanNGoHub ensures a stress-free
+        experience.
+      </p>
+      <p>
+        Our platform is built to save you time and money, offering curated
+        travel options at the best prices. Experience real-time updates,
+        personalized recommendations, and exclusive deals that make every trip
+        memorable. With PlanNGoHub, you are not just booking a journey—you are
+        creating stories and experiences to cherish forever.
       </p>
       <!-- <button class="explore-button"><fa-icon [icon]="faCompass"></fa-icon>Explore Now</button> -->
     </div>
@@ -81,14 +149,22 @@
 
   <section class="cta-section">
     <div class="cta-card">
-      <img src="https://img.freepik.com/premium-photo/beach-illustration-vector_605905-9024.jpg" alt="Join Us">
+      <img
+        src="https://img.freepik.com/premium-photo/beach-illustration-vector_605905-9024.jpg"
+        alt="Join Us"
+      />
       <h3>Do You Need a Vacation?</h3>
-      <p>Join PlanNGoHub today and start your journey to relaxation and adventure.</p>
+      <p>
+        Join PlanNGoHub today and start your journey to relaxation and
+        adventure.
+      </p>
       <button class="cta-button">Join Now</button>
     </div>
     <div class="cta-card">
-      <img src="https://t4.ftcdn.net/jpg/08/86/00/93/360_F_886009397_4OAl2yHDNiNlLxmX31RQ8VXg1fiQTIIu.jpg"
-        alt="Book Now">
+      <img
+        src="https://t4.ftcdn.net/jpg/08/86/00/93/360_F_886009397_4OAl2yHDNiNlLxmX31RQ8VXg1fiQTIIu.jpg"
+        alt="Book Now"
+      />
       <h3>Plan Your Next Adventure</h3>
       <p>Find the best deals for your dream destination. Travel made simple!</p>
       <button class="cta-button">Book Now</button>
@@ -98,13 +174,13 @@
     <div class="carousel-slide">
       <img
         src="https://static.vecteezy.com/system/resources/thumbnails/013/151/036/small/light-blue-pink-orange-and-purple-gradient-background-vector.jpg"
-        alt="Explore the World">
+        alt="Explore the World"
+      />
       <div class="carousel-text">
         <h1>Adventure Awaits</h1>
         <p>Pack your bags and start your journey today!</p>
       </div>
     </div>
-
   </div>
 
   <!-- Flex Layout Content -->
@@ -114,74 +190,94 @@
       <h2><fa-icon [icon]="faGlobe"></fa-icon> Our Services</h2>
       <div class="services-grid">
         <div class="service-card">
-          <img src="https://assets.entrepreneur.com/content/3x2/2000/20160614064338-Cab.jpeg" alt="Cab Service">
+          <img
+            src="https://assets.entrepreneur.com/content/3x2/2000/20160614064338-Cab.jpeg"
+            alt="Cab Service"
+          />
           <h3><a href="#">Cab Booking</a></h3>
-          <p>Enjoy a hassle-free ride experience with our reliable cab booking services. Whether you need an airport
-            transfer, a city ride, or an outstation trip, PlanNGoHub provides:
+          <p>
+            Enjoy a hassle-free ride experience with our reliable cab booking
+            services. Whether you need an airport transfer, a city ride, or an
+            outstation trip, PlanNGoHub provides:
           </p>
           <ol>
             <li>Instant bookings with transparent pricing.</li>
             <li>Real-time driver tracking and estimated arrival times.</li>
-            <li>Options for luxury, economy, and shared rides to suit your budget.
+            <li>
+              Options for luxury, economy, and shared rides to suit your budget.
             </li>
           </ol>
-
         </div>
         <div class="service-card">
           <img
             src="https://www.usatoday.com/gcdn/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg"
-            alt="Hotel Service">
+            alt="Hotel Service"
+          />
           <h3><a href="#">Hotel Reservation</a></h3>
-          <p>Discover the perfect stay for your trip with our wide range of hotels. From budget-friendly inns to
-            luxurious resorts, we ensure: </p>
+          <p>
+            Discover the perfect stay for your trip with our wide range of
+            hotels. From budget-friendly inns to luxurious resorts, we ensure:
+          </p>
           <ol>
-            <li>Verified reviews and ratings for informed decisions.
+            <li>Verified reviews and ratings for informed decisions.</li>
+            <li>
+              Exclusive discounts and loyalty points for frequent travelers.
             </li>
-            <li>Exclusive discounts and loyalty points for frequent travelers.
-            </li>
-            <li>Easy cancellation policies for a worry-free experience.
-            </li>
+            <li>Easy cancellation policies for a worry-free experience.</li>
           </ol>
         </div>
         <div class="service-card">
-          <img src="https://assets.telegraphindia.com/telegraph/c1f195be-91a3-4b2e-9f93-3635f75763f8.jpg"
-            alt="Flight Service">
+          <img
+            src="https://assets.telegraphindia.com/telegraph/c1f195be-91a3-4b2e-9f93-3635f75763f8.jpg"
+            alt="Flight Service"
+          />
           <h3><a href="#">Flight Booking</a></h3>
-          <p>Get the best deals on flights to destinations worldwide, we provide:</p>
+          <p>
+            Get the best deals on flights to destinations worldwide, we provide:
+          </p>
           <ol>
-            <li>Price comparisons across major airlines for domestic and international routes.
+            <li>
+              Price comparisons across major airlines for domestic and
+              international routes.
             </li>
-            <li>Options to filter flights by duration, stopovers, and departure times.
+            <li>
+              Options to filter flights by duration, stopovers, and departure
+              times.
             </li>
-            <li>Notifications for fare drops and travel updates.
-            </li>
+            <li>Notifications for fare drops and travel updates.</li>
           </ol>
         </div>
         <div class="service-card">
           <img
             src="https://img.freepik.com/premium-photo/colorful-collage-famous-landmarks-from-around-world_9975-111655.jpg"
-            alt="Tour Service">
+            alt="Tour Service"
+          />
           <h3><a href="#">Tour Packages</a></h3>
-          <p>Experience the joy of tailored vacations with our personalized tour packages. Ideal for solo travelers,
-            families, or corporate teams, we provide:</p>
+          <p>
+            Experience the joy of tailored vacations with our personalized tour
+            packages. Ideal for solo travelers, families, or corporate teams, we
+            provide:
+          </p>
           <ol>
-            <li>Adventure trips, cultural tours, and leisure packages.
-            </li>
-            <li>Guides and local experts for an immersive experience.
-            </li>
-            <li>Special deals on group bookings and seasonal tours.
-            </li>
+            <li>Adventure trips, cultural tours, and leisure packages.</li>
+            <li>Guides and local experts for an immersive experience.</li>
+            <li>Special deals on group bookings and seasonal tours.</li>
           </ol>
         </div>
       </div>
     </section>
 
     <section class="quotes">
-      <h2>"Traveling - it leaves you speechless, then turns you into a storyteller."</h2>
+      <h2>
+        "Traveling - it leaves you speechless, then turns you into a
+        storyteller."
+      </h2>
       <p>- Ibn Battuta</p>
     </section>
     <section class="quotes">
-      <h2>"The world is a book, and those who do not travel read only one page."</h2>
+      <h2>
+        "The world is a book, and those who do not travel read only one page."
+      </h2>
       <p>- Saint Augustine</p>
     </section>
     <section class="quotes">
@@ -192,32 +288,38 @@
     <section class="why-choose-us">
       <h2>Why Choose PlanNGoHub?</h2>
       <p>
-        At PlanNGoHub, we take the hassle out of travel planning, offering a seamless and efficient platform that
-        combines convenience, reliability, and unbeatable value. Whether you’re booking a cab for a quick trip,
-        reserving a hotel for a getaway, or planning a fully personalized tour package, we’ve got you covered!
+        At PlanNGoHub, we take the hassle out of travel planning, offering a
+        seamless and efficient platform that combines convenience, reliability,
+        and unbeatable value. Whether you’re booking a cab for a quick trip,
+        reserving a hotel for a getaway, or planning a fully personalized tour
+        package, we’ve got you covered!
       </p>
       <ul class="features-list">
         <li>
-          <strong>All-in-One Solution:</strong> Access cab bookings, hotel reservations, flight management, and
-          personalized tour planning—all in one place.
+          <strong>All-in-One Solution:</strong> Access cab bookings, hotel
+          reservations, flight management, and personalized tour planning—all in
+          one place.
         </li>
         <li>
-          <strong>24/7 Customer Support:</strong> Get assistance anytime with our dedicated support team to ensure a
-          smooth experience.
+          <strong>24/7 Customer Support:</strong> Get assistance anytime with
+          our dedicated support team to ensure a smooth experience.
         </li>
         <li>
-          <strong>Affordable Pricing:</strong> Enjoy competitive prices and exclusive deals on all our services.
+          <strong>Affordable Pricing:</strong> Enjoy competitive prices and
+          exclusive deals on all our services.
         </li>
         <li>
-          <strong>User-Friendly Interface:</strong> Navigate with ease through our intuitive and modern website design.
+          <strong>User-Friendly Interface:</strong> Navigate with ease through
+          our intuitive and modern website design.
         </li>
         <li>
-          <strong>Verified Service Providers:</strong> Partnering with trusted and verified providers to ensure the
-          highest standards of quality and safety.
+          <strong>Verified Service Providers:</strong> Partnering with trusted
+          and verified providers to ensure the highest standards of quality and
+          safety.
         </li>
         <li>
-          <strong>Secure Transactions:</strong> Your privacy and security are our top priority, with safe and encrypted
-          payment options.
+          <strong>Secure Transactions:</strong> Your privacy and security are
+          our top priority, with safe and encrypted payment options.
         </li>
       </ul>
     </section>
@@ -225,36 +327,45 @@
     <section class="travel-facts">
       <h2>Did You Know?</h2>
       <ul>
-        <li><fa-icon [icon]="faLandmark"></fa-icon>
-          France is the most visited country in the world.</li>
-        <li><fa-icon [icon]="faUmbrellaBeach"></fa-icon>
-          There are over 25,000 islands in the Pacific Ocean.</li>
-        <li><fa-icon [icon]="faPlaneDeparture"></fa-icon> The shortest flight in the world lasts only 57 seconds!</li>
+        <li>
+          <fa-icon [icon]="faLandmark"></fa-icon> France is the most visited
+          country in the world.
+        </li>
+        <li>
+          <fa-icon [icon]="faUmbrellaBeach"></fa-icon> There are over 25,000
+          islands in the Pacific Ocean.
+        </li>
+        <li>
+          <fa-icon [icon]="faPlaneDeparture"></fa-icon> The shortest flight in
+          the world lasts only 57 seconds!
+        </li>
       </ul>
     </section>
-
-
   </div>
+  
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-content">
       <h3>About Us</h3>
-      <p>At PlanNGoHub, we are redefining the way people travel. By connecting users with a range of trusted travel
-        providers, we aim to make travel planning as easy as a few clicks. Our mission is to provide exceptional
+      <p>
+        At PlanNGoHub, we are redefining the way people travel. By connecting
+        users with a range of trusted travel providers, we aim to make travel
+        planning as easy as a few clicks. Our mission is to provide exceptional
         service, transparent pricing, and unforgettable experiences.
-
       </p>
       <h3>Contact Us</h3>
       <p>Email: support&#64;planngohub.com | Phone: +1-800-555-1234</p>
       <div class="footer-links">
         <a href="#about"><fa-icon [icon]="faInfoCircle"></fa-icon>About</a>
-        <a href="#services"><fa-icon [icon]="faConciergeBell"></fa-icon> Services</a>
-        <a href="#contact"><fa-icon [icon]="faAddressBook"></fa-icon> Contact</a>
+        <a href="#services"
+          ><fa-icon [icon]="faConciergeBell"></fa-icon> Services</a
+        >
+        <a href="#contact"
+          ><fa-icon [icon]="faAddressBook"></fa-icon> Contact</a
+        >
       </div>
       <p>© 2024 PlanNGoHub. All rights reserved.</p>
     </div>
   </footer>
 </div>
 
-
-<!-- <p-button label="sign out" (onClick)="logout()"></p-button> -->

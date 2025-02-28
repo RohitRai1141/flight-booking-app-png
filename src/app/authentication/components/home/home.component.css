@@ -1,12 +1,11 @@
-/*
 body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #f9f9f9, #e9ecef);
-    color: #333;
-  }
-  */
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f9f9f9, #e9ecef);
+  color: #333;
+}
+
 
 
 .homepage-container {
@@ -45,6 +44,17 @@ body {
   z-index: 1000;
 }
 
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  /* Allows scrolling */
+}
+
 
 .hamburger {
   background: none;
@@ -58,23 +68,31 @@ body {
 }
 
 .dashboard-menu {
-  position: absolute;
-  top: 40px;
+  position: fixed;
+  top: 65px;
   right: 0;
-  left: 0.8;
-  width: 400px;
-  background: rgba(246, 237, 237, 0.956);
-  border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  transform: translateX(110%);
+  width: 300px;
+  max-width: 80vw;
+  background: rgba(246, 237, 237, 0.96);
+  border-radius: 8px 0 0 8px;
+  box-shadow: -4px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateX(105%);
   transition: transform 0.3s ease-in-out;
+  height: calc(100vh - 50px);
+  /* Prevents going out of screen */
+  overflow-y: auto;
+  /* Enables vertical scrolling */
+  overflow-x: hidden;
+  /* Prevents horizontal scrolling */
+  padding-bottom: 35px;
+  /* Extra space for scrolling */
 }
 
-
-
+/* Ensure it opens properly */
 .dashboard-menu.open {
   transform: translateX(0);
 }
+
 
 .profile-section {
   display: flex;
@@ -106,18 +124,7 @@ body {
   text-align: center;
 }
 
-/* button {
-  padding: 10px 15px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 
-button:hover {
-  background-color: #45a049;
-} */
 
 input[type="file"] {
   display: none;
@@ -633,7 +640,7 @@ img:hover {
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: not-allowed;
   transition: all 0.3s ease;
 }
 
@@ -651,4 +658,26 @@ img:hover {
 
 .homepage-container.dark-theme .cta-button {
   background: linear-gradient(45deg, #f713d1, #e90c43);
+}
+
+.service-card ol {
+  text-align: justify;
+  list-style-position: inside;
+  padding-left: 0;
+  /* Removes extra indentation */
+  margin-left: 10px;
+  /* Adjust margin if needed */
+  max-width: 90%;
+  /* Ensures uniform width */
+}
+
+.service-card p {
+  text-align: justify;
+  list-style-position: inside;
+  padding-left: 0;
+  /* Removes extra indentation */
+  margin-left: 10px;
+  /* Adjust margin if needed */
+  max-width: 90%;
+  /* Ensures uniform width */
 }

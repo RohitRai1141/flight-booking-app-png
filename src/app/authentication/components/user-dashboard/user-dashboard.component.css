@@ -1,3 +1,28 @@
+/* Light Theme (Default) */
+.dashboard-container {
+    background-color: rgb(233, 223, 223);
+    /* Light Background */
+    color: black;
+    /* Light Text */
+}
+
+/* Dark Theme */
+.dashboard-container.dark-theme {
+    background-color: rgb(15, 15, 15);
+    /* Dark Background */
+    color: rgb(48, 47, 47);
+    /* Dark Text */
+}
+
+.dashboard-container .booking-table {
+    background-color: white;
+
+}
+
+.dashboard-container .booking-table .dark-theme {
+    background-color: black;
+}
+
 /* General Styling */
 .bookings-container,
 .payments-container {
@@ -18,7 +43,7 @@
     font-size: 26px;
     font-weight: bold;
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 15px;
     background: linear-gradient(135deg, #1565c0, #1e88e5);
     color: white;
     border-radius: 8px;
@@ -38,6 +63,7 @@ thead {
     background: linear-gradient(135deg, #1e88e5, #64b5f6);
     color: white;
     font-size: 18px;
+    width: fit-content;
 }
 
 th,
@@ -51,6 +77,60 @@ td {
 
 tbody tr:hover {
     background: #e3f2fd;
+    transition: all 0.3s ease-in-out;
+}
+
+.saved-container {
+    background: linear-gradient(135deg, #cff8d2, #95da98);
+    /* Light green gradient */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 90%;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Section Heading */
+.saved-container h2 {
+    text-align: center;
+    color: #1b5e20;
+    /* Dark green */
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: linear-gradient(135deg, #2e7d32, #66bb6a);
+    color: white;
+    border-radius: 8px;
+}
+
+.saved-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.saved-table thead {
+    background: linear-gradient(135deg, #1e88e5, #64b5f6);
+    /* Dark green to light green */
+    color: white;
+    font-size: 18px;
+}
+
+.saved-table th,
+.saved-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.saved-table tbody tr:hover {
+    background: #e8f5e9;
+    /* Light green hover effect */
     transition: all 0.3s ease-in-out;
 }
 
@@ -111,4 +191,114 @@ button.cancel-btn:hover {
 
 .payments-container h2 {
     background: linear-gradient(135deg, #d84315, #ff7043);
+}
+
+/* Styles for Request Profile Change Section */
+.request-change-container {
+    background-color: #f9f9f9;
+    /* Light grey background */
+    border: 2px solid #007bff;
+    /* Blue border */
+    border-radius: 10px;
+    /* Rounded corners */
+    padding: 20px;
+    /* Spacing inside */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    max-width: 400px;
+    /* Limit width */
+    margin: 20px auto;
+    /* Center align */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth animation */
+}
+
+.request-change-container:hover {
+    transform: scale(1.02);
+    /* Slight zoom effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    /* Deeper shadow on hover */
+}
+
+.request-change-container h3 {
+    color: #007bff;
+    /* Blue heading */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Modern font */
+    margin-bottom: 15px;
+    /* Space below heading */
+    text-align: center;
+    /* Center align text */
+}
+
+.request-change-container label {
+    display: block;
+    /* Block label for spacing */
+    margin-top: 10px;
+    /* Space above label */
+    font-weight: bold;
+    /* Bold label text */
+    color: #333;
+    /* Dark grey color */
+}
+
+.request-change-container input {
+    width: 100%;
+    /* Full width input */
+    padding: 8px;
+    /* Padding inside input */
+    margin-top: 5px;
+    /* Space above input */
+    border: 1px solid #ddd;
+    /* Light border */
+    border-radius: 5px;
+    /* Rounded input */
+    transition: border-color 0.3s ease;
+    /* Smooth border change */
+}
+
+.request-change-container input:focus {
+    border-color: #007bff;
+    /* Blue border on focus */
+    outline: none;
+    /* Remove default outline */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    /* Blue glow */
+}
+
+.request-change-container button {
+    display: block;
+    /* Block button for full width */
+    width: 100%;
+    /* Full width */
+    padding: 10px;
+    /* Padding inside button */
+    background-color: #007bff;
+    /* Blue background */
+    color: white;
+    /* White text */
+    border: none;
+    /* No border */
+    border-radius: 5px;
+    /* Rounded corners */
+    font-weight: bold;
+    /* Bold text */
+    margin-top: 15px;
+    /* Space above button */
+    cursor: pointer;
+    /* Pointer cursor */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth animation */
+}
+
+.request-change-container button:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+    box-shadow: 0 4px 8px rgba(0, 91, 179, 0.3);
+    /* Subtle shadow */
+}
+
+.request-change-container button:active {
+    background-color: #003d80;
+    /* Even darker on click */
 }

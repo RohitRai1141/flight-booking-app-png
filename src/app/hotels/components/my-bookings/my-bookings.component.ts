@@ -4,7 +4,7 @@ import { Router } from '@angular/router'; // Import Router
 import { HotelService } from '../../services/hotel.service';
 import { FormsModule} from '@angular/forms'; // Import FormsModule
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHotel, faMapMarkerAlt, faCalendarCheck, faCalendarMinus, faBed, faCircle, faMoneyBill, faCloudMoon, faUsers, faBars, faClipboardList, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHotel, faMapMarkerAlt, faCalendarCheck, faCalendarMinus, faBed, faCircle, faMoneyBill, faCloudMoon, faUsers, faBars, faClipboardList, faHome, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { NavigationToggleComponent } from '../navigation-toggle/navigation-toggle.component';
 import { Booking, Room, specialOffers } from '../../models/hotel.model';
 
@@ -18,6 +18,8 @@ import { Booking, Room, specialOffers } from '../../models/hotel.model';
   templateUrl: './my-bookings.component.html',
   styleUrls: ['./my-bookings.component.css']
 })
+
+
 export class MyBookings_Component implements OnInit {
   bookings: Booking[] = [];
   currentBookings: Booking[] = [];
@@ -26,7 +28,8 @@ export class MyBookings_Component implements OnInit {
   specialOffers: specialOffers[] = [];
 
   //userid of logged in user
-  userid: string = "USER001";
+  //userid of logged in user
+  userid: string = sessionStorage.getItem('userId') || 'USER001';
 
 
   //icons
@@ -42,6 +45,8 @@ export class MyBookings_Component implements OnInit {
   faBars = faBars;
   faClipboardList = faClipboardList;
   faHome = faHome;
+  faArrowLeft = faArrowLeft;
+  faArrowRight = faArrowRight;
 
    // Popup and Review Form State
   
@@ -102,6 +107,8 @@ export class MyBookings_Component implements OnInit {
       next: (data) => {
         this.bookings = data;
         this.segregateBookings();
+        this.updateCurrentPagination();
+        this.updatePastPagination();
       },
       error: (err) => console.error('Error fetching bookings:', err)
     });
@@ -552,5 +559,78 @@ closeRebookingSuccessPopup(): void {
   //--------------------------toggle section-------------------------------------------------
 
 
+  // --------------------------pagination-----------------------------------------------------
 
+  // for current bookings
+  
+  displayedCurrentBookings: Booking[] = [];
+  currentRowsPerPageOptions: number[] = [3, 6, 9, 12];
+  currentRowsPerPage: number = 3;
+  currentCurrentPage: number = 1;
+  currentTotalPages: number = 1;
+  
+  updateCurrentPagination(): void {
+    const startIndex = (this.currentCurrentPage - 1) * this.currentRowsPerPage;
+    const endIndex = startIndex + this.currentRowsPerPage;
+    this.displayedCurrentBookings = this.currentBookings.slice(startIndex, endIndex);
+    this.currentTotalPages = Math.ceil(this.currentBookings.length / this.currentRowsPerPage);
+    
+  }
+  
+    changeCurrentRowsPerPage(event: any): void {
+      this.currentRowsPerPage = +event.target.value;
+      this.currentCurrentPage = 1; // Reset to first page
+      this.updateCurrentPagination();
+    }
+  
+    goToCurrentPreviousPage(): void {
+      if (this.currentCurrentPage > 1) {
+        this.currentCurrentPage--;
+        this.updateCurrentPagination();
+      }
+    }
+  
+    goToCurrentNextPage(): void {
+      if (this.currentCurrentPage < this.currentTotalPages) {
+        this.currentCurrentPage++;
+        this.updateCurrentPagination();
+      }
+    }
+
+    // for past bookings
+
+    displayedPastBookings: Booking[] = [];
+    pastRowsPerPageOptions: number[] = [3, 6, 9, 12];
+    pastRowsPerPage: number = 3;
+    pastCurrentPage: number = 1;
+    pastTotalPages: number = 1;
+
+    updatePastPagination(): void {
+      const startIndex = (this.pastCurrentPage - 1) * this.pastRowsPerPage;
+      const endIndex = startIndex + this.pastRowsPerPage;
+      this.displayedPastBookings = this.pastBookings.slice(startIndex, endIndex);
+      this.pastTotalPages = Math.ceil(this.pastBookings.length / this.pastRowsPerPage);
+    }
+  
+    changePastRowsPerPage(event: any): void {
+      this.pastRowsPerPage = +event.target.value;
+      this.pastCurrentPage = 1; // Reset to first page
+      this.updatePastPagination();
+    }
+  
+    goToPastPreviousPage(): void {
+      if (this.pastCurrentPage > 1) {
+        this.pastCurrentPage--;
+        this.updatePastPagination();
+      }
+    }
+  
+    goToPastNextPage(): void {
+      if (this.pastCurrentPage < this.pastTotalPages) {
+        this.pastCurrentPage++;
+        this.updatePastPagination();
+      }
+    }
+
+  // --------------------------pagination-----------------------------------------------------
 }

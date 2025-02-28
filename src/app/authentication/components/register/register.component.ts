@@ -24,6 +24,8 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { faBirthdayCake } from '@fortawesome/free-solid-svg-icons';
 import { faVenusMars } from '@fortawesome/free-solid-svg-icons';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-register',
@@ -51,6 +53,7 @@ export class RegisterComponent {
   faEnvelope = faEnvelope;
   faVenusMars = faVenusMars;
   faMapMarkerAlt = faMapMarkerAlt;
+  faBuilding = faBuilding;
   // Simulated list of existing users (can be replaced with an API call)
   existingUsers = [
     { email: 'xyz@gmail.com', password: '4321' },
@@ -89,10 +92,19 @@ export class RegisterComponent {
     { label: 'Other', value: 'Other' },
   ];
 
-  // Role options for the dropdown
+  // Role options dropdown
   roleOptions = [
     { label: 'User', value: 'User' },
     { label: 'Admin', value: 'Admin' },
+    { label: 'Service Provider', value: 'Service Provider' }
+  ];
+
+  // Service Provider options dropdown
+  serviceProviderOptions = [
+    { label: 'Cab Service Provider', value: 'Cab Service Provider' },
+    { label: 'Hotel Service Provider', value: 'Hotel Service Provider' },
+    { label: 'Flight Service Provider', value: 'Flight Service Provider' },
+    { label: 'Tour Service Provider', value: 'Tour Service Provider' }
   ];
 
   // Method to handle registration

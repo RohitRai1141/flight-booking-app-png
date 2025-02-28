@@ -1,3 +1,57 @@
+<nav
+  class="horizontal-navbar flex justify-between items-center px-6 py-3 bg-gray-800 text-white"
+>
+  <div class="flex items-center space-x-3">
+    <img src="../assets/Logo.png" alt="Logo" class="navbar-logo w-10 h-10" />
+    <h3 class="hero-title text-lg font-semibold">PlanNGo-Hub</h3>
+  </div>
+
+  <div class="flex items-center space-x-10">
+    <ul class="flex space-x-6">
+      <li>
+        <a
+        [routerLink]="['/cab/load']"
+          class="flex items-center space-x-2 hover:text-yellow-400"
+        >
+          <fa-icon [icon]="faCar"></fa-icon> <span>Cab</span>
+        </a>
+      </li>
+      <li>
+        <a
+        [routerLink]="['/hotel']"
+          class="flex items-center space-x-2 hover:text-yellow-400"
+        >
+          <fa-icon [icon]="faHotel"></fa-icon> <span>Hotel</span>
+        </a>
+      </li>
+      <li>
+        <a
+        [routerLink]="['/flights']"
+          class="flex items-center space-x-2 hover:text-yellow-400"
+        >
+          <fa-icon [icon]="faPlane"></fa-icon> <span>Flight</span>
+        </a>
+      </li>
+      <li>
+        <a
+        [routerLink]="['/tour']"
+          class="flex items-center space-x-2 hover:text-yellow-400"
+        >
+          <fa-icon [icon]="faSuitcase"></fa-icon> <span>Tour</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Properly Aligned Logout Button -->
+    <button
+      (click)="logout()"
+      class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-md transition duration-300 ml-6"
+    >
+      Logout
+    </button>
+  </div>
+</nav>
+
 <router-outlet></router-outlet>
 
 <p-toast></p-toast>

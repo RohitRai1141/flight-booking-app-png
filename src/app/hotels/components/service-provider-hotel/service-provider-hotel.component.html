@@ -1,0 +1,198 @@
+<!-- hotel-details.component.html -->
+<div *ngIf="hotel" class="hotel-details-container">
+
+    <!-- Hotel Header Section -->
+    <div class="hotel-header">
+
+        <div class="hotel-basic">
+          <h1>{{ hotel['name'] }} <i *ngFor="let star of getFilledStars(hotel.star)"><fa-icon [icon]="faStar"></fa-icon></i></h1>
+          <p><i><fa-icon [icon]="faMapMarkerAlt"></fa-icon></i> {{ hotel['Address'] }}</p>
+          <p><i><fa-icon [icon]="faHotel"></fa-icon></i> {{ hotel['description'] }}</p>
+        </div>
+    
+        <div>
+
+          <!-- If specialOffers are available -->
+          <div  class="hotel-pricing" *ngIf="hotel?.specialOffers && hotel.specialOffers.length > 0">
+
+           <div class="prices">
+            <p class="original-price">₹{{ hotel.price }}</p>
+            <p class="offer-price">
+              ₹{{ calculateOfferPrice(hotel.price, hotel.specialOffers[0].discount) }}
+            </p>
+           </div>
+
+           <div class="desc">
+            <p class="offer-description">{{ hotel.specialOffers[0].description }}</p>
+            <p class="discount">Save {{ hotel.specialOffers[0].discount }}%!</p>
+           </div>
+            
+          </div>
+
+        
+          <!-- If no specialOffers -->
+          <div *ngIf="!hotel?.specialOffers || hotel.specialOffers.length === 0">
+            <p class="regular-price">₹{{ hotel.price }}</p>
+          </div>
+
+        </div>
+    
+    </div>
+  
+    <!-- Image Gallery -->
+    <div class="image-gallery">
+      <div *ngFor="let photo of hotel['images'].slice(0, 5)" class="photo">
+        <img [src]="photo" alt="{{ hotel['name'] }} photo" />
+      </div>
+    </div>
+
+    <!-- Amenities -->
+     <div class="amenities">
+      <h3>Amenities</h3>
+      <div class="hotel-amenities">
+      <li *ngFor="let amenity of hotel['amenities']" class="amenity-item"><i><fa-icon [icon]="getAmenityIcon(amenity)"></fa-icon></i> {{ amenity }}</li>
+      </div>
+      </div>
+  
+    <!-- rating, nearby places and surroundings -->
+    <div class="more-details">
+
+      <!-- rating -->
+      <div class="rating">
+
+        <div class="rating-label">
+        <h3>{{ hotel['rating'] }}/5</h3>
+        <span class="rating-label">{{ getRatingLabel(hotel.rating) }}</span>
+        </div>
+
+        <p>{{ getTruncatedReview(hotel['reviews'].slice(0,1)[0].comment) }}</p>
+
+        <div class="more-btn">
+          <p>{{ hotel['reviews'].slice(0,1)[0].username }}</p>
+          <a (click)="scrollToReviews()">See all reviews</a>
+        </div>
+      </div>
+
+      <!-- nearby attractions -->
+      <div class="nearby-attractions">
+        <h3>Nearby Attractions</h3>
+        <div class="hotel-nearby">
+          <li *ngFor="let attraction of hotel['nearbyAttractions']" class="amenity-item"> <i><fa-icon [icon]="faMapPin"></fa-icon></i> {{ getTruncatedString(attraction) }}</li>
+          </div>
+      </div>
+
+      <!-- surroundings -->
+      <div class="surroundings">
+        <h3>Surroundings</h3>
+        <div class="hotel-surroundings">
+          <li> <i><fa-icon [icon]="faPlane"></fa-icon></i> {{ getTruncatedString(hotel['surroundings'].Airport) }}</li>
+          <li> <i><fa-icon [icon]="faTrain"></fa-icon></i> {{ getTruncatedString(hotel['surroundings'].Train) }}</li>
+          <li> <i><fa-icon [icon]="faBus"></fa-icon> </i> {{ getTruncatedString(hotel['surroundings'].Bus) }}</li>
+          <li><a href="">View on map</a></li>
+      </div>
+      </div>
+    </div>
+    
+    <!-- Room Details -->
+    <div #rooms class="rooms">
+      <h1>Rooms</h1>
+      <div *ngFor="let room of hotel['rooms']" class="room-card">
+        <div class="room-type-img">
+          <h3>{{ room['type'] }}</h3>
+          <img [src]="room.image" alt="{{ room.type }} photo" />
+        </div>
+
+        <div class="details">
+          <ul class="room-details">
+            <li>
+              <i><fa-icon [icon]="faBed"></fa-icon></i> {{ room['bed'] }}
+            </li>
+            <li>
+              <i><fa-icon [icon]="faRulerCombined"></fa-icon></i> {{ room['size'] }}
+            </li>
+            <li *ngFor="let amenity of room['amenities']" class="amenity-item">
+              <i><fa-icon [icon]="getAmenityIcon(amenity)"></fa-icon></i> {{ amenity }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="capacity">
+          <h3>
+            <i><fa-icon [icon]="faUser"></fa-icon></i> {{ room['capacity'].adults }}
+          </h3>
+          <h3>
+            <i><fa-icon [icon]="faChild"></fa-icon></i> {{ room['capacity'].children }}
+          </h3>
+        </div>
+
+        <div class="room-price">
+          <!-- If specialOffers are available -->
+          <div *ngIf="hotel?.specialOffers && hotel.specialOffers.length > 0">
+
+            <div class="prices-room">
+              <h2 class="original-price">₹{{ room['price'] }}</h2>
+            <h2 class="offer-price">
+              ₹{{ calculateOfferPrice(room.price, hotel.specialOffers[0].discount) }}
+            </h2>
+            </div>
+
+            <div class="desc-room">
+              <p class="offer-description">{{ hotel.specialOffers[0].description }}</p>
+            <p class="discount">Save {{ hotel.specialOffers[0].discount }}%!</p>
+            </div>
+          </div>
+
+          <!-- If no specialOffers -->
+          <div *ngIf="!hotel?.specialOffers || hotel.specialOffers.length === 0">
+            <h2 class="regular-price">₹{{ room['price'] }}</h2>
+          </div>
+
+          <p>per night + taxes</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- reviews -->
+    <div #reviews class="reviews">
+
+      <h1>Reviews</h1>
+
+      <div class="review-cards">
+
+        <div *ngFor="let review of hotel['reviews']" class="review">
+
+          <div class="review-header">
+            <p><strong>{{ review['username'] }}</strong></p>
+            <p class="comment"><strong>{{ review['rating'] }} </strong><i><fa-icon [icon]="faStar"></fa-icon></i></p>
+          </div>
+
+          <p>{{ getTruncatedComments(review['comment'])}}</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- faqs -->
+    <div class="faqs">
+      <h2>Frequently Asked Questions</h2>
+      <details *ngFor="let faq of hotel['faqs']" class="faq-item">
+          <summary>{{ faq.question }}</summary>
+          <p>{{ faq.answer }}</p>
+      </details>
+    </div>
+  
+</div>
+  
+<div *ngIf="!hotel">
+    <p>Loading hotel details...</p> 
+</div>
+
+
+<app-service-provider-navigation></app-service-provider-navigation>
+
+
+
+
+  

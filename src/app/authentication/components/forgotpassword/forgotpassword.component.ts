@@ -23,73 +23,39 @@ import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
     CommonModule,
     ButtonModule,
   ],
-  templateUrl:'./forgotpassword.component.html',
+  templateUrl: './forgotpassword.component.html',
   styleUrls: ['./forgotpassword.component.css'],
 })
 export class ForgotPasswordComponent {
   email = '';
+  message = { text: '', type: '' }; // type: 'success' or 'error'
   private authService = inject(AuthService);
-  private messageService = inject(MessageService);
   private router = inject(Router);
-
-  faEnvelope=faEnvelope;
-  // constructor(private forgotPasswordService: ForgotPasswordService) {}
-
-  // onSubmit() {
-  //   if (!this.email) {
-  //     alert('Please enter your email.');
-  //     return;
-  //   }
-
-  //   this.forgotPasswordService.sendResetLink(this.email).subscribe({
-  //     next: () => {
-  //       alert(`Password reset link has been simulated for ${this.email}`);
-  //     },
-  //     error: (err) => {
-  //       console.error(err);
-  //       alert('Failed to simulate password reset. Please try again.');
-  //     },
-  //   });
-  // }
-
 
   onResetPassword() {
     if (!this.email) {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: 'Please enter your email',
-      });
+      this.message = { text: 'Please enter your email', type: 'error' };
       return;
     }
 
     this.authService.resetPassword(this.email).subscribe({
       next: (exists) => {
         if (exists) {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Password reset link has been sent to your email',
-          });
+          this.message = { text: 'Password reset link has been sent to your email', type: 'success' };
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 3000);
         } else {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: 'Email not found',
-          });
+          this.message = { text: 'Email not found', type: 'error' };
         }
       },
       error: () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Something went wrong',
-        });
+        this.message = { text: 'Something went wrong', type: 'error' };
       },
     });
   }
-}
 
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
+}

@@ -1,113 +1,87 @@
-<header style="
-  background-color: #007bff;
-  padding: 20px;
-  text-align: center;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  border-radius: 6px;
-  margin: 5px;
-  width: 590px;
-  height: 50px;
-  margin-top: 10px;
-">
-  PlanNGoHub
-</header>
-<div class="flex justify-content-center align-items-center min-h-screen">
-  <p-card header="Login" [style]="{
-    width: '450px',
-    color: 'black',
-    background: 'rgba(255, 255, 255, 0.4)',
-    marginRight: '280px',
-    marginBottom: '50px'
-  }">
-    <form #loginForm="ngForm" (ngSubmit)="onLogin()">
-      <!-- Email Field -->
-      <div class="field">
-        <label for="email">
-          <fa-icon [icon]="faEnvelope" style="margin-right: 5px; color: #007bff;"></fa-icon>
-          Email
-        </label>
-        <input type="text" pInputText [(ngModel)]="login.email" class="w-full" id="email"
-          style="background: rgba(255, 255, 255, 0.3);" name="email" #email="ngModel" required
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
-        <small *ngIf="email.invalid && (email.dirty || email.touched)" class="block p-error">
-          <span *ngIf="email.hasError('required')">Email is required</span>
-          <span *ngIf="email.hasError('pattern')">Email is invalid</span>
-        </small>
-      </div>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="w-full max-w-md p-6 bg-white shadow-lg rounded-lg">
+    <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">
+      PlanNGoHub
+    </h2>
+    <div class="bg-opacity-40 bg-white p-4 rounded-lg shadow">
+      <form #loginForm="ngForm" (ngSubmit)="onLogin()" class="space-y-4">
+        <!-- Email Field -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            <fa-icon [icon]="faEnvelope" class="mr-2 text-blue-500"></fa-icon>
+            Email
+          </label>
+          <input
+            type="text"
+            [(ngModel)]="login.email"
+            id="email"
+            name="email"
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            #email="ngModel"
+            class="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          />
 
-      <!-- Password Field -->
-      <div class="field">
-        <label for="password">
-          <fa-icon [icon]="faLock" style="margin-right: 5px; color: #007bff;"></fa-icon>
-          Password
-        </label>
-        <p-password [(ngModel)]="login.password" [feedback]="false" [toggleMask]="true" inputId="password"
-          name="password" #password="ngModel" inputStyleClass="w-full" styleClass="w-full" [inputStyle]="{
-          background: 'rgba(255,255,255,0.3)',
-          color: 'black'
-        }" required></p-password>
-        <small *ngIf="password.invalid && (password.dirty || password.touched)" class="block p-error">
-          Password is required
-        </small>
-      </div>
+          <small
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            class="text-red-500"
+          >
+            <span *ngIf="email.hasError('required')">Email is required</span>
+            <span *ngIf="email.hasError('pattern')">Email is invalid</span>
+          </small>
+        </div>
 
-      <!-- Role Dropdown Field -->
-      <!-- <div class="field">
-      <label for="role" style="margin-right: 5px;">
-        <fa-icon
-          [icon]="faUserLock"
-          style="color: #007bff;"
-        ></fa-icon>
-        Role
-      </label>
-      <p-dropdown
- [options]="roles"
- [(ngModel)]="login.role"
- name="role"
- placeholder="Select Role"
- id="role"
- styleClass="w-full"
- [style]="{ 'background': 'rgba(255,255,255,0.3)', 'color': 'black' }"
- #role="ngModel"
- required
-></p-dropdown>
+        <!-- Password Field -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">
+            <fa-icon [icon]="faLock" class="mr-2 text-blue-500"></fa-icon>
+            Password
+          </label>
+          <input
+            type="password"
+            [(ngModel)]="login.password"
+            id="password"
+            name="password"
+            required
+            #password="ngModel"
+            class="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          />
 
-      <small
-        *ngIf="role.invalid && (role.dirty || role.touched)"
-        class="block p-error"
-      >
-        Role is required
-      </small>
-    </div> -->
+          <small
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+            class="text-red-500"
+          >
+            Password is required
+          </small>
+        </div>
 
-      <!-- Sign-In Button -->
-      <p-button 
-            label="SIGN IN" 
-            styleClass="w-full" 
-            type="submit"
-            [disabled]="loginForm.invalid"
+        <button
+          type="submit"
+          class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
+          [disabled]="loginForm.invalid"
+        >
+          SIGN IN
+        </button>
+
+        <!-- Links to Register and Forgot Password -->
+        <div class="text-center mt-4">
+          <span class="text-gray-600">Not a member?</span>
+          <div class="flex justify-center space-x-4 mt-2">
+            <button
+              (click)="navigateToRegister()"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
             >
-          </p-button>
-
-      <!-- Links to Register and Forgot Password -->
-      <div class="mt-2 text-center">
-        <span style="
-          font-family: 'Poppins', sans-serif;
-          font-size: 18px;
-          margin-right: 200px;
-          line-height: 2.0;
-        ">Not a member?</span>
-        <p-button label="Register" class="p-button-text" (onClick)="navigateToRegister()" [style]="{
-          background: 'none',
-          color: 'black',
-          marginTop: '20px',
-          marginRight: '8px'
-        }"></p-button>
-        <p-button label="Forgotpassword" class="p-button-text" (onClick)="navigateToForgotpassword()"
-          [style]="{ background: 'none', color: 'black', marginTop: '20px' }"></p-button>
-      </div>
-    </form>
-  </p-card>
-</div>
+              Register
+            </button>
+            <button
+              (click)="navigateToForgotpassword()"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            >
+              Forgot Password
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>

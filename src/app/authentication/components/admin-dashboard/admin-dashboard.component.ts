@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, inject, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { NgChartsModule } from 'ng2-charts';
 import { ChartConfiguration } from 'chart.js';
@@ -6,6 +6,8 @@ import { User } from '../../models/auth';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
 
 import { faCar } from '@fortawesome/free-solid-svg-icons';
 import { faHotel } from '@fortawesome/free-solid-svg-icons';
@@ -20,16 +22,19 @@ import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faVenusMars } from '@fortawesome/free-solid-svg-icons';
 import { faChartBar } from '@fortawesome/free-solid-svg-icons';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
   templateUrl: './admin-dashboard.component.html',
   styleUrls: ['./admin-dashboard.component.css'],
-  imports: [CommonModule, NgChartsModule, FormsModule, FontAwesomeModule],
+  imports: [CommonModule, ButtonModule, NgChartsModule, FormsModule, FontAwesomeModule],
 })
 export class AdminDashboardComponent implements OnInit {
   isDarkTheme = false;
+  private router = inject(Router);
+
 
   toggleTheme(): void {
     this.isDarkTheme = !this.isDarkTheme;
@@ -67,6 +72,7 @@ export class AdminDashboardComponent implements OnInit {
   faVenusMars = faVenusMars;
   faChartBar = faChartBar;
   faUsers = faUsers;
+  faTrash = faTrash;
   users: User[] = [];
   totalUsers = 0;
   isDashboardOpen = false;
@@ -80,6 +86,7 @@ export class AdminDashboardComponent implements OnInit {
   itemsPerPage = 8; // Number of users per page
   Math = Math; // Add Math reference
   totalPages: number[] = []; // Array for pagination buttons
+  changeRequests: any[] = [];
 
   defaultProfilePic = 'https://via.placeholder.com/150'; // Default profile picture
 
@@ -104,6 +111,8 @@ export class AdminDashboardComponent implements OnInit {
       console.error('No user ID found in sessionStorage.');
     }
     this.fetchUsers();
+    this.fetchChangeRequests(); // Load requests on admin dashboard
+
   }
 
   loadProfile(): void {
@@ -270,8 +279,10 @@ export class AdminDashboardComponent implements OnInit {
           backgroundColor: isDarkTheme ? lightThemeColor : darkThemeColor,
           borderColor: isDarkTheme ? '#0D47A1' : '#167cc9', // Adjust border colors for better contrast
           fill: false,
+
         },
       ],
+
     };
   }
 
@@ -304,5 +315,83 @@ export class AdminDashboardComponent implements OnInit {
         },
       });
     }
+  }
+  searchUserId: string = ''; // Stores the input User ID
+  searchedUser: any | null = null; // Stores the user found
+
+  /** ✅ Search User by ID */
+  searchUser(): void {
+    if (!this.searchUserId.trim()) {
+      alert('Please enter a User ID to search.');
+      return;
+    }
+
+    this.http.get<any>(`http://localhost:3000/users/${this.searchUserId}`).subscribe({
+      next: (user) => {
+        this.searchedUser = user;
+      },
+      error: () => {
+        this.searchedUser = null;
+        alert('User not found!');
+      }
+    });
+  }
+
+  /** ✅ Delete User */
+  deleteUser(): void {
+    if (!this.searchedUser) {
+      alert('No user selected to delete.');
+      return;
+    }
+
+    if (confirm(`Are you sure you want to delete user ${this.searchedUser.id}?`)) {
+      this.http.delete(`http://localhost:3000/users/${this.searchedUser.id}`).subscribe({
+        next: () => {
+          alert('User deleted successfully!');
+          this.searchedUser = null; // Clear the searched result
+        },
+        error: (err) => console.error('Error deleting user:', err)
+      });
+    }
+  }
+
+
+  // Fetch change requests
+  fetchChangeRequests(): void {
+    this.http.get<any[]>('http://localhost:3000/changeRequests').subscribe({
+      next: (data) => this.changeRequests = data,
+      error: (err) => console.error('Error fetching requests:', err)
+    });
+  }
+
+  // Approve request (Admin updates user data)
+  approveRequest(request: any): void {
+    const updatedUser = { fullName: request.fullName, age: request.age, location: request.location };
+
+    this.http.patch(`http://localhost:3000/users/${request.userId}`, updatedUser).subscribe({
+      next: () => {
+        this.deleteRequest(request.id);
+        alert(`User ${request.userId} updated successfully!`);
+      },
+      error: (err) => console.error('Error updating user:', err)
+    });
+  }
+
+  // Reject request (Admin removes request from db)
+  rejectRequest(requestId: string): void {
+    this.deleteRequest(requestId);
+    alert('Request rejected!');
+  }
+
+  // Delete request from database
+  deleteRequest(requestId: string): void {
+    this.http.delete(`http://localhost:3000/changeRequests/${requestId}`).subscribe({
+      next: () => this.fetchChangeRequests(),
+      error: (err) => console.error('Error deleting request:', err)
+    });
+  }
+  navigateToLogin() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

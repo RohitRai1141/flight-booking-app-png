@@ -14,8 +14,26 @@ export class AuthService {
 
   registerUser(postData: RegisterPostData): Observable<any> {
     return new Observable((observer) => {
-      const role = postData.role; // Get the role of the user
-      const idPrefix = role === 'Admin' ? 'AD' : 'PG';
+      let idPrefix = 'PG'; // Default prefix for regular users
+
+      console.log(postData.role);
+      switch (postData.role) {
+        case 'Admin':
+          idPrefix = 'AD';
+          break;
+        case 'Cab Service Provider':
+          idPrefix = 'SPC';
+          break;
+        case 'Hotel Service Provider':
+          idPrefix = 'SPH';
+          break;
+        case 'Flight Service Provider':
+          idPrefix = 'SPF';
+          break;
+        case 'Tour Service Provider':
+          idPrefix = 'SPT';
+          break;
+      }
 
       this.http.get<User[]>(`${this.baseUrl}/users`).subscribe(
         (users) => {
@@ -23,10 +41,11 @@ export class AuthService {
           const ids = filteredUsers
             .map((user) => (user.id ? parseInt(user.id.replace(idPrefix, ''), 10) : NaN))
             .filter((num) => !isNaN(num));
+
           const maxId = Math.max(0, ...ids);
           const nextId = `${idPrefix}${(maxId + 1).toString().padStart(3, '0')}`;
 
-          // Create the new user data with the generated ID
+          // Create new user with generated ID
           const userData = { ...postData, id: nextId };
 
           this.http.post(`${this.baseUrl}/users`, userData).subscribe(
@@ -41,6 +60,7 @@ export class AuthService {
       );
     });
   }
+
 
   // Get User Details for Login
   getUserDetails(email: string, password: string): Observable<User[]> {

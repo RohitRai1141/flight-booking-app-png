@@ -23,6 +23,7 @@ export interface User {
   location: string;
   name: string;
   profilePic: string;
+  agencyId: string;
 }
 export interface User {
   id: string;

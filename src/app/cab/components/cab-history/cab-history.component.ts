@@ -34,6 +34,8 @@ export class BookingHistoryComponent implements OnInit {
   statusFilter: string = '';  
   review = { comment: '', rating:0 };
   reviews: any[] = []; 
+  isRebookPopupOpen = false;
+rebookDetails: any = {};
 
   openEditPopup(booking: any) {
     // this.currentBooking = { ...booking.users?.[0] }; 
@@ -269,8 +271,76 @@ openReviewPopup(booking: Booking): void {
     this.router.navigate(['/cab/cab-booking', id]);    
   }
    
+   
+  openRebookPopup(booking: any) {
+    if (!booking) {
+      console.error("Error: No booking data available for rebooking.");
+      return;
+    }
+  
+    this.currentBooking = { ...booking };  
+  
+    if (!this.currentBooking.users || !Array.isArray(this.currentBooking.users)) {
+      console.error("Error: Users data is missing in booking:", this.currentBooking);
+      return;
+    }
+  
+    this.rebookDetails = {
+      date: '', // Reset new date input
+      dropLocation: booking.cab?.[0]?.dropLocation || ''
+    };
+  
+    this.isRebookPopupOpen = true;
+  }
+  
 
- 
+  closeRebookPopup() {
+    this.isRebookPopupOpen = false;
+  }
+  
+  confirmRebooking() {
+    if (!this.currentBooking || !this.currentBooking.users || !Array.isArray(this.currentBooking.users)) {
+      console.error("Error: currentBooking or users is undefined", this.currentBooking);
+      return;
+    }
+  
+    if (!this.rebookDetails.date || !this.rebookDetails.dropLocation) {
+      console.error("Error: Missing rebooking details.");
+      return;
+    }
+  
+    const updatedBooking = {
+      ...this.currentBooking,
+      users: this.currentBooking.users.map((user: any) => ({
+        ...user,
+        date: this.rebookDetails.date,  
+      })),
+      status: "Upcoming",  
+    };
+  
+    console.log("Rebooking confirmed:", updatedBooking);
+  
+    // Update the booking in the database (db.json)
+    this.cabService.updateBooking(updatedBooking, updatedBooking.id).subscribe(
+      (response) => {
+        console.log("Booking updated successfully in DB:", response);
+  
+        // Find and update the booking in the UI
+        const index = this.bookings.findIndex((b) => b.id === updatedBooking.id);
+        if (index !== -1) {
+          this.bookings[index] = updatedBooking;
+          this.filterBookings();  
+        }
+  
+        this.isRebookPopupOpen = false;  
+      },
+      (error) => {
+        console.error("Error updating booking in DB:", error);
+      }
+    );
+  }
+  
+  
   goBack(): void {
     this.router.navigate(['/cab/home']);  
   }

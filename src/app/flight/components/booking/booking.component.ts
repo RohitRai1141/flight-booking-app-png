@@ -118,10 +118,10 @@ export class BookingComponent {
     }
 
     if (!passenger.postalCode?.trim()) {
-      errors.postalCode = 'Postal code is required';
+      errors.postalCode = 'Passport number is required';
       isValid = false;
     } else if (!/^[A-Z0-9]{8,9}$/i.test(passenger.postalCode.trim())) {
-      errors.postalCode = 'Invalid postal code format';
+      errors.postalCode = 'Invalid passport number';
       isValid = false;
     }
 

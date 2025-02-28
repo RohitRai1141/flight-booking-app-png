@@ -10,21 +10,29 @@ import { CommonModule } from '@angular/common';
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.css'],  
 })
-export class DemoComponent {
-  selectedRole: string = 'end-user'; // Default role
+export class Cab_Demo_Component {
 
-  constructor(private router: Router) {}
-
-  onLogin(): void {
-    switch (this.selectedRole) {
-      case 'user':
+  constructor(private router: Router) {
+    const user = sessionStorage.getItem('role');
+    this.checkUser(user);
+  }
+  private sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  async checkUser(user: String | null): Promise<void>{
+    await this.sleep(1500);
+    switch (user) {
+      case 'User':
         this.router.navigate(['/cab/home']);  
         break;
-      case 'admin':
+      case 'Cab Service Provider':
+          this.router.navigate(['/service/cab-service']);  
+          break;
+      case 'Admin':
         this.router.navigate(['/admin/dashboard']);  
         break;
-      default:
-        console.error('Invalid role selected');  
+      case null:
+        history.back();
     }
   }
 }

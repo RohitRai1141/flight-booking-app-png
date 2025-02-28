@@ -1,0 +1,243 @@
+ 
+.admin-container {
+    padding:30px;
+    font-family: Arial, sans-serif;
+    text-align: center ;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    margin: auto;
+    /* background-color:rgba(123, 140, 186, 0.912); */
+    background-color: #bdcbe2; 
+  }
+  
+  .header {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 40px;  
+  }
+  
+  /* Cards Section */
+  .cards {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 40px;
+    margin-bottom:  60px; /* Increased space between cards and the title */
+  }
+  
+  .card {
+    flex: 1;
+    max-width: 260px;
+    background: lightgray;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 28px;
+    text-align: center;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.895);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Charts Section */
+  .charts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    max-width: 80%;
+    margin: auto;
+  }
+  
+  /* Reduce Pie Chart Sizes */
+  .charts > div {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    min-height: 250px; /* Reduce height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Pie Chart Canvas Size */
+  .charts canvas {
+    max-width: 380px; /* Reduce size */
+    max-height: 380px;
+  }
+  
+  /* Bar Chart */
+  .bar-chart {
+    grid-column: span 2;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* FAB Menu */
+
+.fixed {
+    position: fixed;
+  }
+  
+  .bottom-5 {
+    bottom: 1.25rem;  
+  }
+  
+  .right-5 {
+    right: 1.25rem;  
+  }
+  
+  .z-50 {
+    z-index: 50; 
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .space-y-reverse {
+    --tw-space-y-reverse: 1;
+  }
+  
+  .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: calc(1rem * var(--tw-space-y-reverse));
+    margin-bottom: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;  
+  }
+  
+  .transition-all {
+    transition-property: all;
+  }
+  
+  .duration-300 {
+    transition-duration: 300ms;
+  }
+  
+  .opacity-0 {
+    opacity: 0;
+  }
+  
+  .translate-y-10 {
+    transform: translateY(2.5rem);  
+  }
+  
+  .pointer-events-none {
+    pointer-events: none;
+  }
+  
+  .opacity-100 {
+    opacity: 1;
+  }
+  
+  .translate-y-0 {
+    transform: translateY(0);
+  }
+  
+  .w-12 {
+    width: 3rem;  
+  }
+  
+  .h-12 {
+    height: 3rem;  
+  }
+  
+  .bg-white {
+    background-color: #c0d1e4;
+  }
+  
+  .text-teal-600 {
+    color: #319795;  
+  }
+  
+  .rounded-full {
+    border-radius: 9999px;
+  }
+  
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .border {
+    border-width: 1px;
+  }
+  
+  .border-teal-600 {
+    border-color: #003366;  
+  }
+  
+  .hover\:bg-teal-600:hover {
+    background-color:  #003366;;
+  }
+  
+  .hover\:text-white:hover {
+    color: white;
+  }
+  
+  .transition-colors {
+    transition-property: color, background-color;
+  }
+  
+  .w-16 {
+    width: 4rem;  
+  }
+  
+  .h-16 {
+    height: 4rem; 
+  }
+  
+  .bg-teal-600 {
+    background-color:  #113b64;;
+  }
+  
+  .text-white {
+    color: white;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-3xl {
+    font-size: 1.875rem;  
+  }
+  
+  .hover\:scale-110:hover {
+    transform: scale(1.1);  
+  }
+  
+  .transition-transform {
+    transition-property: transform;
+  }
+  .text-emoji {
+    font-size: 1.5rem;  
+    line-height: 1;
+  }

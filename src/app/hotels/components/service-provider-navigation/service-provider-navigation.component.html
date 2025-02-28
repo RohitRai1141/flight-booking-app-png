@@ -1,0 +1,11 @@
+<!-- Floating Toggle Button -->
+<div class="toggle-btn" (click)="toggleMenu()">
+    <i><fa-icon [icon]="faBars"></fa-icon></i>
+</div>
+  
+  <!-- Navigation Buttons -->
+  <div class="circle-menu" *ngIf="isMenuOpen">
+    <button (click)="navigateToDashboard()" class="circle-btn" title="Dashboard"><i><fa-icon [icon]="faChartArea"></fa-icon></i></button>
+    <button (click)="navigateToHotels()" class="circle-btn" title="Hotels"><i><fa-icon [icon]="faHotel"></fa-icon></i></button>
+  </div>
+  

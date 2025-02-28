@@ -1,1 +1,48 @@
-<p>admin-dashboard works!</p>
+<div class="dashboard">
+    <h1>Admin Dashboard</h1>
+  
+    <!-- Metrics -->
+    <div class="metrics">
+      <div class="metric">
+        <h3>Total Bookings</h3>
+        <p>{{ totalBookings }}</p>
+      </div>
+      <div class="metric">
+        <h3>Total Revenue</h3>
+        <p>{{ totalRevenue | currency:'INR' }}</p>
+      </div>
+      <div class="metric">
+        <h3>Total Visits</h3>
+        <p>{{ totalVisits }}</p>
+      </div>
+      <div class="metric">
+        <h3>Total Hotels</h3>
+        <p>{{ totalHotels }}</p>
+      </div>
+    </div>
+  
+    <!-- Charts -->
+    <div class="charts">
+      <!-- Popular Hotels Pie Chart -->
+      <div class="chart">
+        <h3>Popular Hotels</h3>
+        <canvas baseChart
+                [data]="popularHotelsData"
+                [type]="'pie'">
+        </canvas>
+      </div>
+  
+      <!-- Booking Status Bar Chart -->
+      <div class="chart">
+        <h3>Booking Status</h3>
+        <canvas baseChart
+                [data]="bookingStatusData"
+                [type]="'bar'">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Navigation -->
+<app-admin-navigation></app-admin-navigation>

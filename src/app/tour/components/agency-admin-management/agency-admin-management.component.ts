@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms'; // Import FormsModule
 import { TourPackagesService } from '../../services/tour-packages.service'; // Import the service
 import { HttpClient } from '@angular/common/http';
+// Import any necessary Angular modules for standalone components
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -16,12 +17,14 @@ export class AgencyAdminManagementComponent implements OnInit {
   agencyId!: string;
 
   tours: any[] = [];
+  dbUrl = 'path/to/db.json';
   filteredPackages: any[] = [];
   currentPage: number = 1;
   rowsPerPage: number = 10;
   currentPageStart: number = 1;
   currentPageEnd: number = 10;
   searchTerm: string = '';
+  isFabMenuOpen = false;
 
   //for adding new tour package
   isAddTourModalOpen = false;
@@ -108,6 +111,10 @@ export class AgencyAdminManagementComponent implements OnInit {
     this.fetchLocations();
     console.log('Initial tours data:', this.tours);
 
+  }
+
+  toggleFabMenu(): void {
+    this.isFabMenuOpen = !this.isFabMenuOpen;
   }
 
   //getting tour types

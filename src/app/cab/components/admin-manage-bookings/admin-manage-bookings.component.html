@@ -70,7 +70,7 @@
           <button (click)="openEditPopup(booking)" title="Edit Booking"[disabled]="booking.status === 'Cancelled' || booking.status === 'Completed'">📝</button>
           <button (click)="cancelBooking(booking)"  title="Cancel Booking"[disabled]="booking.status === 'Cancelled' || booking.status === 'Completed'">❌</button>
           <button (click)="viewBooking(booking)" title="View Booking">👁️</button>
-          <button (click)="deleteBooking(booking)" title="Delete Booking Data">🗑</button>
+          <button (click)="confirmDelete(booking)" title="Delete Booking Data">🗑</button>
         </td>
       </tr>
     </tbody>
@@ -126,6 +126,58 @@
       </div>
     </div>
   </div>
+
+
+
+<!-- Modal for editing booking details -->
+<div class="modal" [ngClass]="{ 'is-active': showEditPopup }">
+  <div class="modal-background" (click)="showEditPopup = false"></div>
+  <div class="modal-content">
+    <div class="modal-box">
+      <h2>Booking Details</h2>
+
+      <!-- Pickup Location -->
+      <p><strong>Pickup Location:</strong></p>
+      <input type="text" [(ngModel)]="editPickupLocation" placeholder="Enter Pickup Location" #pickup="ngModel" required
+        [ngClass]="{'invalid': editPickupLocation === editDropLocation}" />
+      <!-- Error Message for Same Locations -->
+      <div *ngIf="editPickupLocation === editDropLocation && editPickupLocation && editDropLocation"
+        class="error-message">
+        Both are same locations!
+      </div>
+
+      <!-- Drop Location -->
+      <p><strong>Drop Location:</strong></p>
+      <input type="text" [(ngModel)]="editDropLocation" placeholder="Enter Drop Location" #drop="ngModel" required
+        [ngClass]="{'invalid': editPickupLocation === editDropLocation}" />
+      <!-- Error Message for Same Locations -->
+      <div *ngIf="editPickupLocation === editDropLocation && editPickupLocation && editDropLocation"
+        class="error-message">
+        Both are same locations!
+      </div>
+
+      <!-- Date -->
+      <p><strong>Date:</strong></p>
+      <input type="date" [(ngModel)]="editDate" placeholder="Select Date" />
+
+      <div class="modal-actions">
+        <button class="btn-close" (click)="showEditPopup = false">Close</button>
+        <button class="btn-save" (click)="saveBookingEdits()"
+          [disabled]="editPickupLocation === editDropLocation">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- Delete Confirmation Popup -->
+<div *ngIf="showDeletePopup" class="popup-overlay">
+  <div class="popup-content">
+    <h3>Are you sure you want to delete this booking from history?</h3>
+    <button (click)="confirmDeleteBooking()">Yes</button>
+    <button (click)="closeDeletePopup()">No</button>
+  </div>
+</div>
+
 
   <!-- Floating Action Button -->
   <div class="fixed bottom-5 right-5 z-50 flex flex-col items-center">

@@ -42,6 +42,8 @@ export class AdminManageBookingsComponent implements OnInit {
   totalPages: number = 1;
   minDate: string;
   maxDate: string;
+  showDeletePopup: boolean = false;
+
 
   constructor(private cabService: CabService, private router: Router) {
     const today = new Date();
@@ -144,22 +146,67 @@ export class AdminManageBookingsComponent implements OnInit {
     this.selectedBooking = null;
   }
 
+  
+
   saveBookingEdits(): void {
     if (this.selectedBooking) {
       this.selectedBooking.cab[0].location = this.editPickupLocation;
       this.selectedBooking.cab[0].dropLocation = this.editDropLocation;
       this.selectedBooking.users[0].date = this.editDate;
+   
+      this.cabService.updateBooking(this.selectedBooking, this.selectedBooking.id).subscribe({
+        next: () => {
+          console.log('Booking updated successfully!');
+          this.fetchBookings();  
+        },
+        error: (err) => {
+          console.error('Error updating booking:', err);
+        },
+      });
     }
+  
+    // Close the edit popup
     this.closeEditPopup();
   }
+  
 
   viewBooking(booking: any): void {
     this.selectedBooking = booking;
     this.showDetailsPopup = true;
   }
-  deleteBooking(booking:any):void{
-    
+
+
+  confirmDeleteBooking(): void {
+    if (this.selectedBooking) {
+      const bookingId = this.selectedBooking.id;
+      this.cabService.deleteBooking(bookingId).subscribe({
+        next: () => {
+          // Remove the deleted booking from the UI
+          this.bookings = this.bookings.filter(b => b.id !== bookingId);
+          this.filteredBookings = this.filteredBookings.filter(b => b.id !== bookingId);
+          this.applyFilters(); // Refresh the UI after deletion
+          console.log('Booking deleted successfully.');
+          this.showDeletePopup = false; // Close the popup after confirmation
+        },
+        error: (err) => {
+          console.error('Error deleting booking:', err);
+          this.showDeletePopup = false; // Close the popup in case of error
+        }
+      });
+    }
   }
+
+    confirmDelete(booking: any): void {
+      this.selectedBooking = booking;
+      this.showDeletePopup = true;  
+     }
+
+
+
+      closeDeletePopup(): void {
+       this.showDeletePopup = false;  
+      }
+
 
   closeDetailsPopup(): void {
     this.showDetailsPopup = false;

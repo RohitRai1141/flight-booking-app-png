@@ -9,22 +9,22 @@ import { Router } from '@angular/router';
   styleUrl: './demopage.component.css',
 })
 export class DemopageComponent {
-  selectedRole: string = 'end-user'; // Default role
   constructor(private router: Router) {
     const user = sessionStorage.getItem('role');
-    this.checkUser(user);
+    const agencyId = sessionStorage.getItem('agencyId');
+    this.checkUser(user, agencyId);
   }
   private sleep(ms: number): Promise<void> {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-  async checkUser(user: String | null): Promise<void>{
+  async checkUser(user: String | null, agencyId: String | null): Promise<void>{
     await this.sleep(1500);
     switch (user) {
       case 'User':
         this.router.navigate(['/tours/home']);
         break;
-      case 'SubAdmin':
-        this.router.navigate(['tours/agencyadmin/AG001/dashboard/packages']);
+      case 'Tour Service Provider':
+        this.router.navigate([`tours/agencyadmin/${agencyId}/dashboard`]);
         break;
       case 'Admin':
         this.router.navigate(['tours/superadmin/dashboard']);

@@ -1,0 +1,35 @@
+.dashboard {
+    padding: 20px;
+    padding-top:0;
+  }
+  
+  .metrics {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .metric {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 23%;
+  }
+  
+  .charts {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .chart {
+    width: 48%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .chart canvas {
+    width: 90% !important;
+    height: 500px !important;
+  }

@@ -1,0 +1,61 @@
+<div class="dashboard-container">
+    <h1 class="title">Service Provider</h1>
+  
+    <!-- Search Bar -->
+    <div class="search-container">
+      <input
+        type="text"
+        [(ngModel)]="agencyId"
+        placeholder="Enter AGENCY ID"
+        class="search-input"
+      />
+      <button (click)="searchByAgencyId()" class="search-icon-button">🔍</button>
+    </div>
+  
+    <!-- Error Popup Box -->
+    <div *ngIf="isInvalidInput" class="error-popup">
+      <span class="error-icon">⚠️</span> Enter Valid Data
+    </div>
+  
+    <!-- Agency Name -->
+    <h2 *ngIf="agencyName" class="agency-name">{{ agencyName }}</h2>
+  
+    <!-- Cab List in Table Format -->
+    <table *ngIf="filteredCabs.length > 0" class="cab-table">
+      <thead>
+        <tr>
+          <th>Cab ID</th>
+          <th>Driver Name</th>
+          <th>Type</th>
+          <th>Contact Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cab of filteredCabs">
+          <td>{{ cab.id }}</td>
+          <td>{{ cab.driverName }}</td>
+          <td>{{ cab.type }}</td>
+          <td>{{ cab.contactNumber }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Message when no cabs are found -->
+    <p *ngIf="filteredCabs.length === 0 && agencyName !== ''">
+      No cabs available for this Agency ID.
+    </p>
+  
+    <!-- Analytics Section: Pie Chart -->
+    <div *ngIf="filteredCabs.length > 0" class="chart-container">
+      <h2 class="chart-title">Best in the Group</h2>
+      <div class="chart-wrapper">
+        <canvas baseChart 
+          [data]="pieChartData" 
+          [options]="pieChartOptions" 
+          [type]="pieChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+  
+  

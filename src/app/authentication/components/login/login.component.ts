@@ -24,6 +24,7 @@ import { faUserLock, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icon
     ButtonModule,
   ],
   templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
   login = { email: '', password: '' };
@@ -39,7 +40,6 @@ export class LoginComponent {
   onLogin() {
     const { email, password } = this.login;
 
-    // Log the login attempt for debugging
     console.log('Login initiated:', { email, password });
 
     this.authService.getUserDetails(email, password).subscribe({
@@ -51,24 +51,34 @@ export class LoginComponent {
 
           // Save user details in sessionStorage
           sessionStorage.setItem('userId', user.id);
-          sessionStorage.setItem('role', user.role); // Save role from server response
+          sessionStorage.setItem('role', user.role);
           sessionStorage.setItem('email', user.email);
+          sessionStorage.setItem('agencyId', user.agencyId ?? null);
 
-          console.log("user", user);
-          console.log("role", user.role);
-          console.log("email", user.email);
+          console.log("User:", user);
+          console.log("Role:", user.role);
+          console.log("Email:", user.email);
 
           // Redirect based on role
-          if (user.role === 'Admin') {
-            this.router.navigate(['/admin-dashboard']).then((success) => {
-              if (success) console.log('Navigation to Admin Dashboard successful');
-              else console.error('Navigation to Admin Dashboard failed');
-            });
-          } else {
-            this.router.navigate(['/home']).then((success) => {
-              if (success) console.log('Navigation to Home successful');
-              else console.error('Navigation to Home failed');
-            });
+          switch (user.role) {
+            case 'Admin':
+              this.router.navigate(['/admin-dashboard']);
+              break;
+            case 'Cab Service Provider':
+              this.router.navigate(['/home']);
+              break;
+            case 'Hotel Service Provider':
+              this.router.navigate(['/home']);
+              break;
+            case 'Flight Service Provider':
+              this.router.navigate(['/home']);
+              break;
+            case 'Tour Service Provider':
+              this.router.navigate(['/home']);
+              break;
+            default:
+              this.router.navigate(['/home']);
+              break;
           }
         } else {
           this.messageService.add({

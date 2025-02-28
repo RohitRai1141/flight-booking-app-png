@@ -101,7 +101,7 @@ export class HotelBookingComponent {
 
   onSubmit(bookingForm: any) {
 
-    const userid = 'USER001';
+    const userid = sessionStorage.getItem('userId') || 'USER001';;
    
     if (bookingForm.valid) {
   

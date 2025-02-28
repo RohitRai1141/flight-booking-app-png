@@ -7,27 +7,40 @@ import { User, cabs, Booking } from '../models/cab-entities';
   providedIn: 'root',
 })
 export class CabService {
-  private apiUrl = 'http://localhost:3000/cabs'; // Mock API URLfor cabs
-  private faqsApiUrl = 'http://localhost:3000/faqs'; //Mock API for faqs
-  private bookingApiUrl = 'http://localhost:3000/cabbookings'; //Mock APi for bookings
-  private reviewUrl = 'http://localhost:3000/reviews';
+  private apiUrl = 'http://localhost:3000/cabs'; // Mock API for cabs
+  private faqsApiUrl = 'http://localhost:3000/faqs'; // Mock API for FAQs
+  private bookingApiUrl = 'http://localhost:3000/cabbookings'; // Mock API for bookings
+  private reviewUrl = 'http://localhost:3000/reviews'; // Mock API for reviews
 
   constructor(private http: HttpClient) {}
 
-  // get all cabs
+  /** -------------------- CAB MANAGEMENT -------------------- **/ 
+
+  // Get all cabs
   getCabs(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
-  // Get cab by id
+
+  // Get cab by ID
   getCabById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}?id=${id}`);
   }
+
+  // Get cabs by agency ID
+  getCabsByAgency(agencyId: string): Observable<cabs[]> {
+    return this.http.get<cabs[]>(`${this.apiUrl}?agencyId=${agencyId}`);
+  }
+
+  /** -------------------- FAQ MANAGEMENT -------------------- **/
 
   // Get all FAQs
   getFAQs(): Observable<any[]> {
     return this.http.get<any[]>(this.faqsApiUrl);
   }
-  //Save Booking data to db.json
+
+  /** -------------------- BOOKING MANAGEMENT -------------------- **/
+
+  // Save booking data to db.json
   saveUserData(data: { cab: any; users: User[] }): Observable<any> {
     return this.http.post(this.bookingApiUrl, data);
   }
@@ -37,32 +50,36 @@ export class CabService {
     return this.http.get<any[]>(this.bookingApiUrl);
   }
 
-  // Get bookings by id
+  // Get booking by ID
   getBookingById(id: string): Observable<any> {
     return this.http.get(`${this.bookingApiUrl}/${id}`);
   }
 
-  // Method to update booking
+
+  // Update booking
   updateBooking(booking: any, bookingId: string): Observable<any> {
     return this.http.put(`${this.bookingApiUrl}/${bookingId}`, booking);
   }
 
-  // Add review
-  addReview(review: any): Observable<any> {
-    return this.http.post(`${this.reviewUrl}`, review);
+  // Update booking status
+  updateBookingStatus(id: number, status: string): Observable<any> {
+    return this.http.patch(`${this.bookingApiUrl}/${id}`, { status });
   }
 
-  // get review
-  getReviews(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.reviewUrl}`);
-  }
-
-  //delete booking
+  // Delete booking
   deleteBooking(bookingId: string): Observable<any> {
     return this.http.delete<any>(`${this.bookingApiUrl}/${bookingId}`);
   }
 
-  updateBookingStatus(id: number, status: string): Observable<any> {
-    return this.http.patch(`${this.bookingApiUrl}/${id}`, { status });
+  /** -------------------- REVIEW MANAGEMENT -------------------- **/
+
+  // Get all reviews
+  getReviews(): Observable<any[]> {
+    return this.http.get<any[]>(this.reviewUrl);
+  }
+
+  // Add a new review
+  addReview(review: any): Observable<any> {
+    return this.http.post<any>(this.reviewUrl, review);
   }
 }

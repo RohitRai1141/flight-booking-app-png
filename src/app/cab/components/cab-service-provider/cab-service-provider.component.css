@@ -1,0 +1,125 @@
+.dashboard-container {
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: rgb(154, 234, 207);
+    height: calc(100vh - 56px);
+  }
+  
+  /* Title */
+  .title {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+  }
+  
+  /* Search Bar */
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+    
+  .search-input {
+    padding: 10px;
+    width: 350px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+  }
+  
+  .search-icon-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .search-icon-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Error Popup */
+  .error-popup {
+    background: #ffdddd;
+    color: red;
+    border: 1px solid red;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    margin: 10px auto;
+    font-weight: bold;
+  }
+  
+  .error-icon {
+    margin-right: 6px;
+  }
+  
+  /* Agency Name */
+  .agency-name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  /* Cab Table */
+  .cab-table {
+    width: 70%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #e0f7ff;
+  }
+  
+  .cab-table th,
+  .cab-table td {
+    border: 1px solid black;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .cab-table th {
+    background-color: #007bff;
+   
+    color: white;
+  }
+  
+  .cab-table tr:nth-child(even) {
+    background-color: #d9ecff;
+  }
+  
+  /* Chart Section */
+  .chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .chart-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Reduce Pie Chart Size */
+  .chart-wrapper {
+    width: 650px;  /* ✅ Smaller Chart */
+    height: 450px; /* ✅ Smaller Chart */
+  }
+  
+  .chart-container canvas {
+    max-width: 2900% !important;
+    max-height: 3600% !important;
+  }
+  
+  

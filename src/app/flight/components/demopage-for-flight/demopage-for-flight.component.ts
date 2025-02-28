@@ -10,20 +10,43 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./demopage-for-flight.component.css']
 })
 export class DemopageForFlightComponent {
-  selectedRole: string = 'end-user'; // Default role
 
-  constructor(private router: Router) {}
-
-  onLogin(): void {
-    switch (this.selectedRole) {
-      case 'end-user':
+  constructor(private router: Router) {
+    const user = sessionStorage.getItem('role');
+    this.checkUser(user);
+  }
+  private sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  async checkUser(user: String | null): Promise<void>{
+    await this.sleep(1500);
+    switch (user) {
+      case 'User':
         this.router.navigate(['/flight/search']);
         break;
-      case 'admin':
+      case 'Flight Service Provider':
+        this.router.navigate(['/flight/service-provider']);
+        break;
+      case 'Admin':
         this.router.navigate(['/flight-admin/panel']);
         break;
-      default:
-        console.error('Invalid role selected');
+      case null:
+        history.back();
     }
   }
+  // onLogin(): void {
+  //   switch (this.selectedRole) {
+  //     case 'end-user':
+  //       this.router.navigate(['/flight/search']);
+  //       break;
+  //     case 'admin':
+  //       this.router.navigate(['/flight-admin/panel']);
+  //       break;
+  //     case 'service-provider':
+  //       this.router.navigate(['/flight/service-provider']);
+  //       break;
+  //     default:
+  //       console.error('Invalid role selected');
+  //   }
+  // }
 }

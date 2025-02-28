@@ -1,3 +1,67 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.horizontal-navbar {
+  width: 100%;
+  height: 70px;
+  background-color: black;
+  padding: 5px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.horizontal-navbar div{
+  display: flex;
+  align-items: center;
+}
+
+.hero-title{
+  color: white;
+  font-size: 30px;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.navbar-logo {
+  height: 70px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.horizontal-navbar ul {
+  display: flex;
+  justify-content: end;
+  list-style: none;
+  margin: -5px;
+  padding: 0;
+}
+
+.horizontal-navbar ul li {
+  margin: 0 30px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+  font-size: larger;
+}
+
+.horizontal-navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+  font-family: 'Lato', sans-serif;
+}
+
+.horizontal-navbar ul li a fa-icon {
+  margin-right: 8px;
+}
+
+.horizontal-navbar ul li a:hover {
+  color: #e47011;
+}
