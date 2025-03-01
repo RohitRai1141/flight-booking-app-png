@@ -83,3 +83,31 @@ flight-booking-app/
 ## **8. Conclusion**  
 The **Flight Booking App** is a functional, user-friendly application that demonstrates my expertise in **Angular development, API integration, and UI design**. Developed as part of my **Infosys Springboard Internship**, this project highlights my ability to create interactive web applications.  
 
+
+Working Users login :
+![Screenshot 2025-03-01 184246](https://github.com/user-attachments/assets/2e293133-b51a-4859-8a5e-43090475ee17)
+![Screenshot 2025-03-01 184256](https://github.com/user-attachments/assets/d6721db1-78a2-41c0-aad0-1629bc94ff63)
+![Screenshot 2025-03-01 184308](https://github.com/user-attachments/assets/67c25fe0-99b9-444d-9ca6-a1ec8d9b0d3d)
+![Screenshot 2025-03-01 184317](https://github.com/user-attachments/assets/f1c5357f-8f06-4bf6-9b55-fa46fdf5ecbe)
+![Screenshot 2025-03-01 184325](https://github.com/user-attachments/assets/fdc96262-c78a-4891-a9e6-6acb5665dbc8)
+![Screenshot 2025-03-01 184409](https://github.com/user-attachments/assets/b4800276-ebbf-47f5-b7e8-e2e5812fdd13)![Screenshot 2025-03-01 184416](https://github.com/user-attachments/assets/0ff1d2d1-7cc8-41a6-9bb9-3539e61a0eee)
+![Screenshot 2025-03-01 184432](https://github.com/user-attachments/assets/9febf9bb-1906-4720-a0c3-e2cdcd7387f1)
+![Screenshot 2025-03-01 184450](https://github.com/user-attachments/assets/4c46979d-5172-4995-a82c-3c8020ccd2de)
+
+
+Admin work flow:
+![Screenshot 2025-03-01 183829](https://github.com/user-attachments/assets/75e63636-6791-4847-86b1-bf785fd9c02c)
+![Screenshot 2025-03-01 183952](https://github.com/user-attachments/assets/43c1af48-e4a3-42f0-8a47-47e1474b4c23)
+![Screenshot 2025-03-01 184001](https://github.com/user-attachments/assets/4dc5d1ae-d95c-4fb8-bf35-61c43aae2324)
+![Screenshot 2025-03-01 184121](https://github.com/user-attachments/assets/c3358465-cbe9-4fba-a75e-3a4e8a57f6d8)
+![Screenshot 2025-03-01 184132](https://github.com/user-attachments/assets/297ad005-cd51-41e9-98f1-ca2e43881fa3)
+
+
+
+
+
+
+
+
+
+
