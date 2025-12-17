@@ -66,7 +66,7 @@ import { FlightServiceProviderDashboardComponent } from './flight/components/fli
 
 export const routes: Routes = [
   // authentication
-  { path: 'login', component: LoginComponent },
+  //{ path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'admin-dashboard', component: AdminDashboardComponent },
@@ -77,7 +77,12 @@ export const routes: Routes = [
   { path: 'flight-service-provider', component: HomeComponent, canActivate: [authGuard] },
   { path: 'tour-service-provider', component: HomeComponent, canActivate: [authGuard] },
 
+  // { path: 'login', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'login', redirectTo: '/home', pathMatch: 'full' },
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+
+  { path: 'home', component: HomeComponent },
 //   { path: '**', redirectTo: '/login' },
 
   // cabs
