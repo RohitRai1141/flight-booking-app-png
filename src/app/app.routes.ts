@@ -77,7 +77,7 @@ export const routes: Routes = [
   { path: 'flight-service-provider', component: HomeComponent, canActivate: [authGuard] },
   { path: 'tour-service-provider', component: HomeComponent, canActivate: [authGuard] },
 
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 //   { path: '**', redirectTo: '/login' },
 
   // cabs
