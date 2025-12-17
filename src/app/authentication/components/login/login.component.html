@@ -12,12 +12,11 @@
             Email
           </label>
           <input
-            type="text"
+            type="email"
             [(ngModel)]="login.email"
             id="email"
             name="email"
             required
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
             #email="ngModel"
             class="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
           />
